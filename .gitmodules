@@ -1,0 +1,3 @@
+[submodule "yihui"]
+	path = yihui
+	url = https://github.com/rbind/yihui.git
