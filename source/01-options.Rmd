@@ -1,0 +1,266 @@
+# オプション {#options}
+
+チャンクオプションとパッケージオプションについて
+
+オリジナルの更新日: 2020-06-30
+
+----
+
+```{block2, type="rmdimportant"}
+このドキュメントでは **`knitr`** 全般の機能を紹介しており, R Markdown だけでなく `Rnw` や `Rhtml` の仕様についても円級しています. R Markdown でも **`knitr`** の機能は良く使われますが, R Markdown 特有の仕様によって挙動が変わることがある点に注意してお読みください.
+```
+
+**`knitr`** パッケージはソースコード, テキスト, グラフ, チャンクで使用するプログラミング言語といった, コードチャンクのコンポネントのほとんど全部をカスタマイズするための多くのオプションを提供します. `knit` 処理のカスタマイズをパッケージレベルでカスタマイズするオプションもあります. この章では **`knitr`** で使用できる全てのチャンクオプションとパッケージオプションを解説します. 以下のリスト中で, オプションのデフォルト値になっているものはカッコ内に表記しています.
+
+## チャンクオプション一覧 {#chunk-options}
+
+チャンクオプションはチャンクのヘッダに書きます. チャンクヘッダの構文は文書フォーマットがなんであるかに依存します. 例えば `.Rnw` ファイル (R + LaTeX) であれば, `<< >>=` という記号の中に書きます. `.Rmd` ならば, チャンクヘッダは ```` ```{r} ```` 内に書きます. 以下の例は主に `.Rmd` (R Markdown) の場合ですが, ほとんどのチャンクオプションはどのフォーマットでも使用可能です.
+
+チャンクオプションは以下のように `タグ名=値` という形式で書きます.
+
+````r
+`r ''````{r, my-chunk, echo=FALSE, fig.height=4, dev='jpeg'}
+```
+````
+
+**チャンクラベル**は特殊なチャンクオプションです (例: 先ほどの例の `my-chunk` がそれにあたります). これは唯一のタグが不要なチャンクオプションです (つまり, 値のみ書くことになります). もし `タグ名=値` の形式で書きたいのならば, チャンクオプション名の `label` を明示的に使うこともできます.
+
+````r
+`r ''````{r label="my-chunk"}
+```
+````
+
+各チャンクのラベルは文書内において一意であることが前提です. 特にキャッシュとグラフのファイル名はチャンクラベルで紐付けているため重要です. ラベルのないチャンクは `unnamed-chunk-i` という形式でラベル名が割り当てられます. `i` は順に整数が割り当てられます.
+
+文書全体のチャンクオプションのデフォルト値を変更するために `knitr::opts_chunk$set()` を使うことができます. 例えば以下のようなチャンクを文書の冒頭に書きます.
+
+````r
+`r''````{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  comment = '', fig.width = 6, fig.height = 6
+)
+```
+````
+
+チャンクオプションの豆知識をいくつか掲載します.
+
+1. チャンクヘッダは1行で書かねばなりません. 改行してはいけません.
+2. チャンクラベルとファイルパスにスペース, ピリオド `.`, アンダースコア `_` を使用するのは避けましょう. セパレータが必要ならば, ハイフン `-` の使用を推奨します. 例えば `setup-options` はラベル名として望ましいですが `setup.options` や `chunk 1` は良くありません. `fig.path = 'figures/mcmc-'` はパス名として良いですが, `fig.path = 'markov chain/monte carlo'` は良くありません.
+3. 全てのオプションの値は **R の構文として適切でなければなりません**. チャンクオプションを関数の引数のように考えると良いでしょう.
+  - 例えば **character** 型をとるオプションは引用符で囲まなければなりません. 例: `results = 'asis'` や `out.width = '\\textwidth'`. ただしリテラルのバックスラッシュは二重のバックスラッシュが必要なことを忘れないでください.
+  - 理論上はチャンクラベルもまた引用符で囲む必要がありますが, 利便性のため書かなくとも自動で引用符が追加されます (例: ```` ```{r, 2a}``` ```` は ```` ```{r, label='2a'}``` ```` として扱われます).
+  - R のコードとして有効なものである限り, いくらでも複雑な構文を書くことができます.
+
+以下では `オプション`: (`デフォルト値`; 値の型) という形式で, **`knitr`** で使えるチャンクオプションのリストを掲載します.
+
+### コード評価関連 {#evaluate}
+
+-   **`eval`**: (`TRUE`; `logical` または `numeric`).: コードチャンクを評価するかどうか. どの R の評価式を評価するかを選ぶために `numeric` のベクトルを使用することもできます. 例: `eval=c(1, 3, 4)` ならば1つ目, 3つ目, そして4つ目の評価式を評価し, `eval = -(4:5)` は 4, 5つ目の式以外の全てを評価します.
+
+### テキストの出力関連 {#text-output}
+
+-   **`echo`**: (`TRUE`; `logical` または `numeric`).: 出力される文書にソースコードを表示するかどうか. 「表示」「隠す」に対応する `TRUE`/`FALSE` に加え, どの R の評価式を表示するかを選ぶために `numeric` のベクトルを使用することもできます. 例: `echo=2:3` は 2, 3番めの評価式を表示し,  `echo = -4` は4番目だけを非表示にします.
+- `results`: (`'markup'`; `character`) 実行結果のテキストの部分をどう表示するかを制御します. このオプションは通常のテキスト出力にのみ影響することに注意してください (警告・メッセージ・エラーは適用範囲外です). 取りうる値は次のとおりです.
+  - `markup`: 出力の文書フォーマットに応じて適切な環境でテキスト出力をマークアップします. 例えば R Markdown ならば `"[1] 1 2 3"` が **`knitr`** によって以下のように加工されます. この場合, `results='markup'` は囲み (```` ``` ````) 付きのコードブロックとして出力されることを意味します.
+  ````
+  ```
+  [1] 1 2 3
+  ```
+  ````
+  -   `asis`: テキスト出力を「そのまま」書き出します. つまり, 生の結果テキストをマークアップ一切なしでそのまま文書に書き出します.
+````r
+`r''````{r, results='asis'}
+cat("I'm raw **Markdown** content.\n")
+```
+````
+    -   **`hold`**: チャンクと flush の全てのテキスト出力をチャンクの末尾に固定します.
+    -   **`hide`** (または `FALSE`): テキスト出力を表示しません.
+-   `collapse`: (`FALSE`; `logical`) 可能であれば, ソースと出力をつなげて1つのブロックにするかどうかです (デフォルトではソースと出力はそれぞれ独立したブロックです). このオプションは Markdown 文書でのみ有効です.
+-   **`warning`**: (`TRUE`; `logical`).: 警告文 (`warning()` で出力されるテキスト) を保存するかどうかです. `FALSE` の場合, 全ての警告文は文書に出力されず, 代わりにコンソールに書き出されます. 警告文の一部を選ぶインデックスとして, `numeric` 型のベクトルを指定することもできます. この場合のインデックスの数値は「何番目の警告文を表示するか」を参照する (例: `3` はこのチャンクから投げられた3番目の警告文を意味します) ものであって, 「何番目の R コードの警告文の出力を許可するか」ではないことに注意してください.
+-   **`error`**: (`TRUE`; `logical`).: エラー文 (`stop()` で出力される文です) を保持するかどうかです. デフォルトの `TRUE` では, **コード評価はエラーが出ても停止しません!** エラー時点で停止させたい場合はこのオプションを `FALSE` に指定してください. **R Markdown ではこのデフォルト値は `FALSE` に変更されていることに注意**してください. チャンクオプションに `include=FALSE` がある場合, 起こりうるエラーを見落とさないように,  **`knitr`** はエラー時点で停止するようになります.
+-   **`message`**: (`TRUE`; `logical`).: `message()` が出力するメッセージ文を (`warning` オプションと同様に) 表示するかどうかです.
+-   **`include`**: (`TRUE`; `logical`).: 出力する文書にチャンクの出力を含めるかどうかです. `FALSE` ならばなにも書き出されませんが, コードの評価はなされ, チャンク内にプロット命令があるのならグラフのファイルも生成されます. よってこの図をそれ以降で任意に挿入することもできます.
+-   **`strip.white`**: (`TRUE`; `logical`).: 出力時にソースコードの冒頭と末尾から空白行を除去するかどうかです.
+-   **`class.output`**: (`NULL`; `character`).: テキストの出力ブロックに追加するクラス名のベクトル. このオプションは R Markdown で HTML を出力する際にのみ機能します. 例えば `class.output = c('foo', 'bar')` はテキスト出力が `<pre class="foo bar"></pre>` で囲まれたブロックとして書き出されます.
+-   **`class.message`**/**`class.warning`**/**`class.error`**: (`NULL`; `character`)・: `class.output` と同様に, R Markdown においてそれぞれ メッセージ文, 警告文, エラー文のブロックに対してクラス名を与えます. `class.source` もまた同様にソースコードのブロックに対して適用されます. "[Code Decoration](#class-decoration)" のセクションを参照してください.
+-   **`attr.output`**/**`attr.message`**/**`attr.warning`**/**`attr.error`**: (`NULL`;
+    `character`).: 上記の `class.*` オプション群と同様に, Pandoc に対してコードブロックの属性を指定します. つまり `class.*` は `attr.*` の特殊ケースです. 例: `class.source = 'numberLines'` は `attr.source = '.numberLines'` と等価ですが, `attr.source` は任意の値を取ることができます. 例えば, `attr.source = c('.numberLines', 'startFrom="11"')`.
+-   **`render`**: (`knitr::knit_print`; `function(x, options, ...)`).: チャンクで表示される値に対して適用する関数です. 関数の第1引数には (`x`) はチャンクの各評価式が評価された結果が与えられます. このチャンクのチャンクオプションがリストとして第二引数 `opstions` に与えられます. この関数は文字列を返すことを想定しています. 詳細は package vignette (`vignette('knit_print', package = 'knitr')`) を参照してください.
+-   **`split`**: (`FALSE`; `logical`).: 出力ブロックを分割したファイルに書き出すかどうか. LaTeX ならば `\input{}` で読み込み, HTML ならば `<iframe></iframe>` タグで読み込まれます. このオプションは `.Rnw`, `.Rtex` そして `.Rhtml` でのみ機能します.
+
+### コードの装飾関連 {#code-decoration}
+
+- `tidy`: (`FALSE`) R コードを整形するかどうかです. 他の有効な値は次のとおりです.
+  - `TRUE` (`tidy = 'formatR'` と等価です): 整形のために `formatR::tidy_source()` を呼び出します.
+  - `'styler'`: コード整形のために `styler::style_text()` を呼び出します.
+  - 整形されたコードを返す, `function(code, ...) {}` という形式の任意の関数.
+  - 整形が失敗した場合, 元の R コードは変更されません (警告は表示されます).
+- `tidy.opts`: (`NULL`; `list`) `tidy` オプションで指定した関数へのオプション引数のリストです. 例えば `tidy.opts = list(blank = FALSE, width.cutoff = 60)` は `tidy = 'formatR'` に対して空白行を削除し各行が60文字におさまるように改行しようとします.
+- `prompt`: (`FALSE`; `logical`) R コードにプロンプト記号 (`>` など) を付けるかどうかです.  `?base::options` ヘルプページの `prompt` と `continue` を参照してください. プロンプト記号の追加は, 読者がコードをコピーするのを難しくさせるため, `prompt=FALSE` のほうが良い選択であることに留意してください. エンジンが `R` 以外の場合, このオプションはうまく機能しないことがあります ([\#1274](https://github.com/yihui/knitr/issues/1274)).
+-   **`comment`**: (`'##'`; `character`).: テキスト出力の各行の先頭文字です. デフォルトでは, コメントアウトできるよう `##` となっているので, 読者は文書から任意の範囲をそのままコピーしても出力部分は無視されるのでそのまま実行することができます. `comment = ''` を指定することで, デフォルトの `##` は除去されます.
+-   **`highlight`**: (`TRUE`; `logical`).: ソースコードをシンタックスハイライトするかどうかです^[訳注: R Markdown ではさらに, YAML フロントマターで適用するハイライトのテーマ名を指定できます].
+-   **`class.source`**: (`NULL`; `character`).: 出力された文書のソースコードブロックのクラス名です. 出力ブロックに対して機能する `class.output` をはじめとする `class.*` シリーズと同様です.
+-   **`attr.source`**: (`NULL`; `character`).: ソースコードブロックの属性です. `attr.output` などの `attr.*` シリーズと同様です.
+-   `size`: (`'normalsize'`; `character`) `.Rnw` 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは  [このページ (英語)](https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles) を参照してください^[訳注: `\normalsize`, `\Large`, `\LARGE` など LaTeX で指定できるフォントサイズを表すトークンのことを指しています].
+-   **`background`**: (`'#F7F7F7'`; `character`).:  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
+-   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **`knitr`** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です. TODO: R Markdown での挙動違うくない?
+
+```{r indent-example}
+rnorm(10)
+```
+
+### キャッシュ関連 {#cache}
+
+-   **`cache`**: (`FALSE`; `logical`).: コードチャンクのキャッシュを取るかどうかです. 初回の実行またはキャッシュが存在しない場合は通常通り実行され, 結果がデータセットが保存され (`.rdb`, `.rdx` ファイルなど), それ以降でコードチャンクが評価されることがあれば, 以前保存されたこれらのファイルからこのチャンクの結果を読み出します. ファイル名がチャンクラベルと R コードの MD5 ハッシュ値で一致する必要があることに注意してください. つまりチャンクになんらかの変更がある度に異なる MD5 ハッシュ値が生成されるため, キャッシュはその度に無効になります. 詳細は [this page.](../demo/cache/) を参考にしてください. 
+-   **`cache.path`**: (`'cache/'`; `character`).: 生成したキャッシュファイルの保存場所を指定します. R Markdown ではデフォルトでは入力ファイルの名前に基づきます. 例えば `INPUT.Rmd` の `FOO` というラベルのチャンクのキャッシュは `INPUT_cache/FOO_*.*` というファイルパスに保存されます.
+-   **`cache.vars`**: (`NULL`; `character`).: キャッシュデータベースに保存される変数名のベクトルを指定します. デフォルトではチャンクで作られた全ての変数が識別され保存されますが, 変数名の自動検出はロバストではないかもしれませんし,  保存したい変数を選別したい場合もあるかもしれないので, 保存したい変数を手動選択することもできます.
+-   **`cache.globals`**: (`NULL`; `character`).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に `autodep = TRUE` オプションをより正確に動作させたいときに使います. チャンク `B` で使われているグローバル変数が チャンク `A` のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue [\#1403](https://github.com/yihui/knitr/issues/1403) を参照してください).
+-   **`cache.lazy`**: (`TRUE`; logical).: 遅延読み込み `lazyLoad()` を使うか, 直接 `load()` でオブジェクトを読み込むかを指定します. 非常に大きなオブジェクトに対しては, 遅延読み込みは機能しないかもしれません. よってこの場合は `cache.lazy = FALSE` が望ましいかもしれません (issue [\#572](https://github.com/yihui/knitr/issues/572) を参照してください).
+-   **`cache.comments`**: (`NULL`; `logical`).: `FALSE` の場合, R コードチャンク内のコメントを書き換えてもキャッシュが無効になりません.
+-   **`cache.rebuild`**: (`FALSE`; `logical`).: `TRUE` の場合, キャッシュが有効であってもチャンクのコードの再評価を行います. このオプションはキャッシュの無効化の条件を指定したいときに有用です. 例えば `cache.rebuild = !file.exists("some-file")` とすれば `some-file` が存在しないときにチャンクが評価されキャッシュが再構成されます (issue [\#238](https://github.com/yihui/knitr/issues/238) を参照).
+-   **`dependson`**: (`NULL`; `character` または `numeric`).: このチャンクが依存しているチャンクのラベル名を文字ベクトルで指定します. このオプションはキャッシュされたチャンクでのみ適用されます. キャッシュされたチャンク内のオブジェクトは, 他のキャッシュされたチャンクに依存しているかもしれず, 他のチャンクの変更に合わせてこのチャンクも更新する必要があるかもしれません.
+  - `dependson` に `numeric` ベクトルを与えた場合, それはチャンクラベルのインデックスを意味します. 例えば `dependson = 1` ならばこの文書の1番目のチャンクに依存することを意味し, `dependson = c(-1, -2)` は直前の2つのチャンクを意味します (負のインデックスは現在のチャンクからの相対的な位置を表します).
+  - `opts_chunk$set()` によってグローバルにチャンクオプションを設定した場合, このオプションは機能しません. ローカルなチャンクオプションとして設定しなければなりません.
+-   **`autodep`**: (`FALSE`; `logical`).: グローバル変数を検出することでチャンク間の依存関係を分析するかどうかを指定します (あまり信頼できません). よって, `dependson` を明示的に指定する必要はありません.
+
+### グラフ関連 {#plots}
+
+-   **`fig.path`**: (`'figure/'`; `character`).: 図の保存ファイルパスを生成する際の接尾語. `fig.path` とチャンクラベルを連結したものがフルパスになります. `figure/prefix-` のようにディレクトリ名が含まれて, それが存在しない場合はディレクトリが作成されます.
+-   **`fig.keep`**: (`'high'`; `character`).: グラフをどのように保存するかです. 可能な値は次のとおりです.
+    -   `high`: 高水準プロットのみ保存 (低水準の変更は全て高水準プロットに統合されます).
+    -   `none`: 全て破棄します.
+    -   `all`: 全てのプロットを保存します (低水準プロットでの変更は新しいグラフとして保存されます).
+    -   `first`: 最初のプロットのみ保存します.
+    -   `last`: 最後のプロットのみ保存します.
+    -   数値ベクトルを指定した場合, その値は保存する低水準プロットのインデックスとなります.
+    低水準プロットとは `lines()` や `points()` などの関数によるグラフ描画のことです. `fig.keep` についてより理解するには次のようなチャンクを考えてください. 通常はこれで2つのグラフを出力します (`fig.keep = 'high'` を指定したので).  `fig.keep = 'none'` としたなら, いかなるグラフも保存されません. `fig.keep = 'all'` ならば, 4 つのグラフとして保存されます. `fig.keep = 'first'` ならば `plot(1)` によって作成されたグラフが保存されます. `fig.keep = 'last'`, なら, 最後の10本の垂線を描画したグラフが保存されます.
+```{r fig-path-example, eval=F}
+plot(1)         # 高水準プロット
+abline(0, 1)    # 低水準の作図
+plot(rnorm(10)) # 高水準プロット
+# ループ内での複数の低水準作図 (R 評価式としては1つ)
+for(i in 1:10) {
+  abline(v = i, lty = 2)
+}
+```
+
+-   **`fig.show`**: (`'asis'`; `character`).: グラフをどのように表示し, 配置するかです. 可能な値は次のとおりです.
+    -   `asis`: グラフが生成された場所にそのまま出力します (R ターミナルで実行した場合とおなじように).
+    -   `hold`: 全てのグラフをまとめてチャンクの最後に出力します.
+    -   `animate`: チャンクに複数のグラフがある場合, 連結して1つのアニメーションにします.
+    -   `hide`: グラフをファイルに保存しますが, 出力時は隠します.
+-   **`dev`**: (LaTeX の場合は `'pdf'`^[訳注: `pdf` は日本語表示に向いていないため, `cairo_pdf` などを利用することをおすすめします],  HTML/Markdown の場合は `'png'`; `character`).: グラフをファイルに保存する際のグラフィックデバイスです. base R および, **`Cairo`**, **`cairoDevice`**, **`svglite`**, **`ragg`**, **`tikzDevice`** パッケージの提供するデバイスに対応しています. デバイスの例: `pdf`, `png`, `svg`, `jpeg`, `tiff`,
+    `cairo_pdf`, `CairoJPEG`, `CairoPNG`, `Cairo_pdf`, `Cairo_png`, `svglite`,
+    `ragg_png`, `tikz`, など. 有効なデバイスの一覧は `names(knitr:::auto_exts)` を参照してください. また, `function(filename, width, height)` という引数を定義した関数名を文字列で与えることでも指定できます. 画像サイズの単位は **常にインチ**です. ビットマップであってもインチで指定したものがピクセルに変換されます.
+
+チャンクオプション `dev`, `fig.ext`, `fig.width`, `fig.height`, `dpi` はベクトルを与えられます (長さが足りない場合は再利用されます). 例えば `dev = c('pdf', 'png')` は1つのグラフに対して 1つづつ `PDF` と `PNG` ファイルを作成します.
+
+-   **`dev.args`**: (`NULL`; `list`).: グラフィックデバイスに与える追加の引数です. 例えば `dev.args = list(bg = 'yellow', pointsize = 10)` を `dev = 'png'` に与えられます. 特定のデバイスに依存するオプション (詳細はそれぞれのデバイスのドキュメントを確認してくだささい). `dev` に複数のデバイスが指定されている場合は `dev.args` を引数のリストをさらにリストでくくることになるでしょう. それぞれの引数リストが対応するデバイスに与えられます. 例: `dev = c('pdf', 'tiff'), dev.args = list(pdf = list(colormodel = 'cmyk', useDingats = TRUE), tiff = list(compression = 'lzw'))`.
+-   **`fig.ext`**: (`NULL`; `character`).: 出力するグラフのファイル拡張子です. `NULL` ならばグラフィックデバイスに応じて自動決定されます. 詳細は `knitr:::auto_exts` を確認してください.
+-   **`dpi`**: (`72`; `numeric`). ビットマップデバイスに対する DPI (インチ毎ドット, `dpi * inches = pixels`) です.
+-   **`fig.width`**, **`fig.height`**: (いずれも `7`; `numeric`).: グラフの幅と高さです. 単位はインチです. グラフィックデバイスに与えられます.
+-   **`fig.asp`**: (`NULL`; `numeric`).: グラフのアスペクト比, つまり 高さ/幅 の比です. `fig.asp` が指定された場合, 高さ (`fig.height`) は `fig.width * fig.asp` によって自動設定されます.
+-   **`fig.dim`**: (`NULL`; `numeric`).: `fig.width` と `fig.height` を指定する長さ2の数値のベクトルです. 例: `fig.dim = c(5, 7)` は `fig.width = 5, fig.height = 7` の省略形です. `fig.asp` と `fig.dim` が指定された場合, `fig.asp` は無視されます (警告文が出力されます).
+-   **`out.width`**, **`out.height`**: (`NULL`; `character`).: 出力時の画像の幅と高さです. 実体としての幅と高さである `fig.width`
+    と `fig.height` とは異なります. つまりグラフは文書に表示される際にスケールが調整されます. 出力フォーマットに応じて, これら2つのオプションはそれぞれ特殊な値を取ることができます. 例えば LaTeX ならば `.8\\linewidth`, `3in`, `8cm` などと指定でき, HTML ならば `300px` と指定できます. `.Rnw` ならば `out.width` のデフォルト値は `\\maxwidth` に変更され, その値は [on this page.](../demo/framed/) のように定義されます. 例えば `'40%'` のようにパーセンテージで指定もでき, これは LaTeX では `0.4\linewidth` に置き換えられます.
+-   **`out.extra`**: (`NULL`; `character`).: 図の表示に関するその他のオプションです. LaTeX で出力する場合は `\includegraphics[]` に挿入される任意の文字に対応し (例: `out.extra = 'angle=90'` ならば図の90度回転), HTML なら `<img />` に挿入されます (例: `out.extra = 'style="border:5px solid orange;"'`).
+-   **`fig.retina`**: (`1`; `numeric`).: このオプションは HTML で出力する際にのみ適用されます. [Retina ディスプレイ](https://ja.wikipedia.org/wiki/Retina%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4)  に対して画像サイズを調整する比率 (多くの場合は2を指定します) です. チャンクオプションの  `dpi` を `dpi * fig.retina` で, `out.width` を `fig.width * dpi / fig.retina` で計算します. 例えば `fig.retina = 2` なら, 画像の物理サイズが2倍となり, その表示サイズは半分になります.
+-   **`resize.width`**, **`resize.height`**: (`NULL`; `character`).: LaTeX で出力する際に `\resizebox{}{}` コマンドで使われます. これら2つのオプションは Tikz グラフィックスをリサイズしたい場合のみ必要になります. それ以外に通常使うことはありません. しかし **`tikzDevice`** の開発者によれば, 他の箇所のテキストとの一貫性のため, Tikz グラフィックスはリサイズを想定していません. 値の1つでも `NULL` ならば, `!` が使用されます (この意味がわからない方は **graphicx** のドキュメントを読んでください).
+-   **`fig.align`**: (`'default'`; `character`).: 出力時の画像の位置揃え (アラインメント) です. 可能な値は `default`, `left`, `right`, `center` です. `default` は位置について特に何も調整しません.
+-   **`fig.link`**: (`NULL`; `character`) 画像に与えるリンク.
+-   **`fig.env`**: (`'figure'`; `character`).: 画像に使われる LaTeX 環境. 例えば `fig.env = 'marginfigure'` ならば `\begin{marginfigure}` で囲まれます. このオプションの使用は `fig.cap` が指定されいることが条件です.
+-   **`fig.cap`**: (`NULL`; `character`).: 図のキャプションです.
+-   **`fig.scap`**: (`NULL`; `character`).: 図の短縮キャプションです. 出力が LaTeX の場合のみ意味をなします. 短縮キャプションは `\caption[]` コマンドに挿入され, 大抵の場合は PDF 出力時の「図一覧」で表示される見出しとして使われます.
+-   **`fig.lp`**: (`'fig:'`; `character`).; 図の相互参照に使われるラベル^[訳注: チャンクラベルと混同しないでください]の接頭語で, `\label{}` コマンドに挿入されます. 実際のラベルはこの接頭語とチャンクラベルを連結して作られます. 例えば図のラベルが  ```` ```{r, foo-plot} ```` will be ならば, デフォルトでは図のラベルは `fig:foo-plot` になります.
+-   **`fig.pos`**: (`''`; `character`).: LaTeX の `\begin{figure}[]` に使われる, 画像の位置調整オプション^[訳注: LaTeX では通常は図の位置は調整されますが, `fig.pos='H'` ならばその位置で固定されます]を指定します. 
+-   **`fig.subcap`**: (`NULL`).: subfigures のためのキャプションです. 複数のグラフが1つのチャンクにあり, かつ `fig.subcap` も `fig.cap` is `NULL` である場合, `\subfloat{}` が個別の画像の表示に使われます (この場合はプリアンブルに `\usepackage{subfig}` と書く必要があります). 具体例は [067-graphics-options.Rnw](https://github.com/yihui/knitr-examples/blob/master/067-graphics-options.Rnw) を参照してください.
+-   **`fig.ncol`**: (`NULL`; `integer`). subfigure の数です. 例えば[この issue](https://github.com/yihui/knitr/issues/1327#issuecomment-346242532) を見てください (`fig.ncol` も `fig.sep` も LaTeX でのみ機能します).
+-   **`fig.sep`**: (`NULL`; `character`).: subfigures どうしの間に挿入されるセパレータを指定する文字ベクトルです. `fig.ncol` が指定された場合, デフォルトでは `fig.sep` に N 個ごとに  `\newline` が挿入されます (`N` は列の数です). 例えば `fig.ncol = 2` ならばデフォルトは `fig.sep = c('', '', '\\newline', '', '', '\\newline', '', ...)` となります.
+-   **`fig.process`**: (`NULL`; `function`).: 画像ファイルに対する後処理の関数です. 関数は画像のファイルパスを引数として, 挿入したい新しい画像のファイルを返すものであるべきです. 関数に `options` 引数がある場合, この引数にチャンクオプションのリストが与えられます.
+-   **`fig.showtext`**: (`NULL`; `logical`).: `TRUE` ならばグラフの描画前に `showtext::showtext_begin()` が呼ばれます. 詳細は [**`showtext`**](http://cran.rstudio.com/package=showtext) パッケージのドキュメントを参照してください^[訳注: `showtext` は手っ取り早く日本語を表示できますが, いくつかの制約があります. 詳細は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』『[Rでのフォントの扱い](https://oku.edu.mie-u.ac.jp/~okumura/stat/font.html)』などを見てください.].
+-   **`external`**: (`TRUE`; `logical`).: tikz グラフィックの処理 (PDF 生成時のコンパイル前の処理) を外部化するかどうかです. **`tikzDevice`** パッケージの `tikz()` デバイスを使う場合 (つまり `dev='tikz'` を指定したとき) のみ使用され, コンパイル時間を短縮することが可能です.
+-   **`sanitize`**: (`FALSE`; `character`). tikz グラフィックでサニタイズ (ここでは, LaTeXで特殊な意味を持つ文字のエスケープ処理) するかどうかです. 詳細は **`tikzDevice`** パッケージのドキュメントを参照してください.
+
+さらにこの他に, ユーザーが使用することを想定していない隠しオプションが2つあります. `fig.cur` (複数の図表がある場合の, 現在の図番号/インデックス) と `fig.num` (チャンク内の図の合計数) です. これら2つのオプションは **`knitr`** が複数の図そしてアニメーションを処理するためにあります. 場合によっては手動で保存した画像ファイルを使ってアニメーションを書き出す場合などに役に立つかもしれません (使用例として [graphics manual](https://github.com/yihui/knitr/releases/download/doc/knitr-graphics.pdf) を参照してください).
+
+### アニメーション関連 {#animation}
+
+- **`interval`**: (`1`; `numeric`).: アニメーションの1フレームごとの時間 (単位は秒) です.
+- **`animation.hook`**: (`knitr::hook_ffmpeg_html`; `function` または `character`). HTML 出力時のアニメーション作成用のフック関数を指定します. デフォルトでは FFmpeg を使って WebM 動画ファイルに変換します.
+  - 別のフック関数として [**gifski**](https://cran.r-project.org/package=gifski) パッケージの `knitr::hook_gifski` 関数はGIFアニメーションを作ることができます.
+  - このオプションは `'ffmpeg'` や `'gifski'` といった文字列を指定することもできます. これらは対応するフック関数の省略形です. 例: `animation.hook = 'gifski'` は `animation.hook = knitr::hook_gifski` を意味します.
+- **`aniopts`**: (`'controls,loop'`; `character`).: アニメーションに対する追加のオプションです. 詳細は LaTeX の [**animate**
+        package.](http://ctan.org/pkg/animate) のドキュメントを参照してください.
+- **`ffmpeg.bitrate`**: (`1M`; `character`).: WebM 動画の質を制御するための FFmpeg の引数 `-b:v` に対応する値を指定できます.
+- **`ffmpeg.format`**: (`webm`; `character`).: FFmpeg の出力する動画フォーマットです. つまり, 動画ファイルの拡張子名です.
+
+### コードチャンク関連 {#code-chunk}
+
+- **`code`**: (`NULL`; `character`).: 指定された場合, そのチャンクのコードを上書きします. この機能によって, プログラミング的にコード挿入が可能になります. 例えば `code = readLines('test.R')` とすれば `test.R` の内容を現在のチャンクで実行します.
+- **`ref.label`**: (`NULL`; `character`).: A character vector of labels of the chunks
+    from which the code of the current chunk is inherited (see the demo for
+    [chunk references](../demo/reference/)). TODO: 使ったこと無いので要動作確認
+
+### 子文書関連 {#child-document}
+
+- **`child`**: (`NULL`; `character`).:  親文書に挿入する子文書のファイルパスを示す文字ベクトルを指定します.
+
+### 言語エンジン関連 {#engine}
+
+- **`engine`**: (`'R'`; `character`).: コードチャンクの言語名です. 指定可能な名前は `names(knitr::knit_engines$get())` で確認できます. 例: `python`, `sql`, `julia`, `bash`, `c`, など. `knitr::knit_engines` で他の言語を使うためのセットアップが可能です.
+- **`engine.path`**: (`NULL`; `character`).: 実行可能なエンジンのパスを指定します. あなたのお使いのシステムの別の実行ファイルを使用するためのオプションです. 例えば `python` はデフォルトでは `/usr/bin/python` を参照しますが, 他のバージョンを使うため `engine.path = '~/anaconda/bin/python'` などと指定することもできます^[訳注: R Markdown の場合, Python のバージョンは `reticulate` パッケージでも制御できます. むしろそちらをつかったほうが便利だと思われます.]. `engine.path` もまたパスのリストを与えられます. これによってエンジンごとにそれぞれパスを指定することができます. 以下のコードが例です. リストの名前はエンジン名と一致する必要があります.
+
+```{r set-engine-path-example, eval=F}
+knitr::opts_chunk$set(engine.path = list(
+  python = '~/anaconda/bin/python',
+  ruby = '/usr/local/bin/ruby'
+))
+```
+
+
+### オプションテンプレート関連
+
+-   **`opts.label`**: (`NULL`; `character`).: `knitr::opts_template` でのオプションのラベルです. オプションセットのラベルは `knitr::opts_template` で設定できます (`?knitr::opts_template` を参照してください). このオプションにより, 頻繁に使うチャンクオプションのタイピング労力を削減できます. 
+
+訳注: 例えば次のように, `echo=F` を設定するテンプレート `noecho` をどこかで作成したとします. すると, 以降のチャンクで `opts.label="noecho"` を設定すると `opts_template` で設定した `noecho` のオプションが全て適用されます. もちろん複数のオプションをまとめることもできるので, 定番の設定を使いまわすのが簡単になります.
+
+```{r, template-example, eval=F}
+knitr::opts_template$set(noecho = list(echo = F))
+```
+
+### ソースコードの抽出関連
+
+-   **`purl`**: (`TRUE`; `logical`).: ソースドキュメントから `knitr::purl()` でソースコードを取りだす時, このチャンクを含めるか除外するかどうかです.
+
+### その他のチャンクオプション
+
+-   **`R.options`**: (`NULL`; `list`).: コードチャンク内でのローカルな R オプションを指定します. これらは `options()` によってこのコードチャンクの直前に一時的に設定され, 実行後に戻されます.
+
+## パッケージオプション一覧 {#package-options}
+
+パッケージオプションは [`knitr::opts_knit`](#objects) を使用することで変更できます. **`knitr::opts_chunk` と混同しないでください**. 使用例は以下のとおりです.
+
+```{r opts-knit-example, eval=F}
+knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
+```
+
+別の方法として, R の基本関数である `options()` を使ってパッケージオプションを設定する場合は `?knitr::opts_knit` を参照してください.
+
+可能なオプションは次のとおりです.
+
+- **`aliases`**: (`NULL`; `character`).: チャンクオプションのエイリアスを指定する名前付きベクトルです. 例えば `c(h = 'fig.height', w = 'fig.width')` は **`knitr`** に `h` は `fig.height` `w` は `fig.width` と同じ意味だと認識させます. このオプションは名前の長いチャンクオプションのタイピング労力を削減できます.
+- **`base.dir`**: (`NULL`; `character`).: グラフを生成する際のディレクトリの絶対パスです.
+- **`base.url`**: (`NULL`; `character`).: HTML ページに掲載する画像のベースURLです.
+- **`concordance`**: (`FALSE`; `logical`).: この機能は  RStudio によって実装されている機能で, `.Rnw` でのみ有効です. Whether to write a concordance file to map the output line numbers to the input line numbers. This enables one to navigate from the output to the input, and can be helpful especially when a TeX error occurs. This feature is only for `.Rnw` documents, and implemented in RStudio. TODO
+-   **`eval.after`**: (`'fig.cap'`; `character`).: オプション名の文字ベクトルを指定します. このオプションはチャンクが評価された**後で**評価され, 他のオプションはチャンクが評価される前に評価されます. 例えば `eval.after = 'fig.cap'` が指定されているときに `fig.cap = paste('p-value is', t.test(x)$p.value)` とすると, チャンクの評価後の `x` の値が使用されます.
+- **`global.par`**: (`FALSE`; `logical`).: `TRUE` にすると, それ以前のコードチャンクでの `par()` での設定が引き継がれます (もちろん, この設定は R グラフィックスのみで有効です). デフォルトでは  **`knitr`** はグラフの記録のために新規のグラフィックデバイスを開き, コードの評価後に閉じるため, `par()` による設定はその都度破棄されます.
+- **`header`**: (`NULL`; `character`).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば `\documentclass{article}` の直後, HTML ならば `<head>` タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は `knitr::knit_patterns$get('document.begin')` で知ることができます. このオプションは `.Rnw` と `.Rhtml` 限定の機能です^[訳注: R Markdown ではヘッダの設定は YAML フロントマターで行います].
+-  **`latex.options.color`**, **`latex.options.graphicx`**: (`NULL`).: それぞれ LaTeX パッケージの  **color** と **graphicx** に対するオプションを指定します. これらのオプションは `.Rnw` 限定の機能です^[訳注: R Markdown ではこの機能もやはり YAML フロントマターが担当しています].
+-   **`out.format`**: (`NULL`; `character`).: 可能な値は `latex`, `sweave`,
+    `html`, `markdown`, `jekyll` です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば `?knitr::render_latex` を参考にしてください. このオプションは `knitr::knit()` が実行される**前に**設定する必要があります (文書内で設定しても機能しません).
+-   **`progress`**: (`TRUE`; `logical`).: `knitr::knit()` の実行中にプログレスバーを表示するかどうかを指定します.
+-   **`root.dir`**: (`NULL`; `character`).: コードチャンク評価時のルートディレクトリを指定します. `NULL` の場合, 入力ファイルと同じ場所が指定されます.
+-   **`self.contained`**: (`TRUE`; `logical`).: 出力する文書が自己完結的であるべきかどうかを指定します (`.tex` ファイルにスタイルを書き出すか, `html` に CSS を書き出すか). このオプションは `.Rnw` と `.Rhtml` でのみ機能します^[訳注: R Markdown では出力フォーマット関数に同様のオプションが用意されていることが多いです].
+-   **`unnamed.chunk.label`**: (`unnamed-chunk`; `character`).: ラベルを設定していないチャンクのラベルの接頭語を指定します.
+-   **`upload.fun`**: (`identity`; `function`).: ファイルパスを引数にとり, ファイルに対して処理を行い出力フォーマットが HTML または Markdown の場合に文字列を返す関数を指定します. 典型的な使い方として, 画像をアップロードしそのリンクを返す関数を指定します. 例えば `knitr::opts_knit$set(upload.fun = knitr::imgur_upload)` でファイルを http://imgur.com にアップロードできます (`?knitr::imgur_upload` を参照してください).
+-   **`verbose`**: (`FALSE`; `logical`).: 情報を冗長に詳細するか (例えば各チャンクで実行されたRコードやメッセージログなど), チャンクラベルとオプションのみ表示するかを指定します.

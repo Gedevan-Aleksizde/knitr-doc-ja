@@ -1,0 +1,199 @@
+# フック {#hooks}
+
+コードチャンク実行前後のカスタマイズ関数, 出力の調整, チャンクオプションの操作について
+
+オリジナルの更新日: 2017-02-03
+
+----
+
+**`knitr`** の `knit_hooks` オブジェクトはフック (hook) を設定するのに使います. 基本的な使用法は `knit_hooks$set(param = FUN)` です (詳細は \@ref(objects) 章『オブジェクト』参照)で, ここでの  `param` はチャンクオプション名, `FUN` は関数です. フックには2種類あります. チャンクに対するフックと出力に対するフックです. フック関数はどのように設計するかによって異なる形式をとるでしょう.
+
+## チャンクフック
+
+チャンクフックは対応するチャンクオプションの値が `NULL` ではないとき  コードチャンクの前後に実行されます (つまりオプションになんらかの値を設定している限り, 実行されるということです). この関数は以下のように 3 つの引数が定義されるべきです.
+
+```{r chunk-hook-example, eval=F} 
+foo_hook = function(before, options, envir) {
+    if (before) {
+        ## チャンク実行前の処理
+    } else {
+        ## チャンク実行後の処理
+    }
+}
+```
+
+**`knitr`** が文書を処理する時, 各チャンクの直前に `foo_hook(before = TRUE)` が (チャンクがキャッシュされていたり評価しないように設定されていない限り) 呼び出され, チャンク直後に `foo_hook(before = FALSE)` が呼び出されます. `options` 引数は現在のチャンクに設定された**オプション** (\@ref(options) 章) です (例えば `options$label` は現在のチャンクのラベルです). `envir` にはコードチャンクが評価させる環境を指定します. 後の2つの引数はチャンクフックのオプション引数です. 例えば, 次のように `small_mar` オプションにフックを設定します. (訳注: マージン調整だけでは違いがわかりづらい, というか R Markdown はデフォルトでマージン調整するので背景色も変更して違いをわかりやすくしました)
+
+```{r chunk-hook-example-2}
+knitr::knit_hooks$set(small_mar = function(before, options, envir) {
+    if (before){
+      par(mar = c(4, 4, .1, .1))  # 上と右側のマージンを小さく設定
+      par(bg = "yellow") # 背景色を毒々しくする
+    }
+})
+```
+
+そしてフックに設定した関数はこのように呼び出されます.
+
+````r
+`r ''````{r, myplot, small_mar=TRUE}
+## small_mar=TRUE は必須ではない: NULL でさえなければフックは適用される
+hist(rnorm(100), main = '')
+```
+````
+
+```{r, myplot, small_mar=T, echo=F}
+## small_mar=TRUE は必須ではない: NULL でさえなければフックは適用される
+hist(rnorm(100), main = '')
+```
+
+**`knitr`** のフックは出力にテキストを挿入することにも使えます. そのため, このタイプのフック関数は文字列を返す必要があります. この機能はフックの能力を大いに広げます. **`rgl`** パッケージを例に取りましょう. **rgl** によって生成された 3D グラフを Markdown または HTML 文書に挿入したい時, このタイプのフック関数を考える事になるでしょう (この例よりも洗練された `hook_rgl()` 関数が **`rgl`** パッケージにあるので参照してください). 
+
+```{r hook-rgl-example, eval=F}
+knit_hooks$set(rgl = function(before, options, envir) {
+  if (!before) {
+    ## チャンクコードが評価された後の処理
+    if (rgl.cur() == 0) return()  # アクティブなデバイスがないかどうか
+    name = paste0(options$fig.path, options$label, '.png')
+    rgl.snapshot(name, fmt = 'png')
+    return(paste0('![rgl plot](', name, ')\n'))
+  }
+})
+```
+
+そしてコードチャンクはこのようになります.
+
+````r
+`r ''````{r, fancy-rgl, rgl=TRUE}
+library(rgl)  # 用例は ?plot3d から
+open3d()
+x = sort(rnorm(1000)); y = rnorm(1000); z = rnorm(1000) + atan2(x,y)
+plot3d(x, y, z, col = rainbow(1000))
+```
+````
+Markdown の場合 `![rgl plot](fancy-rgl.png)` と出力されているでしょう.
+
+要約すると:
+
+1. フックは `knit_hooks` で, `knit_hooks$set(foo = FUN)` という構文で設定されます
+2. あるチャンクで `foo` というチャンクオプションが `NULL` 以外の値をとる場合, このフック関数 `FUN` が実行されます.
+3. フックはチャンクの直前と直後に実行できます
+4. フックによって返される文字列は修正が加えられることなく出力ブロックに書き出されます.
+
+さらなる用例は [045-chunk-hook.md](https://github.com/yihui/knitr-examples/blob/master/045-chunk-hook.md) ([source](https://github.com/yihui/knitr-examples/blob/master/045-chunk-hook.Rmd)) を参照してください.
+
+## 出力フック
+
+出力フックはチャンクからの**生の**出力をカスタマイズし洗練するために使います. 様々な種類の出力に対処するための 8つの出力フック関数が存在します.
+
+- **`source`**: ソースコード
+- **`output`**: 通常の R の出力 (i.e., what would have been printed in an R terminal) except warnings, messages and errors
+- **`warning`**: `warning()` による警告文
+- **`message`**: `message()` によるメッセージ文
+- **`error`**: `stop()` によるエラー文 (コードチャンクとインライン R コードの両方に適用されます)
+- **`plot`**: 出力されるグラフ
+- **`inline`**: インライン R コードの出力
+- **`chunk`**: チャンクの全ての出力 (つまりその前のフックにも生み出されたもの)
+- **`document`**: 文書全体の出力 (デフォルトでは `base::identity` が適用されます)
+
+これらのフックは全て `function(x, options)` という形式をとります (例外として, `inline` と `document` のフックのみ引数は `x` の1つです), `x` が出力の文字列で, `options` が現在のチャンクのオプションのリストです. 出力フックに関する情報と用例をさらに詳しく知りたい場合は [_R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html) を参考にしてください.
+
+以下は `error` フックの用例になります. [R Markdown](https://rmarkdown.rstudio.com) 上で, エラー文に対して追加で整形処理をするフックです.
+
+```{r, error-hook-example1}
+knitr::knit_hooks$set(error = function(x, options) { 
+  paste(c('\n\n:::{style="color:Crimson; background-color: SeaShell;"}',
+    gsub('^## Error', '**Error**', x),
+    ':::'), collapse = '\n')
+  }
+)
+```
+
+このようなチャンクでフックの動作をテストします
+
+````r
+`r ''````{r, error=TRUE}
+1 + "a"
+```
+````
+
+```{r, error-hook-example2, echo=F, error=T}
+1 + "a"
+```
+
+デフォルトではチャンクフックは空ですが, 出力フックはデフォルト設定があり, 以下のようにしてリセットできます.
+
+```{r, reset-knit-hook, eval=T}
+knitr::knit_hooks$restore() 
+```
+
+本パッケージは出力を異なる部品にわけてそれぞれにデフォルトのフックを設定し, さらに LaTeX, HTML, Jekyll といった異なる出力フォーマットごとに用意しています. `render_*()` という一連の関数群は, 例えば `render_latex()`, `redner_html()`, など出力フォーマットごとにそれぞれ異なる, 組み込みの出力フックを提供するためにあります. 出力フックはドキュメント内で設定すべきですが, `knitr::knit()` が文書を処理する前にフックを設定したなら `render_*()`, たとえば `render_markdown()`, `render_html()` を最初に呼び出さなければなりません. `hooks_markdown()` などの `hooks_*()` 関数で, 設定を変えることなくこれらの出力フックにアクセスすることができます.
+
+以降は各フォーマットでの詳細を記します.
+
+### LaTeX: `render_latex()`
+
+出力ファイルタイプが LaTeX の場合, デフォルトのフックはほとんどのチャンク出力を `verbatim` 環境で囲んで出力し, `inline` 出力における数値を指数表記で出力します (詳細は see [output demo](../demo/output/) を参照してください). `plot`, `chunk` フックはより複雑な処理をしています.
+
+- デフォルトでは `plot` フックは出力の信頼性を維持するため多くの要因に影響されます. 
+  - たとえばグラフィックデバイスが `tikz` ならば, `\input{}` コマンドが使われますし^[訳注: tikz の画像は LaTeX ソースコードで記述されるため, `\input{}` でテキストファイルとして読み込む必要があります.], それ以外では通常は `\includegraphics{}` コマンドが使われます.
+  - `out.width`, `out.height` オプションに依存して, フックはグラフのサイズをリセットします (たとえば `\includegraphics[width=.8\textwidth]{file}` のように). 1つのチャンクに複数のグラフがある場合, `fig.show='hold'` を設定するとともに, 複数の画像を適切なサイズで横に並べて表示できるように設定できます (たとえば `.45\textwidth`^[訳注: 本文幅の45%] とすれば横に2つのグラフを並べられます). 
+  - tikz のグラフは `\input{}` で挿入するため, このやり方は正しくありませんが, チャンクオプション `resize.width` と `resize.height` は複数の tikz グラフを横に並べることができます (`\resizebox{resize.width}{resize.height}{file.tikz}` という書き方によって. もしいずれかのオプションが `NULL` なら `!` で置き換えられます. 詳細は LaTeX パッケージの `graphicx` のドキュメントを参照してください). このフック関数によってユーザーは自動レポート生成の全能力を使いこなせます --- 単一チャンクの複数グラフとグラフのサイズの設定が可能になるだけでなく, base R のグラフィックスや grid 系のグラフィックス (例: **ggplot2**), あるいはグリッド系のグラフを並べて表示する (この機能がなかったら, R で1つのウィンドウにこういった複数のグラフを1つにまとめるのがどんなに難しいことか考えても見てください^[訳注: 現在は `patchwork` や `cowplot` パッケージなどの登場により, そこまで難しいことではなくなりつつあります]).
+  - グラフのアラインを決めるために `fig.align` には4つの値が用意され (`default`, `left`, `right`, `center`), 簡単に画像を中央揃えにできます (`fig.align='center'` によって).
+- デフォルトの `chunk` フックは主にチャンクの装飾に使われています.
+  - LaTeX の `framed` パッケージがユーザーの TeX ソフトウェアパッケージ (TeXLive か MikTeX か他の何か^[訳注: あるいは Yihui 氏による TinyTeX とか]) にインストールされているなら, `chunk` フックはカスタマイズした背景色 (デフォルトでは薄灰色) にした `kframe` 環境に全ての出力を挿入することで, チャンクの視認性を向上させます (他の地の文よりも強調されますが, とても目立つというほどでもないはずです).
+  - 最後に, 全ての出力が `knitrout` 環境で囲まれます. この環境はユーザーが LaTeX で再定義できます.
+
+### Sweave: `render_sweave()`
+
+ソースコードを `Sinput` 環境に挿入し, その出力を `Sioutput` 環境に挿入し, そしてチャンク全体を `Schunk` 環境に挿入します. このテーマの使用にはスタイルファイル `Sweave.sty` か, 少なくともこれら3つの環境を定義することが必要です.
+
+### Listings: `render_listings()`
+
+Sweave 同様に,  [`Sweavel.sty`](https://github.com/yihui/knitr/blob/master/inst/misc/Sweavel.sty) が使用されます.
+
+### HTML: `render_html()`
+
+HTML ファイルに書き出すにあたって, フックは出力を自動で調整します. 基本的にチャンクによる出力はクラス付きの `div` レイヤーに挿入されます. たとえば, ソースコードは `<div class="knitr source"></div>`, チャンク全体は `<pre></pre>` に, インラインの出力は `<code class="knitr inline"></code>` に書き出されます^[訳注: R Markdown では最終的に出力されるHTMLはさらに pandoc などの処理を経由しているため, これとは異なります].
+
+### Markdown: `render_markdown()`
+
+ソースコードとその出力はスペース4つでインデントされます. GitHub Flavored Markdown のため, ソースコードは ```` ```r ```` と ```` ``` ```` の間に挿入され,  出力部分は ```` ``` ```` と ```` ``` ```` の間に挿入されます.
+
+### Jekyll: `render_jekyll()`
+
+このサイト^[訳注: オリジナルが掲載されている Yihui 氏のサイト]を構築するために, Jykell 用に特別にいくつかのフックを用意する必要がありました. これらは実際かなり単純なものです. R ソースコードはハイライト環境に挿入し言語を `r` に設定する, 残りの出力部分は `text` 言語に設定したハイライト環境 (ほとんど何もハイライトしない) に挿入するだけです. 現在, グラフは Markdown の構文に従って書き出されます.
+
+### reStructuredText: `render_rst()`
+
+コードは `::` の後に挿入され, スペース4個でインデントされるか, `sourcecode` ディレクティブに挿入されます.
+
+## オプションフック
+
+他のチャンクオプションの値に応じて別のチャンクオプションの値を変えたいとき, `opts_hooks` をつかってそれを実行することがあるかもしれません. オプションフックは対応するチャンクオプションの値が `NULL` 以外であるときに実行されます. たとえば `fig.width` を常に `fig.height` 以上の値に調整することができます.
+
+```{r, option-hook-example}
+knitr::opts_hooks$set(fig.width = function(options) {
+if (options$fig.width < options$fig.height) {
+    options$fig.width = options$fig.height
+  }
+  options
+})
+```
+
+`fig.width` は `NULL` になることがないため, このフック関数は常にチャンクの直前の, チャンクオプションが確認される前に実行されます. 以下のコードチャンクは上記のフックを設定することで, `fig.width` の実際の値は初期値の `5` の代わりに `6` が適用されます.
+
+````r
+`r ''````{r fig.width = 5, fig.height = 6}
+plot(1:10)
+```
+````
+```{r fig.width = 5, fig.height = 6, echo=F}
+plot(1:10)
+```
+
+訳注: `knit_hooks` 同様に, `opts_hooks` にも `restore()` メソッドが用意されています.
+
+```{r, reset-opts-hook, echo=F}
+knitr::opts_hooks$restore() 
+```
