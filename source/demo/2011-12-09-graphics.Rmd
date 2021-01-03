@@ -1,0 +1,117 @@
+<!---
+title: Graphics
+subtitle: Power of graphics in knitr
+date: '2011-12-09'
+slug: graphics
+--->
+
+# グラフィックス {-#graphics}
+
+**`knitr`** におけるグラフィックスの力について
+
+オリジナルの記事: https://yihui.org/knitr/demos/graphics
+
+オリジナルの更新日: 2011/12/9
+
+----
+
+```{block2, type="rmdtip"}
+このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
+```
+
+## グラフィックスマニュアル {-}
+
+グラフィックスマニュアルでは **`knitr`** のグラフィックスに彩りを加えるものを紹介します.
+
+- グラフィックスマニュアルのソースと出力は以下です
+  - Rnw ソース: [knitr-graphics.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.Rnw)
+  - LyX ソース: [knitr-graphics.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.lyx)
+  - PDF 出力: [knitr-graphics.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-graphics.pdf)
+
+刊行にあたって R グラフィックスの改善の余地が大いにあることに気づくかもしれません. R があなたにもたらすものを鵜呑みにしないでください. あなたのグラフを美しくプロフェッショナルにすることを考える時間です.
+
+マニュアルからいくつかスクリーショットを提示します.
+
+![knitr 上の tikz グラフィックス](https://db.yihui.org/imgur/HCkka.png)
+
+![knitr 上の ggplot2](https://db.yihui.org/imgur/BTEiu.png)
+
+ [`tufte-handout`](http://code.google.com/p/tufte-latex/) クラスの作者に感謝します. 上記の例はこれを利用しています. そして **`tikzDevice`**  パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).
+
+## カスタムグラフィックデバイスについての補足 {-}
+
+[チャンクオプション](#options) の `dev` は3つの引数をとる R 関数として定義されたカスタムグラフィックデバイスに対応します. これは `pointsize` 10 を使用した PDF デバイスの例です^[訳注: R Markdown の場合, 日本語表示は後述するように `cairo_pdf` のほうが簡単です.].
+
+```{r demo-custom-graphic-dvice-function}
+my_pdf = function(file, width, height) {
+  pdf(file, width = width, height = height, pointsize = 10)
+}
+```
+
+これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. **`knitr`** はグラフファイルに対して適切なファイル拡張子を推測できないため, `fig.ext` オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.
+
+````r
+`r ''````{r dev='my_pdf', fig.ext='pdf'}
+plot(rnorm(100))
+```
+````
+
+文書全体でこのデバイスを使用したい場合は, もちろん `\SweaveOpts{}` を使ってグローバルに設定することもできます.
+
+## デバイスに追加の引数を与える {-}
+
+`dev.args` オプションを通してグラフィカルデバイスをよく制御できます.  `pointsize = 10` とハードコーディングする代わりに, チャンクに `dev.args = list(pointsize = 10)` を与えることができます. これが例です.
+
+````r
+`r ''````{r dev='pdf', dev.args=list(pointsize=10)}
+plot(rnorm(100))
+```
+````
+
+`dev.args` はリストなので, デバイスの引数として可能なものを取るべきです. たとえば `pdf()` には `dev.args=list(pointsize=11, family='serif')`. `dev.args` の全ての要素はチャンクのグラフィカすデバイスに与えられます.
+
+## R グラフィックスにハイパーリンクを付ける {-}
+
+**tikzDevice** パッケージのおかげで, R グラフィックスではほとんどの LaTeX コマンドを使うことができます. ハイパーリンクを付ける例を示します: [links.Rnw](https://gist.github.com/1937313) (Jonathan Kennel に感謝).
+
+特記事項として, あなたは `\usepackage{hyperref}` を **tikzDevice** パッケージのメトリックのリストに与える必要があります. そうでなければ `\hyperlink` や `\hypertarget` コマンドは認識されません.
+
+## マルチバイト文字のエンコーディング {-}
+
+あなたのグラフにマルチバイト文字が含まれている場合, `pdf()` デバイスの `encoding` オプションを指定する必要があります. issue [#172](https://github.com/yihui/knitr/issues/172) を参照してください. 可能なエンコーディングのリストは以下で確認できます.
+
+```{r demo-graphics-encoding}
+list.files(system.file('enc', package = 'grDevices'))
+## 例: pdf.options(encoding = 'CP1250')
+```
+
+このような警告メッセージを目にした場合, エンコーディングの設定が必要かもしれません.
+
+```
+Warning: conversion failure on '<var>' in 'mbcsToSbcs': dot substituted for <var>`.
+```
+
+別の手段として, `pdf`  の代わりに  `cairo_pdf` を使うというものがあります. (issue [#436](https://github.com/yihui/knitr/issues/436) を参照してください)[^use-cairo-pdf][^use-rmarkdown]:
+
+```{r demo-graphics-cairo-pdf, eval=F}
+options(device = function(file, width = 7, height = 7, ...) {
+  cairo_pdf(tempfile(), width = width, height = height, ...)
+})
+```
+
+もし Windows 環境でこれが失敗するのなら, issue [#527](https://github.com/yihui/knitr/issues/527) を確認してください.
+
+[^use-cairo-pdf]: 訳注: 投稿したい論文雑誌などから特別な要件がない限り, 現在は `cairo_pdf` のほうが簡単だと思います.
+[^use-rmarkdown]: 訳注: R Markdown であれば, `dev = 'cairo_pdf'` で十分です.
+
+## 装飾フォント {-}
+
+`pdf()` のドキュメントによれば, `useDingbats` 引数は小さな円を含む PDF のファイルサイズを減らしてくれる可能性があります. RStudio 上で **`knitr`** を使っている場合, このオプションはデフォルトで無効になっています. 巨大な散布図を含む場合, ソース文書に `pdf.options(useDingbats = TRUE)` と書くことで有効になるでしょう. 詳細な議論は issue [#311](https://github.com/yihui/knitr/issues/311) を参照してください.
+
+## アニメーション {-}
+
+チャンクオプション `fig.show='animate'` が設定されコードチャンクで複数のグラフが生成されている場合, 全てのグラフが統合されアニメーションになります. LaTeX の出力では, LaTeX パッケージの **animate** が使われ, HTML/Markdown の出力に対しては, デフォルトでは [FFmpeg](http://ffmpeg.org) が使われ [WebM](http://www.webmproject.org) 動画が作られます. FFmpeg をインストールする際に  **libvpx** のサポートを有効にする必要があることに注意してください. Linux および Windows ユーザーは FFmpeg ウェブサイトのダウンロードリンクを確認してください (バイナリ版では **libvpx** は有効になっています). OSX ユーザーは, [Homebrew](http://brew.sh) 経由で FFmpeg をインストールできます.
+
+```{bash, eval=F}
+brew install ffmpeg --with-libvpx
+```

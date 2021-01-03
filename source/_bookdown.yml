@@ -1,0 +1,43 @@
+book_filename: knitr.Rmd
+output_dir: "../docs"
+delete_merged_file: true
+rmd_files:
+    - 'index.Rmd'
+    - '01-options.Rmd'
+    - '03-hooks.Rmd'
+    - '04-examples.Rmd'
+    - '06-FAQ.Rmd'
+    - '20-examples-header.Rmd'
+    - 'demo/2012-03-16-editors.Rmd'
+    - 'demo/2012-02-29-framed.Rmd'
+    - 'demo/2011-12-10-listings.Rmd'
+    - 'demo/2012-01-25-output.Rmd'
+    - 'demo/2012-01-14-reference.Rmd'
+    - 'demo/2011-12-09-graphics.Rmd'
+    - 'demo/2011-12-05-manual.Rmd'
+    - 'demo/2011-12-04-cache.Rmd'
+    - 'demo/2013-03-11-showcase.Rmd'
+    - '30-appendix-header.Rmd'
+    - '31-objects.Rmd'
+    - '33-patterns.Rmd'
+language:                 
+  label:
+    fig: '図 '
+    tab: '表 '
+    eq: '式 '
+    thm: '定理 '
+    lem: '補題 '
+    cor: '系 '
+    prp: '命題 '
+    cnj: '予想 '
+    def: '定義 '
+    exm: '例 '
+    exr: '練習 '
+    proof: '証明. '
+    remark: '用例. '
+    solution: '解答. '
+  ui:
+    edit: "Edit"
+    chapter_name: ''
+    section_name: "SS "
+    appendix_name: '補遺'

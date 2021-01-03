@@ -1,0 +1,62 @@
+<!---
+title: Package framed
+subtitle: Default LaTeX style in knitr
+date: '2012-02-29'
+slug: framed
+--->
+
+# `framed` パッケージ {-#framed}
+
+**`knitr`** における LaTeX のデフォルトスタイル
+
+オリジナルのページ: https://yihui.org/knitr/demo/framed/
+
+オリジナルの更新日: 2012/2/29
+
+----
+
+```{block2, type="rmdtip"}
+このページは `knitr` 単体の場合を解説しています. R Markdown の場合, `framed` が関わるのは基本的にコードチャンクの表示スタイルのみです.
+```
+
+デフォルトでは **`knitr`** はタイプセットに [framed](http://www.ctan.org/pkg/framed) という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.
+
+[よくある質問](#FAQs)で挙げたように, 影付きボックスからはみ出ることがあるかもしれません. その際は `options('width')` でより小さい値を設定してください.
+
+## 要素の概要 {-}
+
+テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は `kframe` 環境で問題が合った旨を警告します. `kframe` は **`knitr`** チャンク出力を包むために使用します. 既知の問題では,  issue [#154](https://github.com/yihui/knitr/issues/154) で PNG を使った場合があります. 確実にページ余白を超えないようにするため, **`knitr`** は以下のコマンドを LaTeX プリアンブルで使用します.
+
+```{tex demo-framed-exceed, eval=F}
+%% maxwidth is the original width if it's less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+```
+
+出力が LaTeX の場合, チャンクオプション `out.width` はデフォルトで `'\\maxwidth'` 設定されます.
+
+## 影付きボックスのパディング {-}
+
+もしデフォルトのレイアウト (パディングがまったくない)が倹約しすぎると感じた場合, この LaTeX コマンドでパディングを 5mm に設定します.
+
+```{tex demo-framed-padding, eval=F} 
+\setlength\fboxsep{5mm}
+```
+
+**framed** パッケージに寄るデフォルトのスタイルが気に入らない場合, [listings](#listings) や自分自身で定義した出力[フック](#hooks) に切り替えられます.
+
+## **framed** と互換性のない環境 {-}
+
+二段組の文書内での `figure*` とは相性がよくありません. この状況に対処するアプローチに1つとして, [knitr-twocolumn.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-twocolumn.pdf) を参照してください.
+
+Tufte handout/book クラスを使う場合, `fullwidth` 環境と **framed** パッケージは併用できません. 可能性のある解決策として, issue [#222](https://github.com/yihui/knitr/issues/222) の議論を参照してください.
+
+**lineno** パッケージとも併用できません. [Michael's の投稿](http://groups.google.com/group/knitr/browse_thread/thread/b0d6723386371139)を参照してください.

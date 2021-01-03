@@ -1,0 +1,48 @@
+<!---
+title: Examples
+subtitle: Source and output of demos
+date: '2017-02-03'
+layout: example
+list_pages: true
+--->
+
+# 使用例 {#examples}
+
+ソースと出力のデモ
+
+オリジナルのページ: https://yihui.org/knitr/demos/
+
+オリジナルの更新日: 2017-02-03
+
+----
+
+```{block2, type="rmdnote"}
+編集上の問題から, ここで挙げられているページは全てナビゲーションバーの「用例」パートの各章のリンクとなっています.
+```
+
+Github の [knitr-examples](https://github.com/yihui/knitr-examples) のほうがより豊富なコレクションになっています. このページはむしろドキュメント用途として作られています. 他のユーザーによる [**`knitr`**の応用事例集](#showcase) を見ることもできます.
+
+```{r demos-list, results="asis", echo=F}
+items <- sort(list.files("demo", pattern = "\\.*md$", ignore.case = T))
+
+make_item_text <- function(x){
+  header <- read.table(file.path("demo", x), nrows = 4, skip = 1, col.names = c("name", "value"), sep = ":", fileEncoding = "utf-8")
+  header <- data.frame(as.list(setNames(header$value, header$name)))
+  header$subtitle <- with(header, ifelse(is.na(subtitle), "", subtitle))
+  header$title <- with(header, ifelse(is.na(title), "", title))
+  if(grepl("\\.md$", x, ignore.case = T)){
+    topic <- with(header, paste(date, title, '-', subtitle, "(未翻訳)"))
+  } else {
+    tmp <- readLines(file.path("demo", x))[2:10]
+    title <- sub("^#\\s*(.+)\\s(.*)", "\\1", grep("^#\\s", tmp, value = T)[1])
+    ref <- sub("^#\\s*(.+)\\s\\{-(.*)\\}", "\\2", grep("^#\\s", tmp, value = T)[1])
+    subtitle <- grep("^[^a-zA-Z\\-]", tmp,value=T)[2]
+    topic <- paste(header$date,
+                   paste0("[", title, ' - ', subtitle, "](", ref, ")")
+                   )
+  }
+  return(topic)
+}
+cat(paste("-", unlist(lapply(items, make_item_text))), sep = "\n")
+```
+

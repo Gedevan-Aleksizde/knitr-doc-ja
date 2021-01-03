@@ -1,0 +1,62 @@
+<!---
+title: Listings
+subtitle: Using knitr with listings
+date: '2011-12-10'
+slug: listings
+--->
+
+# `Listings` {#listings}
+
+`listings` と `knitr` の併用
+
+オリジナルのページ: https://yihui.org/knitr/demo/listings/
+
+オリジナルの更新日: 2011/12/10
+
+----
+
+```{block2, type="rmdtip"}
+このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
+```
+
+**`knitr`** では, LaTeX の `listings` パッケージで結果を装飾するためにの出力[フック](#hooks)を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.
+
+```{r demo-listings-hook, eval=F} 
+## a common hook for messages, warnings and errors
+hook_lst_bf = function(x, options) {
+    paste("\\begin{lstlisting}[basicstyle={\\bfseries}]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+}
+knit_hooks$set(source = function(x, options) {
+    paste("\\begin{lstlisting}[language=R,numbers=left,stepnumber=2]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+}, output = function(x, options) {
+    paste("\\begin{lstlisting}[basicstyle={\\ttfamily}]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+}, warning = hook_lst_bf, message = hook_lst_bf, error = hook_lst_bf)
+
+## empty highlight header since it is not useful any more
+set_header(highlight = "")
+```
+
+見て分かるように, **`knitr`** は全てをユーザーに公開してます. 必要なのはこれらの R コードの部品と出力を適切な環境で包むことです.
+
+**ちょっと待った**, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で `render_listings()` 関数として **`knitr`** に組み込まれています. これが使用例になります.
+
+- **knitr** で `listings` をつかう
+  - Rnw ソース: [knitr-listings.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-listings.Rnw)
+  - LyX ソース: [knitr-listings.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-listings.lyx)
+  - PDF 出力: [knitr-listings.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-listings.pdf)
+
+PDFの出力のスクリーショットを1つお見せします:
+
+![knitr での listings の使用](https://db.yihui.org/imgur/PKupQ.png)
+
+LaTeX のスタイルファイル `Sweavel.sty` を提供してくれた Frank Harrell に感謝します.
+
+## さらなる listings オプション.
+
+**listings** パッケージには膨大な数の使用可能なオプションがあるので, その全性能を引き出すにはマニュアルを読み込んでください. 以下はエラーメッセージで開業する方法の例を提示しています. この[Rnw ソース](https://gist.github.com/2209775)をダウンロードすることができます.  ポイントは `breaklines=true` オプションです.
+
+![listings の出力の改行](https://db.yihui.org/imgur/3313T.png)
+

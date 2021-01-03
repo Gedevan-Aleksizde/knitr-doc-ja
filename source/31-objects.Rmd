@@ -1,3 +1,11 @@
+<!---
+title: Objects
+subtitle: Objects to manipulate options, patterns and hooks
+date: '2017-02-03'
+slug: objects
+--->
+
+
 # オブジェクト {#objects}
 
 オプションを操作するオブジェクト, パターン, そしてフックについて
@@ -18,7 +26,7 @@
 - **`opts_chunk`**, **`opts_current`**: [チャンクオプション](#chunk-options)を管理します
 - **`opts_knit`**: **`knitr`** [パッケージ全体のオプション](#package-options)を管理します
 - **`knit_hooks`**: [フック関数](#hooks)を管理します
-- **[`knit_patterns`](../patterns)**: 入力ドキュメントから R コードを取りだすための正規表現を管理します
+- **[`knit_patterns`](#patterns)**: 入力ドキュメントから R コードを取りだすための正規表現を管理します
 - **`knit_engines`**: R 以外の他の言語の処理に対する関数を管理します
 
 `knit_patterns` 以外の他の全てのオブジェクトはデフォルトの初期値が設定されており, `knit_paterns` は特に指定がない場合は入力ファイルのタイプに基づいて自動的に決定されます. `knit_hooks` オブジェクトは1番よく使うことになるでしょう. そして残りの3つは直接使用する機会は少ないと思います. たとえば `opts_chunk` はたいていはコマンドラインで直接実行するよりも入力ファイル内で設定します.
