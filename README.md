@@ -1,5 +1,5 @@
 
-本文はこちらです: https://gedevan-aleksizde.github.io/knitr-doc-ja/.index.html
+本文はこちらです: https://gedevan-aleksizde.github.io/knitr-doc-ja/
 
 # これは何?/What's this?
 
