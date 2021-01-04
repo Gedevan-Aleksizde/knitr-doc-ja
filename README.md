@@ -1,4 +1,6 @@
 
+本文はこちらです: https://gedevan-aleksizde.github.io/knitr-doc-ja/.index.html
+
 # これは何?/What's this?
 
 * [Yihui 氏のリポジトリ](https://github.com/rbind/yihui) の `knitr` パッケージの解説『knitr: Elegant, flexible, and fast dynamic report generation with R』を翻訳した文書です. 氏のサイトの全てのコンテンツは [CC BY-NC-SA 4.0 (表示 - 非営利 - 継承 4.0 国際)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています.
