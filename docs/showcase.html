@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>knitr のショーケース | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
+  <meta name="description" content="knitr のショーケース | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="knitr のショーケース | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="knitr のショーケース | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  
+  
+  
+
+<meta name="author" content="著者: Xie, Yihui (谢益辉)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+
+
+<meta name="date" content="2021-01-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cache.html"/>
+<link rel="next" href="objects.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="header.css" type="text/css" />
+<link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Top</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#概要"><i class="fa fa-check"></i>概要</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#モチベーション"><i class="fa fa-check"></i>モチベーション</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#特徴"><i class="fa fa-check"></i>特徴</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#謝辞"><i class="fa fa-check"></i>謝辞</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#foas"><i class="fa fa-check"></i>FOAS</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="options.html"><a href="options.html"><i class="fa fa-check"></i><b>1</b> オプション</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="options.html"><a href="options.html#chunk-options"><i class="fa fa-check"></i><b>1.1</b> チャンクオプション一覧</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
+<li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
+<li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hooks.html"><a href="hooks.html"><i class="fa fa-check"></i><b>2</b> フック</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hooks.html"><a href="hooks.html#チャンクフック"><i class="fa fa-check"></i><b>2.1</b> チャンクフック</a></li>
+<li class="chapter" data-level="2.2" data-path="hooks.html"><a href="hooks.html#出力フック"><i class="fa fa-check"></i><b>2.2</b> 出力フック</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="hooks.html"><a href="hooks.html#latex-render_latex"><i class="fa fa-check"></i><b>2.2.1</b> LaTeX: <code>render_latex()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="hooks.html"><a href="hooks.html#sweave-render_sweave"><i class="fa fa-check"></i><b>2.2.2</b> Sweave: <code>render_sweave()</code></a></li>
+<li class="chapter" data-level="2.2.3" data-path="hooks.html"><a href="hooks.html#listings-render_listings"><i class="fa fa-check"></i><b>2.2.3</b> Listings: <code>render_listings()</code></a></li>
+<li class="chapter" data-level="2.2.4" data-path="hooks.html"><a href="hooks.html#html-render_html"><i class="fa fa-check"></i><b>2.2.4</b> HTML: <code>render_html()</code></a></li>
+<li class="chapter" data-level="2.2.5" data-path="hooks.html"><a href="hooks.html#markdown-render_markdown"><i class="fa fa-check"></i><b>2.2.5</b> Markdown: <code>render_markdown()</code></a></li>
+<li class="chapter" data-level="2.2.6" data-path="hooks.html"><a href="hooks.html#jekyll-render_jekyll"><i class="fa fa-check"></i><b>2.2.6</b> Jekyll: <code>render_jekyll()</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path="hooks.html"><a href="hooks.html#restructuredtext-render_rst"><i class="fa fa-check"></i><b>2.2.7</b> reStructuredText: <code>render_rst()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="hooks.html"><a href="hooks.html#オプションフック"><i class="fa fa-check"></i><b>2.3</b> オプションフック</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>3</b> 使用例</a></li>
+<li class="chapter" data-level="4" data-path="FAQs.html"><a href="FAQs.html"><i class="fa fa-check"></i><b>4</b> よくある質問 (FAQ)</a></li>
+<li class="part"><span><b>I 用例</b></span></li>
+<li><a href="editors.html#editors"><code>knitr</code> のエディタ</a>
+<ul>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i>Texmaker</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texstudio"><i class="fa fa-check"></i>TeXStudio</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#winedt"><i class="fa fa-check"></i>WinEdt</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#emacsess"><i class="fa fa-check"></i>Emacs/ESS</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#gedit"><i class="fa fa-check"></i>Gedit</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#sublime"><i class="fa fa-check"></i>Sublime</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#vim"><i class="fa fa-check"></i>Vim</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#textmate"><i class="fa fa-check"></i>TextMate</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texshop"><i class="fa fa-check"></i>TeXShop</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texworks"><i class="fa fa-check"></i>TeXworks</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#kile"><i class="fa fa-check"></i>Kile</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#tinn-r"><i class="fa fa-check"></i>Tinn-R</a></li>
+</ul></li>
+<li><a href="framed.html#framed"><code>framed</code> パッケージ</a>
+<ul>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i>要素の概要</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#影付きボックスのパディング"><i class="fa fa-check"></i>影付きボックスのパディング</a></li>
+<li><a href="framed.html#framed-と互換性のない環境"><strong>framed</strong> と互換性のない環境</a></li>
+</ul></li>
+<li><a href="listings.html#listings"><code>Listings</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i>チャンク出力の制御</a>
+<ul>
+<li><a href="output.html#echo-オプションの発展的な使い方"><code>echo</code> オプションの発展的な使い方</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#インライン出力"><i class="fa fa-check"></i>インライン出力</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#long-lines-of-text-output"><i class="fa fa-check"></i>Long lines of text output</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#メッセージに1コメントを"><i class="fa fa-check"></i>1メッセージに1コメントを</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#その他"><i class="fa fa-check"></i>その他</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>チャンク参照/マクロ</a>
+<ul>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#同じラベルを使用する"><i class="fa fa-check"></i>同じラベルを使用する</a></li>
+<li><a href="reference.html#チャンクオプション-ref.label">チャンクオプション <code>ref.label</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i>グラフィックス</a>
+<ul>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#グラフィックスマニュアル"><i class="fa fa-check"></i>グラフィックスマニュアル</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#カスタムグラフィックデバイスについての補足"><i class="fa fa-check"></i>カスタムグラフィックデバイスについての補足</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#デバイスに追加の引数を与える"><i class="fa fa-check"></i>デバイスに追加の引数を与える</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#r-グラフィックスにハイパーリンクを付ける"><i class="fa fa-check"></i>R グラフィックスにハイパーリンクを付ける</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#マルチバイト文字のエンコーディング"><i class="fa fa-check"></i>マルチバイト文字のエンコーディング</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#装飾フォント"><i class="fa fa-check"></i>装飾フォント</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#アニメーション"><i class="fa fa-check"></i>アニメーション</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="manual.html"><a href="manual.html"><i class="fa fa-check"></i>マニュアル</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html"><i class="fa fa-check"></i>キャッシュ</a>
+<ul>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュの例"><i class="fa fa-check"></i>キャッシュの例</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#重要な補足事項"><i class="fa fa-check"></i>重要な補足事項</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュにはまだ何かありますか"><i class="fa fa-check"></i>キャッシュにはまだ何かありますか?</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュディレクトリを入力ファイル名と連動させる"><i class="fa fa-check"></i>キャッシュディレクトリを入力ファイル名と連動させる</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#より細かいキャッシュのとり方"><i class="fa fa-check"></i>より細かいキャッシュのとり方</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#乱数生成器-rng-の再現可能性"><i class="fa fa-check"></i>乱数生成器 (RNG) の再現可能性</a></li>
+</ul></li>
+<li><a href="showcase.html#showcase"><code>knitr</code> のショーケース</a>
+<ul>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i>ウエブサイト</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書評"><i class="fa fa-check"></i>書評</a></li>
+<li><a href="showcase.html#knitr-によるソリューション"><code>knitr</code> によるソリューション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#r-パッケージ"><i class="fa fa-check"></i>R パッケージ</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#教材"><i class="fa fa-check"></i>教材</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ワークショッププレゼンテーション"><i class="fa fa-check"></i>ワークショップ・プレゼンテーション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書籍"><i class="fa fa-check"></i>書籍</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#論文レポート"><i class="fa fa-check"></i>論文・レポート</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#多言語でのラッパー"><i class="fa fa-check"></i>多言語でのラッパー</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ブログの投稿"><i class="fa fa-check"></i>ブログの投稿</a></li>
+</ul></li>
+<li class="appendix"><span><b>補遺</b></span></li>
+<li class="chapter" data-level="A" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>A</b> オブジェクト</a></li>
+<li class="chapter" data-level="B" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>B</b> パターン</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="patterns.html"><a href="patterns.html#ビルトインパターン"><i class="fa fa-check"></i><b>B.1</b> ビルトインパターン</a></li>
+</ul></li>
+<li class="divider"></li>
+<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="showcase" class="section level1 unnumbered">
+<h1><code>knitr</code> のショーケース</h1>
+<p>ユーザーたちによる使用例</p>
+<p>オリジナルのページ: <a href="https://yihui.org/knitr/demo/showcase/" class="uri">https://yihui.org/knitr/demo/showcase/</a></p>
+<p>オリジナルの更新日: 2013-03-11</p>
+<hr />
+
+<div class="rmdtip">
+訳注: 更新日時からも分かるように, このリストは古く, また膨大であるため個別の翻訳はいたしません. R に限らず, 活発に利用されているオープンソースソフトウェアは頻繁に更新されるため, 非公式の解説はしばしば out-of-date になりうる, ということに注意してください.
+</div>
+
+<div class="rmdinfo">
+以下のリンク集は外部サイトによる <code>knitr</code> の使用事例集です (もしリンクしてほしくない, あるいはしてほしいということであれば私 (Yihui) に気軽に連絡してください)
+</div>
+<div id="ウエブサイト" class="section level2 unnumbered">
+<h2>ウエブサイト</h2>
+<ul>
+<li><a href="http://rpubs.com/">RPubs</a>: Easy web publishing from R</li>
+<li><a href="http://kbroman.github.io/knitr_knutshell">knitr in a knutshell</a>, a short tutorial by Karl Broman</li>
+<li><a href="http://www.ats.ucla.edu/stat/r/">R learning resources</a> at UCLA by Joshua Wiley et al (dynamically built with <strong>knitr</strong>)</li>
+<li><a href="http://www.sharelatex.com/learn/Knitr">knitr on ShareLaTeX</a> (an online LaTeX editor)</li>
+<li><a href="http://gallery.rcpp.org/">Rcpp Gallery</a>: Articles and code examples for the <strong>Rcpp</strong> package</li>
+<li><a href="http://slidify.org/">Slidify</a>: reproducible HTML5 slides made easy</li>
+<li><a href="http://onepager.togaware.com/">One Page R</a> Literate Data Science by Graham Williams</li>
+<li><a href="http://www.scribd.com/doc/93360631/Presentation">Reproducible graphics with R and ggplot2</a> by Baptiste Auguié</li>
+<li><a href="https://github.com/johnmyleswhite/MLNotes">ML/stats notes</a> by John Myles White</li>
+<li><a href="http://alea.fr.eu.org/pages/intro-R">A French introduction to R</a> by Julien Barnier (also see <a href="http://cran.r-project.org/other-docs.html">CRAN</a>)</li>
+<li>Applications of R in Business Contest (<a href="http://www.inside-r.org/howto/knitr-elegant-flexible-and-fast-dynamic-report-generation-r">knitr’s entry</a>; <a href="http://www.revolutionanalytics.com/news-events/news-room/2012/applications-of-r-in-business-competition.php">announcement</a>)</li>
+</ul>
+</div>
+<div id="書評" class="section level2 unnumbered">
+<h2>書評</h2>
+<p><a href="http://amzn.com/1498716962">Dynamic Documents with R and knitr</a> に対する書評のリストです.</p>
+<ul>
+<li>A <a href="http://www.jstatsoft.org/v56/b02/">book review</a> in the <em>Journal of Statistical Software</em> by Amelia McNamara</li>
+<li>A <a href="http://www.maa.org/press/maa-reviews/dynamic-documents-with-r-and-knitr-0">book review</a> in <em>MAA Reviews</em> by Peter Rabinovitch</li>
+<li>A <a href="http://www.tug.org/books/reviews/tb109reviews-xie.html">book review</a> on <a href="http://www.tug.org/books/#xie-knitr">TUGboat</a> by Boris Veytsman</li>
+<li><a href="http://rpubs.com/safeisrisky/knitr_booksummary">A book review</a> on RPubs by RK</li>
+<li><a href="http://dx.doi.org/10.1080/00031305.2015.1014676">A book review</a> in <em>The American Statistician</em> by Quan Zhang</li>
+</ul>
+</div>
+<div id="knitr-によるソリューション" class="section level2 unnumbered">
+<h2><code>knitr</code> によるソリューション</h2>
+<ul>
+<li><a href="http://biostat.mc.vanderbilt.edu/wiki/Main/KnitrHowto">a knitr Howto page</a> in Vanderbilt Biostatistics Wiki</li>
+<li><a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/">Plain Text, Papers, Pandoc</a> by Kieran Healy</li>
+<li><a href="https://github.com/sachsmc/tufterhandout">R Markdown output formats for Tufte-style handouts</a> by Michael Sachs</li>
+<li><a href="http://brendanrocks.com/blogging-with-rmarkdown-knitr-jekyll/">Blogging with Rmarkdown, knitr, and Jekyll</a> by Brendan Rocks</li>
+<li><a href="http://jfisher-usgs.github.com/r/2012/07/03/knitr-jekyll/">Blog with Knitr and Jekyll</a> by Jason C Fisher</li>
+<li><a href="http://gastonsanchez.wordpress.com/2012/11/19/creating-html5-slides-with-rstudio-knitr-and-pandoc/">Creating HTML5 slides with RStudio, knitr and pandoc</a> by Gaston Sanchez</li>
+<li><a href="https://github.com/jimhester/knitrBootstrap">A framework to create bootstrap styled HTML reports from knitr Rmarkdown</a> by Jim Hester (a <a href="http://htmlpreview.github.io/?https://raw.github.com/jimhester/knitrBootstrap/master/inst/examples/all.html">preview</a>)</li>
+<li><a href="http://fishyoperations.com/creating-a-business-dashboards-in-r.html">Creating a Business Dashboard in R</a> by Bart Smeets</li>
+<li>Carl Boettiger has cool blog posts demonstrating how to publish a post to Wordpress.com with knitr and RWordPress purely in R, with images uploaded to <a href="http://www.carlboettiger.info/archives/3974">Imgur</a> and <a href="http://www.carlboettiger.info/archives/3988">Flickr</a> respectively</li>
+<li><a href="http://geospaced.blogspot.com/2012/05/knitr-cactus-twitterbootstrap-jquery.html">knitr + cactus + TwitterBootstrap + Jquery</a> by Barry Rowlingson (includes a smart use of jQuery to add links to R functions)</li>
+<li><a href="http://lamages.blogspot.co.uk/2012/05/interactive-reports-in-r-with-knitr-and.html">Interactive reports in R with knitr and RStudio</a> and <a href="http://lamages.blogspot.com/2012/05/interactive-html-presentation-with-r.html">Interactive HTML presentation with R, googleVis, knitr, pandoc and slidy</a> by Markus Gesmann</li>
+<li><a href="http://tex.stackexchange.com/a/87897/9128">Stacked bar plots with several descriptive nodes</a> by ADP</li>
+<li><a href="http://wkmor1.wordpress.com/2012/07/01/rchievement-of-the-day-3-bloggin-from-r-14/">Blogging from R to Wordpress</a> by William K. Morris</li>
+<li>A demo on using <code>tidy=TRUE</code> or the listings environment so code chunks can stay inside page margins (<a href="http://tex.stackexchange.com/q/41471/9128">link to StackExchange</a>)</li>
+<li><a href="http://lincolnmullen.com/blog/how-to-use-knitr-with-a-rakefile/">How to Use Knitr with a Rakefile</a> by Lincoln A. Mullen</li>
+<li><a href="http://ericpgreen.com/reproducible-research-with-word/">Reproducible Research with Word?</a> by Eric P. Green</li>
+<li><a href="http://ramnathv.github.io/slidifyExamples/examples/popcornjs">knitr, slidify, and Popcorn.js</a> by Ramnath Vaidyanathan (<a href="https://github.com/yihui/knitr/issues/466">#466</a>)</li>
+<li><a href="http://chogg.name/blog/2015/03/19/nanoc_knitr/">Transparent, reproducible blogging with nanoc and knitr</a> by Charles Hogg</li>
+<li><a href="http://lukemiller.org/index.php/2015/11/using-knitr-and-r-to-make-instructorstudent-handout-versions/">Using knitr and R to make instructor/student handout versions</a> by Luke Miller</li>
+<li><a href="https://github.com/asardaes/R-LaTeX-Template">Thesis template to generate LaTeX files using R with knitr</a> by Alexis Sarda</li>
+</ul>
+</div>
+<div id="r-パッケージ" class="section level2 unnumbered">
+<h2>R パッケージ</h2>
+<ul>
+<li><a href="https://github.com/baptiste/cda/wiki">The Github Wiki of the cda package</a> by Baptiste Auguie</li>
+<li><a href="http://tengfei.github.com/ggbio/">website of ggbio package</a> by Tengfei Yin</li>
+<li><a href="http://sampsurf.r-forge.r-project.org/">The sampSurf Package</a> by Jeffrey H. Gove</li>
+<li><a href="https://github.com/RevolutionAnalytics/RHadoop/wiki">the RHadoop Wiki</a> by Revolution Analytics</li>
+<li><a href="http://xavier-fim.net/packages/ggmcmc/">The ggmcmc package examples</a> by Xavier Fernández-i-Marín</li>
+<li><a href="http://cran.r-project.org/package=tabplot">tabplot: Tableplot, a visualization of large datasets</a> by Martijn Tennekes and Edwin de Jonge (see its PDF vignette)</li>
+<li>the <a href="https://github.com/djmurphy420/ggplot2-transition-guide">ggplot2 transition guide</a> to version 0.9.0 by Dennis Murphy et al</li>
+<li>a few packages on Bioconductor: <a href="http://www.bioconductor.org/packages/2.12/bioc/vignettes/ReportingTools/inst/doc/knitr.html">ReportingTools</a> and <a href="http://www.bioconductor.org/packages/2.12/bioc/html/RGalaxy.html">RGalaxy</a></li>
+<li><a href="https://github.com/talgalili/dendextend">the dendextend package</a> by Tal Galili</li>
+<li><a href="http://chnosz.net/vignettes/anintro.html">An Introduction to CHNOSZ</a> vignette by Jeffrey M. Dick using Tufte style</li>
+</ul>
+</div>
+<div id="教材" class="section level2 unnumbered">
+<h2>教材</h2>
+<p>以下は Roger Peng の厚情によってシェアされた Cousera の講座 <a href="https://www.coursera.org/course/compdata"><em>Computing for Data Analysis</em></a> 向けの <strong><code>knitr</code></strong> の講義です.</p>
+<iframe width="100%" height="450" src="//www.youtube.com/embed/YcJb1HBc-1Q" frameborder="0" allowfullscreen>
+</iframe>
+<p>さらに以下も <strong><code>knitr</code></strong> と関連する講座の資料です.</p>
+<ul>
+<li><a href="http://kbroman.github.io/Tools4RR/">BMI 826-003</a> (Tools for Reproducible Research) by Karl Broman, University of Wisconsin-Madison</li>
+<li><a href="https://www.coursera.org/course/repdata">Reproducible Research</a> by Roger Peng, Coursera</li>
+<li><a href="http://www.unomaha.edu/mahbubulmajumder/data-science/fall-2014/">Introduction to data science</a> by Mahbubul Majumder, University of Nebraska at Omaha</li>
+<li><a href="http://fonnesbeck.github.com/Bios301/">BIOS 301</a> (Introduction to Statistical Computing) by Chris Fonnesbeck, Vanderbilt University</li>
+<li><a href="http://www.calvin.edu/~rpruim/courses/m344/S12/">Math 344</a> (Probability and Statistics) by Randall Pruim, Calvin College</li>
+<li><a href="http://www.math.montana.edu/~jimrc/classes/stat506/">Stat 506</a> (Advanced Regression) by Jim Robison-Cox, Montana State University</li>
+<li><a href="http://www1.appstate.edu/~arnholta/classes/STT3820/index.htm">STT 3820</a> by Alan T. Arnholt, Appalachian State University</li>
+<li><a href="http://www.math.mcmaster.ca/~bolker/classes/m747/">Math 747</a> (Topics in math biology) by Ben Bolker, McMaster University</li>
+<li><a href="http://www.personal.psu.edu/yoh5109/319spring2013/">STAT 319</a> (Applied Statistics in Science) by Yuan Huang, Penn State University (also see the tutorial <a href="https://onlinecourses.science.psu.edu/statprogram/markdown">Create Dynamic R Statistical Reports Using R Markdown</a>)</li>
+<li><a href="http://bcb.dfci.harvard.edu/~aedin/courses/ReproducibleResearch/">some notes</a> on reproducible research by Aedin Culhane, Harvard University</li>
+<li><a href="http://www.stat.rice.edu/~marina/stat622.html">STAT 622</a> (Bayesian Data Analysis) by Marina Vannucci, Rice University</li>
+<li><a href="http://genome.duke.edu/labs/engelhardt/courses/cbb540.html">STA613/CBB540</a> (Statistical methods in computational biology) by Barbara Engelhardt, Duke University</li>
+<li><a href="http://statacumen.com/teaching/sc1/">Stat 590</a> (Statistical Computing) by Erik Erhardt, University of New Mexico</li>
+<li><a href="https://onlinecourses.science.psu.edu/stat497r/node/101">STAT 497C</a> (Topics in R Statistical Language) by Eric Nord, Penn State University</li>
+<li><a href="http://www.stat.washington.edu/~hoff/courses/567/">CSSS-Stat 567</a> (Statistical Analysis of Social Networks) by Peter Hoff, University of Washington</li>
+<li><a href="http://msemac.redwoods.edu/~darnold/math15/">Math 15</a> (Statistics) by David Arnold, College of the Redwoods</li>
+<li><a href="http://www.stat.ubc.ca/~jenny/STAT545A/">STAT 545A</a> Exploratory Data Analysis by Jennifer Bryan, University of British Columbia</li>
+<li><a href="http://www.stat.purdue.edu/~varao/STAT545/main.html">STAT545</a> Introduction to Computational Statistics, by Vinayak Rao, Purdue University</li>
+<li><a href="https://stat.duke.edu/courses/Fall14/sta101.001/">Sta 101</a> Data Analysis and Statistical Inference, by Mine Çetinkaya-Rundel, Duke University</li>
+<li><a href="http://strata.uga.edu/6370/">GEOL 6370</a> Data Analysis in the Geosciences, by Steven M. Holland, University of Georgia</li>
+</ul>
+</div>
+<div id="ワークショッププレゼンテーション" class="section level2 unnumbered">
+<h2>ワークショップ・プレゼンテーション</h2>
+<p>以下は Joshua Wiley の厚情によって作成・シェアされたチュートリアル資料です.</p>
+<iframe width="100%" height="450" src="//www.youtube.com/embed/p2VBzhLVz3o" frameborder="0" allowfullscreen>
+</iframe>
+<p>文字に起こされたプレゼンテーション:</p>
+<ul>
+<li><a href="https://speakerdeck.com/jennybc/new-tools-and-workflows-for-data-analysis">New tools and workflows for data analysis</a> by Jennifer Bryan (<a href="http://www.fields.utoronto.ca/video-archive/2015/02/318-4374">video</a>)</li>
+<li><a href="http://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/">Geospatial Data in R and Beyond</a> by Barry Rowlingson</li>
+<li><a href="http://davenportspatialanalytics.squarespace.com/blog/2012/6/19/notes-from-a-recent-spatial-r-class-i-gave.html">Broom Spatial R Class</a> by Frank Davenport (<a href="https://dl.dropbox.com/u/9577903/broomspatial.pdf">PDF</a>)</li>
+<li><a href="http://euclid.psych.yorku.ca/datavis.ca/courses/VCD/R/output/">Visualizing Categorical Data</a> by Michael Friendly</li>
+<li><a href="http://www.ling.upenn.edu/~joseff/avml2012/">ggplot2 workshop notes</a> by Josef Fruehwald for AVML 2012</li>
+<li><a href="http://www.homepages.ucl.ac.uk/~uctpfos/files/introPHD.html">R Introduction for UCL PhDs</a> by Florian Oswald at University College London</li>
+<li><a href="http://zfazekas.github.com/teaching/2013/02/17/ecpr-intro-to-R/">Introduction to R lectures for ECPR Winter School 2013</a> by Zoltán Fazekas, University of Southern Denmark</li>
+<li><a href="https://dl.dropbox.com/u/4149392/R_for_the_brave.pdf">R for the brave</a> by Will Pearse</li>
+<li><a href="http://lcolladotor.github.com/Rmd-intro/">Introduction to knitr: The R Markdown (Rmd) format</a> by L. Collado Torres for JHSPH Biostat computing club</li>
+<li><a href="http://mwfrost.com/r_slides/r_slides.html">Stop Clicking, Start typing</a> by Matt Frost</li>
+<li><a href="http://www.slideshare.net/wdkz/rstudio-13866958">そろそろRStudioの話でもしてみようと思う</a> by 和田 計也</li>
+<li><a href="https://speakerdeck.com/vinayakh/introduction-to-data-analysis-and-visualization-using-r">Introduction to Data Analysis and Visualization using R</a> by Vinayak Hedge</li>
+<li><a href="http://metvurst.wordpress.com/2013/07/15/creating-publication-quality-graphics-using-r-3/">Creating publication quality graphics using R</a> by Tim Salabim</li>
+<li><a href="https://github.com/umd-byob/byob/tree/master/presentations/2013/0903-knitr_reproducible_research">Reproducible Research Using Knitr/R</a> by Keith Hughitt</li>
+</ul>
+</div>
+<div id="書籍" class="section level2 unnumbered">
+<h2>書籍</h2>
+<ul>
+<li><a href="http://theanalysisofdata.com/">The Analysis of Data</a> by Guy Lebanon (written with R Markdown)</li>
+<li><a href="http://www.crcpress.com/product/isbn/9781482203530">Dynamic Report Generation with R and knitr</a> by Yihui Xie (written with LyX + the <code>knitr</code> module)
+<ul>
+<li><a href="https://www.crcpress.com/product/isbn/9781498716963">Dynamic Report Generation with R and knitr, Second Edition</a></li>
+</ul></li>
+<li><a href="http://www.matthewjockers.net/2013/09/03/tawr/">Text Analysis with R for Students of Literature</a> by Matthew L. Jockers</li>
+<li><a href="https://leanpub.com/dataanalysisforthelifesciences">Data Analysis for the Life Sciences</a> by Rafael Irizarry and Michael Love</li>
+<li><a href="http://www.crcpress.com/product/isbn/9781466590731">Using R for Introductory Statistics, Second Edition</a> by John Verzani</li>
+<li><a href="http://shop.oreilly.com/product/0636920028352.do">Learning R: A Step-by-Step Function Guide to Data Analysis</a> by Richard Cotton (written with AsciiDoc + <code>knitr</code>)</li>
+<li><a href="http://derekogle.com/IFAR/">Introductory Fisheries Analysis with R</a> by Derek H. Ogle</li>
+<li><a href="http://www.math.smith.edu/~nhorton/sleuth/">The Statistical Sleuth In R</a> by Nicholas Horton, Kate Aloisio, and Ruobing Zhang (<code>knitr</code> + LaTeX)</li>
+<li><a href="https://groups.google.com/forum/?hl=en&amp;fromgroups#!topic/knitr/bYj3Zn11hjE">Regression Modeling Strategies</a> (<code>knitr</code> + LaTeX)</li>
+<li><a href="http://blogs.baylor.edu/rlatentvariable/">Latent Variable Modeling using R: A Step-By-Step Guide</a></li>
+<li><a href="http://yihui.org/en/guestbook/#comment-456270476">Biolostatistical Design and Analysis using R</a></li>
+<li><a href="http://www.experimentalecon.com/papers/estats.pdf">Statistics for Experimental Economists: Elegant Analysis with R</a> by Mark A. Olson</li>
+<li><a href="http://ksbapp.com/">R과 Knitr를 활용한 데이터 연동형 문서 만들기</a></li>
+<li><a href="http://www.imta.gob.mx/biblioteca/libros_html/el-arte-de-programar-en-r/">El arte de programar en R: un lenguaje para la estadística</a> by Julio Sergio Santana and Efraín Mateos Farfán</li>
+<li><a href="http://genomicsclass.github.io/book/">PH525x series - Biomedical Data Science</a> by Rafael Irizarry and Michael Love</li>
+<li><a href="http://a.co/0axoWr6">Data Science for Fundraising: Build Data-Driven Solutions Using R</a> by Ashutosh Nandeshwar and Rodger Devine</li>
+</ul>
+</div>
+<div id="論文レポート" class="section level2 unnumbered">
+<h2>論文・レポート</h2>
+<ul>
+<li><a href="https://www.nature.com/articles/s41559-017-0160">Our path to better science in less time using open data science tools</a> by Julia S. Stewart Lowndes <em>et al</em>, Nature Ecology &amp; Evolution <strong>1</strong>, Article number: 0160 (2017)</li>
+<li>Eglen, SJ; Weeks, M; Jessop, M; Simonotto, J; Jackson, T; Sernagor, E. A data repository and analysis framework for spontaneous neural activity recordings in developing retina. GigaScience 2014, 3:3 <a href="http://dx.doi.org/10.1186/2047-217X-3-3" class="uri">http://dx.doi.org/10.1186/2047-217X-3-3</a>
+<ul>
+<li>plus <a href="http://blogs.biomedcentral.com/gigablog/2014/03/26/carmen-reproducible-research-and-push-button-papers/">an interview</a> to the first author</li>
+<li><a href="http://blogs.biomedcentral.com/gigablog/2014/04/16/qa-on-dynamic-documents/">Q&amp;A on dynamic documents</a></li>
+</ul></li>
+<li><a href="http://www.nature.com/news/programming-tools-adventures-with-r-1.16609">Programming tools: Adventures with R</a> by Sylvia Tippmann, <em>Nature</em> <strong>517</strong>, 109–110 (01 January 2015) <a href="doi:10.1038/517109a" class="uri">doi:10.1038/517109a</a></li>
+<li><a href="http://dx.doi.org/10.1038/nbt.3202">Rebooting review</a>, <em>Nature Biotechnology</em> <strong>33</strong>, 319 (2015)</li>
+<li><a href="http://dx.doi.org/10.1038/520276a">Rule rewrite aims to clean up scientific software</a>, <em>Nature</em> <strong>520</strong>, 276–277 (2015)</li>
+<li><a href="http://www.britishecologicalsociety.org/publications/guides-to/">A Guide to Reproducible Code</a> (Guides to Better Science), by the British Ecological Society</li>
+<li><a href="http://www.kff.org/health-costs/report/2017-employer-health-benefits-survey/">2017 Employer Health Benefits Survey</a> by Kaiser Family Foundation (2017)
+<ul>
+<li>Referenced by the New York Times article “<a href="https://www.nytimes.com/2017/09/19/health/health-insurance-premiums-employer.html">While Premiums Soar Under Obamacare, Costs of Employer-Based Plans Are Stable</a>”</li>
+</ul></li>
+<li><a href="http://stanford.edu/~dbroock/broockman_kalla_aronow_lg_irregularities.pdf">Irregularities in LaCour (2014)</a> by David Broockman, Joshua Kalla, and Peter Aronow, a rebuttal paper with retraction letter from Donald P. Green
+<ul>
+<li>LaCour, Michael J. &amp; Donald P. Green. 2014. “When contact changes minds: An experiment on transmission of support for gay equality[2].” Science 346(6215): 1366.</li>
+</ul></li>
+<li><a href="https://twitter.com/Margarita_RH/status/1090590323406000129">Granger-causality analysis of integrated-model outputs, a tool to assess external drivers in fishery</a> by Margarita Rincón, Rachele Corti, Bjarki Elvarsson, Fernando Ramos, and Javier Ruiz.</li>
+<li><a href="https://twitter.com/alharry/status/1088323057230405633">Harry Alastair V.</a>, Butcher Paul A., Macbeth William G., Morgan Jess A. T., Taylor Stephen M., Geraghty Pascal T. (2019) Life history of the common blacktip shark, Carcharhinus limbatus, from central eastern Australia and comparative demography of a cryptic shark complex. Marine and Freshwater Research. <a href="https://doi.org/10.1071/MF18141" class="uri">https://doi.org/10.1071/MF18141</a></li>
+<li>Piwowar HA, Vision TJ. (2013) Data reuse and the open data citation advantage. PeerJ 1:e175 <a href="http://dx.doi.org/10.7717/peerj.175" class="uri">http://dx.doi.org/10.7717/peerj.175</a></li>
+<li><a href="http://www3.nd.edu/~mclark19/projects.html">Some great short courses</a> on R, generalized additive models, and machine learning, etc, by Michael Clark, Center for Social Research, Notre Dame</li>
+<li><a href="https://github.com/JWiley/mediation">An Introduction to Mediation Analysis</a> by Joshua F. Wiley</li>
+<li>ORANGE REPORT: <a href="http://secure.pensionsmyndigheten.se/download/18.76cf683d13f231c03cd1bc/Orange+Report+2012.pdf">Annual Report of the Swedish Pension System</a> by the Swedish Pensions Agency</li>
+<li><a href="http://www.alex-singleton.com/2011-census-open-atlas-project/">2011 Census Open Atlas Project</a> by Alex Singleton</li>
+<li><a href="http://arxiv.org/abs/1312.7158">openWAR</a>: An Open Source System for Evaluating Overall Player Performance in Major League Baseball</li>
+<li><a href="http://www.g3journal.org/content/early/2013/10/30/g3.113.008565/suppl/DC1">Design and Analysis of Bar-seq Experiments</a> by Robinson et al., 2014</li>
+<li><a href="https://github.com/timchurches/meta-analyses">Data and program code for meta-analyses of population health and health services research questions</a> by Tim Churches</li>
+<li><a href="https://github.com/EBI-predocs/knitr-example">Genomic analysis using R and knitr</a> by Konrad Rudolph</li>
+<li><a href="https://github.com/grattaninstitute/Assessing-2016-Super-tax-reforms">Assessing the 2016 Budget reforms</a> by John Daley and Brendan Coates</li>
+<li><a href="https://s3.amazonaws.com/files.consumerfinance.gov/f/documents/BecomingCreditVisible_Data_Point_Final.pdf">CFPB Data Point: Becoming Credit Visible</a> by the CFPB Office of Research</li>
+<li><a href="https://github.com/tomwallis/cnn_texture_appearance">A parametric texture model based on deep convolutional features closely matches texture appearance for humans</a> by Wallis et al.</li>
+<li><a href="http://www.biorxiv.org/content/biorxiv/suppl/2016/11/21/086710.DC1/086710-1.pdf">Revisiting the effect of red on competition in humans (supplementary information)</a> by Laura Fortunato and Aaron Clauset</li>
+<li><a href="https://f1000research.com/articles/7-1096/v1">Epiviz Web Components: reusable and extensible component library to visualize functional genomic datasets</a> by Jayaram Kancherla, Alexander Zhang, Brian Gottfried, and Hector Corrada Bravo</li>
+</ul>
+</div>
+<div id="多言語でのラッパー" class="section level2 unnumbered">
+<h2>多言語でのラッパー</h2>
+<ul>
+<li><a href="https://github.com/ropensci/knitr-ruby">knitr-ruby</a>: a Ruby wrapper</li>
+<li><a href="https://github.com/fhirschmann/Flask-FlatPages-Knitr">Flask-FlatPages-Knitr</a>: Knitr preprocessing for Flask-FlatPages</li>
+</ul>
+</div>
+<div id="ブログの投稿" class="section level2 unnumbered">
+<h2>ブログの投稿</h2>
+<ul>
+<li><a href="http://galahad.well.ox.ac.uk/repro/">Using knitr and pandoc to create reproducible scientific reports</a> by Peter Humburg</li>
+<li><a href="http://civilstat.com/?p=1521">Reproducible research, training wheels, and knitr</a> by Jerzy Wieczorek</li>
+<li><a href="http://www.noamross.net/blog/2013/1/7/collaborating-with-r.html">Don’t R alone!</a> A guide to tools for collaboration with R by Noam Ross</li>
+<li><a href="http://jeromyanglim.blogspot.com.au/2012/05/getting-started-with-r-markdown-knitr.html">Getting Started with R Markdown, knitr, and Rstudio 0.96</a>, <a href="http://jeromyanglim.blogspot.com/2012/06/how-to-convert-sweave-latex-to-knitr-r.html">How to Convert Sweave LaTeX to knitr R Markdown</a> and <a href="http://jeromyanglim.blogspot.com/2012/06/converting-sweave-latex-to-knitr-latex.html">Converting Sweave LaTeX to knitr LaTeX: A case study</a> by Jeromy Anglim</li>
+<li><a href="http://conjugateprior.org/2013/03/tools-for-making-a-paper/">Tools for making a paper</a> by Will Lowe</li>
+<li><a href="http://blog.revolutionanalytics.com/2012/09/data-reporting-knitr.html">Integrate data and reporting on the Web with knitr</a> by me as a guest blog post on Revolution Analytics</li>
+<li><a href="http://rpubs.com/JoFrhwld/UseR_Sept">knitr: A flexible R authoring tool</a> (HTML5 slides) by Josef Fruehwald</li>
+<li><a href="http://citizen-statistician.org/2012/10/08/planting-seeds-of-reproducibility-with-knitr-and-markdown/">Planting seeds of reproducibility with knitr and markdown</a> by Mine Çetinkaya-Rundel (the Citizen-Statistician blog)</li>
+<li><a href="http://biostat.mc.vanderbilt.edu/wiki/Main/GradStudentsHelpfulExamples">A closer look at “How economists get tripped up by statistics”</a> by Laurie Samuels</li>
+<li><a href="http://timelyportfolio.blogspot.com/2012/04/latex-allergy-cured-by-knitr.html">Latex Allergy Cured by knitr</a></li>
+<li><a href="http://timelyportfolio.blogspot.com/2012/04/knitr-performance-report-attempt-1.html">knitr Performance Report-Attempt 1</a></li>
+<li><a href="http://aliquote.org/memos/2012/04/02/easier-literate-programming-with-r">Easier literate programming with R</a> by Christophe Lalanne</li>
+<li><a href="http://www.blogofolio.de/2012/05/knitr-eine-alternative-zu-sweave/">knitR - eine Alternative zu Sweave?</a> by Christian B.</li>
+<li><a href="http://blog.felixriedel.com/2012/05/better-r-support-in-pygments-by-monkey-patching-slexer/">Better R support in pygments by monkey patching SLexer</a> by f3lix</li>
+<li><a href="http://xccds1977.blogspot.com/2012/05/knitr.html">被knitr包给震撼到了</a> by <span class="citation">[@xccds]</span>(<a href="https://twitter.com/xccds" class="uri">https://twitter.com/xccds</a>)</li>
+<li><a href="http://torsneyt.wordpress.com/2012/05/19/reproducible-research/">Reproducible Research</a> by Tom Torsney-Weir (on Vim and Marked)</li>
+<li><a href="http://www.yangzhiping.com/tech/r-markdown-knitr.html">为什么Markdown+R有较大概率成为科技写作主流？</a> by 阳志平</li>
+<li><a href="http://www.russellshepherd.com/d/?q=blog/governance-indicators">Governance Indicators</a> by Russell Shepherd</li>
+<li><a href="http://mcfromnz.wordpress.com/2012/07/28/petrol-prices-adjusted-for-inflation/">Petrol prices adjusted for inflation</a> by Matt Cooper</li>
+<li><a href="http://blog.revolutionanalytics.com/2012/08/creating-beautiful-reports-from-r-with-knitr.html">Creating beautiful reports from R with knitr</a> by David Smith</li>
+<li><a href="http://www.tomtorsneyweir.com/research-notebook/">An R-based Research Notebook</a> by Tom Torsney-Weir</li>
+<li><a href="http://learningdata.wordpress.com/2012/09/30/knitr-markdown-and-your-homework/">knitR, Markdown, and Your Homework</a> by Jarrett Byrnes</li>
+<li><a href="http://www.trestletechnology.net/2012/10/color-palettes-in-hcl-space/">Color Palettes in HCL Space</a> by Trestle Technology, LLC</li>
+<li><a href="http://fellgernon.tumblr.com/post/35587597245/introduction-to-r-and-biostatistics-2012-version">Introduction to R and Biostatistics</a> by Leonardo Collado Torres</li>
+<li><a href="http://onertipaday.blogspot.com/2012/12/italian-bio-r-day-2012-slides-on.html">Reproducible Research using R and Bioconductor</a> by Paolo Sonego</li>
+<li><a href="http://reasoniamhere.com/bioinformaticians-need-lab-notebooks-too/">Bioinformaticians Need Lab Notebooks Too</a> by Nacho Caballero</li>
+<li><a href="http://machine-master.blogspot.com/2013/03/from-openoffice-noob-to-control-freak.html">From OpenOffice noob to control freak: A love story with R, LaTeX and knitr</a> by Christoph Molnar</li>
+<li><a href="http://stla.overblog.com/including-an-interactive-3d-rgl-graphic-with-knitr">Including an interactive 3D rgl graphic in a html report with knitr</a> by Stéphane Laurent</li>
+<li><a href="http://rprogramming.net/create-html-or-pdf-files-with-r-knitr-miktex-and-pandoc/">Create HTML or PDF Files with R, Knitr, MiKTeX, and Pandoc</a> by Justin Meyer</li>
+<li><a href="http://quantifyingmemory.blogspot.com/2013/02/reproducible-research-with-r-knitr.html">Reproducible research with R, Knitr, Pandoc and Word</a> by Rolf Fredheim</li>
+<li><a href="http://dataillumination.blogspot.com/2013/03/visualizing-farmers-markets-geo-data_19.html">Visualizing Farmers’ Markets Geo Data using googleVis, plyr, knitr and Markdown using R</a> by Peter Chen</li>
+<li><a href="http://www.scribd.com/doc/132971631/NSFstats2013">2013 NSF Graduate Research Fellowship statistics</a> by Elson Liu</li>
+<li><a href="http://stevencarlislewalker.wordpress.com/2013/07/12/ben-bolkers-notes-on-workflows-pipelines-reproducible-research-etc/">Ben Bolker’s notes on workflows, pipelines, reproducible research, etc.</a> by Steve C Walker</li>
+<li><a href="http://www.complementarytraining.blogspot.se/2013/10/playing-with-r-ggplot2-and-knitr.html">Playing with R, ggplot2 and knitr</a> by Mladen Jovanović</li>
+<li><a href="http://watson.nci.nih.gov/~sdavis/blog/a_simple_bootstrap-based_knitr_template/">A simple bootstrap-based knitr template</a> by Sean Davis</li>
+<li><a href="http://blog.r-enthusiasts.com/2013/12/04/automated-blogging.html">Automated Blogging</a> by Romain François</li>
+<li><a href="http://www.mango-solutions.com/wp/2014/01/how-to-avoid-scandals-using-knitr/">How to avoid scandals using knitr</a> by Mango Solutions</li>
+<li>Fast-track publishing using knitr: <a href="http://gforge.se/?p=928">Part I</a>, <a href="http://gforge.se/?p=960">Part II</a>, <a href="http://gforge.se/?p=1005">Part III</a> by Max Gordon</li>
+<li><a href="http://therostrumblog.wordpress.com/2014/01/29/basic-data-frame-manipulations-in-r/">Basic data-frame manipulations in R</a> by THE ROSTRUM</li>
+<li><a href="http://www.dataschool.io/reproducibility-is-not-just-for-researchers/">Reproducibility is not just for researchers</a> by Kevin Markham</li>
+<li><a href="http://theincidentaleconomist.com/wordpress/tools-for-statistical-writing-and-reproducible-research/">Tools for statistical writing and reproducible research</a> by Bill Gardner</li>
+<li><a href="http://qiita.com/hereticreader/items/a3000cb7d5b17ad71731">knitr ではじめるデータ分析レポート作成 ~基礎編~</a> by Yu ISHIKAWA</li>
+<li><a href="http://reganmian.net/blog/2014/10/14/starting-data-analysiswrangling-with-r-things-i-wish-id-been-told/">Starting data analysis/wrangling with R: Things I wish I’d been told</a> by Stian Håklev</li>
+<li><a href="http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/">Knitr’s best hidden gem: spin</a> by Dean Attali</li>
+<li><a href="http://randomlifedata.com/2015/04/why-use-knitr-for-scientific-publishing/">Why use KnitR for scientific publishing?</a> by Rob Les Davidson</li>
+<li><a href="http://www.predictiveanalyticsworld.com/patimes/from-code-to-reports-with-knitr-050915/">From Code to Reports with knitr &amp; Markdown</a> by Andrew Brooks</li>
+<li><a href="http://rayli.net/blog/data/top-10-data-mining-algorithms-in-plain-r/">Top 10 data mining algorithms in plain R</a> by Ray Li</li>
+<li><a href="http://www.jonzelner.net/knitr/r/reproducibility/2016/06/02/knitr/">Knotes on Knitr</a> by Jon Zelner</li>
+<li><a href="http://blog.revolutionanalytics.com/2016/08/a-reproducibility-horror-story.html">A reproducibility horror story</a></li>
+<li><a href="https://gdsdata.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/">Reproducible Analytical Pipeline</a> by Matt Upson</li>
+<li><a href="https://elifesciences.org/elife-news/composing-reproducible-manuscripts-using-r-markdown">Composing reproducible manuscripts using R Markdown</a> by Chris Hartgerink, Tilburg University</li>
+</ul>
+
+</div>
+</div>
+
+
+
+<!---
+title: Objects
+subtitle: Objects to manipulate options, patterns and hooks
+date: '2017-02-03'
+slug: objects
+--->
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cache.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="objects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

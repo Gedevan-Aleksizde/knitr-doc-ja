@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
+  <meta name="description" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  
+  
+  
+
+<meta name="author" content="著者: Xie, Yihui (谢益辉)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+
+
+<meta name="date" content="2021-01-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="listings.html"/>
+<link rel="next" href="reference.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="header.css" type="text/css" />
+<link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Top</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#概要"><i class="fa fa-check"></i>概要</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#モチベーション"><i class="fa fa-check"></i>モチベーション</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#特徴"><i class="fa fa-check"></i>特徴</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#謝辞"><i class="fa fa-check"></i>謝辞</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#foas"><i class="fa fa-check"></i>FOAS</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="options.html"><a href="options.html"><i class="fa fa-check"></i><b>1</b> オプション</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="options.html"><a href="options.html#chunk-options"><i class="fa fa-check"></i><b>1.1</b> チャンクオプション一覧</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
+<li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
+<li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hooks.html"><a href="hooks.html"><i class="fa fa-check"></i><b>2</b> フック</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hooks.html"><a href="hooks.html#チャンクフック"><i class="fa fa-check"></i><b>2.1</b> チャンクフック</a></li>
+<li class="chapter" data-level="2.2" data-path="hooks.html"><a href="hooks.html#出力フック"><i class="fa fa-check"></i><b>2.2</b> 出力フック</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="hooks.html"><a href="hooks.html#latex-render_latex"><i class="fa fa-check"></i><b>2.2.1</b> LaTeX: <code>render_latex()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="hooks.html"><a href="hooks.html#sweave-render_sweave"><i class="fa fa-check"></i><b>2.2.2</b> Sweave: <code>render_sweave()</code></a></li>
+<li class="chapter" data-level="2.2.3" data-path="hooks.html"><a href="hooks.html#listings-render_listings"><i class="fa fa-check"></i><b>2.2.3</b> Listings: <code>render_listings()</code></a></li>
+<li class="chapter" data-level="2.2.4" data-path="hooks.html"><a href="hooks.html#html-render_html"><i class="fa fa-check"></i><b>2.2.4</b> HTML: <code>render_html()</code></a></li>
+<li class="chapter" data-level="2.2.5" data-path="hooks.html"><a href="hooks.html#markdown-render_markdown"><i class="fa fa-check"></i><b>2.2.5</b> Markdown: <code>render_markdown()</code></a></li>
+<li class="chapter" data-level="2.2.6" data-path="hooks.html"><a href="hooks.html#jekyll-render_jekyll"><i class="fa fa-check"></i><b>2.2.6</b> Jekyll: <code>render_jekyll()</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path="hooks.html"><a href="hooks.html#restructuredtext-render_rst"><i class="fa fa-check"></i><b>2.2.7</b> reStructuredText: <code>render_rst()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="hooks.html"><a href="hooks.html#オプションフック"><i class="fa fa-check"></i><b>2.3</b> オプションフック</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>3</b> 使用例</a></li>
+<li class="chapter" data-level="4" data-path="FAQs.html"><a href="FAQs.html"><i class="fa fa-check"></i><b>4</b> よくある質問 (FAQ)</a></li>
+<li class="part"><span><b>I 用例</b></span></li>
+<li><a href="editors.html#editors"><code>knitr</code> のエディタ</a>
+<ul>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i>Texmaker</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texstudio"><i class="fa fa-check"></i>TeXStudio</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#winedt"><i class="fa fa-check"></i>WinEdt</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#emacsess"><i class="fa fa-check"></i>Emacs/ESS</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#gedit"><i class="fa fa-check"></i>Gedit</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#sublime"><i class="fa fa-check"></i>Sublime</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#vim"><i class="fa fa-check"></i>Vim</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#textmate"><i class="fa fa-check"></i>TextMate</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texshop"><i class="fa fa-check"></i>TeXShop</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texworks"><i class="fa fa-check"></i>TeXworks</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#kile"><i class="fa fa-check"></i>Kile</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#tinn-r"><i class="fa fa-check"></i>Tinn-R</a></li>
+</ul></li>
+<li><a href="framed.html#framed"><code>framed</code> パッケージ</a>
+<ul>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i>要素の概要</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#影付きボックスのパディング"><i class="fa fa-check"></i>影付きボックスのパディング</a></li>
+<li><a href="framed.html#framed-と互換性のない環境"><strong>framed</strong> と互換性のない環境</a></li>
+</ul></li>
+<li><a href="listings.html#listings"><code>Listings</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i>チャンク出力の制御</a>
+<ul>
+<li><a href="output.html#echo-オプションの発展的な使い方"><code>echo</code> オプションの発展的な使い方</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#インライン出力"><i class="fa fa-check"></i>インライン出力</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#long-lines-of-text-output"><i class="fa fa-check"></i>Long lines of text output</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#メッセージに1コメントを"><i class="fa fa-check"></i>1メッセージに1コメントを</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#その他"><i class="fa fa-check"></i>その他</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>チャンク参照/マクロ</a>
+<ul>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#同じラベルを使用する"><i class="fa fa-check"></i>同じラベルを使用する</a></li>
+<li><a href="reference.html#チャンクオプション-ref.label">チャンクオプション <code>ref.label</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i>グラフィックス</a>
+<ul>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#グラフィックスマニュアル"><i class="fa fa-check"></i>グラフィックスマニュアル</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#カスタムグラフィックデバイスについての補足"><i class="fa fa-check"></i>カスタムグラフィックデバイスについての補足</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#デバイスに追加の引数を与える"><i class="fa fa-check"></i>デバイスに追加の引数を与える</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#r-グラフィックスにハイパーリンクを付ける"><i class="fa fa-check"></i>R グラフィックスにハイパーリンクを付ける</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#マルチバイト文字のエンコーディング"><i class="fa fa-check"></i>マルチバイト文字のエンコーディング</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#装飾フォント"><i class="fa fa-check"></i>装飾フォント</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#アニメーション"><i class="fa fa-check"></i>アニメーション</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="manual.html"><a href="manual.html"><i class="fa fa-check"></i>マニュアル</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html"><i class="fa fa-check"></i>キャッシュ</a>
+<ul>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュの例"><i class="fa fa-check"></i>キャッシュの例</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#重要な補足事項"><i class="fa fa-check"></i>重要な補足事項</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュにはまだ何かありますか"><i class="fa fa-check"></i>キャッシュにはまだ何かありますか?</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュディレクトリを入力ファイル名と連動させる"><i class="fa fa-check"></i>キャッシュディレクトリを入力ファイル名と連動させる</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#より細かいキャッシュのとり方"><i class="fa fa-check"></i>より細かいキャッシュのとり方</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#乱数生成器-rng-の再現可能性"><i class="fa fa-check"></i>乱数生成器 (RNG) の再現可能性</a></li>
+</ul></li>
+<li><a href="showcase.html#showcase"><code>knitr</code> のショーケース</a>
+<ul>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i>ウエブサイト</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書評"><i class="fa fa-check"></i>書評</a></li>
+<li><a href="showcase.html#knitr-によるソリューション"><code>knitr</code> によるソリューション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#r-パッケージ"><i class="fa fa-check"></i>R パッケージ</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#教材"><i class="fa fa-check"></i>教材</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ワークショッププレゼンテーション"><i class="fa fa-check"></i>ワークショップ・プレゼンテーション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書籍"><i class="fa fa-check"></i>書籍</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#論文レポート"><i class="fa fa-check"></i>論文・レポート</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#多言語でのラッパー"><i class="fa fa-check"></i>多言語でのラッパー</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ブログの投稿"><i class="fa fa-check"></i>ブログの投稿</a></li>
+</ul></li>
+<li class="appendix"><span><b>補遺</b></span></li>
+<li class="chapter" data-level="A" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>A</b> オブジェクト</a></li>
+<li class="chapter" data-level="B" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>B</b> パターン</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="patterns.html"><a href="patterns.html#ビルトインパターン"><i class="fa fa-check"></i><b>B.1</b> ビルトインパターン</a></li>
+</ul></li>
+<li class="divider"></li>
+<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="output" class="section level1 unnumbered">
+<h1>チャンク出力の制御</h1>
+<p>チャンクの6種類の出力とインライン出力を操作する</p>
+<p>オリジナルのページ:</p>
+<p>オリジナルの更新日: 2012-01-25</p>
+<hr />
+<p><a href="https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf">main manual</a> の導入の通り, <strong><code>knitr</code></strong> は R コードチャンクの評価のために <strong><code>evaluate</code></strong> パッケージを使用し, その出力は6種類あります. <strong>ソースコード</strong>, <strong>通常テキスト出力</strong>, <strong>メッセージ文</strong>, <strong>警告文</strong>, <strong>エラー文</strong>, そして<strong>グラフ</strong>です. 以降ではこれらをうまく制御する方法を要約します.</p>
+<ol style="list-style-type: decimal">
+<li><strong>ソースコード</strong>: チャンクオプション <code>echo</code> を使います, 例: <code>echo=FALSE</code> は R コードを隠します</li>
+<li><strong>通常テキスト出力</strong>: <code>results</code> オプションを使います (<code>markup</code> はテキストをマークアップし, <code>asis</code> はテキストをそのまま出力し, <code>hide</code> は結果を隠します)</li>
+<li><strong>メッセージ文</strong>: <code>message</code> オプションを使います (<code>FALSE</code> は出力されるメッセージ文を隠します)</li>
+<li><strong>警告文</strong>: <code>warning</code> オプションを使います (<code>FALSE</code> は出力される警告文を隠します)</li>
+<li><strong>エラー文</strong>: <code>error</code> オプションを使います (<code>FALSE</code> はエラー発生時点で R の処理を停止し, <code>TRUE</code> は出力にエラー文を表示します)</li>
+<li><strong>グラフ</strong>: <code>fig.keep</code> オプションを使います. (<code>none</code> は全てのグラフを破棄し, <code>all</code> は全ての低水準プロットに分けて保存し, <code>high</code> は高水準作図として保存します)</li>
+</ol>
+<p>これらのオプションは互いに独立しており, 他のタイプの出力への影響を気にすることなく自由に切り替えることができます.</p>
+<p><strong><code>knitr</code></strong> の全ての<a href="$options">オプション</a>は R の評価式から値を取ることができます. これは main manual で条件評価 (conditional evaluation) の機能として紹介したものです. 端的に言うなら <code>eval=dothis</code> は実際の値 <code>value</code> はグローバル環境の <code>dothis</code> とい変数から取られた値になるということです. この変数を操作することで, 1つ1つのチャンクの評価をオン・オフ切り替えることができます.</p>
+<div id="echo-オプションの発展的な使い方" class="section level2 unnumbered">
+<h2><code>echo</code> オプションの発展的な使い方</h2>
+<p>チャンクオプション <code>echo</code> は <code>TRUE/FALSE</code> だけでなく, 数値のベクトルを取ることで出力文を選択することができます. このベクトルのインデックスはコードチャンクを完全な R 評価式単位でインデックスします. たとえば <code>echo=1</code> は出力内の最初のソースコード出力のみを含めることを意味します. 以下はこの例の完全版です.</p>
+<pre><code>&lt;&lt;hide-par, echo=3:4&gt;&gt;=
+## 表示させたくない「醜い」コード
+par(mar = c(4, 4, 0.1, 0.1), cex.lab = 0.95, cex.axis = 0.9,
+    mgp = c(2, 0.7, 0), tcl = -0.3)
+plot(mtcars[, 1:2])
+plot(mtcars[, 4:5])
+@</code></pre>
+<p>評価式 <code>par()</code> はこのコードチャンクに必須ではなく, 読み手の集中力を逸らすことすらあります. そこで出力からこれを隠したいとなるでしょう. このケースでは, 最初の評価式 (コメントのことです) も見せたくありません. <code>echo=3:4</code> ならば3, 4番めの評価式が出力に含まれることを意味します. 評価式のインデックスが行番号と同じである必要はありません. 代わりに 1,2番めの評価式を削除するという意味で <code>echo=-(1:2)</code> とすることもできます.</p>
+<p>ソースコードを部分部分に分けて選択すると, 読み手は混乱するかもしれません. (相対的に) 完全な部分集合を選ぶために, ほとんどの場合は <code>a:b</code> または <code>-(a:b)</code> を使うべきでしょう. しかし, 誰もあなたに禁じることはできません.</p>
+<pre><code>% 3, 5 番めの評価式を選択
+&lt;&lt;hide-par, echo=c(3, 5)&gt;&gt;=
+## 表示させたくない「醜い」コード
+par(mar = c(4, 4, 0.1, 0.1), cex.lab = 0.95, cex.axis = 0.9,
+    mgp = c(2, 0.7, 0), tcl = -0.3)
+plot(mtcars[, 1:2])
+par(mar = c(4, 4, 1, 0.5)) # reset margins
+plot(mtcars[, 4:5])
+@</code></pre>
+</div>
+<div id="インライン出力" class="section level2 unnumbered">
+<h2>インライン出力</h2>
+<p>チャンクの出力とは別の出力タイプがあります. インライン R コードの出力です (例: <code>\Sexpr{t.test(x)$p.value}</code>). 数値の出力は特別な扱われ方をします. 非常に大きいか小さい数値は指数表記で書き出されます. 指数表記になるしきい値は R オプションの <code>scipen</code> (詳細は <code>?options</code> を参照してください) によります. 基本的に <span class="math inline">\(10^4\)</span> より大きいか, <span class="math inline">\(10^{-4}\)</span> より小さい場合に指数表記になります (負の数でも絶対値が同様に評価されます). 出力フォーマット (LaTeX とか HTML とか) に応じて, <strong><code>knitr</code></strong> は <code>$3.14 \times 10^5$</code> や <code>3.14 &amp;times; 10&lt;sup&gt;5&lt;/sup&gt;</code> というように適切なコードで出力します.</p>
+<p>もう1つの R オプション <code>digits</code> は, どの桁で丸めるべきかを制御します. デフォルトの <code>options(scipen = 0, digits = 4)</code> が気に入らないならば, こんなふうに最初のチャンクで変更できます.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="output.html#cb33-1"></a><span class="do">## 10^5 以上ならば指数表記され, 2 桁で丸める</span></span>
+<span id="cb33-2"><a href="output.html#cb33-2"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">1</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>R Markdown での例:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb34-1"><a href="output.html#cb34-1" aria-hidden="true" tabindex="-1"></a>インラインコードでは「<span class="in">``` `r&#39;&#39; 1+1` ```</span>」と表示される</span></code></pre></div>
+<p>インラインコードでは「2」と表示される</p>
+<p>上記の例では他の地の文とともに <code>2</code> と表示されます.</p>
+<p>Rnw の例 (LaTeX):</p>
+<pre><code>Inline code looks like this \Sexpr{1+1}</code></pre>
+<p>R HTML の例:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb36-1"><a href="output.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline 1+1 --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
+<p>R HTML 文書では, デフォルトでは結果の文字列は <code>&lt;code&gt;&lt;/code&gt;</code> で囲まれます. 出力から <code>&lt;code&gt;&lt;/code&gt;</code> タグをなくしたいなら, R コードを <code>I()</code> で囲むだけです. 例:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb37-1"><a href="output.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline I(1+1) --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
+<p>さらに別の用例を<a href="http://stackoverflow.com/q/14124022/559676">スタックオーバーフローの投稿</a>で見ることができます.</p>
+</div>
+<div id="long-lines-of-text-output" class="section level2 unnumbered">
+<h2>Long lines of text output</h2>
+<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong><code>knitr</code></strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>.</p>
+</div>
+<div id="メッセージに1コメントを" class="section level2 unnumbered">
+<h2>1メッセージに1コメントを</h2>
+<p>R でメッセージ文を書き出すのに <code>cat()</code> を使うのが好きな人がたくさんいますが, これは大変よくない使い方です. このような形にメッセージ文は非表示にするのが大変だからです. 本当に <strong>メッセージ</strong> を提示したい場合は, <code>message()</code> 関数を使うべきです. 正規のメッセージは <code>suppressMessages()</code> で表示を抑制したり, <strong><code>knitr</code></strong> で補足したりすることができ便利です. パッケージ開発者の中にはこの問題に注意を払ってない人がいます. そのようなパッケージを読み込んだりパッケージの関数を使ったりすると, 表示を抑制できない偽物のメッセージ文を見かけます. パッケージのスタートアップメッセージはじっさい必要ですが, それは <code>packageStartupMessage()</code> で表示すべきです. <strong><code>knitr</code></strong> の <code>message=FALSE</code> でメッセージを消せないなら, それはパッケージ開発者に変更を要求するときです.</p>
+<p>同様に, 警告を発したいならまさに <code>warning()</code> を使うべきです.</p>
+<p>というわけで, あなたの <code>cat</code> の振る舞いに気をつけてください!</p>
+</div>
+<div id="その他" class="section level2 unnumbered">
+<h2>その他</h2>
+<p>チャンクで <code>echo=FALSE, results='hide'</code> を使用した時, 出力に余分な空白行があるかもしれません. 空白行がいらないのなら, issue <a href="https://github.com/yihui/knitr/issues/231">#231</a> で解決できるかもしれません.</p>
+
+<!---
+title: Chunk Reference/Macro
+subtitle: How to reuse chunks
+date: '2012-01-14'
+slug: reference
+--->
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="23">
+<li id="fn23"><p>訳注: <code>citation()</code> の出力が <code>width</code> に対応していない場合の問題です<a href="output.html#fnref23" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="listings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reference.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

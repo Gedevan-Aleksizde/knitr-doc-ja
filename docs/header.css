@@ -1,0 +1,12 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Osaka', 'Meiryo', 'Noto Sans CJK', Arial, Helvetica, 'DejaVu Sans', sans-serif;
+}
+
+code.sourceCode, .sourceCode.r {
+  font-family: 'Ricty Discord', Ricty, Inconsolata, 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace ;
+}
+
+.subtitle {
+  font-size:20pt;
+  text-align: center;
+}

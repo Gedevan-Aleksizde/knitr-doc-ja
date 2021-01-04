@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>knitr のエディタ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
+  <meta name="description" content="knitr のエディタ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="knitr のエディタ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="knitr のエディタ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  
+  
+  
+
+<meta name="author" content="著者: Xie, Yihui (谢益辉)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+
+
+<meta name="date" content="2021-01-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="FAQs.html"/>
+<link rel="next" href="framed.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="header.css" type="text/css" />
+<link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Top</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#概要"><i class="fa fa-check"></i>概要</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#モチベーション"><i class="fa fa-check"></i>モチベーション</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#特徴"><i class="fa fa-check"></i>特徴</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#謝辞"><i class="fa fa-check"></i>謝辞</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#foas"><i class="fa fa-check"></i>FOAS</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="options.html"><a href="options.html"><i class="fa fa-check"></i><b>1</b> オプション</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="options.html"><a href="options.html#chunk-options"><i class="fa fa-check"></i><b>1.1</b> チャンクオプション一覧</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
+<li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
+<li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hooks.html"><a href="hooks.html"><i class="fa fa-check"></i><b>2</b> フック</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hooks.html"><a href="hooks.html#チャンクフック"><i class="fa fa-check"></i><b>2.1</b> チャンクフック</a></li>
+<li class="chapter" data-level="2.2" data-path="hooks.html"><a href="hooks.html#出力フック"><i class="fa fa-check"></i><b>2.2</b> 出力フック</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="hooks.html"><a href="hooks.html#latex-render_latex"><i class="fa fa-check"></i><b>2.2.1</b> LaTeX: <code>render_latex()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path="hooks.html"><a href="hooks.html#sweave-render_sweave"><i class="fa fa-check"></i><b>2.2.2</b> Sweave: <code>render_sweave()</code></a></li>
+<li class="chapter" data-level="2.2.3" data-path="hooks.html"><a href="hooks.html#listings-render_listings"><i class="fa fa-check"></i><b>2.2.3</b> Listings: <code>render_listings()</code></a></li>
+<li class="chapter" data-level="2.2.4" data-path="hooks.html"><a href="hooks.html#html-render_html"><i class="fa fa-check"></i><b>2.2.4</b> HTML: <code>render_html()</code></a></li>
+<li class="chapter" data-level="2.2.5" data-path="hooks.html"><a href="hooks.html#markdown-render_markdown"><i class="fa fa-check"></i><b>2.2.5</b> Markdown: <code>render_markdown()</code></a></li>
+<li class="chapter" data-level="2.2.6" data-path="hooks.html"><a href="hooks.html#jekyll-render_jekyll"><i class="fa fa-check"></i><b>2.2.6</b> Jekyll: <code>render_jekyll()</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path="hooks.html"><a href="hooks.html#restructuredtext-render_rst"><i class="fa fa-check"></i><b>2.2.7</b> reStructuredText: <code>render_rst()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="hooks.html"><a href="hooks.html#オプションフック"><i class="fa fa-check"></i><b>2.3</b> オプションフック</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>3</b> 使用例</a></li>
+<li class="chapter" data-level="4" data-path="FAQs.html"><a href="FAQs.html"><i class="fa fa-check"></i><b>4</b> よくある質問 (FAQ)</a></li>
+<li class="part"><span><b>I 用例</b></span></li>
+<li><a href="editors.html#editors"><code>knitr</code> のエディタ</a>
+<ul>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i>Texmaker</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texstudio"><i class="fa fa-check"></i>TeXStudio</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#winedt"><i class="fa fa-check"></i>WinEdt</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#emacsess"><i class="fa fa-check"></i>Emacs/ESS</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#gedit"><i class="fa fa-check"></i>Gedit</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#sublime"><i class="fa fa-check"></i>Sublime</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#vim"><i class="fa fa-check"></i>Vim</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#textmate"><i class="fa fa-check"></i>TextMate</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texshop"><i class="fa fa-check"></i>TeXShop</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texworks"><i class="fa fa-check"></i>TeXworks</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#kile"><i class="fa fa-check"></i>Kile</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#tinn-r"><i class="fa fa-check"></i>Tinn-R</a></li>
+</ul></li>
+<li><a href="framed.html#framed"><code>framed</code> パッケージ</a>
+<ul>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i>要素の概要</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#影付きボックスのパディング"><i class="fa fa-check"></i>影付きボックスのパディング</a></li>
+<li><a href="framed.html#framed-と互換性のない環境"><strong>framed</strong> と互換性のない環境</a></li>
+</ul></li>
+<li><a href="listings.html#listings"><code>Listings</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i>チャンク出力の制御</a>
+<ul>
+<li><a href="output.html#echo-オプションの発展的な使い方"><code>echo</code> オプションの発展的な使い方</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#インライン出力"><i class="fa fa-check"></i>インライン出力</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#long-lines-of-text-output"><i class="fa fa-check"></i>Long lines of text output</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#メッセージに1コメントを"><i class="fa fa-check"></i>1メッセージに1コメントを</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#その他"><i class="fa fa-check"></i>その他</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>チャンク参照/マクロ</a>
+<ul>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#同じラベルを使用する"><i class="fa fa-check"></i>同じラベルを使用する</a></li>
+<li><a href="reference.html#チャンクオプション-ref.label">チャンクオプション <code>ref.label</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i>グラフィックス</a>
+<ul>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#グラフィックスマニュアル"><i class="fa fa-check"></i>グラフィックスマニュアル</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#カスタムグラフィックデバイスについての補足"><i class="fa fa-check"></i>カスタムグラフィックデバイスについての補足</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#デバイスに追加の引数を与える"><i class="fa fa-check"></i>デバイスに追加の引数を与える</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#r-グラフィックスにハイパーリンクを付ける"><i class="fa fa-check"></i>R グラフィックスにハイパーリンクを付ける</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#マルチバイト文字のエンコーディング"><i class="fa fa-check"></i>マルチバイト文字のエンコーディング</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#装飾フォント"><i class="fa fa-check"></i>装飾フォント</a></li>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#アニメーション"><i class="fa fa-check"></i>アニメーション</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="manual.html"><a href="manual.html"><i class="fa fa-check"></i>マニュアル</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html"><i class="fa fa-check"></i>キャッシュ</a>
+<ul>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュの例"><i class="fa fa-check"></i>キャッシュの例</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#重要な補足事項"><i class="fa fa-check"></i>重要な補足事項</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュにはまだ何かありますか"><i class="fa fa-check"></i>キャッシュにはまだ何かありますか?</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#キャッシュディレクトリを入力ファイル名と連動させる"><i class="fa fa-check"></i>キャッシュディレクトリを入力ファイル名と連動させる</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#より細かいキャッシュのとり方"><i class="fa fa-check"></i>より細かいキャッシュのとり方</a></li>
+<li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#乱数生成器-rng-の再現可能性"><i class="fa fa-check"></i>乱数生成器 (RNG) の再現可能性</a></li>
+</ul></li>
+<li><a href="showcase.html#showcase"><code>knitr</code> のショーケース</a>
+<ul>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i>ウエブサイト</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書評"><i class="fa fa-check"></i>書評</a></li>
+<li><a href="showcase.html#knitr-によるソリューション"><code>knitr</code> によるソリューション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#r-パッケージ"><i class="fa fa-check"></i>R パッケージ</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#教材"><i class="fa fa-check"></i>教材</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ワークショッププレゼンテーション"><i class="fa fa-check"></i>ワークショップ・プレゼンテーション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書籍"><i class="fa fa-check"></i>書籍</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#論文レポート"><i class="fa fa-check"></i>論文・レポート</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#多言語でのラッパー"><i class="fa fa-check"></i>多言語でのラッパー</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ブログの投稿"><i class="fa fa-check"></i>ブログの投稿</a></li>
+</ul></li>
+<li class="appendix"><span><b>補遺</b></span></li>
+<li class="chapter" data-level="A" data-path="objects.html"><a href="objects.html"><i class="fa fa-check"></i><b>A</b> オブジェクト</a></li>
+<li class="chapter" data-level="B" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>B</b> パターン</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="patterns.html"><a href="patterns.html#ビルトインパターン"><i class="fa fa-check"></i><b>B.1</b> ビルトインパターン</a></li>
+</ul></li>
+<li class="divider"></li>
+<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="editors" class="section level1 unnumbered">
+<h1><code>knitr</code> のエディタ</h1>
+<p>Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて</p>
+<p>オリジナルの記事: <a href="https://yihui.org/knitr/demo/editors/" class="uri">https://yihui.org/knitr/demo/editors/</a></p>
+<p>オリジナルの更新日: 2012-03-16</p>
+<hr />
+
+<div class="rmdtip">
+<strong>訳注</strong>: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
+</div>
+<p>私は以前 <a href="$lyx">Lyx</a> (未翻訳), <a href="$RStudio">RStudio</a> (未翻訳) <a href="$org">Emacs Org-mode</a> (未翻訳), <a href="$ecripse">Ecripse</a> (未翻訳) について書きました. その他にも, <a href="http://www.xm1math.net/texmaker/">Texmaker</a> や Windt といったエディタで <strong><code>knitr</code></strong> を使うことができます. ポイントは R を呼び出して <strong><code>knitr</code></strong> パッケージを読み込み, それから <code>knit()</code>または <code>knit2pdf()</code> を呼び出すことです.</p>
+<div id="texmaker" class="section level2 unnumbered">
+<h2>Texmaker</h2>
+<p><code>User --&gt; User Commands --&gt; Edit User Commands</code> から, Rnw 文書を処理するためのカスタムコマンドを定義できます.</p>
+<div class="figure" style="text-align: center"><span id="fig:demo-def-user-command-texmaker"></span>
+<img src="https://db.yihui.org/imgur/ddIBH.png" alt="Texmaker でユーザーコマンドを定義する"  />
+<p class="caption">
+図 4.1: Texmaker でユーザーコマンドを定義する
+</p>
+</div>
+<p>Rの実行ファイルパスが <code>PATH</code> 環境変数にない場合, 上記のコマンドに <code>Rscript.exe</code> のフルパスを書く必要があります. こんなかんじに:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="editors.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:/Program Files/R/R-2.14.2/bin/Rscript.exe&quot;</span> <span class="ex">-e</span> <span class="st">&quot;knitr::knit2pdf(&#39;%.Rnw&#39;)&quot;</span></span></code></pre></div>
+<p><code>Rscript.exe</code> の場所さえ知っていれば, R を開いて <code>R.home('bin')</code> を実行すれば見つけられます. そうすればどんな Rnw 文書ファイルに対しても, この <code>knitr</code> コマンドでコンパイルすることができます.</p>
+<div class="figure" style="text-align: center"><span id="fig:demo-compile-texmaker"></span>
+<img src="https://db.yihui.org/imgur/xKoeT.png" alt="Texmaker で knitr コマンドでコンパイルする"  />
+<p class="caption">
+図 4.2: Texmaker で knitr コマンドでコンパイルする
+</p>
+</div>
+<p>文書をコンパイルするには左向きの矢印をクリックし, PDF を表示するのに右矢印をクリックします. もちろん上記の設定は Windows のものですが, 他のシステムでも同じ要領です. <code>Rscript.exe</code> を <code>Rscript</code> に置き換えてください (実際は Windows 環境でも <code>Rscript</code> が使えます).</p>
+</div>
+<div id="texstudio" class="section level2 unnumbered">
+<h2>TeXStudio</h2>
+<p>一例として, 基本的には Texmaker と同様に設定することができます (Henrik Nyhus と <a href="https://twitter.com/MathBioPaul/status/691446297304272897">Paul J. Hurtado</a> に感謝)</p>
+<div class="figure" style="text-align: center"><span id="fig:demo-editor-texstudio"></span>
+<img src="https://db.yihui.org/imgur/VFcvTUB.png" alt="TeXStudio での knitr"  />
+<p class="caption">
+図 4.3: TeXStudio での knitr
+</p>
+</div>
+<p>上級者向けオプション (左下) を解放すれば, 下部に <code>Commands ($PATH)</code> が現れるでしょう. ここに <code>R</code> フォルダのパスを入力できます (例: 引用符なしで <code>C:\Program Files\R\R-3.3.2\bin\x64</code>). それからユーザーコマンド (そして他のコマンドからも呼び出せる) に <code>Rscript.exe -e "knitr::knit2pdf('%.Rnw')"</code> とするだけです.</p>
+<p>いつでもこのコマンドを実行できます (ホットキーは Alt-Shift-F1) し, サイレントモードでも knitr で PDF を生成できます. F7 キーでいつでも表示されている PDF を更新できます. 代わりの方法として, コマンドの末尾に <code>| txs:///view-pdf</code> を追加する方法があります. これはあるコマンドの実行後に実行する別のコマンドを分けるパイプ記号です. よって基本的に F7 を押すだけで事足りるようになります.</p>
+<p>しかし, もし BibLaTeX のような文献引用パッケージを使うならば, まだかなり非効率です. コンパイルの前に bib ファイルの処理を手動で行う必要があり, よって最低でも2回手動でコンパイルする必要があり (そしてあなたは何回必要か正確に分からないでしょう). その間に不要なビューアの呼び出しが発生します. TeXstudio は文献処理ツール起動したりコンパイルしたり, それらを繰り返すのに優れていますが, ビルドと閲覧 (F5) を何度も押す度にこれが必要になり, そこでデフォルトのコンパイラを <code>Rscript.exe -e "knitr::knit2pdf('%.Rnw')"</code> で置き換えることで <strong><code>knitr</code></strong> を使用し続けられるわけです (<code>R</code> フォルダを <code>$PATH</code> に設定している前提です). その隣の “Repeat contained compilation commands” が押されたままであることを確認してください.</p>
+<p>もちろん, これならば少なくとも F5 (または F6) を押すだけで TeXstudio デフォルトの標準の　LaTeX コンパイラの代わりに <code>knitr</code> が実行されます. この方法のおそらく唯一の欠点は, ほとんどの人にとって LaTeX コードのデバッグがいっそう困難になることです. ほとんどのエラーが「<code>texify.exe</code> “had status 1”」という曖昧な警告に置き換わってしまうことです (ユーザーコマンド経由で <strong><code>knitr</code></strong> を実行するのではこれは改善できません). そのような状況でもログファイルも時には有用ですが, ログファイルは <code>.Rnw</code> ファイルではなく <strong><code>knitr</code></strong> の生成した <code>.tex</code> を参照するので, このファイルを開いてどこがおかしいのかを見つけようとする必要があります.</p>
+<p>しかし物事の全体で見れば, TeXstudio ならば 他のあらゆる LaTeX 書き込み機能の恩恵を得つつ <code>knitr</code> を使うことができます. その上, 不便な回避策が必要な RStudio と比較すれば, <code>BibLaTeX-Chicago</code> のような <code>Biber</code> ベースの文献引用パッケージの使用もはるかに簡単になります.</p>
+</div>
+<div id="winedt" class="section level2 unnumbered">
+<h2>WinEdt</h2>
+<p>WinEdt の<a href="http://www.winedt.org/Config/modes/R-Sweave.php">R-Sweave</a> モードは現在 <strong><code>knitr</code></strong> をサポートしています. 自分自身で WinEdt の設定をしたいなら, よくお読みください.</p>
+<p>以下の手引書は <a href="https://github.com/philchalmers">Phil Chalmers</a> によるものです. 私は全てを確認していませんが, おおよそ良さそうだと思います.</p>
+<ol style="list-style-type: decimal">
+<li><code>Options -&gt; Execution Modes -&gt; PDFTeXify</code> へ移動する. それから実行可能な <code>Rscript.exe</code> (例: <code>C:\Program Files\R\R-2.14.2\bin\Rscript.exe</code>) を探し, それを選択する</li>
+<li><code>Switches</code> で <code>-e</code> を入力し, <code>Parameters</code> で <code>"knitr::knit2pdf('%n%t')"</code> を入力する.</li>
+</ol>
+<p>そして <code>F9</code> をタイプすれば, PDF を開くのを含めて全てが一度に実行されます.</p>
+<p>Phil に感謝.</p>
+</div>
+<div id="emacsess" class="section level2 unnumbered">
+<h2>Emacs/ESS</h2>
+<p>12/9 以降, <strong><code>knitr</code></strong> は公式に <a href="http://ess.r-project.org">ESS</a> にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="editors.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ess</span></code></pre></div>
+<p>ESS で <strong><code>knitr</code></strong> を使う方法に関する<a href="https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075">短い動画</a>があります.</p>
+<p>(歴史的背景に興味がある人向け) <a href="http://sjp.co.nz/posts/emacs-ess-knitr/">Simon Potter</a> と <a href="https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/">lucialam</a> の両氏が Emacs/<strong>knitr</strong> についてブログに書いています.</p>
+</div>
+<div id="gedit" class="section level2 unnumbered">
+<h2>Gedit</h2>
+<p><a href="https://en.wikipedia.org/wiki/Gedit">gedit</a> で外部ツールとして定義することができます. 以下は David Allen による方法です. 感謝.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="editors.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> -e <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$GEDIT_CURRENT_DOCUMENT_NAME</span><span class="st">&#39;)&quot;</span></span></code></pre></div>
+</div>
+<div id="sublime" class="section level2 unnumbered">
+<h2>Sublime</h2>
+<p>Andrew Heiss による <a href="https://github.com/andrewheiss/KnitrSublime">KnitrSublime</a> パッケージは Sublime Text 2 で LaTeX で <strong><code>knitr</code></strong> を使用する基本的な機能をサポートしています.</p>
+</div>
+<div id="vim" class="section level2 unnumbered">
+<h2>Vim</h2>
+<p>Jakson Aquino のおかげで <a href="http://www.vim.org/scripts/script.php?script_id=2628">Vim-R-Plugin</a> <strong><code>knitr</code></strong> の包括的なサポートをしています.</p>
+</div>
+<div id="textmate" class="section level2 unnumbered">
+<h2>TextMate</h2>
+<p>Applescript for TextMate 2 で使用するアプローチとして <a href="https://github.com/yihui/knitr/issues/252#issuecomment-6034068">#252</a> や Chris Fonnesbeck のリポジトリ <a href="https://github.com/fonnesbeck/knitr.tmbundle">knitr.tmbundle</a> を参照してください.</p>
+</div>
+<div id="texshop" class="section level2 unnumbered">
+<h2>TeXShop</h2>
+<p><a href="http://pages.uoregon.edu/koch/texshop/">TeXShop</a> で <strong><code>knitr</code></strong> を動作させる設定は簡単です. TeXShop の <code>Engines</code> ディレクトリ (大抵の場合は <code>~/Library/TeXShop/Engines/</code>) の <code>Knitr.engine</code> ファイルに以下を書き込むだけです.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="editors.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb27-2"><a href="editors.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=$PATH</span>:/usr/texbin:/usr/local/bin</span>
+<span id="cb27-3"><a href="editors.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> -e <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$1</span><span class="st">&#39;)&quot;</span></span>
+<span id="cb27-4"><a href="editors.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> -pdf <span class="st">&quot;</span><span class="va">${1%</span>.*<span class="va">}</span><span class="st">&quot;</span></span></code></pre></div>
+<p><a href="http://cameron.bracken.bz/sweave-for-texshop">Cameron Bracken</a> と <a href="http://yihui.org/en/2012/06/enjoyable-reproducible-research/#comment-601032753">Fabian Greimel</a> の厚情に感謝.</p>
+</div>
+<div id="texworks" class="section level2 unnumbered">
+<h2>TeXworks</h2>
+<p>追加ツールの設定に関して TeXworks も Texmaker と似ています. 以下は Ubuntu でのスクリーショットです. StackExchange 回答してくれた <a href="http://tex.stackexchange.com/a/85165/9128">Speravir</a> に感謝. (Windows/Mac OS も <code>Rscript</code> が <code>PATH</code> にある限り同様にできるはずです).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:demo-editors-texworks"></span>
+<img src="https://db.yihui.org/imgur/d6tE6.png" alt="TeXworks で knitr を使う"  />
+<p class="caption">
+図 4.4: TeXworks で <strong><code>knitr</code></strong> を使う
+</p>
+</div>
+</div>
+<div id="kile" class="section level2 unnumbered">
+<h2>Kile</h2>
+<p>tirip01 が以下のような方法を指摘しています.</p>
+<ol style="list-style-type: decimal">
+<li><p><code>Build</code> タブを開き, <code>New..</code> を選んで, <code>knitr</code> とタイプし <code>Finish</code> を押します. <code>General</code> タブから <code>Comannd</code> タブで <code>Rscript</code> と入力し, その下の <code>Options</code> フィールドで <code>-e "knitr::knit2pdf('%source')"</code> とタイプします.</p>
+<p><img src="https://securecdn.disqus.com/uploads/mediaembed/images/564/4837/original.jpg" /></p></li>
+<li><p><code>Advanced</code> タブへ移動し, Rnw を <code>Source extension</code> に設定し, pdf を <code>Target extension</code> に設定します.</p>
+<p><img src="https://securecdn.disqus.com/uploads/mediaembed/images/564/4838/original.jpg" /></p></li>
+<li><p>メニューから <code>Compile</code> を選択します.</p></li>
+</ol>
+<p>Dr Marek Gągolewski も <a href="http://www.rexamine.com/2013/04/configure-kile-for-knitr/">Configure Kile for knitr under GNU/Linux</a> というブログ投稿でもっと複雑なアプローチを解説しています.</p>
+</div>
+<div id="tinn-r" class="section level2 unnumbered">
+<h2>Tinn-R</h2>
+<p>Tinn-R は <strong><code>knitr</code></strong> v2.3.7.3 以降からサポートを開始しました.</p>
+
+<!---
+title: Package framed
+subtitle: Default LaTeX style in knitr
+date: '2012-02-29'
+slug: framed
+--->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="FAQs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="framed.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
