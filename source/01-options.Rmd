@@ -87,7 +87,7 @@ knitr::opts_chunk$set(
 -   **`include`**: (`TRUE`; `logical`).: 出力する文書にチャンクの出力を含めるかどうかです. `FALSE` ならばなにも書き出されませんが, コードの評価はなされ, チャンク内にプロット命令があるのならグラフのファイルも生成されます. よってこの図をそれ以降で任意に挿入することもできます.
 -   **`strip.white`**: (`TRUE`; `logical`).: 出力時にソースコードの冒頭と末尾から空白行を除去するかどうかです.
 -   **`class.output`**: (`NULL`; `character`).: テキストの出力ブロックに追加するクラス名のベクトル. このオプションは R Markdown で HTML を出力する際にのみ機能します. 例えば `class.output = c('foo', 'bar')` はテキスト出力が `<pre class="foo bar"></pre>` で囲まれたブロックとして書き出されます.
--   **`class.message`**/**`class.warning`**/**`class.error`**: (`NULL`; `character`)・: `class.output` と同様に, R Markdown においてそれぞれ メッセージ文, 警告文, エラー文のブロックに対してクラス名を与えます. `class.source` もまた同様にソースコードのブロックに対して適用されます. "[Code Decoration](#class-decoration)" のセクションを参照してください.
+-   **`class.message`**/**`class.warning`**/**`class.error`**: (`NULL`; `character`)・: `class.output` と同様に, R Markdown においてそれぞれ メッセージ文, 警告文, エラー文のブロックに対してクラス名を与えます. `class.source` もまた同様にソースコードのブロックに対して適用されます. "[コードの装飾](#code-decoration)" のセクションを参照してください.
 -   **`attr.output`**/**`attr.message`**/**`attr.warning`**/**`attr.error`**: (`NULL`;
     `character`).: 上記の `class.*` オプション群と同様に, Pandoc に対してコードブロックの属性を指定します. つまり `class.*` は `attr.*` の特殊ケースです. 例: `class.source = 'numberLines'` は `attr.source = '.numberLines'` と等価ですが, `attr.source` は任意の値を取ることができます. 例えば, `attr.source = c('.numberLines', 'startFrom="11"')`.
 -   **`render`**: (`knitr::knit_print`; `function(x, options, ...)`).: チャンクで表示される値に対して適用する関数です. 関数の第1引数には (`x`) はチャンクの各評価式が評価された結果が与えられます. このチャンクのチャンクオプションがリストとして第二引数 `opstions` に与えられます. この関数は文字列を返すことを想定しています. 詳細は package vignette (`vignette('knit_print', package = 'knitr')`) を参照してください.
@@ -108,7 +108,7 @@ knitr::opts_chunk$set(
 -   **`attr.source`**: (`NULL`; `character`).: ソースコードブロックの属性です. `attr.output` などの `attr.*` シリーズと同様です.
 -   `size`: (`'normalsize'`; `character`) `.Rnw` 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは  [overleaf のヘルプページ (英語)](https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles) を参照してください^[訳注: `\normalsize`, `\Large`, `\LARGE` など LaTeX で指定できるフォントサイズを表すマクロのことを指しています].
 -   **`background`**: (`'#F7F7F7'`; `character`).:  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
--   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **`knitr`** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です. TODO: R Markdown での挙動違うくない?
+-   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **`knitr`** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です^[訳注: R Markdown の場合は **`knitr`** 以外の中間処理があるため, 必ずしもこのルールを守りません].
 
 ```{r indent-example}
 rnorm(10)
@@ -203,9 +203,7 @@ for(i in 1:10) {
 ### コードチャンク関連 {#code-chunk}
 
 - **`code`**: (`NULL`; `character`).: 指定された場合, そのチャンクのコードを上書きします. この機能によって, プログラミング的にコード挿入が可能になります. 例えば `code = readLines('test.R')` とすれば `test.R` の内容を現在のチャンクで実行します.
-- **`ref.label`**: (`NULL`; `character`).: A character vector of labels of the chunks
-    from which the code of the current chunk is inherited (see the demo for
-    [チャンク参照](#reference)). TODO: 使ったこと無いので要動作確認
+- **`ref.label`**: (`NULL`; `character`).: 現在のチャンクのコードに引き継ぐ, 別のチャンクのラベルの文字列ベクトルを指定します (動作例は  [チャンク参照](#reference) を確認してください).
 
 ### 子文書関連 {#child-document}
 
@@ -228,7 +226,7 @@ knitr::opts_chunk$set(engine.path = list(
 
 -   **`opts.label`**: (`NULL`; `character`).: `knitr::opts_template` でのオプションのラベルです. オプションセットのラベルは `knitr::opts_template` で設定できます (`?knitr::opts_template` を参照してください). このオプションにより, 頻繁に使うチャンクオプションのタイピング労力を削減できます. 
 
-訳注: 例えば次のように, `echo=F` を設定するテンプレート `noecho` をどこかで作成したとします. すると, 以降のチャンクで `opts.label="noecho"` を設定すると `opts_template` で設定した `noecho` のオプションが全て適用されます. もちろん複数のオプションをまとめることもできるので, 定番の設定を使いまわすのが簡単になります.
+**訳注**: 例えば次のように, `echo=F` を設定するテンプレート `noecho` をどこかで作成したとします. すると, 以降のチャンクで `opts.label="noecho"` を設定すると `opts_template` で設定した `noecho` のオプションが全て適用されます. もちろん複数のオプションをまとめることもできるので, 定番の設定を使いまわすのが簡単になります.
 
 ```{r, template-example, eval=F}
 knitr::opts_template$set(noecho = list(echo = F))
@@ -257,7 +255,7 @@ knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
 - **`aliases`**: (`NULL`; `character`).: チャンクオプションのエイリアスを指定する名前付きベクトルです. 例えば `c(h = 'fig.height', w = 'fig.width')` は **`knitr`** に `h` は `fig.height` `w` は `fig.width` と同じ意味だと認識させます. このオプションは名前の長いチャンクオプションのタイピング労力を削減できます.
 - **`base.dir`**: (`NULL`; `character`).: グラフを生成する際のディレクトリの絶対パスです.
 - **`base.url`**: (`NULL`; `character`).: HTML ページに掲載する画像のベースURLです.
-- **`concordance`**: (`FALSE`; `logical`).: この機能は  RStudio によって実装されている機能で, `.Rnw` でのみ有効です. Whether to write a concordance file to map the output line numbers to the input line numbers. This enables one to navigate from the output to the input, and can be helpful especially when a TeX error occurs. This feature is only for `.Rnw` documents, and implemented in RStudio. TODO
+- **`concordance`**: (`FALSE`; `logical`).: この機能は  RStudio によって実装されている機能で, `.Rnw` でのみ有効です. 入力ファイルの行番号に対応した行番号を出力ファイルに書き出すかどうかを指定します. これにより, 出力から入力の誘導が可能になり, 特に LaTeX のエラー発生時に役に立ちます.
 -   **`eval.after`**: (`'fig.cap'`; `character`).: オプション名の文字ベクトルを指定します. このオプションはチャンクが評価された**後で**評価され, 他のオプションはチャンクが評価される前に評価されます. 例えば `eval.after = 'fig.cap'` が指定されているときに `fig.cap = paste('p-value is', t.test(x)$p.value)` とすると, チャンクの評価後の `x` の値が使用されます.
 - **`global.par`**: (`FALSE`; `logical`).: `TRUE` にすると, それ以前のコードチャンクでの `par()` での設定が引き継がれます (もちろん, この設定は R グラフィックスのみで有効です). デフォルトでは  **`knitr`** はグラフの記録のために新規のグラフィックデバイスを開き, コードの評価後に閉じるため, `par()` による設定はその都度破棄されます.
 - **`header`**: (`NULL`; `character`).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば `\documentclass{article}` の直後, HTML ならば `<head>` タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は `knitr::knit_patterns$get('document.begin')` で知ることができます. このオプションは `.Rnw` と `.Rhtml` 限定の機能です^[訳注: R Markdown ではヘッダの設定は YAML フロントマターで行います].
