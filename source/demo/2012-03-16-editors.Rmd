@@ -15,31 +15,41 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 
 ----
 
-I have written about [LyX](../lyx/), [RStudio](../rstudio/), [Emacs Org-mode](../org/) and [Eclipse](../eclipse/). There are still other editors that we can use with **knitr**, such as [Texmaker](http://www.xm1math.net/texmaker/) and WinEdt. The key is that you call R and load the **knitr** package, then call the function `knit()` or `knit2pdf()`.
+```{block2 demo-editor-translator, type="rmdtip"}
+**訳注**: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
+```
+
+私は以前 [Lyx]($lyx) (未翻訳), [RStudio]($RStudio) (未翻訳) [Emacs Org-mode]($org) (未翻訳), [Ecripse]($ecripse) (未翻訳) について書きました. その他にも, [Texmaker](http://www.xm1math.net/texmaker/) や Windt といったエディタで **`knitr`** を使うことができます. ポイントは R を呼び出して **`knitr`** パッケージを読み込み, それから `knit()`または `knit2pdf()` を呼び出すことです.
 
 ## Texmaker {-}
 
-You can define a custom command to process Rnw documents by `User --> User Commands --> Edit User Commands`:
+`User --> User Commands --> Edit User Commands` から, Rnw 文書を処理するためのカスタムコマンドを定義できます.
 
-![Define user commands in Texmaker](https://db.yihui.org/imgur/ddIBH.png)
+```{r demo-def-user-command-texmaker, echo=F, fig.cap="Texmaker でユーザーコマンドを定義する"}
+knitr::include_graphics("https://db.yihui.org/imgur/ddIBH.png")
+```
 
-Note if you have not added R's bin path to the `PATH` variable, you need to use the full path to `Rscript.exe` in the above command like:
+Rの実行ファイルパスが `PATH` 環境変数にない場合, 上記のコマンドに `Rscript.exe` のフルパスを書く必要があります. こんなかんじに:
 
 ```bash
 "C:/Program Files/R/R-2.14.2/bin/Rscript.exe" -e "knitr::knit2pdf('%.Rnw')"
 ```
 
-If you do know where is `Rscript.exe`, simply open R and use `R.home('bin')` to find it. Then for an Rnw document, you can use this `knitr` command to compile it:
+`Rscript.exe` の場所さえ知っていれば, R を開いて `R.home('bin')` を実行すれば見つけられます. そうすればどんな Rnw 文書ファイルに対しても, この  `knitr` コマンドでコンパイルすることができます.
 
-![Compile Rnw in Texmaker with knitr](https://db.yihui.org/imgur/xKoeT.png)
+```{r demo-compile-texmaker, echo=F, fig.cap="Texmaker で knitr コマンドでコンパイルする"}
+knitr::include_graphics("https://db.yihui.org/imgur/xKoeT.png")
+```
 
-Click the arrow on the left to compile the document, and the right arrow to view PDF. Of course the above configuration is for Windows, but it is straightforward for other systems as well: change `Rscript.exe` to `Rscript` (in fact you can use `Rscript` under Windows as well).
+文書をコンパイルするには左向きの矢印をクリックし, PDF を表示するのに右矢印をクリックします. もちろん上記の設定は Windows のものですが, 他のシステムでも同じ要領です. `Rscript.exe` を `Rscript` に置き換えてください (実際は Windows 環境でも `Rscript` が使えます).
 
 ## TeXStudio {-}
 
-For one, you can do basically the same thing as in Texmaker (thanks, Henrik Nyhus and [Paul J. Hurtado](https://twitter.com/MathBioPaul/status/691446297304272897)):
+一例として, 基本的には Texmaker と同様に設定することができます (Henrik Nyhus と [Paul J. Hurtado](https://twitter.com/MathBioPaul/status/691446297304272897) に感謝)
 
-![knitr in TeXStudio](https://db.yihui.org/imgur/VFcvTUB.png)
+```{r demo-editor-texstudio, echo=F, fig.cap="TeXStudio での knitr"}
+knitr::include_graphics("https://db.yihui.org/imgur/VFcvTUB.png")
+```
 
 If you reveal Advanced Options (bottom left), you'll also see `Commands ($PATH)` at the bottom, where you can input the path to your `R` folder (e.g. `C:\Program Files\R\R-3.3.2\bin\x64`, no quotes); then the user command (and other calls to knitr that you might want in other commands) can just be `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"`.
 

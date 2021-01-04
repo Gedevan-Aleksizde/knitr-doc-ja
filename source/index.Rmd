@@ -14,31 +14,8 @@ urlcolor: magenta
 
 # knitr {-}
 
-```{r knitr-setup, include=FALSE}
-knitr::knit_hooks$set(wrapper = function(before, options) {
-  # the original chunk might be indented
-  if (is.null(indent <- options$indent)) indent <- ''
-  
-  # hide the wrapper=TRUE option
-  opts <- gsub(', wrapper=TRUE', '', options$params.src)
-  
-  if (before) {
-    # add the header
-    sprintf('\n\n%s````\n```{r,%s}\n````\n', indent, opts)
-  } else {
-    # add the footer
-    sprintf('\n\n%s````\n```\n````\n', indent)
-  }
-})
-
-knitr::opts_template$set(
-  subtitle = list(
-    echo = F,
-    class.output = "subtitle",
-    comment = "",
-    background = NULL
-    )
-  )
+```{r index-setup, include=F}
+require(knitr)
 ```
 
 ```{block2, type="rmdimportant"}

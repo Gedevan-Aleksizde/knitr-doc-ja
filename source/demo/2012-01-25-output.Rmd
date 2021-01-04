@@ -15,26 +15,26 @@ slug: output
 
 ----
 
-As introduced in the [main manual](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf), **knitr** uses the **evaluate** package to evaluate R code chunks, and there are six types of output: source code, normal text output, messages, warnings, errors and plots. Below we give a summary on the fine control over them.
+[main manual](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) の導入の通り, **`knitr`** は R コードチャンクの評価のために **`evaluate`** パッケージを使用し, その出力は6種類あります. **ソースコード**, **通常テキスト出力**, **メッセージ文**, **警告文**, **エラー文**, そして**グラフ**です. 以降ではこれらをうまく制御する方法を要約します.
 
-1. source code: use chunk option `echo`, e.g. `echo=FALSE` hides the R code
-1. normal text output: use option `results` (`markup` marks up the results; `asis` return texts as-is; `hide` hides the results)
-1. messages: option `message` (`FALSE` hides messages in the output)
-1. warnings: option `warning` (`FALSE` hides warnings in the output)
-1. errors: option `error` (`FALSE` will make R stop if an error occurs; `TRUE` will show the error messages in the output)
-1. plots: option `fig.keep` (`none` discards all plots; `all` for all plots including low-level plots; `high` for high-level plots)
+1. **ソースコード**: チャンクオプション `echo` を使います, 例: `echo=FALSE` は R コードを隠します
+1. **通常テキスト出力**: `results` オプションを使います (`markup` はテキストをマークアップし, `asis` はテキストをそのまま出力し, `hide` は結果を隠します)
+1. **メッセージ文**: `message` オプションを使います (`FALSE` は出力されるメッセージ文を隠します)
+1. **警告文**: `warning` オプションを使います (`FALSE` は出力される警告文を隠します)
+1. **エラー文**: `error` オプションを使います (`FALSE` はエラー発生時点で R の処理を停止し, `TRUE` は出力にエラー文を表示します)
+1. **グラフ**: `fig.keep` オプションを使います. (`none` は全てのグラフを破棄し, `all` は全ての低水準プロットに分けて保存し, `high` は高水準作図として保存します)
 
-These options are orthogonal to each other, so you are free to turn on/off one type of output without affecting other pieces.
+これらのオプションは互いに独立しており, 他のタイプの出力への影響を気にすることなく自由に切り替えることができます.
 
-Note all [options](../../options/) in **knitr** can take values from R expressions, which brings the feature of conditional evaluation introduced in the main manual. In short, `eval=dothis` means the real value of `eval` is taken from a variable named `dothis` in the global environment; by manipulating this variable, we can turn on/off the evaluation of a batch of chunks.
+**`knitr`** の全ての[オプション]($options)は R の評価式から値を取ることができます. これは main manual で条件評価 (conditional evaluation) の機能として紹介したものです. 端的に言うなら `eval=dothis` は実際の値 `value` はグローバル環境の `dothis` とい変数から取られた値になるということです. この変数を操作することで, 1つ1つのチャンクの評価をオン・オフ切り替えることができます.
 
-## Advanced usage of the `echo` option {-}
+## `echo` オプションの発展的な使い方 {-}
 
-Besides `TRUE/FALSE`, the chunk option `echo` can also take a numeric vector to selectively echo source code in the output. This vector indexes the complete R expresions in the code chunk, e.g. `echo=1` means only include the first expression in the output. Below is a complete example:
+チャンクオプション `echo` は `TRUE/FALSE` だけでなく, 数値のベクトルを取ることで出力文を選択することができます. このベクトルのインデックスはコードチャンクを完全な R 評価式単位でインデックスします. たとえば `echo=1` は出力内の最初のソースコード出力のみを含めることを意味します. 以下はこの例の完全版です.
 
-```r 
+```
 <<hide-par, echo=3:4>>=
-## 'ugly' code that I do not want to show
+## 表示させたくない「醜い」コード
 par(mar = c(4, 4, 0.1, 0.1), cex.lab = 0.95, cex.axis = 0.9,
     mgp = c(2, 0.7, 0), tcl = -0.3)
 plot(mtcars[, 1:2])
@@ -42,14 +42,14 @@ plot(mtcars[, 4:5])
 @
 ```
 
-The `par()` expression is not essential to this code chunk, and it is even distracting to the readers, so we may want to hide it in the output. In this particular case, we do not want the first expression (comments) either; `echo=3:4` means the third and fourth expressions are to be included in the output. Note the index of an expression is not necessarily the same as its line number. Alternatively, we can use `echo=-(1:2)` to remove the first two expressions.
+評価式 `par()` はこのコードチャンクに必須ではなく, 読み手の集中力を逸らすことすらあります. そこで出力からこれを隠したいとなるでしょう. このケースでは, 最初の評価式 (コメントのことです) も見せたくありません. `echo=3:4` ならば3, 4番めの評価式が出力に含まれることを意味します. 評価式のインデックスが行番号と同じである必要はありません. 代わりに 1,2番めの評価式を削除するという意味で `echo=-(1:2)` とすることもできます.
 
-It may be confusing to the reader if you select a discrete subset of the source code; oftentimes we should use `a:b` or `-(a:b)` to select a (relatively) complete subset. However, nobody can stop you from doing so:
+ソースコードを部分部分に分けて選択すると, 読み手は混乱するかもしれません. (相対的に) 完全な部分集合を選ぶために, ほとんどの場合は `a:b` または `-(a:b)` を使うべきでしょう. しかし, 誰もあなたに禁じることはできません.
 
-```r 
-% select 3rd and 5th expressions
+``` 
+% 3, 5 番めの評価式を選択
 <<hide-par, echo=c(3, 5)>>=
-## 'ugly' code that I do not want to show
+## 表示させたくない「醜い」コード
 par(mar = c(4, 4, 0.1, 0.1), cex.lab = 0.95, cex.axis = 0.9,
     mgp = c(2, 0.7, 0), tcl = -0.3)
 plot(mtcars[, 1:2])
@@ -58,61 +58,59 @@ plot(mtcars[, 4:5])
 @
 ```
 
-## Inline output {-}
+## インライン出力 {-}
 
-Besides chunk output, there is another type of output: inline R code output (e.g. `\Sexpr{t.test(x)$p.value}`). Numeric output is treated specially: the numbers will be written in scientific notations if they are too big or small. The threshold between scientific notation and fixed notation is the R option `scipen` (see `?options` for details). Basically if a number is bigger than `10^4` or smaller than `10^{-4}` (applies to the absolute values of negative numbers too), it will be denoted in scientific notation. Depending on the output format (LaTeX or HTML), **knitr** will use the appropriate code like `$3.14 \times 10^5$` or `3.14 &times; 10<sup>5</sup>`.
+チャンクの出力とは別の出力タイプがあります.  インライン R コードの出力です (例: `\Sexpr{t.test(x)$p.value}`). 数値の出力は特別な扱われ方をします. 非常に大きいか小さい数値は指数表記で書き出されます. 指数表記になるしきい値は R オプションの `scipen` (詳細は `?options` を参照してください) によります. 基本的に $10^4$ より大きいか, $10^{-4}$ より小さい場合に指数表記になります (負の数でも絶対値が同様に評価されます). 出力フォーマット (LaTeX とか HTML とか) に応じて, **`knitr`** は `$3.14 \times 10^5$` や `3.14 &times; 10<sup>5</sup>` というように適切なコードで出力します.
 
-Another R option `digits` controls how many digits a number should be rounded with. If you do not like the default `options(scipen = 0, digits = 4)`, you can change them in the first chunk like:
+もう1つの R オプション `digits` は, どの桁で丸めるべきかを制御します. デフォルトの `options(scipen = 0, digits = 4)` が気に入らないならば, こんなふうに最初のチャンクで変更できます.
 
-```r 
-<<setup, echo=FALSE, cache=FALSE>>=
-## numbers >= 10^5 will be denoted in scientific notation,
-## and rounded to 2 digits
+```{r demo-output-round-digits} 
+## 10^5 以上ならば指数表記され, 2 桁で丸める
 options(scipen = 1, digits = 2)
-@
 ```
 
-A Markdown example:
+R Markdown での例:
 
-``` 
-Inline code looks like this `r 1+1`
+```md
+インラインコードでは「``` `r'' 1+1` ```」と表示される
 ```
 
-The above would print `2`, inline with the rest of the sentence.
+インラインコードでは「`r 1+1`」と表示される
 
-An Rnw example (LaTeX):
+上記の例では他の地の文とともに `2` と表示されます.
 
-```tex 
+Rnw の例 (LaTeX):
+
+```
 Inline code looks like this \Sexpr{1+1}
 ```
 
-An R HTML example:
+R HTML の例:
 
 ```html 
 <p>Inline code looks like this <!--rinline 1+1 --></p>
 ```
 
-For R HTML documents, the character results are written in `<code></code>` by default. If you would like to drop the `<code></code>` tags in the output, simply wrap your R code with `I()`. For example,
+R HTML 文書では, デフォルトでは結果の文字列は `<code></code>` で囲まれます. 出力から `<code></code>` タグをなくしたいなら, R コードを `I()` で囲むだけです. 例:
 
 ```html 
 <p>Inline code looks like this <!--rinline I(1+1) --></p>
 ```
 
-See this [SO post](http://stackoverflow.com/q/14124022/559676) for another example.
+さらに別の用例を[スタックオーバーフローの投稿](http://stackoverflow.com/q/14124022/559676)で見ることができます.
 
 ## Long lines of text output {-}
 
-Normally R respects the option `width` (set via `options(width = ??)`) when printing text output, e.g. `rnorm(100)`. The default value for `width` is set to `75` and it is likely you want a smaller value if you use LaTeX. In some cases, you may see the output is still too width even if you have set this option to be a small value, and that is usually because R does not respect this option. I cannot do much about this, although there can be some hacks on **knitr**'s side. See [#421](https://github.com/yihui/knitr/issues/421) for one example.
+通常, R はテキスト出力時に `width` オプション (`options(width = ??)` で設定されたもの) を尊重します. たとえば `rnorm(100)` として見てください. `width` のデフォルト値は `75` に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, **`knitr`** 側でハックする方法がいくつかあります. その例の1つは issue [#421](https://github.com/yihui/knitr/issues/421) で見られます^[訳注: `citation()` の出力が `width` に対応していない場合の問題です].
 
-## One comment on messages {-}
+## 1メッセージに1コメントを {-}
 
-Many people like to use `cat()` to write messages in R, and this is a very bad practice, because it is inconvenient to turn off such messages. When we really mean _messages_, we should use `message()`. These regular messages can be conveniently suppressed by `suppressMessages()` or captured by **knitr**. Some package authors did not seem to pay attention to this issue; when we load a package or use functions in a package, we may see fake messages that cannot be supppressed. If a startup message is really necessary, it should be put in `packageStartupMessage()`. When you are unable to turn off some messages by `message=FALSE` in **knitr**, it is probably time to request the package authors to make some changes.
+R でメッセージ文を書き出すのに `cat()` を使うのが好きな人がたくさんいますが, これは大変よくない使い方です. このような形にメッセージ文は非表示にするのが大変だからです. 本当に **メッセージ** を提示したい場合は, `message()` 関数を使うべきです. 正規のメッセージは `suppressMessages()` で表示を抑制したり, **`knitr`** で補足したりすることができ便利です. パッケージ開発者の中にはこの問題に注意を払ってない人がいます. そのようなパッケージを読み込んだりパッケージの関数を使ったりすると, 表示を抑制できない偽物のメッセージ文を見かけます. パッケージのスタートアップメッセージはじっさい必要ですが, それは `packageStartupMessage()` で表示すべきです. **`knitr`** の `message=FALSE` でメッセージを消せないなら, それはパッケージ開発者に変更を要求するときです.
 
-Similarly, we should use `warning()` when we really mean a warning.
+同様に, 警告を発したいならまさに `warning()` を使うべきです.
 
-So watch out your `cat`s!
+というわけで, あなたの `cat` の振る舞いに気をつけてください!
 
-## Misc {-}
+## その他 {-}
 
-If you use `echo=FALSE, results='hide'` on a chunk, you may see extra empty lines in the output; if you do not want these empty lines, see [#231](https://github.com/yihui/knitr/issues/231) for a possible solution.
-
+チャンクで `echo=FALSE, results='hide'` を使用した時, 出力に余分な空白行があるかもしれません. 空白行がいらないのなら, issue [#231](https://github.com/yihui/knitr/issues/231) で解決できるかもしれません.

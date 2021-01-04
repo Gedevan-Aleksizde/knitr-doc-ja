@@ -13,9 +13,15 @@ slug: reference
 
 オリジナルの更新日 2012/01/14
 
-Sweave has the feature of chunk reference to reuse chunks with the syntax `<<chunk-label>>` (without `=` compared to `<<>>=`), e.g.
+----
 
-```r 
+```{block2, demo-reference-translateor, type="rmdtip"}
+**訳注**: このページは全編を通して Sweave の構文で書かれていますが, R Markdown のチャンクでも同様のことが可能です.
+```
+
+Sweave には `<<chunk-label>>` (`<<>>=` と違い `=` がない点に注意) という構文でチャンクを再利用するためにチャンクを参照する機能があります. たとえば
+
+``` 
 <<chunk1>>=
 1 + 1
 @
@@ -25,20 +31,22 @@ Sweave has the feature of chunk reference to reuse chunks with the syntax `<<chu
 @
 ```
 
-In `chunk2`, the code in `chunk1` will be inserted. This feature is also available in **knitr**, but note **knitr** supports arbitrary (finite) levels of recursion in chunk references (Sweave only supports one level), i.e. one chunk can reference another chunk which references yet another chunk.
+`chunk2` では `chunk1` のコードが挿入されます. この機能は **`knitr`** でも有効ですが **`knitr`** はさらに任意の (制限なし) 階層での再帰的なチャンク参照をサポートしています (Sweave は1段階までしかサポートしていませんでした). つまりあるチャンクはさらに別のチャンクを参照しているチャンクを参照できるということです.
 
-This same `<<chunk-label>>` syntax will work in markdown, to reuse a previous named markdown chunk within another chunk, even though your .Rmd editor will likely flag the line as an unexpected token.
+この `<<chunk-label>>` 構文と同様のものは markdown の構文でも機能します. それ以前の, 他のチャンクを含んでいる, 名前を付けた markdown チャンクを再利用することができます. あなたの使っている R Markdown エディタが「予期しないトークンです」と構文に警告していたとしてもです.
 
-There are still other approaches to reuse chunks in **knitr**.
+**訳注**:  R Markdown でもチャンク中に `<<`, `>>` で囲んでラベルを書くことでチャンク参照ができます.
 
-1. use the same label as the previous chunk to be reused
-1. use the chunk option `ref.label` to reference another chunk
+**knitr** でチャンクを再利用するアプローチは他にもあります.
 
-## Use the same label {-}
+1. 再利用したいチャンクと同じ名前のラベルを使う
+1. そのチャンクを参照する `ref.label` オプションを使う
 
-An example for the first approach:
+## 同じラベルを使用する {-}
 
-```r 
+1番目のアプローチの例です
+
+```sweave
 <<chunk1, echo=TRUE, results='hide'>>=
 1 + 1
 @
@@ -47,13 +55,13 @@ An example for the first approach:
 @
 ```
 
-The second chunk is empty, so **knitr** will look for another chunk with the same label but is not empty, and use the code from that chunk. The key is to leave a chunk empty to use code from other chunks. One problem with this approach is that you cannot cache both chunks since their MD5 digests are different, and **knitr** only allows one set of cache files per label.
+2番目のチャンクは空なので, **`knitr`** は同じ名前を持ち, 空でないチャンクを探し, そのチャンクのコードを使用します. ポイントは他のチャンクを使用するためにはチャンクの中身を空にしておくことです. 問題は, この2つのチャンクの MD5 ハッシュ値が異なるため, 両方のキャッシュを残すことができないというものです. **`knitr`** はラベル1つにつき1まとまりのキャッシュしか取ることができません.
 
-## Use chunk option `ref.label` {-}
+## チャンクオプション `ref.label` {-}
 
-An example for the second approach:
+2番目のアプローチの例です.
 
-```r 
+```sweave
 <<chunk1, echo=TRUE, results='hide'>>=
 1 + 1
 @
@@ -62,6 +70,6 @@ An example for the second approach:
 @
 ```
 
-The second chunk uses a different label, so cache is no longer a problem. Obviously the second approach is a more general solution.
+2番目のチャンクはラベルが異なるので, キャッシュが取れない問題はなくなりました. 明らかに, 第2のアプローチはより汎用的な解決法です.
 
-This feature enables us to separate R code and R output in the output document. For instance, we can use `echo=FALSE` in the body of an article to hide R code, and use chunk references in the appendix to show R code (with `eval=FALSE, ref.label=...`).
+この機能は出力文書において R のコードと出力を分離することを可能とします. 簡単な例として, 論文を書く際に本文中に R コードを表示しないために `echo=FALSE` を設定することができます. そして補遺 (Appendix)  のセクションでこの R コードを掲載するため, チャンク参照を使います (`eval=FALSE, ref.label=...` オプションを使います).

@@ -32,9 +32,17 @@ slug: graphics
 
 マニュアルからいくつかスクリーショットを提示します.
 
-![knitr 上の tikz グラフィックス](https://db.yihui.org/imgur/HCkka.png)
+(ref:demo-graphics-tikz) **`knitr`** 上の tikz グラフィックス
 
-![knitr 上の ggplot2](https://db.yihui.org/imgur/BTEiu.png)
+```{r demo-graphics-tikz, echo=F, fig.cap="(ref:demo-graphics-tikz)"}
+knitr::include_graphics("https://db.yihui.org/imgur/HCkka.png")
+```
+
+(ref:demo-graphics-ggplot2) **`knitr`** 上の **`ggplot2`**
+
+```{r demo-graphics-ggplot2, echo=F, fig.cap="(ref:demo-graphics-ggplot2"}
+knitr::include_graphics("https://db.yihui.org/imgur/BTEiu.png")
+```
 
  [`tufte-handout`](http://code.google.com/p/tufte-latex/) クラスの作者に感謝します. 上記の例はこれを利用しています. そして **`tikzDevice`**  パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).
 
@@ -51,7 +59,7 @@ my_pdf = function(file, width, height) {
 これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. **`knitr`** はグラフファイルに対して適切なファイル拡張子を推測できないため, `fig.ext` オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.
 
 ````r
-`r ''````{r dev='my_pdf', fig.ext='pdf'}
+```{r dev='my_pdf', fig.ext='pdf'}`r ''`
 plot(rnorm(100))
 ```
 ````
@@ -63,7 +71,7 @@ plot(rnorm(100))
 `dev.args` オプションを通してグラフィカルデバイスをよく制御できます.  `pointsize = 10` とハードコーディングする代わりに, チャンクに `dev.args = list(pointsize = 10)` を与えることができます. これが例です.
 
 ````r
-`r ''````{r dev='pdf', dev.args=list(pointsize=10)}
+```{r dev='pdf', dev.args=list(pointsize=10)}`r ''`
 plot(rnorm(100))
 ```
 ````

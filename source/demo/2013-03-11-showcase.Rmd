@@ -234,7 +234,7 @@ slug: showcase
 - [Basic data-frame manipulations in R](http://therostrumblog.wordpress.com/2014/01/29/basic-data-frame-manipulations-in-r/) by THE ROSTRUM
 - [Reproducibility is not just for researchers](http://www.dataschool.io/reproducibility-is-not-just-for-researchers/) by Kevin Markham
 - [Tools for statistical writing and reproducible research](http://theincidentaleconomist.com/wordpress/tools-for-statistical-writing-and-reproducible-research/) by Bill Gardner
-- [knitr ではじめるデータ分析レポート作成 ~基礎編~](http://qiita.com/hereticreader/items/a3000cb7d5b17ad71731) by Yu ISHIKAWA
+- [knitr ではじめるデータ分析レポート作成 \~基礎編\~](http://qiita.com/hereticreader/items/a3000cb7d5b17ad71731) by Yu ISHIKAWA
 - [Starting data analysis/wrangling with R: Things I wish I'd been told](http://reganmian.net/blog/2014/10/14/starting-data-analysiswrangling-with-r-things-i-wish-id-been-told/) by Stian Håklev
 - [Knitr's best hidden gem: spin](http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/) by Dean Attali
 - [Why use KnitR for scientific publishing?](http://randomlifedata.com/2015/04/why-use-knitr-for-scientific-publishing/) by Rob Les Davidson

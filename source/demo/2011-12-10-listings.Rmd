@@ -5,7 +5,7 @@ date: '2011-12-10'
 slug: listings
 --->
 
-# `Listings` {#listings}
+# `Listings` {-#listings}
 
 `listings` と `knitr` の併用
 
@@ -50,7 +50,9 @@ set_header(highlight = "")
 
 PDFの出力のスクリーショットを1つお見せします:
 
-![knitr での listings の使用](https://db.yihui.org/imgur/PKupQ.png)
+```{r demo-listings-knitr, echo=F, fig.cap="knitr での listings の使用"}
+knitr::include_graphics("https://db.yihui.org/imgur/PKupQ.png")
+```
 
 LaTeX のスタイルファイル `Sweavel.sty` を提供してくれた Frank Harrell に感謝します.
 
@@ -58,5 +60,6 @@ LaTeX のスタイルファイル `Sweavel.sty` を提供してくれた Frank H
 
 **listings** パッケージには膨大な数の使用可能なオプションがあるので, その全性能を引き出すにはマニュアルを読み込んでください. 以下はエラーメッセージで開業する方法の例を提示しています. この[Rnw ソース](https://gist.github.com/2209775)をダウンロードすることができます.  ポイントは `breaklines=true` オプションです.
 
-![listings の出力の改行](https://db.yihui.org/imgur/3313T.png)
-
+```{r demo-listings-knitr-break-line, echo=F, fig.cap="listings の出力の改行"}
+knitr::include_graphics("https://db.yihui.org/imgur/3313T.png")
+```

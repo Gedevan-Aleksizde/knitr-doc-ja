@@ -27,7 +27,7 @@ slug: framed
 
 テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は `kframe` 環境で問題が合った旨を警告します. `kframe` は **`knitr`** チャンク出力を包むために使用します. 既知の問題では,  issue [#154](https://github.com/yihui/knitr/issues/154) で PNG を使った場合があります. 確実にページ余白を超えないようにするため, **`knitr`** は以下のコマンドを LaTeX プリアンブルで使用します.
 
-```{tex demo-framed-exceed, eval=F}
+```tex
 %% maxwidth is the original width if it's less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -47,11 +47,11 @@ slug: framed
 
 もしデフォルトのレイアウト (パディングがまったくない)が倹約しすぎると感じた場合, この LaTeX コマンドでパディングを 5mm に設定します.
 
-```{tex demo-framed-padding, eval=F} 
+```tex
 \setlength\fboxsep{5mm}
 ```
 
-**framed** パッケージに寄るデフォルトのスタイルが気に入らない場合, [listings](#listings) や自分自身で定義した出力[フック](#hooks) に切り替えられます.
+**framed** パッケージのデフォルトのスタイルが気に入らない場合, [listings](#listings) や自分自身で定義した出力[フック](#hooks) に切り替えられます.
 
 ## **framed** と互換性のない環境 {-}
 
