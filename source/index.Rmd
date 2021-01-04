@@ -41,7 +41,7 @@ SweaveListingUtils + その他).
 
 [<img src="https://db.yihui.org/imgur/yYw46aF.jpg" align="right" width=200 style="margin-left: 1em;" />](https://amzn.com/1498716962)
 
-- 透明性とはユーザーが入力と出力に完全にアクセスできることを意味します. 例えば R ターミナル上では  `1 + 2` は `[1] 3` を出力しますが, **`knitr`**によってユーザーは `1 + 2` を LaTeX の `\begin{verbatim}` と `\end{verbatim}` や, HTML タグ `<div class="rsource">` と `</div>` の間に出力したりできますし, `[1] 3` を \begin{Routput}` と `\end{Routput}` の間に出力できたりします. 詳細は \@ref(hooks) 章『フック』を参照してください.
+- 透明性とはユーザーが入力と出力に完全にアクセスできることを意味します. 例えば R ターミナル上では  `1 + 2` は `[1] 3` を出力しますが, **`knitr`**によってユーザーは `1 + 2` を LaTeX の `\begin{verbatim}` と `\end{verbatim}` や, HTML タグ `<div class="rsource">` と `</div>` の間に出力したりできますし, `[1] 3` を `\begin{Routput}` と `\end{Routput}` の間に出力できたりします. 詳細は \@ref(hooks) 章『フック』を参照してください.
 - **`knitr`** は R コードを Rターミナル上で実行した場合でもユーザーの意図する結果と一致することを目指しています. 例えば `qplot(x, y)` でそのままグラフを出力できます (`print()` は不要です) し, デフォルトでコードチャンク内の**全ての**プロットが出力されます.
 - **`pgfSweave`** や **`cacheSweave`** といったパッケージは有用な機能を Sweave に提供しました (高品質な tikz のグラフィックとキャッシュ) が, **`knitr`** はこの実装をより簡単にしました.
 - **`knitr`** のデザインによってあらゆる言語 (例: R, Python, awk) が入力可能となり, あらゆるマークアップ言語の形式で出力が可能となりました (例: LaTeX, HTML, Markdown, AsciiDoc,  reStructuredText).

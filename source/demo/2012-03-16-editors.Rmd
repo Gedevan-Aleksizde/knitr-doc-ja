@@ -51,44 +51,44 @@ knitr::include_graphics("https://db.yihui.org/imgur/xKoeT.png")
 knitr::include_graphics("https://db.yihui.org/imgur/VFcvTUB.png")
 ```
 
-If you reveal Advanced Options (bottom left), you'll also see `Commands ($PATH)` at the bottom, where you can input the path to your `R` folder (e.g. `C:\Program Files\R\R-3.3.2\bin\x64`, no quotes); then the user command (and other calls to knitr that you might want in other commands) can just be `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"`.
+上級者向けオプション (左下) を解放すれば, 下部に `Commands ($PATH)` が現れるでしょう. ここに `R` フォルダのパスを入力できます (例: 引用符なしで `C:\Program Files\R\R-3.3.2\bin\x64`). それからユーザーコマンド (そして他のコマンドからも呼び出せる) に `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"` とするだけです.
 
-Every time you run this user command (hotkey Alt-Shift-F1), you'll run knitr and silently generate the PDF; you'll need to hit F7 every time to refresh the viewer. Alternatively, you can add `| txs:///view-pdf` to the end of the command - the pipe character separates different commands you want to run one after another, so it'll basically hit F7 for you.
+いつでもこのコマンドを実行できます (ホットキーは Alt-Shift-F1) し, サイレントモードでも knitr で PDF を生成できます. F7 キーでいつでも表示されている PDF を更新できます. 代わりの方法として, コマンドの末尾に `| txs:///view-pdf` を追加する方法があります. これはあるコマンドの実行後に実行する別のコマンドを分けるパイプ記号です. よって基本的に F7 を押すだけで事足りるようになります.
 
-This is still pretty inefficient, however, if you're using a citation package like BibLaTeX; you'll need to keep running the bib file manually before compiling, and you may need to manually compile at least twice (and you might not be able to tell how many times you need), which will also call the viewer unnecessarily in the middle. TeXstudio is already great at compiling and/or running the bib tool and repeating however many times is needed when you hit Build & View (F5), and you can continue to make use of that with knitr by replacing the default compiler with the `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"` command (assuming you already set the `R` folder `$PATH`). Make sure the "Repeat contained compilation commands" button next to it remains pressed.
+しかし, もし BibLaTeX のような文献引用パッケージを使うならば, まだかなり非効率です. コンパイルの前に bib ファイルの処理を手動で行う必要があり, よって最低でも2回手動でコンパイルする必要があり (そしてあなたは何回必要か正確に分からないでしょう). その間に不要なビューアの呼び出しが発生します. TeXstudio は文献処理ツール起動したりコンパイルしたり, それらを繰り返すのに優れていますが, ビルドと閲覧 (F5) を何度も押す度にこれが必要になり,  そこでデフォルトのコンパイラを `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"` で置き換えることで **`knitr`** を使用し続けられるわけです (`R` フォルダを `$PATH` に設定している前提です). その隣の "Repeat contained compilation commands" が押されたままであることを確認してください.
 
-This, of course, will make TeXstudio run off knitr instead of the standard LaTeX compilers by default, at least when you hit F5 (or F6); probably the only downside to this, for most people, is that it can make debugging your LaTeX code more difficult, as most errors will only give you the ambiguous warning that `texify.exe` "had status 1" (running `knitr` via user command doesn't improve that either). The log file is sometimes still useful, though even when it is, it refers to lines in the `.tex` file that knitr produced, and not the `.Rnw` file, so you need to open that file up and try and figure out what's wrong.
+もちろん, これならば少なくとも F5 (または F6) を押すだけで TeXstudio デフォルトの標準の　LaTeX コンパイラの代わりに `knitr` が実行されます.  この方法のおそらく唯一の欠点は, ほとんどの人にとって LaTeX コードのデバッグがいっそう困難になることです. ほとんどのエラーが「`texify.exe` "had status 1"」という曖昧な警告に置き換わってしまうことです (ユーザーコマンド経由で **`knitr`** を実行するのではこれは改善できません). そのような状況でもログファイルも時には有用ですが, ログファイルは `.Rnw` ファイルではなく  **`knitr`** の生成した `.tex` を参照するので,   このファイルを開いてどこがおかしいのかを見つけようとする必要があります.
 
-Overall, though, TeXstudio does allow you to use `knitr` while taking advantage of all its other LaTeX-writing perks; moreover, it makes it a lot easier to use `Biber`-based citation packages like `BibLaTeX-Chicago`, compared to RStudio which requires some awkward workarounds.
+しかし物事の全体で見れば, TeXstudio ならば 他のあらゆる LaTeX 書き込み機能の恩恵を得つつ `knitr`  を使うことができます. その上, 不便な回避策が必要な RStudio と比較すれば, `BibLaTeX-Chicago` のような `Biber` ベースの文献引用パッケージの使用もはるかに簡単になります.
 
 ## WinEdt {-}
 
-The WinEdt mode [R-Sweave](http://www.winedt.org/Config/modes/R-Sweave.php) supports **knitr** now. Please read on if you want to configure WinEdt by yourself instead.
+WinEdt の[R-Sweave](http://www.winedt.org/Config/modes/R-Sweave.php) モードは現在 **`knitr`** をサポートしています. 自分自身で WinEdt の設定をしたいなら, よくお読みください.
 
-The following instructions were from [Phil Chalmers](https://github.com/philchalmers), and I did not test them at all, but I feel it should be in the ballpark.
+以下の手引書は [Phil Chalmers](https://github.com/philchalmers) によるものです. 私は全てを確認していませんが, おおよそ良さそうだと思います.
 
-1. Go to `Options -> Execution Modes -> PDFTeXify`. Then look for executable `Rscript.exe` (e.g. `C:\Program Files\R\R-2.14.2\bin\Rscript.exe`) and select that.
-2. under `Switches` put `-e`, and under `Parameters` put `"knitr::knit2pdf('%n%t')"`
+1. `Options -> Execution Modes -> PDFTeXify` へ移動する. それから実行可能な `Rscript.exe` (例: `C:\Program Files\R\R-2.14.2\bin\Rscript.exe`) を探し, それを選択する
+2. `Switches` で `-e` を入力し, `Parameters` で `"knitr::knit2pdf('%n%t')"` を入力する.
 
-Now hitting `F9` will run everything for you at once, including opening up the PDF.
+そして `F9` をタイプすれば, PDF を開くのを含めて全てが一度に実行されます.
 
-Thanks, Phil.
+Phil に感謝.
 
 ## Emacs/ESS {-}
 
-Since 12.09, **knitr** has been officially supported in [ESS](http://ess.r-project.org). If you are using Debian/Ubuntu, you can install it by
+12/9 以降, **`knitr`** は公式に [ESS](http://ess.r-project.org) にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.
 
 ```bash 
 sudo apt-get install ess
 ```
 
-[Here is a short video](https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d4307511-dfb6-48e0-8f1d-d80f46dc80ab.mp4) showing how to use **knitr** in ESS.
+ESS で **`knitr`** を使う方法に関する[短い動画](https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075)があります.
 
-(For historic interest only) Both [Simon Potter](http://sjp.co.nz/posts/emacs-ess-knitr/) and [lucialam](https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/) have blog posts about Emacs/**knitr**.
+(歴史的背景に興味がある人向け) [Simon Potter](http://sjp.co.nz/posts/emacs-ess-knitr/) と [lucialam](https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/) の両氏が Emacs/**knitr** についてブログに書いています.
 
 ## Gedit {-}
 
-You can define external tools in [gedit](https://en.wikipedia.org/wiki/Gedit). Thanks to the tip from David Allen below, you may knit a document via
+[gedit](https://en.wikipedia.org/wiki/Gedit) で外部ツールとして定義することができます. 以下は David Allen による方法です. 感謝. 
 
 ```bash
 Rscript -e "library(knitr); knit('$GEDIT_CURRENT_DOCUMENT_NAME')"
@@ -96,19 +96,19 @@ Rscript -e "library(knitr); knit('$GEDIT_CURRENT_DOCUMENT_NAME')"
 
 ## Sublime {-}
 
-The [KnitrSublime](https://github.com/andrewheiss/KnitrSublime) package by Andrew Heiss provides very rudimentary LaTeX support for **knitr** in Sublime Text 2.
+Andrew Heiss による [KnitrSublime](https://github.com/andrewheiss/KnitrSublime) パッケージは Sublime Text 2 で LaTeX で **`knitr`** を使用する基本的な機能をサポートしています.
 
 ## Vim {-}
 
-The [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628) has comprehensive support to **knitr** thanks to Jakson Aquino.
+Jakson Aquino のおかげで [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628) **`knitr`** の包括的なサポートをしています.
 
 ## TextMate {-}
 
-See [#252](https://github.com/yihui/knitr/issues/252#issuecomment-6034068) for one approach with Applescript for TextMate 2, and the [knitr.tmbundle](https://github.com/fonnesbeck/knitr.tmbundle) repository by Chris Fonnesbeck.
+Applescript for TextMate 2 で使用するアプローチとして [#252](https://github.com/yihui/knitr/issues/252#issuecomment-6034068) や Chris Fonnesbeck のリポジトリ [knitr.tmbundle](https://github.com/fonnesbeck/knitr.tmbundle) を参照してください.
 
 ## TeXShop {-}
 
-It is easy to configure [TeXShop](http://pages.uoregon.edu/koch/texshop/) to work with **knitr**; just save the code below as a file `Knitr.engine` under the `Engines` directory of TeXShop (usually `~/Library/TeXShop/Engines/`):
+[TeXShop](http://pages.uoregon.edu/koch/texshop/) で **`knitr`** を動作させる設定は簡単です. TeXShop の `Engines` ディレクトリ (大抵の場合は `~/Library/TeXShop/Engines/`) の `Knitr.engine` ファイルに以下を書き込むだけです.
 
 ```bash 
 #!/bin/bash
@@ -117,30 +117,34 @@ Rscript -e "library(knitr); knit('$1')"
 latexmk -pdf "${1%.*}"
 ```
 
-Courtesy of [Cameron Bracken](http://cameron.bracken.bz/sweave-for-texshop) and [Fabian Greimel](http://yihui.org/en/2012/06/enjoyable-reproducible-research/#comment-601032753).
+[Cameron Bracken](http://cameron.bracken.bz/sweave-for-texshop) と [Fabian Greimel](http://yihui.org/en/2012/06/enjoyable-reproducible-research/#comment-601032753) の厚情に感謝.
 
 ## TeXworks {-}
 
-TeXworks is similar to Texmaker in terms of configuration for additional tools. Below is a screenshot of the configuration under Ubuntu, thanks to [Speravir](http://tex.stackexchange.com/a/85165/9128) for the answer on StackExchange (Windows/Mac OS should be similar, as long as `Rscript` is in `PATH`).
+追加ツールの設定に関して TeXworks も Texmaker と似ています. 以下は Ubuntu でのスクリーショットです. StackExchange 回答してくれた [Speravir](http://tex.stackexchange.com/a/85165/9128) に感謝. (Windows/Mac OS も `Rscript` が `PATH` にある限り同様にできるはずです).
 
-![TeXworks with knitr](https://db.yihui.org/imgur/d6tE6.png)
+(ref:demo-editors-texworks) TeXworks で **`knitr`** を使う
+
+```{r demo-editors-texworks, echo=F, fig.cap="(ref:demo-editors-texworks)"}
+knitr::include_graphics("https://db.yihui.org/imgur/d6tE6.png")
+```
 
 ## Kile {-}
 
-The following method was pointed out by tirip01 in the comments below:
+tirip01 が以下のような方法を指摘しています.
 
-1. Open the `Build` tab, select `New..`, type `knitr` and press `Finish`. In the `General` tab enter `Rscript` in the `Command` field. Below, in the `Options` field type: `-e "knitr::knit2pdf('%source')"`
+1. `Build` タブを開き, `New..` を選んで, `knitr` とタイプし `Finish` を押します. `General` タブから `Comannd` タブで `Rscript` と入力し, その下の `Options` フィールドで `-e "knitr::knit2pdf('%source')"` とタイプします.
 
     ![](https://securecdn.disqus.com/uploads/mediaembed/images/564/4837/original.jpg)
 
-1. Go to `Advanced` tab and set Rnw as `Source extension` and pdf as `Target extension`.
+1. `Advanced` タブへ移動し, Rnw を `Source extension` に設定し, pdf を `Target extension` に設定します.
 
     ![](https://securecdn.disqus.com/uploads/mediaembed/images/564/4838/original.jpg)
 
-1. In menu select `Compile`
+1. メニューから `Compile` を選択します.
 
-Dr Marek Gągolewski also has a blog post [Configure Kile for knitr under GNU/Linux](http://www.rexamine.com/2013/04/configure-kile-for-knitr/), which describes a more complicated approach.
+Dr Marek Gągolewski も [Configure Kile for knitr under GNU/Linux](http://www.rexamine.com/2013/04/configure-kile-for-knitr/) というブログ投稿でもっと複雑なアプローチを解説しています.
 
 ## Tinn-R {-}
 
-Tinn-R started to support **knitr** since v2.3.7.3.
+Tinn-R は **`knitr`** v2.3.7.3 以降からサポートを開始しました. 

@@ -41,7 +41,7 @@ set_header(highlight = "")
 
 見て分かるように, **`knitr`** は全てをユーザーに公開してます. 必要なのはこれらの R コードの部品と出力を適切な環境で包むことです.
 
-**ちょっと待った**, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で `render_listings()` 関数として **`knitr`** に組み込まれています. これが使用例になります.
+**ちょっと待ってください**, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で `render_listings()` 関数として **`knitr`** に組み込まれています. これが使用例になります.
 
 - **knitr** で `listings` をつかう
   - Rnw ソース: [knitr-listings.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-listings.Rnw)

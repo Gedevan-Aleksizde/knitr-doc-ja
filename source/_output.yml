@@ -1,11 +1,10 @@
 rmdja::gitbook_ja:
-  keep_md: true
+  keep_md: false
   css: header.css
   config:
-    family: serif
+    fontsettings:
+      family: serif
     toc:
       collapse: none
       before: '<li><a href="index.html">Top</a></li>'
       after: "<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>"
-#rmdja::pdf_book_ja:
-#  keep_tex: true

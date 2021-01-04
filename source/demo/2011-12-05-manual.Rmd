@@ -17,8 +17,8 @@ slug: manual
 訳注: このページは **`knitr`** ドキュメントのトップページではありません.
 ```
 
-The package manual itself can be a good example demonstrating most of the features in **knitr**. It was actually written in LyX ([knitr-manual.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.lyx)), and you can use the exported Rnw source [knitr-manual.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.Rnw) to produce the PDF output [knitr-manual.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf).
+パッケージのマニュアルそれ自体は **`knitr`** のほとんどの機能の良い使用例となりえます. このマニュアルは LyX で書かれ (([knitr-manual.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.lyx))), Rnw ソース ([knitr-manual.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.Rnw)) にエクスポートして PDFファイル [knitr-manual.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) を生成できます.
 
-Three add-on packages are required to compile the manual: **rgl**, **animation** and **tikzDevice**.
+マニュアルのコンパイルには3つのパッケージが追加で必要です. **`rgl`**, **`animation`**, **`tikzDevice`** です.
 
-See the [LyX page](../lyx/) for instructions on how to use **knitr** with LyX.
+LyX で **`knitr`** を使う手順は [LyX page](https://yihui.org/knitr/demo/lyx/) を参照してください.

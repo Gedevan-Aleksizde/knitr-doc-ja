@@ -19,7 +19,7 @@ slug: cache
 
 ## キャッシュの例 {-}
 
-キャッシュ機能は私の文書の多くで広く使われています. たとえば **knitr** の [main manual](https://yihui.org/knitr/manual/)^[訳注: リンク切れ] や [graphics](http://yihui.org/knitr/demo/graphics/) です. ここでは, もう少しいくつかの例を挙げます.
+キャッシュ機能は私の文書の多くで広く使われています. たとえば **knitr** の [メインマニュアル]($manual) や [グラフィックス]($graphics) です. ここでは, もう少しいくつかの例を挙げます.
 
 - 基本的な例
   - 巨大なデータをキャッシュする [056-huge-plot.Rmd](https://github.com/yihui/knitr-examples/raw/master/056-huge-plot.Rmd) ([出力](https://github.com/yihui/knitr-examples/blob/master/056-huge-plot.md)
