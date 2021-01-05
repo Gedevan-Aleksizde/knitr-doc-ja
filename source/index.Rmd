@@ -5,7 +5,7 @@ author:
   - "著者: Xie, Yihui (谢益辉)"
   - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
 site: bookdown::bookdown_site
-decription : "knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui's knitr documentation"
+description : "knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui's knitr documentation"
 documentclass: bxjsreport
 link-citations: true
 linkcolor: blue
