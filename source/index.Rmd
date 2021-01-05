@@ -22,6 +22,8 @@ require(knitr)
 
 ```{block2, type="rmdimportant"}
 本稿は [CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています. Yihui 氏によるオリジナルは https://yihui.org/knitr/ で読むことができます.
+
+This is an unofficial Japanese translation of Yihui's **`knitr`** documentation, which is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).  The original documentation by Yihui is [here](https://yihui.org/knitr/).
 ```
 
 ```{r cc-logo, results="asis", echo=F}
