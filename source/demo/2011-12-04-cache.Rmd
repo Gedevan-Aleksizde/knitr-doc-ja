@@ -19,18 +19,18 @@ slug: cache
 
 ## キャッシュの例 {-}
 
-キャッシュ機能は私の文書の多くで広く使われています. たとえば **knitr** の [メインマニュアル]($manual) や [グラフィックス]($graphics) です. ここでは, もう少しいくつかの例を挙げます.
+キャッシュ機能は私の文書の多くで広く使われています. たとえば **knitr** の [メインマニュアル](#manual) や [グラフィックス](#graphics) です. ここでは, もう少しいくつかの例を挙げます.
 
 - 基本的な例
   - 巨大なデータをキャッシュする [056-huge-plot.Rmd](https://github.com/yihui/knitr-examples/raw/master/056-huge-plot.Rmd) ([出力](https://github.com/yihui/knitr-examples/blob/master/056-huge-plot.md)
   - Rtex の構文を使った例: [knitr-latex.Rtex](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-latex.Rtex)
 - キャッシュの依存関係の自動的な構成
   - Rnw ソース: [knitr-dependson.Rnw](https://github.com/yihui/knitr-examples/blob/master/017-auto-dependson.Rnw)
-  - チャンクオプション `autodep=TRUE` と関数 `dep_auto()` によって, **`knitr`** チャンク間の依存関係を解決することが可能となり, `dependson` オプションを指定するための手動の能力をいくらか省くことができます.
+  - チャンクオプション `autodep=TRUE` と関数 `dep_auto()` によって, **`knitr`** チャンク間の依存関係を解決することが可能となり, `dependson` オプションを指定するための手作業をいくらか省くことができます.
   
 ## 重要な補足事項 {-}
 
-キャッシュがいつ再構成されるかと, キャッシュされないチャンクについてよく理解するため, [メインマニュアル](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) のキャッシュに関するセクションを, とても注意深く読まなければなりません.
+キャッシュがいつ再構成されるかと, キャッシュされないチャンクについてよく理解するため, [メインマニュアル](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) (英語版 PDF) のキャッシュに関するセクションを, とても注意深く読まなければなりません.
 
 キャッシュに影響する要素を今一度繰り返します (いかなる変更も古いキャッシュを無効にします):
 
@@ -46,7 +46,7 @@ slug: cache
 
 `source()` と `setGeneric()` は, コードがローカル環境で評価された場合でもグローバル環境にオブジェクトを作成するという副次作用を持ちます. **`knitr`** 0.4 より前ではこれらのグローバルオブジェクトをキャッシュすることはできませんでした (たとえば issue [#138](https://github.com/yihui/knitr/issues/138) を見てください). しかし ver. 0.4 以降は **`knitr`** が `globalenv()` で作成されたオブジェクトを確認し, 他のオブジェクト同様に保存するようになったため, キャッシュできるようになりました.
 
-キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. パッケージを読み込み, あとで除外したとして, **`knitr`** はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue [#382](https://github.com/yihui/knitr/issues/382) で解説されているように, キャッシュディレクトリにある `__packages` ファイルを手動で編集しなければなりません.
+キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. かりにパッケージを読み込み, あとで除外したとしても, **`knitr`** はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue [#382](https://github.com/yihui/knitr/issues/382) で解説されているように, キャッシュディレクトリにある `__packages` ファイルを手動で編集しなければなりません.
 
 ## キャッシュにはまだ何かありますか? {-}
 
@@ -81,7 +81,7 @@ knitr::opts_chunk$set(cache.extra = list(
 
 上級者はチャンクオプション `cache` に対して `TRUE` か `FALSE` かだけでなく, 数字で設定するなどしてもっと粒度の細かいキャッシュが欲しいと考えるかもしれません. `cache = 0, 1, 2, 3` として, `0` は `FALSE`, `3` は `TRUE` と同じで, `cache = 1` は計算の結果のみキャッシュから読み込む (`evaluate::evaluate()` から), よってコードは再評価されませんが, 他の箇所, 出力フックや作成されたグラフの保存といった箇所は評価されます. `cache = 2` ならば, `1` とほとんど同じですが, 唯一の違いはグラフファイルがすでに存在する場合, 再保存されない点です. これはグラフが大きい場合, いくらか時間の削減になります. 以前のRセッションで記録されたグラフが別のRセッション, あるいは別のバージョンで安全に再保存されるという保証はないため, `cache = 1` よりは `cache = 2` を推奨します.
 
-`cache = 1, 2` の場合は小数のチャンクオプションだけがキャッシュに影響します. オプション名は `knitr:::cache1.opts`, `knitr:::cache2.opts` で確認してください. 基本的に, コード評価に影響しないチャンクオプションが変更されてもキャッシュは無効になりません. たとえば `echo` を `TRUE` から `FALSE` に変えるとか, `fig.cap = '新しいキャプション'` と設定するなどの変更です. しかし, `eval` を `TRUE` から `FALSE` に変えた場合, あるいは `cache.path='foo/'` を `'bar/'` に変えた場合, キャッシュは再構成されます.
+`cache = 1, 2` の場合は少数のチャンクオプションだけがキャッシュに影響します. オプション名は `knitr:::cache1.opts`, `knitr:::cache2.opts` で確認してください. 基本的に, コード評価に影響しないチャンクオプションが変更されてもキャッシュは無効になりません. たとえば `echo` を `TRUE` から `FALSE` に変えるとか, `fig.cap = '新しいキャプション'` と設定するなどの変更です. しかし, `eval` を `TRUE` から `FALSE` に変えた場合, あるいは `cache.path='foo/'` を `'bar/'` に変えた場合, キャッシュは再構成されます.
 
 いくつかの例が, [example #101](https://github.com/yihui/knitr-examples/) ([出力](https://github.com/yihui/knitr-examples/blob/master/101-cache-levels.md)) で見られます.
 
