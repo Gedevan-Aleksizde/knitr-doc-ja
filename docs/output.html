@@ -5,27 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
-  <meta name="description" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
+  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
-  
+  <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi" />
 
 
-<meta name="date" content="2021-01-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">Top</a></li>
+<li><p style="text-align:center;"><a href="index.html"><img src="img/knitr.png" style="display: inline-block; max-width:80px; max-height:80px; width: auto; height: auto;"></a></p></li>
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
 <ul>
@@ -335,7 +334,7 @@ plot(mtcars[, 4:5])
 </div>
 <div id="long-lines-of-text-output" class="section level2 unnumbered">
 <h2>Long lines of text output</h2>
-<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong><code>knitr</code></strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>.</p>
+<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong><code>knitr</code></strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>.</p>
 </div>
 <div id="メッセージに1コメントを" class="section level2 unnumbered">
 <h2>1メッセージに1コメントを</h2>
@@ -357,8 +356,8 @@ slug: reference
 </div>
 <div class="footnotes">
 <hr />
-<ol start="23">
-<li id="fn23"><p>訳注: <code>citation()</code> の出力が <code>width</code> に対応していない場合の問題です<a href="output.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="24">
+<li id="fn24"><p>訳注: <code>citation()</code> の出力が <code>width</code> に対応していない場合の問題です<a href="output.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -398,11 +397,11 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/edit/master/source/demo/2012-01-25-output.Rmd",
+"text": "Edit"
 },
 "history": {
-"link": null,
+"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/blob/master/source/demo/2012-01-25-output.Rmd",
 "text": null
 },
 "view": {

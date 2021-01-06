@@ -5,27 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 フック | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
-  <meta name="description" content="2 フック | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 フック | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
+  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="2 フック | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
-  
+  <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi" />
 
 
-<meta name="date" content="2021-01-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">Top</a></li>
+<li><p style="text-align:center;"><a href="index.html"><img src="img/knitr.png" style="display: inline-block; max-width:80px; max-height:80px; width: auto; height: auto;"></a></p></li>
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
 <ul>
@@ -372,14 +371,14 @@ plot3d(x, y, z, col = rainbow(1000))
 <ul>
 <li>デフォルトでは <code>plot</code> フックは出力の信頼性を維持するため多くの要因に影響されます.
 <ul>
-<li>たとえばグラフィックデバイスが <code>tikz</code> ならば, <code>\input{}</code> コマンドが使われますし<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>, それ以外では通常は <code>\includegraphics{}</code> コマンドが使われます.</li>
-<li><code>out.width</code>, <code>out.height</code> オプションに依存して, フックはグラフのサイズをリセットします (たとえば <code>\includegraphics[width=.8\textwidth]{file}</code> のように). 1つのチャンクに複数のグラフがある場合, <code>fig.show='hold'</code> を設定するとともに, 複数の画像を適切なサイズで横に並べて表示できるように設定できます (たとえば <code>.45\textwidth</code><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> とすれば横に2つのグラフを並べられます).</li>
-<li>tikz のグラフは <code>\input{}</code> で挿入するため, このやり方は正しくありませんが, チャンクオプション <code>resize.width</code> と <code>resize.height</code> は複数の tikz グラフを横に並べることができます (<code>\resizebox{resize.width}{resize.height}{file.tikz}</code> という書き方によって. もしいずれかのオプションが <code>NULL</code> なら <code>!</code> で置き換えられます. 詳細は LaTeX パッケージの <code>graphicx</code> のドキュメントを参照してください). このフック関数によってユーザーは自動レポート生成の全能力を使いこなせます — 単一チャンクの複数グラフとグラフのサイズの設定が可能になるだけでなく, base R のグラフィックスや grid 系のグラフィックス (例: <strong>ggplot2</strong>), あるいはグリッド系のグラフを並べて表示することもできます — この機能がなかったら, R で1つのウィンドウにこういった複数のグラフを1つにまとめるのがどんなに難しいことか考えても見てください<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</li>
+<li>たとえばグラフィックデバイスが <code>tikz</code> ならば, <code>\input{}</code> コマンドが使われますし<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>, それ以外では通常は <code>\includegraphics{}</code> コマンドが使われます.</li>
+<li><code>out.width</code>, <code>out.height</code> オプションに依存して, フックはグラフのサイズをリセットします (たとえば <code>\includegraphics[width=.8\textwidth]{file}</code> のように). 1つのチャンクに複数のグラフがある場合, <code>fig.show='hold'</code> を設定するとともに, 複数の画像を適切なサイズで横に並べて表示できるように設定できます (たとえば <code>.45\textwidth</code><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> とすれば横に2つのグラフを並べられます).</li>
+<li>tikz のグラフは <code>\input{}</code> で挿入するため, このやり方は正しくありませんが, チャンクオプション <code>resize.width</code> と <code>resize.height</code> は複数の tikz グラフを横に並べることができます (<code>\resizebox{resize.width}{resize.height}{file.tikz}</code> という書き方によって. もしいずれかのオプションが <code>NULL</code> なら <code>!</code> で置き換えられます. 詳細は LaTeX パッケージの <code>graphicx</code> のドキュメントを参照してください). このフック関数によってユーザーは自動レポート生成の全能力を使いこなせます — 単一チャンクの複数グラフとグラフのサイズの設定が可能になるだけでなく, base R のグラフィックスや grid 系のグラフィックス (例: <strong>ggplot2</strong>), あるいはグリッド系のグラフを並べて表示することもできます — この機能がなかったら, R で1つのウィンドウにこういった複数のグラフを1つにまとめるのがどんなに難しいことか考えても見てください<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>.</li>
 <li>グラフのアラインを決めるために <code>fig.align</code> には4つの値が用意され (<code>default</code>, <code>left</code>, <code>right</code>, <code>center</code>), 簡単に画像を中央揃えにできます (<code>fig.align='center'</code> によって).</li>
 </ul></li>
 <li>デフォルトの <code>chunk</code> フックは主にチャンクの装飾に使われています.
 <ul>
-<li>LaTeX の <code>framed</code> パッケージがユーザーの TeX ソフトウェアパッケージ (TeXLive か MikTeX か他の何か<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>) にインストールされているなら, <code>chunk</code> フックはカスタマイズした背景色 (デフォルトでは薄灰色) にした <code>kframe</code> 環境に全ての出力を挿入することで, チャンクの視認性を向上させます (他の地の文よりも強調されますが, とても目立つというほどでもないはずです).</li>
+<li>LaTeX の <code>framed</code> パッケージがユーザーの TeX ソフトウェアパッケージ (TeXLive か MikTeX か他の何か<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>) にインストールされているなら, <code>chunk</code> フックはカスタマイズした背景色 (デフォルトでは薄灰色) にした <code>kframe</code> 環境に全ての出力を挿入することで, チャンクの視認性を向上させます (他の地の文よりも強調されますが, とても目立つというほどでもないはずです).</li>
 <li>最後に, 全ての出力が <code>knitrout</code> 環境で囲まれます. この環境はユーザーが LaTeX で再定義できます.</li>
 </ul></li>
 </ul>
@@ -394,7 +393,7 @@ plot3d(x, y, z, col = rainbow(1000))
 </div>
 <div id="html-render_html" class="section level3" number="2.2.4">
 <h3><span class="header-section-number">2.2.4</span> HTML: <code>render_html()</code></h3>
-<p>HTML ファイルに書き出すにあたって, フックは出力を自動で調整します. 基本的にチャンクによる出力はクラス付きの <code>div</code> レイヤーに挿入されます. たとえば, ソースコードは <code>&lt;div class="knitr source"&gt;&lt;/div&gt;</code>, チャンク全体は <code>&lt;pre&gt;&lt;/pre&gt;</code> に, インラインの出力は <code>&lt;code class="knitr inline"&gt;&lt;/code&gt;</code> に書き出されます<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</p>
+<p>HTML ファイルに書き出すにあたって, フックは出力を自動で調整します. 基本的にチャンクによる出力はクラス付きの <code>div</code> レイヤーに挿入されます. たとえば, ソースコードは <code>&lt;div class="knitr source"&gt;&lt;/div&gt;</code>, チャンク全体は <code>&lt;pre&gt;&lt;/pre&gt;</code> に, インラインの出力は <code>&lt;code class="knitr inline"&gt;&lt;/code&gt;</code> に書き出されます<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>.</p>
 </div>
 <div id="markdown-render_markdown" class="section level3" number="2.2.5">
 <h3><span class="header-section-number">2.2.5</span> Markdown: <code>render_markdown()</code></h3>
@@ -402,7 +401,7 @@ plot3d(x, y, z, col = rainbow(1000))
 </div>
 <div id="jekyll-render_jekyll" class="section level3" number="2.2.6">
 <h3><span class="header-section-number">2.2.6</span> Jekyll: <code>render_jekyll()</code></h3>
-<p>このサイト<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>を構築するために, Jykell 用に特別にいくつかのフックを用意する必要がありました. これらは実際かなり単純なものです. R ソースコードはハイライト環境に挿入し言語を <code>r</code> に設定する, 残りの出力部分は <code>text</code> 言語に設定したハイライト環境 (ほとんど何もハイライトしない) に挿入するだけです. 現在, グラフは Markdown の構文に従って書き出されます.</p>
+<p>このサイト<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>を構築するために, Jykell 用に特別にいくつかのフックを用意する必要がありました. これらは実際かなり単純なものです. R ソースコードはハイライト環境に挿入し言語を <code>r</code> に設定する, 残りの出力部分は <code>text</code> 言語に設定したハイライト環境 (ほとんど何もハイライトしない) に挿入するだけです. 現在, グラフは Markdown の構文に従って書き出されます.</p>
 </div>
 <div id="restructuredtext-render_rst" class="section level3" number="2.2.7">
 <h3><span class="header-section-number">2.2.7</span> reStructuredText: <code>render_rst()</code></h3>
@@ -436,13 +435,13 @@ list_pages: true
 </div>
 <div class="footnotes">
 <hr />
-<ol start="13">
-<li id="fn13"><p>訳注: tikz の画像は LaTeX ソースコードで記述されるため, <code>\input{}</code> でテキストファイルとして読み込む必要があります.<a href="hooks.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p>訳注: 本文幅の45%<a href="hooks.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>訳注: 現在は <code>patchwork</code> や <code>cowplot</code> パッケージなどの登場により, そこまで難しいことではなくなりつつあります<a href="hooks.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p>訳注: あるいは Yihui 氏による TinyTeX とか<a href="hooks.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>訳注: R Markdown では最終的に出力されるHTMLはさらに pandoc などの処理を経由しているため, これとは異なります<a href="hooks.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p>訳注: オリジナルが掲載されている Yihui 氏のサイトのこと<a href="hooks.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<ol start="14">
+<li id="fn14"><p>訳注: tikz の画像は LaTeX ソースコードで記述されるため, <code>\input{}</code> でテキストファイルとして読み込む必要があります.<a href="hooks.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>訳注: 本文幅の45%<a href="hooks.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>訳注: 現在は <code>patchwork</code> や <code>cowplot</code> パッケージなどの登場により, そこまで難しいことではなくなりつつあります<a href="hooks.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>訳注: あるいは Yihui 氏による TinyTeX とか<a href="hooks.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>訳注: R Markdown では最終的に出力されるHTMLはさらに pandoc などの処理を経由しているため, これとは異なります<a href="hooks.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>訳注: オリジナルが掲載されている Yihui 氏のサイトのこと<a href="hooks.html#fnref19" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -482,11 +481,11 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/edit/master/source/03-hooks.Rmd",
+"text": "Edit"
 },
 "history": {
-"link": null,
+"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/blob/master/source/03-hooks.Rmd",
 "text": null
 },
 "view": {
