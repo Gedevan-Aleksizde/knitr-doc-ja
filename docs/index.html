@@ -5,27 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
-  <meta name="description" content="knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
+  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
-  
+  <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi" />
 
 
-<meta name="date" content="2021-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">Top</a></li>
+<li><p style="text-align:center;"><a href="index.html"><img src="img/knitr.png" style="display: inline-block; max-width:80px; max-height:80px; width: auto; height: auto;"></a></p></li>
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
 <ul>
@@ -279,14 +278,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</h1>
 <p class="author"><em>著者: Xie, Yihui (谢益辉)</em></p>
+<<<<<<< HEAD
 <p class="author"><em>翻訳者: Katagiri, Satoshi (ill-identified)</em></p>
 <p class="date"><em>2021-01-05</em></p>
+=======
+<p class="author"><em>翻訳者: Katagiri, Satoshi<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
+<p class="date"><em>2021-01-06 (ver. 1.1)</em></p>
+>>>>>>> work
 </div>
 <div id="knitr" class="section level1 unnumbered">
 <h1>knitr</h1>
 
 <div class="rmdimportant">
-本稿は <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)</a> で提供されています. Yihui 氏によるオリジナルは <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a> で読むことができます.
+<p>本稿は <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)</a> で提供されています. Yihui 氏によるオリジナルは <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a> で読むことができます.</p>
+This is an unofficial Japanese translation of Yihui’s <strong><code>knitr</code></strong> documentation, which is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The original documentation by Yihui is <a href="https://yihui.org/knitr/">here</a>.
 </div>
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></p>
 
@@ -307,8 +312,7 @@ SweaveListingUtils + その他).</p>
 <li><strong><code>pgfSweave</code></strong> や <strong><code>cacheSweave</code></strong> といったパッケージは有用な機能を Sweave に提供しました (高品質な tikz のグラフィックとキャッシュ) が, <strong><code>knitr</code></strong> はこの実装をより簡単にしました.</li>
 <li><strong><code>knitr</code></strong> のデザインによってあらゆる言語 (例: R, Python, awk) が入力可能となり, あらゆるマークアップ言語の形式で出力が可能となりました (例: LaTeX, HTML, Markdown, AsciiDoc, reStructuredText).</li>
 </ul>
-<p>このパッケージは <a href="https://github.com/yihui/knitr">GitHub</a> 上で開発されており, インストール手順と<a href="FAQs.html#FAQs">FAQ</a>もここで参照できます. <a href="https://github.com/yihui/knitr#readme">README</a>を確認してください. このサイトは <strong><code>knitr</code></strong>の完全なドキュメントとして提供されており, <a href="/knitr/demo/manual/">main
-manual</a>, <a href="https://yihui.org/knitr/demo/graphics/">graphics manual</a>, <a href="https://yihui.org/knitr/demos/">demos</a>/examples](<a href="https://github.com/yihui/knitr-examples" class="uri">https://github.com/yihui/knitr-examples</a>) をここで閲覧することができます. さらに統合的な参考資料としては, <a href="https://github.com/yihui/knitr-book">knitr book</a> (邦訳未刊行) をご覧ください.</p>
+<p>このパッケージは <a href="https://github.com/yihui/knitr">GitHub</a> 上で開発されており, インストール手順と<a href="FAQs.html#FAQs">FAQ</a>もここで参照できます. <a href="https://github.com/yihui/knitr#readme">パッケージの README</a> も確認してください. このサイトは <strong><code>knitr</code></strong> の完全なドキュメントとして提供されており, <a href="manual.html#manual">メインマニュアル</a>, <a href="graphics.html#graphics">グラフィックス</a>, <a href="examples.html#examples">用例</a>, <a href="https://github.com/yihui/knitr-examples">knitr-examples</a> を閲覧することができます. さらに統合的な参考資料としては, <a href="https://github.com/yihui/knitr-book">knitr book</a> (邦訳未刊行) をご覧ください.</p>
 </div>
 <div id="モチベーション" class="section level2 unnumbered">
 <h2>モチベーション</h2>
@@ -362,6 +366,12 @@ slug: options
 show_toc: true
 --->
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>twitter@<a href="https://twitter.com/ill_identified">ill_identified</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

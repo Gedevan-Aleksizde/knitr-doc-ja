@@ -5,27 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>補遺A オブジェクト | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
-  <meta name="description" content="補遺A オブジェクト | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="補遺A オブジェクト | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
+  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="補遺A オブジェクト | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
-  
+  <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi" />
 
 
-<meta name="date" content="2021-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">Top</a></li>
+<li><p style="text-align:center;"><a href="index.html"><img src="img/knitr.png" style="display: inline-block; max-width:80px; max-height:80px; width: auto; height: auto;"></a></p></li>
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
 <ul>
@@ -279,6 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="objects" class="section level1" number="5">
 <h1><span class="header-section-number">補遺A</span> オブジェクト</h1>
 <p>オプションを操作するオブジェクト, パターン, そしてフックについて</p>
+<p>オリジナルのページ: <a href="https://yihui.org/knitr/objects/" class="uri">https://yihui.org/knitr/objects/</a></p>
 <p>オリジナルの更新日: 2017-02-03</p>
 <hr />
 <p><strong><code>knitr</code></strong> パッケージはオプションと設定を制御する特別なオブジェクト (以下では <code>obj</code> と表記) を使用します. このオブジェクトは次のようなメソッドを持ちます.</p>
@@ -298,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><code>knit_patterns</code> 以外の他の全てのオブジェクトはデフォルトの初期値が設定されており, <code>knit_paterns</code> は特に指定がない場合は入力ファイルのタイプに基づいて自動的に決定されます. <code>knit_hooks</code> オブジェクトは1番よく使うことになるでしょう. そして残りの3つは直接使用する機会は少ないと思います. たとえば <code>opts_chunk</code> はたいていはコマンドラインで直接実行するよりも入力ファイル内で設定します.</p>
 <p>各チャンクが依存している <strong><code>knitr</code></strong> の設定は, そのチャンクが実行されるまえに設定<strong>されなければなりません</strong>. スクリプトの一番最初の, 他のどのチャンクよりも先に実行される位置に「<code>knit</code>
-の設定用チャンク」を書き, その中で <code>cache = FALSE</code>, <code>include = FALSE</code> オプションを設定することをおすすめします. 設定用チャンクには, このチャンク自身の実行時に有効化される設定を想定する命令文は含めては<strong>いけません</strong><a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>. 設定用チャンクはこのようになるでしょう<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>.</p>
+の設定用チャンク」を書き, その中で <code>cache = FALSE</code>, <code>include = FALSE</code> オプションを設定することをおすすめします. 設定用チャンクには, このチャンク自身の実行時に有効化される設定を想定する命令文は含めては<strong>いけません</strong><a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>. 設定用チャンクはこのようになるでしょう<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="objects.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=</span></span>
 <span id="cb53-2"><a href="objects.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="at">library(knitr)</span></span>
 <span id="cb53-3"><a href="objects.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="at">opts_knit$set(upload.fun = imgur_upload, self.contained = FALSE,</span></span>
@@ -316,9 +316,9 @@ slug: patterns
 </div>
 <div class="footnotes">
 <hr />
-<ol start="28">
-<li id="fn28"><p>訳注: チャンクオプションの評価はそのチャンクの実行直前になるため, ここでの変更は次のチャンクまで有効にならない, という意味です<a href="objects.html#fnref28" class="footnote-back">↩︎</a></p></li>
-<li id="fn29"><p>訳注: この例は <code>.Rnw</code> のものであり, <code>&lt;&lt; ... &gt;&gt;=</code> というヘッダの記法も<code>.Rnw</code> で使われることに注意してください. R Markdown では <code>{r, ...}</code> を使います (参考: <a href="options.html#chunk-options">1.1</a> 章)<a href="objects.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<ol start="29">
+<li id="fn29"><p>訳注: チャンクオプションの評価はそのチャンクの実行直前になるため, ここでの変更は次のチャンクまで有効にならない, という意味です<a href="objects.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>訳注: この例は <code>.Rnw</code> のものであり, <code>&lt;&lt; ... &gt;&gt;=</code> というヘッダの記法も<code>.Rnw</code> で使われることに注意してください. R Markdown では <code>{r, ...}</code> を使います (参考: <a href="options.html#chunk-options">1.1</a> 章)<a href="objects.html#fnref30" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

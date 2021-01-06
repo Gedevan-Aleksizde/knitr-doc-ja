@@ -5,27 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 よくある質問 (FAQ) | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
-  <meta name="description" content="4 よくある質問 (FAQ) | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 よくある質問 (FAQ) | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
+  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="4 よくある質問 (FAQ) | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
-  
+  <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi" />
 
 
-<meta name="date" content="2021-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">Top</a></li>
+<li><p style="text-align:center;"><a href="index.html"><img src="img/knitr.png" style="display: inline-block; max-width:80px; max-height:80px; width: auto; height: auto;"></a></p></li>
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
 <ul>
@@ -289,12 +288,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>「パッケージのサイトの説明が役に立たないときはどこで質問するのがいいですか?」
 <ul>
-<li>何を質問したいかにもよりますが, 以下のような選択肢があります<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> (特に最初の2つは私もよく巡回しています).
+<li>何を質問したいかにもよりますが, 以下のような選択肢があります<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> (特に最初の2つは私もよく巡回しています).
 <ul>
 <li>(推奨) <strong><a href="http://stackoverflow.com/questions/tagged/knitr">Stack Overflow</a></strong>: 一般的な質問 (より専門的で早い回答がつきます). <code>r</code> と <code>knitr</code> タグを忘れずにつけてください.</li>
 <li><strong><a href="https://github.com/yihui/knitr/issues">Github issues</a></strong>: バグ報告と機能追加の要望のみにしてください.</li>
 <li><strong><a href="https://groups.google.com/group/knitr">knitr mailing list</a></strong> または <strong><a href="http://www.r-project.org/mail.html">R-help</a></strong> のメーリングリスト: 一般的な質問とその回答が, 一般公開されるEメールによってやりとりされます.</li>
-<li><strong>私の個人的なEメール</strong>: 本当にプライベートな問題でない限り<a href="https://yihui.org/en/2017/08/so-gh-email/">非推奨</a>です<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</li>
+<li><strong>私の個人的なEメール</strong>: 本当にプライベートな問題でない限り<a href="https://yihui.org/en/2017/08/so-gh-email/">非推奨</a>です<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</li>
 <li><strong>Twitter</strong> (<a href="http://twitter.com/xieyihui">@xieyihui</a>): 本当に簡単な問題だと確信があるなら.</li>
 </ul></li>
 </ul></li>
@@ -304,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>「<code>&gt;</code> とか <code>+</code> とかのプロンプト記号はどこへいったんですか? 出力にこれがないと落ち着きません」
 <ul>
-<li><a href="https://yihui.org/en/2013/01/code-pollution-with-command-prompts/">私はこれらが意味をなさないと考えている</a>ので, デフォルトではこれらは除去されています. R の本に <code>&gt;</code> や <code>+</code> を載せるのを嫌う理由はこのようなものです: 本に書かれた R コードを読む際に, <strong>こいつらは私の精神をめちゃくちゃにひねりちぎろうとし, 私の両眼に流血を欲してきます</strong>. マジで <code>1 + 1</code> ではなく <code>&gt; 1+1</code> という表記を読むのがお好みな奇特な方は, <a href="options.html#options">チャンクオプション</a> の章にあるように <code>prompt</code> オプションで設定できます<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</li>
+<li><a href="https://yihui.org/en/2013/01/code-pollution-with-command-prompts/">私はこれらが意味をなさないと考えている</a>ので, デフォルトではこれらは除去されています. R の本に <code>&gt;</code> や <code>+</code> を載せるのを嫌う理由はこのようなものです: 本に書かれた R コードを読む際に, <strong>こいつらは私の精神をめちゃくちゃにひねりちぎろうとし, 私の両眼に流血を欲してきます</strong>. マジで <code>1 + 1</code> ではなく <code>&gt; 1+1</code> という表記を読むのがお好みな奇特な方は, <a href="options.html#options">チャンクオプション</a> の章にあるように <code>prompt</code> オプションで設定できます<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</li>
 </ul></li>
 <li>「ワーキングディレクトリとはなんですか? コードチャンク内でワーキングディレクトリを変更できますか?」
 <ul>
@@ -335,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ここに生のインラインR評価式を出力: `` `r
 1+1` ``.</code></pre>
 <p>ここに生のインラインR評価式を出力: <code>`r 1+1`</code>.</p>
-<ol style="list-style-type: decimal">
+<ol start="8" style="list-style-type: decimal">
 <li>「何かお役に立てることはありますか?」
 <ul>
 <li><a href="https://paypal.me/YihuiXie">paypal</a> でドネートできますし, たのしい GIF アニメを私に<a href="https://twitter.com/xieyihui">ツイート</a>したり, Github で <strong><code>knitr</code></strong> のリポジトリをフォークしたりコードの改善に貢献したりできます.</li>
@@ -344,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>「このドキュメントの修正や小さな変更を投稿するにはどうすればいいですか?」
 <ul>
 <li>R パッケージを修正したい場合は <a href="https://github.com/yihui/knitr">リポジトリ</a> へ移動し, ツールバー右上の Edit ボタンを押します. それから必要な修正をします. 投稿の概要を書いて, <strong>Propose file change</strong> をクリックして, プルリクエストを投稿してください.</li>
-<li>このウエブサイト (<a href="https://yihui.org/knitr" class="uri">https://yihui.org/knitr</a>) 上の修正や変更提案は, ページ左側の <code>Edit this page</code> を押して, あとは Github の手順に従ってください<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</li>
+<li>このウエブサイト (<a href="https://yihui.org/knitr" class="uri">https://yihui.org/knitr</a>) 上の修正や変更提案は, ページ左側の <code>Edit this page</code> を押して, あとは Github の手順に従ってください<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>.</li>
 </ul></li>
 </ol>
 
@@ -361,11 +360,11 @@ slug: editors
 </div>
 <div class="footnotes">
 <hr />
-<ol start="19">
-<li id="fn19"><p>訳注: 英語が苦手な場合は, <a href="https://ja.stackoverflow.com/">Stack Oveflow 日本語版</a>, または <a href="https://r-wakalang.slack.com/messages/general/">R-wakalang</a> などのコミュニティがあります<a href="FAQs.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p>訳注: リンク先の投稿を要約すると, Yihui氏個人で次から次へと来る質問をさばくのは限界があるし, オープンコミュニティは多くの回答者がいて既出の質問に対する答えも共有でき効率的だ, ということです<a href="FAQs.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>訳注: Yihui 氏がこれを嫌う理由はここでも簡潔に書かれています. R Markdown においては, それ以外の方法でもコードの装飾をカスタマイズできます. たとえばこの翻訳版でなされているようにコピーボタンや行番号をつけたりできます.<a href="FAQs.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>訳注: 原典ではなくこの翻訳版に対する修正提案は <a href="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" class="uri">https://github.com/Gedevan-Aleksizde/knitr-doc-ja</a> で受け付けています<a href="FAQs.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<ol start="20">
+<li id="fn20"><p>訳注: 英語が苦手な場合は, <a href="https://ja.stackoverflow.com/">Stack Oveflow 日本語版</a>, または <a href="https://r-wakalang.slack.com/messages/general/">R-wakalang</a> などのコミュニティがあります<a href="FAQs.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>訳注: リンク先の投稿を要約すると, Yihui氏個人で次から次へと来る質問をさばくのは限界があるし, オープンコミュニティは多くの回答者がいて既出の質問に対する答えも共有でき効率的だ, ということです<a href="FAQs.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>訳注: Yihui 氏がこれを嫌う理由はここでも簡潔に書かれています. R Markdown においては, それ以外の方法でもコードの装飾をカスタマイズできます. たとえばこの翻訳版でなされているようにコピーボタンや行番号をつけたりできます.<a href="FAQs.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p>訳注: 原典ではなくこの翻訳版に対する修正提案は <a href="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" class="uri">https://github.com/Gedevan-Aleksizde/knitr-doc-ja</a> で受け付けています<a href="FAQs.html#fnref23" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -1,15 +1,17 @@
 ---
 title: "`knitr`: Rによる美麗で柔軟そして高速な動的レポート生成"
-date: "`r Sys.Date()`"
+date: "`r Sys.Date()` (ver. 1.1)"
 author:
   - "著者: Xie, Yihui (谢益辉)"
-  - "翻訳者: Katagiri, Satoshi (ill-identified)"
+  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
 site: bookdown::bookdown_site
+description : "knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui's knitr documentation"
 documentclass: bxjsreport
 link-citations: true
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
+github-repo: https://github.com/Gedevan-Aleksizde/knitr-doc-ja
 ---
 
 # knitr {-}
@@ -20,6 +22,8 @@ require(knitr)
 
 ```{block2, type="rmdimportant"}
 本稿は [CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています. Yihui 氏によるオリジナルは https://yihui.org/knitr/ で読むことができます.
+
+This is an unofficial Japanese translation of Yihui's **`knitr`** documentation, which is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).  The original documentation by Yihui is [here](https://yihui.org/knitr/).
 ```
 
 ```{r cc-logo, results="asis", echo=F}
@@ -46,8 +50,7 @@ SweaveListingUtils + その他).
 - **`pgfSweave`** や **`cacheSweave`** といったパッケージは有用な機能を Sweave に提供しました (高品質な tikz のグラフィックとキャッシュ) が, **`knitr`** はこの実装をより簡単にしました.
 - **`knitr`** のデザインによってあらゆる言語 (例: R, Python, awk) が入力可能となり, あらゆるマークアップ言語の形式で出力が可能となりました (例: LaTeX, HTML, Markdown, AsciiDoc,  reStructuredText).
 
-このパッケージは [GitHub](https://github.com/yihui/knitr) 上で開発されており, インストール手順と[FAQ](#FAQs)もここで参照できます. [README](https://github.com/yihui/knitr#readme)を確認してください. このサイトは **`knitr`**の完全なドキュメントとして提供されており, [main
-manual](/knitr/demo/manual/), [graphics manual](https://yihui.org/knitr/demo/graphics/), [demos](https://yihui.org/knitr/demos/)/examples](https://github.com/yihui/knitr-examples) をここで閲覧することができます. さらに統合的な参考資料としては, [knitr book](https://github.com/yihui/knitr-book) (邦訳未刊行) をご覧ください.
+このパッケージは [GitHub](https://github.com/yihui/knitr) 上で開発されており, インストール手順と[FAQ](#FAQs)もここで参照できます. [パッケージの README](https://github.com/yihui/knitr#readme) も確認してください. このサイトは **`knitr`** の完全なドキュメントとして提供されており, [メインマニュアル](#manual), [グラフィックス](#graphics), [用例](#examples), [knitr-examples](https://github.com/yihui/knitr-examples) を閲覧することができます. さらに統合的な参考資料としては, [knitr book](https://github.com/yihui/knitr-book) (邦訳未刊行) をご覧ください.
 
 ## モチベーション {-}
 

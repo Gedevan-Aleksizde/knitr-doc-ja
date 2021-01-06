@@ -5,27 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
-  <meta name="description" content="キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
+  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
-  
+  <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi (ill-identified)" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi" />
 
 
-<meta name="date" content="2021-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">Top</a></li>
+<li><p style="text-align:center;"><a href="index.html"><img src="img/knitr.png" style="display: inline-block; max-width:80px; max-height:80px; width: auto; height: auto;"></a></p></li>
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>knitr</a>
 <ul>
@@ -285,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>チャンクオプションの <code>cache=TRUE</code> でキャッシュを有効にでき, <code>cache.path</code> でキャッシュ用ディレクトリを指定できます. <a href="options.html#options">1</a> 章『オプション』を参照してください.</p>
 <div id="キャッシュの例" class="section level2 unnumbered">
 <h2>キャッシュの例</h2>
-<p>キャッシュ機能は私の文書の多くで広く使われています. たとえば <strong>knitr</strong> の <a href="$manual">メインマニュアル</a> や <a href="$graphics">グラフィックス</a> です. ここでは, もう少しいくつかの例を挙げます.</p>
+<p>キャッシュ機能は私の文書の多くで広く使われています. たとえば <strong>knitr</strong> の <a href="manual.html#manual">メインマニュアル</a> や <a href="graphics.html#graphics">グラフィックス</a> です. ここでは, もう少しいくつかの例を挙げます.</p>
 <ul>
 <li>基本的な例
 <ul>
@@ -295,13 +294,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>キャッシュの依存関係の自動的な構成
 <ul>
 <li>Rnw ソース: <a href="https://github.com/yihui/knitr-examples/blob/master/017-auto-dependson.Rnw">knitr-dependson.Rnw</a></li>
-<li>チャンクオプション <code>autodep=TRUE</code> と関数 <code>dep_auto()</code> によって, <strong><code>knitr</code></strong> チャンク間の依存関係を解決することが可能となり, <code>dependson</code> オプションを指定するための手動の能力をいくらか省くことができます.</li>
+<li>チャンクオプション <code>autodep=TRUE</code> と関数 <code>dep_auto()</code> によって, <strong><code>knitr</code></strong> チャンク間の依存関係を解決することが可能となり, <code>dependson</code> オプションを指定するための手作業をいくらか省くことができます.</li>
 </ul></li>
 </ul>
 </div>
 <div id="重要な補足事項" class="section level2 unnumbered">
 <h2>重要な補足事項</h2>
-<p>キャッシュがいつ再構成されるかと, キャッシュされないチャンクについてよく理解するため, <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf">メインマニュアル</a> のキャッシュに関するセクションを, とても注意深く読まなければなりません.</p>
+<p>キャッシュがいつ再構成されるかと, キャッシュされないチャンクについてよく理解するため, <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf">メインマニュアル</a> (英語版 PDF) のキャッシュに関するセクションを, とても注意深く読まなければなりません.</p>
 <p>キャッシュに影響する要素を今一度繰り返します (いかなる変更も古いキャッシュを無効にします):</p>
 <ol style="list-style-type: decimal">
 <li><code>include</code> を除く全てのチャンクオプション, たとえば <code>tidy=TRUE</code> を <code>FALSE</code> に変えるだけでも古いキャッシュは破棄されますが, <code>include</code> は例外です.</li>
@@ -314,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>さもなければ次回からはチャンクはスキップされ, そこでの設定はすべて無視されます. このようなチャンクでは明示的に <code>cache=FALSE</code> を使わなければなりません.</p>
 <p><code>source()</code> と <code>setGeneric()</code> は, コードがローカル環境で評価された場合でもグローバル環境にオブジェクトを作成するという副次作用を持ちます. <strong><code>knitr</code></strong> 0.4 より前ではこれらのグローバルオブジェクトをキャッシュすることはできませんでした (たとえば issue <a href="https://github.com/yihui/knitr/issues/138">#138</a> を見てください). しかし ver. 0.4 以降は <strong><code>knitr</code></strong> が <code>globalenv()</code> で作成されたオブジェクトを確認し, 他のオブジェクト同様に保存するようになったため, キャッシュできるようになりました.</p>
-<p>キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. パッケージを読み込み, あとで除外したとして, <strong><code>knitr</code></strong> はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue <a href="https://github.com/yihui/knitr/issues/382">#382</a> で解説されているように, キャッシュディレクトリにある <code>__packages</code> ファイルを手動で編集しなければなりません.</p>
+<p>キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. かりにパッケージを読み込み, あとで除外したとしても, <strong><code>knitr</code></strong> はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue <a href="https://github.com/yihui/knitr/issues/382">#382</a> で解説されているように, キャッシュディレクトリにある <code>__packages</code> ファイルを手動で編集しなければなりません.</p>
 </div>
 <div id="キャッシュにはまだ何かありますか" class="section level2 unnumbered">
 <h2>キャッシュにはまだ何かありますか?</h2>
@@ -327,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb51-2"><a href="cache.html#cb51-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
 <span id="cb51-3"><a href="cache.html#cb51-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(R.version, <span class="fu">sessionInfo</span>(), </span>
 <span id="cb51-4"><a href="cache.html#cb51-4"></a>  <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y-%m&quot;</span>)))</span></code></pre></div>
-<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>.</p>
+<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>.</p>
 <p>注: キャッシュ条件にさらにオブジェクトを導入する際に, <code>cache.extra</code> 以外の任意のオプション名を使用することができます. たとえば <code>cache.validation</code> も呼び出せます. 全てのチャンクオプションはキャッシュの確認時に考慮されるためです.</p>
 </div>
 <div id="キャッシュディレクトリを入力ファイル名と連動させる" class="section level2 unnumbered">
@@ -337,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="より細かいキャッシュのとり方" class="section level2 unnumbered">
 <h2>より細かいキャッシュのとり方</h2>
 <p>上級者はチャンクオプション <code>cache</code> に対して <code>TRUE</code> か <code>FALSE</code> かだけでなく, 数字で設定するなどしてもっと粒度の細かいキャッシュが欲しいと考えるかもしれません. <code>cache = 0, 1, 2, 3</code> として, <code>0</code> は <code>FALSE</code>, <code>3</code> は <code>TRUE</code> と同じで, <code>cache = 1</code> は計算の結果のみキャッシュから読み込む (<code>evaluate::evaluate()</code> から), よってコードは再評価されませんが, 他の箇所, 出力フックや作成されたグラフの保存といった箇所は評価されます. <code>cache = 2</code> ならば, <code>1</code> とほとんど同じですが, 唯一の違いはグラフファイルがすでに存在する場合, 再保存されない点です. これはグラフが大きい場合, いくらか時間の削減になります. 以前のRセッションで記録されたグラフが別のRセッション, あるいは別のバージョンで安全に再保存されるという保証はないため, <code>cache = 1</code> よりは <code>cache = 2</code> を推奨します.</p>
-<p><code>cache = 1, 2</code> の場合は小数のチャンクオプションだけがキャッシュに影響します. オプション名は <code>knitr:::cache1.opts</code>, <code>knitr:::cache2.opts</code> で確認してください. 基本的に, コード評価に影響しないチャンクオプションが変更されてもキャッシュは無効になりません. たとえば <code>echo</code> を <code>TRUE</code> から <code>FALSE</code> に変えるとか, <code>fig.cap = '新しいキャプション'</code> と設定するなどの変更です. しかし, <code>eval</code> を <code>TRUE</code> から <code>FALSE</code> に変えた場合, あるいは <code>cache.path='foo/'</code> を <code>'bar/'</code> に変えた場合, キャッシュは再構成されます.</p>
+<p><code>cache = 1, 2</code> の場合は少数のチャンクオプションだけがキャッシュに影響します. オプション名は <code>knitr:::cache1.opts</code>, <code>knitr:::cache2.opts</code> で確認してください. 基本的に, コード評価に影響しないチャンクオプションが変更されてもキャッシュは無効になりません. たとえば <code>echo</code> を <code>TRUE</code> から <code>FALSE</code> に変えるとか, <code>fig.cap = '新しいキャプション'</code> と設定するなどの変更です. しかし, <code>eval</code> を <code>TRUE</code> から <code>FALSE</code> に変えた場合, あるいは <code>cache.path='foo/'</code> を <code>'bar/'</code> に変えた場合, キャッシュは再構成されます.</p>
 <p>いくつかの例が, <a href="https://github.com/yihui/knitr-examples/">example #101</a> (<a href="https://github.com/yihui/knitr-examples/blob/master/101-cache-levels.md">出力</a>) で見られます.</p>
 <p>この方法では, 計算と文書の出力レンダリングを分離することが可能となり,
 キャッシュを破棄することなく出力を調整するのに役立ちます. issue <a href="https://github.com/yihui/knitr/issues/396">#396</a>, <a href="https://github.com/yihui/knitr/issues/536">#536</a> を確認してください.</p>
@@ -359,8 +358,8 @@ slug: showcase
 </div>
 <div class="footnotes">
 <hr />
-<ol start="27">
-<li id="fn27"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<ol start="28">
+<li id="fn28"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref28" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

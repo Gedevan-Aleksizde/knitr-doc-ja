@@ -20,7 +20,6 @@ rmd_files:
     - '30-appendix-header.Rmd'
     - '31-objects.Rmd'
     - '33-patterns.Rmd'
-view: https://github.com/Gedevan-Aleksizde/knitr-doc-ja/tree/master/source/%s
 history: https://github.com/Gedevan-Aleksizde/knitr-doc-ja/blob/master/source/%s
 edit: https://github.com/Gedevan-Aleksizde/knitr-doc-ja/edit/master/source/%s
 repo: https://github.com/Gedevan-Aleksizde/knitr-doc-ja/
