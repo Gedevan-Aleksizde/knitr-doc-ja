@@ -11,7 +11,7 @@ link-citations: true
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-github-repo: https://github.com/Gedevan-Aleksizde/knitr-doc-ja
+github-repo: Gedevan-Aleksizde/knitr-doc-ja
 ---
 
 # knitr {-}
