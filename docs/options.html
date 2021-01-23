@@ -13,7 +13,7 @@
   
   
   <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="github-repo" content="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" />
+  <meta name="github-repo" content="Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="1 オプション | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
@@ -371,13 +371,8 @@ knitr::opts_chunk$set(
 <li><strong><code>indent</code></strong>: (<code>character</code>).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は <strong><code>knitr</code></strong> が文書を読み込む際に設定されます. 例えば以下のチャンクでは, <code>indent</code> は空白文字2個です<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="options.html#cb5-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
-<<<<<<< HEAD
-<pre><code>##  [1] -0.3033183 -0.2665683  0.4118925 -0.5271531  1.8442483  0.3015926
-##  [7] -1.4030261 -0.5633622  0.8036327  2.5413302</code></pre>
-=======
-<pre><code>##  [1] -0.0663513 -0.4155000 -0.8227486 -0.3937251  0.2986644 -0.5722195
-##  [7]  0.1254055  0.7386926 -2.5769589  1.2250091</code></pre>
->>>>>>> work
+<pre><code>##  [1]  0.04050993 -0.06667960  1.06436653  1.30278564  0.43926500 -0.79725138
+##  [7] -1.62444758 -2.24257617  0.45205502  1.30989410</code></pre>
 </div>
 <div id="options-cache" class="section level3" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> キャッシュ関連</h3>
@@ -591,14 +586,14 @@ show_toc: true
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {
 "theme": "white",
@@ -614,7 +609,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/tree/master/source/01-options.Rmd",
+"link": null,
 "text": null
 },
 "download": null,
