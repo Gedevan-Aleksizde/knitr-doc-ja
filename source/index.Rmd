@@ -1,6 +1,6 @@
 ---
 title: "`knitr`: Rによる美麗で柔軟そして高速な動的レポート生成"
-date: "`r Sys.Date()` (ver. 1.1)"
+date: "`r Sys.Date()` (ver. 1.1.x)"
 author:
   - "著者: Xie, Yihui (谢益辉)"
   - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
