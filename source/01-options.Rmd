@@ -109,7 +109,7 @@ knitr::opts_chunk$set(
 -   `size`: (`'normalsize'`; `character`) `.Rnw` 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは  [overleaf のヘルプページ (英語)](https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles) を参照してください^[訳注: `\normalsize`, `\Large`, `\LARGE` など LaTeX で指定できるフォントサイズを表すマクロのことを指しています].
 -   **`background`**: (`'#F7F7F7'`; `character`).:  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
 -   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **knitr** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です^[訳注: R Markdown の場合は **knitr** 以外の中間処理があるため, 必ずしもこのルールを守りません].
-
+  
 ```{r indent-example}
 rnorm(10)
 ```
@@ -176,6 +176,7 @@ for(i in 1:10) {
 -   **`fig.link`**: (`NULL`; `character`) 画像に与えるリンク.
 -   **`fig.env`**: (`'figure'`; `character`).: 画像に使われる LaTeX 環境. 例えば `fig.env = 'marginfigure'` ならば `\begin{marginfigure}` で囲まれます. このオプションの使用は `fig.cap` が指定されいることが条件です.
 -   **`fig.cap`**: (`NULL`; `character`).: 図のキャプションです.
+-   **`fig.alt`**: (`NULL`; `character`) HTML 出力時の図の `<img>` タグの `alt` 属性に使う代替テキストです. デフォルトでは, 代替テキストが与えられた場合チャンクオプション `fig.cap` には代替テキストが使われます.
 -   **`fig.scap`**: (`NULL`; `character`).: 図の短縮キャプションです. 出力が LaTeX の場合のみ意味をなします. 短縮キャプションは `\caption[]` コマンドに挿入され, 大抵の場合は PDF 出力時の「図一覧」で表示される見出しとして使われます.
 -   **`fig.lp`**: (`'fig:'`; `character`).; 図の相互参照に使われるラベル^[訳注: チャンクラベルと混同しないでください]の接頭語で, `\label{}` コマンドに挿入されます. 実際のラベルはこの接頭語とチャンクラベルを連結して作られます. 例えば図のラベルが  ```` ```{r, foo-plot} ```` will be ならば, デフォルトでは図のラベルは `fig:foo-plot` になります.
 -   **`fig.pos`**: (`''`; `character`).: LaTeX の `\begin{figure}[]` に使われる, 画像の位置調整オプション^[訳注: LaTeX では通常は図の位置は調整されますが, `fig.pos='H'` ならばその位置で固定されます]を指定します. 
@@ -256,9 +257,10 @@ knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
 - **`base.dir`**: (`NULL`; `character`).: グラフを生成する際のディレクトリの絶対パスです.
 - **`base.url`**: (`NULL`; `character`).: HTML ページに掲載する画像のベースURLです.
 - **`concordance`**: (`FALSE`; `logical`).: この機能は  RStudio によって実装されている機能で, `.Rnw` でのみ有効です. 入力ファイルの行番号に対応した行番号を出力ファイルに書き出すかどうかを指定します. これにより, 出力から入力の誘導が可能になり, 特に LaTeX のエラー発生時に役に立ちます.
--   **`eval.after`**: (`'fig.cap'`; `character`).: オプション名の文字ベクトルを指定します. このオプションはチャンクが評価された**後で**評価され, 他のオプションはチャンクが評価される前に評価されます. 例えば `eval.after = 'fig.cap'` が指定されているときに `fig.cap = paste('p-value is', t.test(x)$p.value)` とすると, チャンクの評価後の `x` の値が使用されます.
+-   **`eval.after`**: (`c('fig.cap', 'fig.alt'; `character`).: オプション名の文字ベクトルを指定します. このオプションはチャンクが評価された**後で**評価され, 他の全てのオプションはチャンクが評価される前に評価されます. 例えば `eval.after = 'fig.cap'` が指定されているときに `fig.cap = paste('p-value is', t.test(x)$p.value)` とすると, `eval.after` にはチャンクの評価後の `x` の値が使用されます.
 - **`global.par`**: (`FALSE`; `logical`).: `TRUE` にすると, それ以前のコードチャンクでの `par()` での設定が引き継がれます (もちろん, この設定は R グラフィックスのみで有効です). デフォルトでは  **knitr** はグラフの記録のために新規のグラフィックデバイスを開き, コードの評価後に閉じるため, `par()` による設定はその都度破棄されます.
 - **`header`**: (`NULL`; `character`).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば `\documentclass{article}` の直後, HTML ならば `<head>` タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は `knitr::knit_patterns$get('document.begin')` で知ることができます. このオプションは `.Rnw` と `.Rhtml` 限定の機能です^[訳注: R Markdown ではヘッダの設定は YAML フロントマターで行います].
+-   `label.prefix`: (`c(table = 'tab:')`; character) ラベルの接頭語を指定します. 現時点では `kable::kable()` によって生成される表のラベルに対する接頭語のみサポートしています.
 -  **`latex.options.color`**, **`latex.options.graphicx`**: (`NULL`).: それぞれ LaTeX パッケージの  **color** と **graphicx** に対するオプションを指定します. これらのオプションは `.Rnw` 限定の機能です^[訳注: R Markdown ではこの機能もやはり YAML フロントマターが担当しています].
 -   **`out.format`**: (`NULL`; `character`).: 可能な値は `latex`, `sweave`,
     `html`, `markdown`, `jekyll` です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば `?knitr::render_latex` を参考にしてください. このオプションは `knitr::knit()` が実行される**前に**設定する必要があります (文書内で設定しても機能しません).
