@@ -19,7 +19,7 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 **訳注**: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
 ```
 
-私は以前 [Lyx]($lyx) (未翻訳), [RStudio]($RStudio) (未翻訳) [Emacs Org-mode]($org) (未翻訳), [Ecripse]($ecripse) (未翻訳) について書きました. その他にも, [Texmaker](http://www.xm1math.net/texmaker/) や Windt といったエディタで **`knitr`** を使うことができます. ポイントは R を呼び出して **`knitr`** パッケージを読み込み, それから `knit()`または `knit2pdf()` を呼び出すことです.
+私は以前 [Lyx]($lyx) (未翻訳), [RStudio]($RStudio) (未翻訳) [Emacs Org-mode]($org) (未翻訳), [Ecripse]($ecripse) (未翻訳) について書きました. その他にも, [Texmaker](http://www.xm1math.net/texmaker/) や Windt といったエディタで **knitr** を使うことができます. ポイントは R を呼び出して **knitr** パッケージを読み込み, それから `knit()`または `knit2pdf()` を呼び出すことです.
 
 ## Texmaker {-}
 
@@ -55,15 +55,15 @@ knitr::include_graphics("https://db.yihui.org/imgur/VFcvTUB.png")
 
 いつでもこのコマンドを実行できます (ホットキーは Alt-Shift-F1) し, サイレントモードでも knitr で PDF を生成できます. F7 キーでいつでも表示されている PDF を更新できます. 代わりの方法として, コマンドの末尾に `| txs:///view-pdf` を追加する方法があります. これはあるコマンドの実行後に実行する別のコマンドを分けるパイプ記号です. よって基本的に F7 を押すだけで事足りるようになります.
 
-しかし, もし BibLaTeX のような文献引用パッケージを使うならば, まだかなり非効率です. コンパイルの前に bib ファイルの処理を手動で行う必要があり, よって最低でも2回手動でコンパイルする必要があり (そしてあなたは何回必要か正確に分からないでしょう). その間に不要なビューアの呼び出しが発生します. TeXstudio は文献処理ツール起動したりコンパイルしたり, それらを繰り返すのに優れていますが, ビルドと閲覧 (F5) を何度も押す度にこれが必要になり,  そこでデフォルトのコンパイラを `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"` で置き換えることで **`knitr`** を使用し続けられるわけです (`R` フォルダを `$PATH` に設定している前提です). その隣の "Repeat contained compilation commands" が押されたままであることを確認してください.
+しかし, もし BibLaTeX のような文献引用パッケージを使うならば, まだかなり非効率です. コンパイルの前に bib ファイルの処理を手動で行う必要があり, よって最低でも2回手動でコンパイルする必要があり (そしてあなたは何回必要か正確に分からないでしょう). その間に不要なビューアの呼び出しが発生します. TeXstudio は文献処理ツール起動したりコンパイルしたり, それらを繰り返すのに優れていますが, ビルドと閲覧 (F5) を何度も押す度にこれが必要になり,  そこでデフォルトのコンパイラを `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"` で置き換えることで **knitr** を使用し続けられるわけです (`R` フォルダを `$PATH` に設定している前提です). その隣の "Repeat contained compilation commands" が押されたままであることを確認してください.
 
-もちろん, これならば少なくとも F5 (または F6) を押すだけで TeXstudio デフォルトの標準の　LaTeX コンパイラの代わりに `knitr` が実行されます.  この方法のおそらく唯一の欠点は, ほとんどの人にとって LaTeX コードのデバッグがいっそう困難になることです. ほとんどのエラーが「`texify.exe` "had status 1"」という曖昧な警告に置き換わってしまうことです (ユーザーコマンド経由で **`knitr`** を実行するのではこれは改善できません). そのような状況でもログファイルも時には有用ですが, ログファイルは `.Rnw` ファイルではなく  **`knitr`** の生成した `.tex` を参照するので,   このファイルを開いてどこがおかしいのかを見つけようとする必要があります.
+もちろん, これならば少なくとも F5 (または F6) を押すだけで TeXstudio デフォルトの標準の　LaTeX コンパイラの代わりに `knitr` が実行されます.  この方法のおそらく唯一の欠点は, ほとんどの人にとって LaTeX コードのデバッグがいっそう困難になることです. ほとんどのエラーが「`texify.exe` "had status 1"」という曖昧な警告に置き換わってしまうことです (ユーザーコマンド経由で **knitr** を実行するのではこれは改善できません). そのような状況でもログファイルも時には有用ですが, ログファイルは `.Rnw` ファイルではなく  **knitr** の生成した `.tex` を参照するので,   このファイルを開いてどこがおかしいのかを見つけようとする必要があります.
 
 しかし物事の全体で見れば, TeXstudio ならば 他のあらゆる LaTeX 書き込み機能の恩恵を得つつ `knitr`  を使うことができます. その上, 不便な回避策が必要な RStudio と比較すれば, `BibLaTeX-Chicago` のような `Biber` ベースの文献引用パッケージの使用もはるかに簡単になります.
 
 ## WinEdt {-}
 
-WinEdt の[R-Sweave](http://www.winedt.org/Config/modes/R-Sweave.php) モードは現在 **`knitr`** をサポートしています. 自分自身で WinEdt の設定をしたいなら, よくお読みください.
+WinEdt の[R-Sweave](http://www.winedt.org/Config/modes/R-Sweave.php) モードは現在 **knitr** をサポートしています. 自分自身で WinEdt の設定をしたいなら, よくお読みください.
 
 以下の手引書は [Phil Chalmers](https://github.com/philchalmers) によるものです. 私は全てを確認していませんが, おおよそ良さそうだと思います.
 
@@ -76,13 +76,13 @@ Phil に感謝.
 
 ## Emacs/ESS {-}
 
-12/9 以降, **`knitr`** は公式に [ESS](http://ess.r-project.org) にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.
+12/9 以降, **knitr** は公式に [ESS](http://ess.r-project.org) にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.
 
 ```bash 
 sudo apt-get install ess
 ```
 
-ESS で **`knitr`** を使う方法に関する[短い動画](https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075)があります.
+ESS で **knitr** を使う方法に関する[短い動画](https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075)があります.
 
 (歴史的背景に興味がある人向け) [Simon Potter](http://sjp.co.nz/posts/emacs-ess-knitr/) と [lucialam](https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/) の両氏が Emacs/**knitr** についてブログに書いています.
 
@@ -96,11 +96,11 @@ Rscript -e "library(knitr); knit('$GEDIT_CURRENT_DOCUMENT_NAME')"
 
 ## Sublime {-}
 
-Andrew Heiss による [KnitrSublime](https://github.com/andrewheiss/KnitrSublime) パッケージは Sublime Text 2 で LaTeX で **`knitr`** を使用する基本的な機能をサポートしています.
+Andrew Heiss による [KnitrSublime](https://github.com/andrewheiss/KnitrSublime) パッケージは Sublime Text 2 で LaTeX で **knitr** を使用する基本的な機能をサポートしています.
 
 ## Vim {-}
 
-Jakson Aquino のおかげで [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628) **`knitr`** の包括的なサポートをしています.
+Jakson Aquino のおかげで [Vim-R-Plugin](http://www.vim.org/scripts/script.php?script_id=2628) **knitr** の包括的なサポートをしています.
 
 ## TextMate {-}
 
@@ -108,7 +108,7 @@ Applescript for TextMate 2 で使用するアプローチとして [#252](https:
 
 ## TeXShop {-}
 
-[TeXShop](http://pages.uoregon.edu/koch/texshop/) で **`knitr`** を動作させる設定は簡単です. TeXShop の `Engines` ディレクトリ (大抵の場合は `~/Library/TeXShop/Engines/`) の `Knitr.engine` ファイルに以下を書き込むだけです.
+[TeXShop](http://pages.uoregon.edu/koch/texshop/) で **knitr** を動作させる設定は簡単です. TeXShop の `Engines` ディレクトリ (大抵の場合は `~/Library/TeXShop/Engines/`) の `Knitr.engine` ファイルに以下を書き込むだけです.
 
 ```bash 
 #!/bin/bash
@@ -123,7 +123,7 @@ latexmk -pdf "${1%.*}"
 
 追加ツールの設定に関して TeXworks も Texmaker と似ています. 以下は Ubuntu でのスクリーショットです. StackExchange 回答してくれた [Speravir](http://tex.stackexchange.com/a/85165/9128) に感謝. (Windows/Mac OS も `Rscript` が `PATH` にある限り同様にできるはずです).
 
-(ref:demo-editors-texworks) TeXworks で **`knitr`** を使う
+(ref:demo-editors-texworks) TeXworks で **knitr** を使う
 
 ```{r demo-editors-texworks, echo=F, fig.cap="(ref:demo-editors-texworks)"}
 knitr::include_graphics("https://db.yihui.org/imgur/d6tE6.png")
@@ -147,4 +147,4 @@ Dr Marek Gągolewski も [Configure Kile for knitr under GNU/Linux](http://www.r
 
 ## Tinn-R {-}
 
-Tinn-R は **`knitr`** v2.3.7.3 以降からサポートを開始しました. 
+Tinn-R は **knitr** v2.3.7.3 以降からサポートを開始しました. 

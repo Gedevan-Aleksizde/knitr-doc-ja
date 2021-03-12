@@ -19,7 +19,7 @@ slug: listings
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
 ```
 
-**`knitr`** では, LaTeX の `listings` パッケージで結果を装飾するためにの出力[フック](#hooks)を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.
+**knitr** では, LaTeX の `listings` パッケージで結果を装飾するためにの出力[フック](#hooks)を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.
 
 ```{r demo-listings-hook, eval=F} 
 ## a common hook for messages, warnings and errors
@@ -39,9 +39,9 @@ knit_hooks$set(source = function(x, options) {
 set_header(highlight = "")
 ```
 
-見て分かるように, **`knitr`** は全てをユーザーに公開してます. 必要なのはこれらの R コードの部品と出力を適切な環境で包むことです.
+見て分かるように, **knitr** は全てをユーザーに公開してます. 必要なのはこれらの R コードの部品と出力を適切な環境で包むことです.
 
-**ちょっと待ってください**, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で `render_listings()` 関数として **`knitr`** に組み込まれています. これが使用例になります.
+**ちょっと待ってください**, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で `render_listings()` 関数として **knitr** に組み込まれています. これが使用例になります.
 
 - **knitr** で `listings` をつかう
   - Rnw ソース: [knitr-listings.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-listings.Rnw)

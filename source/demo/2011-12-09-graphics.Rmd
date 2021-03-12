@@ -7,7 +7,7 @@ slug: graphics
 
 # グラフィックス {-#graphics}
 
-**`knitr`** におけるグラフィックスの力について
+**knitr** におけるグラフィックスの力について
 
 オリジナルの記事: https://yihui.org/knitr/demos/graphics
 
@@ -21,7 +21,7 @@ slug: graphics
 
 ## グラフィックスマニュアル {-}
 
-グラフィックスマニュアルでは **`knitr`** のグラフィックスに彩りを加えるものを紹介します.
+グラフィックスマニュアルでは **knitr** のグラフィックスに彩りを加えるものを紹介します.
 
 - グラフィックスマニュアルのソースと出力は以下です
   - Rnw ソース: [knitr-graphics.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.Rnw)
@@ -32,19 +32,19 @@ slug: graphics
 
 マニュアルからいくつかスクリーショットを提示します.
 
-(ref:demo-graphics-tikz) **`knitr`** 上の tikz グラフィックス
+(ref:demo-graphics-tikz) **knitr** 上の tikz グラフィックス
 
 ```{r demo-graphics-tikz, echo=F, fig.cap="(ref:demo-graphics-tikz)"}
 knitr::include_graphics("https://db.yihui.org/imgur/HCkka.png")
 ```
 
-(ref:demo-graphics-ggplot2) **`knitr`** 上の **`ggplot2`**
+(ref:demo-graphics-ggplot2) **knitr** 上の **`ggplot2`**
 
 ```{r demo-graphics-ggplot2, echo=F, fig.cap="(ref:demo-graphics-ggplot2"}
 knitr::include_graphics("https://db.yihui.org/imgur/BTEiu.png")
 ```
 
- [`tufte-handout`](http://code.google.com/p/tufte-latex/) クラスの作者に感謝します. 上記の例はこれを利用しています. そして **`tikzDevice`**  パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).
+ [`tufte-handout`](http://code.google.com/p/tufte-latex/) クラスの作者に感謝します. 上記の例はこれを利用しています. そして **tikzDevice**  パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).
 
 ## カスタムグラフィックデバイスについての補足 {-}
 
@@ -56,7 +56,7 @@ my_pdf = function(file, width, height) {
 }
 ```
 
-これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. **`knitr`** はグラフファイルに対して適切なファイル拡張子を推測できないため, `fig.ext` オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.
+これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. **knitr** はグラフファイルに対して適切なファイル拡張子を推測できないため, `fig.ext` オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.
 
 ````r
 ```{r dev='my_pdf', fig.ext='pdf'}`r ''`
@@ -114,7 +114,7 @@ options(device = function(file, width = 7, height = 7, ...) {
 
 ## 装飾フォント {-}
 
-`pdf()` のドキュメントによれば, `useDingbats` 引数は小さな円を含む PDF のファイルサイズを減らしてくれる可能性があります. RStudio 上で **`knitr`** を使っている場合, このオプションはデフォルトで無効になっています. 巨大な散布図を含む場合, ソース文書に `pdf.options(useDingbats = TRUE)` と書くことで有効になるでしょう. 詳細な議論は issue [#311](https://github.com/yihui/knitr/issues/311) を参照してください.
+`pdf()` のドキュメントによれば, `useDingbats` 引数は小さな円を含む PDF のファイルサイズを減らしてくれる可能性があります. RStudio 上で **knitr** を使っている場合, このオプションはデフォルトで無効になっています. 巨大な散布図を含む場合, ソース文書に `pdf.options(useDingbats = TRUE)` と書くことで有効になるでしょう. 詳細な議論は issue [#311](https://github.com/yihui/knitr/issues/311) を参照してください.
 
 ## アニメーション {-}
 

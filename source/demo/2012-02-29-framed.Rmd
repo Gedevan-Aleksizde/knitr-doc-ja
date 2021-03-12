@@ -7,7 +7,7 @@ slug: framed
 
 # `framed` パッケージ {-#framed}
 
-**`knitr`** における LaTeX のデフォルトスタイル
+**knitr** における LaTeX のデフォルトスタイル
 
 オリジナルのページ: https://yihui.org/knitr/demo/framed/
 
@@ -19,13 +19,13 @@ slug: framed
 このページは `knitr` 単体の場合を解説しています. R Markdown の場合, `framed` が関わるのは基本的にコードチャンクの表示スタイルのみです.
 ```
 
-デフォルトでは **`knitr`** はタイプセットに [framed](http://www.ctan.org/pkg/framed) という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.
+デフォルトでは **knitr** はタイプセットに [framed](http://www.ctan.org/pkg/framed) という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.
 
 [よくある質問](#FAQs)で挙げたように, 影付きボックスからはみ出ることがあるかもしれません. その際は `options('width')` でより小さい値を設定してください.
 
 ## 要素の概要 {-}
 
-テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は `kframe` 環境で問題が合った旨を警告します. `kframe` は **`knitr`** チャンク出力を包むために使用します. 既知の問題では,  issue [#154](https://github.com/yihui/knitr/issues/154) で PNG を使った場合があります. 確実にページ余白を超えないようにするため, **`knitr`** は以下のコマンドを LaTeX プリアンブルで使用します.
+テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は `kframe` 環境で問題が合った旨を警告します. `kframe` は **knitr** チャンク出力を包むために使用します. 既知の問題では,  issue [#154](https://github.com/yihui/knitr/issues/154) で PNG を使った場合があります. 確実にページ余白を超えないようにするため, **knitr** は以下のコマンドを LaTeX プリアンブルで使用します.
 
 ```tex
 %% maxwidth is the original width if it's less than linewidth
