@@ -33,7 +33,7 @@
   
 <link rel="prev" href="FAQs.html"/>
 <link rel="next" href="framed.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -285,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdtip">
 <strong>訳注</strong>: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
 </div>
-<p>私は以前 <a href="$lyx">Lyx</a> (未翻訳), <a href="$RStudio">RStudio</a> (未翻訳) <a href="$org">Emacs Org-mode</a> (未翻訳), <a href="$ecripse">Ecripse</a> (未翻訳) について書きました. その他にも, <a href="http://www.xm1math.net/texmaker/">Texmaker</a> や Windt といったエディタで <strong><code>knitr</code></strong> を使うことができます. ポイントは R を呼び出して <strong><code>knitr</code></strong> パッケージを読み込み, それから <code>knit()</code>または <code>knit2pdf()</code> を呼び出すことです.</p>
+<p>私は以前 <a href="$lyx">Lyx</a> (未翻訳), <a href="$RStudio">RStudio</a> (未翻訳) <a href="$org">Emacs Org-mode</a> (未翻訳), <a href="$ecripse">Ecripse</a> (未翻訳) について書きました. その他にも, <a href="http://www.xm1math.net/texmaker/">Texmaker</a> や Windt といったエディタで <strong>knitr</strong> を使うことができます. ポイントは R を呼び出して <strong>knitr</strong> パッケージを読み込み, それから <code>knit()</code>または <code>knit2pdf()</code> を呼び出すことです.</p>
 <div id="texmaker" class="section level2 unnumbered">
 <h2>Texmaker</h2>
 <p><code>User --&gt; User Commands --&gt; Edit User Commands</code> から, Rnw 文書を処理するためのカスタムコマンドを定義できます.</p>
@@ -317,13 +317,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>上級者向けオプション (左下) を解放すれば, 下部に <code>Commands ($PATH)</code> が現れるでしょう. ここに <code>R</code> フォルダのパスを入力できます (例: 引用符なしで <code>C:\Program Files\R\R-3.3.2\bin\x64</code>). それからユーザーコマンド (そして他のコマンドからも呼び出せる) に <code>Rscript.exe -e "knitr::knit2pdf('%.Rnw')"</code> とするだけです.</p>
 <p>いつでもこのコマンドを実行できます (ホットキーは Alt-Shift-F1) し, サイレントモードでも knitr で PDF を生成できます. F7 キーでいつでも表示されている PDF を更新できます. 代わりの方法として, コマンドの末尾に <code>| txs:///view-pdf</code> を追加する方法があります. これはあるコマンドの実行後に実行する別のコマンドを分けるパイプ記号です. よって基本的に F7 を押すだけで事足りるようになります.</p>
-<p>しかし, もし BibLaTeX のような文献引用パッケージを使うならば, まだかなり非効率です. コンパイルの前に bib ファイルの処理を手動で行う必要があり, よって最低でも2回手動でコンパイルする必要があり (そしてあなたは何回必要か正確に分からないでしょう). その間に不要なビューアの呼び出しが発生します. TeXstudio は文献処理ツール起動したりコンパイルしたり, それらを繰り返すのに優れていますが, ビルドと閲覧 (F5) を何度も押す度にこれが必要になり, そこでデフォルトのコンパイラを <code>Rscript.exe -e "knitr::knit2pdf('%.Rnw')"</code> で置き換えることで <strong><code>knitr</code></strong> を使用し続けられるわけです (<code>R</code> フォルダを <code>$PATH</code> に設定している前提です). その隣の “Repeat contained compilation commands” が押されたままであることを確認してください.</p>
-<p>もちろん, これならば少なくとも F5 (または F6) を押すだけで TeXstudio デフォルトの標準の　LaTeX コンパイラの代わりに <code>knitr</code> が実行されます. この方法のおそらく唯一の欠点は, ほとんどの人にとって LaTeX コードのデバッグがいっそう困難になることです. ほとんどのエラーが「<code>texify.exe</code> “had status 1”」という曖昧な警告に置き換わってしまうことです (ユーザーコマンド経由で <strong><code>knitr</code></strong> を実行するのではこれは改善できません). そのような状況でもログファイルも時には有用ですが, ログファイルは <code>.Rnw</code> ファイルではなく <strong><code>knitr</code></strong> の生成した <code>.tex</code> を参照するので, このファイルを開いてどこがおかしいのかを見つけようとする必要があります.</p>
+<p>しかし, もし BibLaTeX のような文献引用パッケージを使うならば, まだかなり非効率です. コンパイルの前に bib ファイルの処理を手動で行う必要があり, よって最低でも2回手動でコンパイルする必要があり (そしてあなたは何回必要か正確に分からないでしょう). その間に不要なビューアの呼び出しが発生します. TeXstudio は文献処理ツール起動したりコンパイルしたり, それらを繰り返すのに優れていますが, ビルドと閲覧 (F5) を何度も押す度にこれが必要になり, そこでデフォルトのコンパイラを <code>Rscript.exe -e "knitr::knit2pdf('%.Rnw')"</code> で置き換えることで <strong>knitr</strong> を使用し続けられるわけです (<code>R</code> フォルダを <code>$PATH</code> に設定している前提です). その隣の “Repeat contained compilation commands” が押されたままであることを確認してください.</p>
+<p>もちろん, これならば少なくとも F5 (または F6) を押すだけで TeXstudio デフォルトの標準の　LaTeX コンパイラの代わりに <code>knitr</code> が実行されます. この方法のおそらく唯一の欠点は, ほとんどの人にとって LaTeX コードのデバッグがいっそう困難になることです. ほとんどのエラーが「<code>texify.exe</code> “had status 1”」という曖昧な警告に置き換わってしまうことです (ユーザーコマンド経由で <strong>knitr</strong> を実行するのではこれは改善できません). そのような状況でもログファイルも時には有用ですが, ログファイルは <code>.Rnw</code> ファイルではなく <strong>knitr</strong> の生成した <code>.tex</code> を参照するので, このファイルを開いてどこがおかしいのかを見つけようとする必要があります.</p>
 <p>しかし物事の全体で見れば, TeXstudio ならば 他のあらゆる LaTeX 書き込み機能の恩恵を得つつ <code>knitr</code> を使うことができます. その上, 不便な回避策が必要な RStudio と比較すれば, <code>BibLaTeX-Chicago</code> のような <code>Biber</code> ベースの文献引用パッケージの使用もはるかに簡単になります.</p>
 </div>
 <div id="winedt" class="section level2 unnumbered">
 <h2>WinEdt</h2>
-<p>WinEdt の<a href="http://www.winedt.org/Config/modes/R-Sweave.php">R-Sweave</a> モードは現在 <strong><code>knitr</code></strong> をサポートしています. 自分自身で WinEdt の設定をしたいなら, よくお読みください.</p>
+<p>WinEdt の<a href="http://www.winedt.org/Config/modes/R-Sweave.php">R-Sweave</a> モードは現在 <strong>knitr</strong> をサポートしています. 自分自身で WinEdt の設定をしたいなら, よくお読みください.</p>
 <p>以下の手引書は <a href="https://github.com/philchalmers">Phil Chalmers</a> によるものです. 私は全てを確認していませんが, おおよそ良さそうだと思います.</p>
 <ol style="list-style-type: decimal">
 <li><code>Options -&gt; Execution Modes -&gt; PDFTeXify</code> へ移動する. それから実行可能な <code>Rscript.exe</code> (例: <code>C:\Program Files\R\R-2.14.2\bin\Rscript.exe</code>) を探し, それを選択する</li>
@@ -334,9 +334,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="emacsess" class="section level2 unnumbered">
 <h2>Emacs/ESS</h2>
-<p>12/9 以降, <strong><code>knitr</code></strong> は公式に <a href="http://ess.r-project.org">ESS</a> にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.</p>
+<p>12/9 以降, <strong>knitr</strong> は公式に <a href="http://ess.r-project.org">ESS</a> にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="editors.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ess</span></code></pre></div>
-<p>ESS で <strong><code>knitr</code></strong> を使う方法に関する<a href="https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075">短い動画</a>があります.</p>
+<p>ESS で <strong>knitr</strong> を使う方法に関する<a href="https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075">短い動画</a>があります.</p>
 <p>(歴史的背景に興味がある人向け) <a href="http://sjp.co.nz/posts/emacs-ess-knitr/">Simon Potter</a> と <a href="https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/">lucialam</a> の両氏が Emacs/<strong>knitr</strong> についてブログに書いています.</p>
 </div>
 <div id="gedit" class="section level2 unnumbered">
@@ -346,11 +346,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="sublime" class="section level2 unnumbered">
 <h2>Sublime</h2>
-<p>Andrew Heiss による <a href="https://github.com/andrewheiss/KnitrSublime">KnitrSublime</a> パッケージは Sublime Text 2 で LaTeX で <strong><code>knitr</code></strong> を使用する基本的な機能をサポートしています.</p>
+<p>Andrew Heiss による <a href="https://github.com/andrewheiss/KnitrSublime">KnitrSublime</a> パッケージは Sublime Text 2 で LaTeX で <strong>knitr</strong> を使用する基本的な機能をサポートしています.</p>
 </div>
 <div id="vim" class="section level2 unnumbered">
 <h2>Vim</h2>
-<p>Jakson Aquino のおかげで <a href="http://www.vim.org/scripts/script.php?script_id=2628">Vim-R-Plugin</a> <strong><code>knitr</code></strong> の包括的なサポートをしています.</p>
+<p>Jakson Aquino のおかげで <a href="http://www.vim.org/scripts/script.php?script_id=2628">Vim-R-Plugin</a> <strong>knitr</strong> の包括的なサポートをしています.</p>
 </div>
 <div id="textmate" class="section level2 unnumbered">
 <h2>TextMate</h2>
@@ -358,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="texshop" class="section level2 unnumbered">
 <h2>TeXShop</h2>
-<p><a href="http://pages.uoregon.edu/koch/texshop/">TeXShop</a> で <strong><code>knitr</code></strong> を動作させる設定は簡単です. TeXShop の <code>Engines</code> ディレクトリ (大抵の場合は <code>~/Library/TeXShop/Engines/</code>) の <code>Knitr.engine</code> ファイルに以下を書き込むだけです.</p>
+<p><a href="http://pages.uoregon.edu/koch/texshop/">TeXShop</a> で <strong>knitr</strong> を動作させる設定は簡単です. TeXShop の <code>Engines</code> ディレクトリ (大抵の場合は <code>~/Library/TeXShop/Engines/</code>) の <code>Knitr.engine</code> ファイルに以下を書き込むだけです.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="editors.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb27-2"><a href="editors.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=$PATH</span>:/usr/texbin:/usr/local/bin</span>
 <span id="cb27-3"><a href="editors.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> -e <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$1</span><span class="st">&#39;)&quot;</span></span>
@@ -372,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="figure" style="text-align: center"><span id="fig:demo-editors-texworks"></span>
 <img src="https://db.yihui.org/imgur/d6tE6.png" alt="TeXworks で knitr を使う"  />
 <p class="caption">
-図 4.4: TeXworks で <strong><code>knitr</code></strong> を使う
+図 4.4: TeXworks で <strong>knitr</strong> を使う
 </p>
 </div>
 </div>
@@ -390,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="tinn-r" class="section level2 unnumbered">
 <h2>Tinn-R</h2>
-<p>Tinn-R は <strong><code>knitr</code></strong> v2.3.7.3 以降からサポートを開始しました.</p>
+<p>Tinn-R は <strong>knitr</strong> v2.3.7.3 以降からサポートを開始しました.</p>
 
 <!---
 title: Package framed

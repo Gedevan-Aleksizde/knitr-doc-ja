@@ -33,7 +33,7 @@
   
 <link rel="prev" href="manual.html"/>
 <link rel="next" href="showcase.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -294,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>キャッシュの依存関係の自動的な構成
 <ul>
 <li>Rnw ソース: <a href="https://github.com/yihui/knitr-examples/blob/master/017-auto-dependson.Rnw">knitr-dependson.Rnw</a></li>
-<li>チャンクオプション <code>autodep=TRUE</code> と関数 <code>dep_auto()</code> によって, <strong><code>knitr</code></strong> チャンク間の依存関係を解決することが可能となり, <code>dependson</code> オプションを指定するための手作業をいくらか省くことができます.</li>
+<li>チャンクオプション <code>autodep=TRUE</code> と関数 <code>dep_auto()</code> によって, <strong>knitr</strong> チャンク間の依存関係を解決することが可能となり, <code>dependson</code> オプションを指定するための手作業をいくらか省くことができます.</li>
 </ul></li>
 </ul>
 </div>
@@ -306,14 +306,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>include</code> を除く全てのチャンクオプション, たとえば <code>tidy=TRUE</code> を <code>FALSE</code> に変えるだけでも古いキャッシュは破棄されますが, <code>include</code> は例外です.</li>
 <li>チャンク内のR コードのわずかな変更, スペースや空白行の追加・削除であっても, 古いキャッシュを削除することにつながります</li>
 </ol>
-<p>極めて重要な注意事項として, 副次的な作用をもつチャンクはキャッシュ<strong>すべきでない</strong>ということを挙げます. <strong><code>knitr</code></strong> は <code>print()</code> による副次作用を維持しようとしますが, さらなる別の副次作用は保存されません. ここでチャンクをキャッシュすべきでないケースをいくつか挙げます.</p>
+<p>極めて重要な注意事項として, 副次的な作用をもつチャンクはキャッシュ<strong>すべきでない</strong>ということを挙げます. <strong>knitr</strong> は <code>print()</code> による副次作用を維持しようとしますが, さらなる別の副次作用は保存されません. ここでチャンクをキャッシュすべきでないケースをいくつか挙げます.</p>
 <ol style="list-style-type: decimal">
-<li><code>options('width')</code>, <code>pdf.options()</code>, または <code>opts_chunk$set()</code>, <code>opts_knit$set()</code>, <code>knit_hooks$set()</code> のような他のなんらかの <strong><code>knitr</code></strong> のオプションを設定する時</li>
-<li>キャッシュされたチャンクでの <code>library()</code> によるパッケージの読み込みと読み込まれたパッケージはキャッシュされないチャンクによっても扱われます. (キャッシュされたチャンクでパッケージを読み込み, 使うのは全く OK です. <strong><code>knitr</code></strong> はキャッシュされたチャンクでパッケージのリストを保存するためです. しかし, キャッシュされないチャンクが, それまでのキャッシュされたチャンクでどのパッケージをロードしたかを知ることはできません.)</li>
+<li><code>options('width')</code>, <code>pdf.options()</code>, または <code>opts_chunk$set()</code>, <code>opts_knit$set()</code>, <code>knit_hooks$set()</code> のような他のなんらかの <strong>knitr</strong> のオプションを設定する時</li>
+<li>キャッシュされたチャンクでの <code>library()</code> によるパッケージの読み込みと読み込まれたパッケージはキャッシュされないチャンクによっても扱われます. (キャッシュされたチャンクでパッケージを読み込み, 使うのは全く OK です. <strong>knitr</strong> はキャッシュされたチャンクでパッケージのリストを保存するためです. しかし, キャッシュされないチャンクが, それまでのキャッシュされたチャンクでどのパッケージをロードしたかを知ることはできません.)</li>
 </ol>
 <p>さもなければ次回からはチャンクはスキップされ, そこでの設定はすべて無視されます. このようなチャンクでは明示的に <code>cache=FALSE</code> を使わなければなりません.</p>
-<p><code>source()</code> と <code>setGeneric()</code> は, コードがローカル環境で評価された場合でもグローバル環境にオブジェクトを作成するという副次作用を持ちます. <strong><code>knitr</code></strong> 0.4 より前ではこれらのグローバルオブジェクトをキャッシュすることはできませんでした (たとえば issue <a href="https://github.com/yihui/knitr/issues/138">#138</a> を見てください). しかし ver. 0.4 以降は <strong><code>knitr</code></strong> が <code>globalenv()</code> で作成されたオブジェクトを確認し, 他のオブジェクト同様に保存するようになったため, キャッシュできるようになりました.</p>
-<p>キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. かりにパッケージを読み込み, あとで除外したとしても, <strong><code>knitr</code></strong> はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue <a href="https://github.com/yihui/knitr/issues/382">#382</a> で解説されているように, キャッシュディレクトリにある <code>__packages</code> ファイルを手動で編集しなければなりません.</p>
+<p><code>source()</code> と <code>setGeneric()</code> は, コードがローカル環境で評価された場合でもグローバル環境にオブジェクトを作成するという副次作用を持ちます. <strong>knitr</strong> 0.4 より前ではこれらのグローバルオブジェクトをキャッシュすることはできませんでした (たとえば issue <a href="https://github.com/yihui/knitr/issues/138">#138</a> を見てください). しかし ver. 0.4 以降は <strong>knitr</strong> が <code>globalenv()</code> で作成されたオブジェクトを確認し, 他のオブジェクト同様に保存するようになったため, キャッシュできるようになりました.</p>
+<p>キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. かりにパッケージを読み込み, あとで除外したとしても, <strong>knitr</strong> はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue <a href="https://github.com/yihui/knitr/issues/382">#382</a> で解説されているように, キャッシュディレクトリにある <code>__packages</code> ファイルを手動で編集しなければなりません.</p>
 </div>
 <div id="キャッシュにはまだ何かありますか" class="section level2 unnumbered">
 <h2>キャッシュにはまだ何かありますか?</h2>
@@ -343,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="乱数生成器-rng-の再現可能性" class="section level2 unnumbered">
 <h2>乱数生成器 (RNG) の再現可能性</h2>
-<p>乱数生成器 (RNG) が関係するチャンクの再現性を維持するため, <strong><code>knitr</code></strong> は <code>.Random.seed</code> をキャッシュし, 各チャンクの評価直前に復元します. しかし1つ問題があります. チャンク A, B がキャッシュされていたとします. この時A, B の間に新たにチャンク C を挿入したとします (3つのチャンクは全て内部で RNG を使用しています). RNG が変更されたため B が更新されるはずですが, <code>.Random.seed</code> は副次作用であるため, これに反して実際には B は更新されません. はっきり言うと, B の再現性は偽りのものとなります.</p>
+<p>乱数生成器 (RNG) が関係するチャンクの再現性を維持するため, <strong>knitr</strong> は <code>.Random.seed</code> をキャッシュし, 各チャンクの評価直前に復元します. しかし1つ問題があります. チャンク A, B がキャッシュされていたとします. この時A, B の間に新たにチャンク C を挿入したとします (3つのチャンクは全て内部で RNG を使用しています). RNG が変更されたため B が更新されるはずですが, <code>.Random.seed</code> は副次作用であるため, これに反して実際には B は更新されません. はっきり言うと, B の再現性は偽りのものとなります.</p>
 <p>RNG の関係する再現可能性を保証するために, <code>.Random.seed</code> とキャッシュを関連付ける必要があります. これが変更される度にキャッシュも更新されなければなりません. これは <code>cache.extra</code> オプションで <strong>評価されない</strong> R 評価式を参照することで簡単にできます. たとえば以下のように.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="cache.html#cb52-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
 <p><code>?rand_seed</code> を確認してください (これは評価されない R 評価式です). この場合は各チャンクは最初に <code>.Random.seed</code> が最後の実行から変更されたかどうかを確認します. <code>.Random.seed</code> が異なるならキャッシュは再構成されます.</p>

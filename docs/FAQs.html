@@ -33,7 +33,7 @@
   
 <link rel="prev" href="examples.html"/>
 <link rel="next" href="editors.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -282,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <p>この FAQ は <a href="https://github.com/yihui/knitr/issues">issues</a> や私 (Yihui) のブログやEメールに届いた質問などを蓄積したものです. 個人的な考えとして, 私は FAQ という概念の大ファンでもありませんし, FAQ はときとしてほとんどバグのようなものであると思っています. ソフトウェアパッケージの作者は, ユーザーがそんな質問を頻繁にする理由を考えるべきです (ユーザーが全員愚かであるから, という考えには賛成できません). 少なくとも私は, 128件もの質問を1つ1つ読み返すほど忍耐強くありませんし, これを読んでいるあなたにも同様のことをさせるつもりはありません.</p>
 <ol style="list-style-type: decimal">
-<li>「<strong><code>knitr</code></strong>が動かないんだけど…」
+<li>「<strong>knitr</strong>が動かないんだけど…」
 <ul>
 <li>まず最初に, あなたの R パッケージ (<code>update.packages()</code> を使います) とたぶん R 本体も (ところで, 現在のあなたの<a href="https://cran.rstudio.com">Rのバージョン</a>は何ですか?) 更新してください. それから動くかどうかを確認してください. もしそれでも動かなかったら,「必要最低限の再現例 (minimal reprex)」のファイルと <code>library(knitr); sessionInfo()</code> の実行結果を <a href="https://github.com/yihui/knitr/issues">issue</a> に投稿してください.</li>
 </ul></li>
@@ -316,7 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>「コードチャンクにリテラルや生のコードを書く方法は? たとえばパースせずにコードチャンクを書きたいです. チュートリアルに便利だと思います.」
 <ul>
 <li>チャンクヘッダを破壊する必要があります. たとえば <code>```{r}`r''` ```</code> のように, チャンクヘッダの前後に空の文字列を加えます(issues <a href="https://github.com/yihui/knitr/issues/443">#443</a>). あるいはチャンクヘッダに<a href="https://ja.wikipedia.org/w/index.php?title=%E3%82%BC%E3%83%AD%E5%B9%85%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9&amp;oldid=78849992">ゼロ幅スペース</a>を追加します. 詳細は <a href="https://github.com/yihui/knitr-examples">example 065</a> を見てください.</li>
-<li>インラインの R コードでは <code>knitr::inline_expr()</code> を使うことになるでしょう (<strong><code>knitr</code></strong> ver. 1.8 以降で使用できます). R Markdown で書いている場合は, あるトリックを使えます. <code>`r</code> <strong>直後に</strong>改行を入れ (実際にやるときは直後にスペースを入れないでください), 二重のバッククオート (バックティック) のペアでインラインの評価式全体を囲みます. 例えば以下のようになります. この挙動の説明に興味があるなら <a href="https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/">このページ</a> を見てください (訳注: 未翻訳).</li>
+<li>インラインの R コードでは <code>knitr::inline_expr()</code> を使うことになるでしょう (<strong>knitr</strong> ver. 1.8 以降で使用できます). R Markdown で書いている場合は, あるトリックを使えます. <code>`r</code> <strong>直後に</strong>改行を入れ (実際にやるときは直後にスペースを入れないでください), 二重のバッククオート (バックティック) のペアでインラインの評価式全体を囲みます. 例えば以下のようになります. この挙動の説明に興味があるなら <a href="https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/">このページ</a> を見てください (訳注: 未翻訳).</li>
 </ul></li>
 </ol>
 <p><strong>訳注</strong>: ソースコードでの記述</p>
@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="8" style="list-style-type: decimal">
 <li>「何かお役に立てることはありますか?」
 <ul>
-<li><a href="https://paypal.me/YihuiXie">paypal</a> でドネートできますし, たのしい GIF アニメを私に<a href="https://twitter.com/xieyihui">ツイート</a>したり, Github で <strong><code>knitr</code></strong> のリポジトリをフォークしたりコードの改善に貢献したりできます.</li>
+<li><a href="https://paypal.me/YihuiXie">paypal</a> でドネートできますし, たのしい GIF アニメを私に<a href="https://twitter.com/xieyihui">ツイート</a>したり, Github で <strong>knitr</strong> のリポジトリをフォークしたりコードの改善に貢献したりできます.</li>
 <li>パッケージや <a href="http://amzn.com/1498716962">knitr book</a> を引用してください. R で <code>citation('knitr')</code> をしてみてください.</li>
 </ul></li>
 <li>「このドキュメントの修正や小さな変更を投稿するにはどうすればいいですか?」

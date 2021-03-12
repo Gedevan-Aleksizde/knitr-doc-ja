@@ -33,7 +33,7 @@
   
 <link rel="prev" href="framed.html"/>
 <link rel="next" href="output.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -285,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdtip">
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
 </div>
-<p><strong><code>knitr</code></strong> では, LaTeX の <code>listings</code> パッケージで結果を装飾するためにの出力<a href="hooks.html#hooks">フック</a>を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.</p>
+<p><strong>knitr</strong> では, LaTeX の <code>listings</code> パッケージで結果を装飾するためにの出力<a href="hooks.html#hooks">フック</a>を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="listings.html#cb30-1"></a><span class="do">## a common hook for messages, warnings and errors</span></span>
 <span id="cb30-2"><a href="listings.html#cb30-2"></a>hook_lst_bf <span class="ot">=</span> <span class="cf">function</span>(x, options) {</span>
 <span id="cb30-3"><a href="listings.html#cb30-3"></a>  <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[basicstyle={</span><span class="sc">\\</span><span class="st">bfseries}]</span><span class="sc">\n</span><span class="st">&quot;</span>, x, </span>
@@ -301,8 +301,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb30-13"><a href="listings.html#cb30-13"></a></span>
 <span id="cb30-14"><a href="listings.html#cb30-14"></a><span class="do">## empty highlight header since it is not useful any more</span></span>
 <span id="cb30-15"><a href="listings.html#cb30-15"></a><span class="fu">set_header</span>(<span class="at">highlight =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p>見て分かるように, <strong><code>knitr</code></strong> は全てをユーザーに公開してます. 必要なのはこれらの R コードの部品と出力を適切な環境で包むことです.</p>
-<p><strong>ちょっと待ってください</strong>, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で <code>render_listings()</code> 関数として <strong><code>knitr</code></strong> に組み込まれています. これが使用例になります.</p>
+<p>見て分かるように, <strong>knitr</strong> は全てをユーザーに公開してます. 必要なのはこれらの R コードの部品と出力を適切な環境で包むことです.</p>
+<p><strong>ちょっと待ってください</strong>, 上記のコードをコピペしないでください. これはすでに少々の機能を追加した上で <code>render_listings()</code> 関数として <strong>knitr</strong> に組み込まれています. これが使用例になります.</p>
 <ul>
 <li><strong>knitr</strong> で <code>listings</code> をつかう
 <ul>

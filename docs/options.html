@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="hooks.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -283,9 +283,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 
 <div class="rmdtip">
-このドキュメントでは <strong><code>knitr</code></strong> 全般の機能を紹介しており, <code>Rnw</code> や <code>Rhtml</code> の仕様についても言及しています. R Markdown でも <strong><code>knitr</code></strong> の機能は使われますが, R Markdown 独自の中間処理によって, 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.
+このドキュメントでは <strong>knitr</strong> 全般の機能を紹介しており, <code>Rnw</code> や <code>Rhtml</code> の仕様についても言及しています. R Markdown でも <strong>knitr</strong> の機能は使われますが, R Markdown 独自の中間処理によって, 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.
 </div>
-<p><strong><code>knitr</code></strong> パッケージはソースコード, テキスト, グラフ, チャンクで使用するプログラミング言語といった, コードチャンクのコンポネントのほとんど全部をカスタマイズするための多くのオプションを提供します. <code>knit</code> 処理のカスタマイズをパッケージレベルでカスタマイズするオプションもあります. この章では <strong><code>knitr</code></strong> で使用できる全てのチャンクオプションとパッケージオプションを解説します. 以下のリスト中で, オプションのデフォルト値になっているものはカッコ内に表記しています.</p>
+<p><strong>knitr</strong> パッケージはソースコード, テキスト, グラフ, チャンクで使用するプログラミング言語といった, コードチャンクのコンポネントのほとんど全部をカスタマイズするための多くのオプションを提供します. <code>knit</code> 処理のカスタマイズをパッケージレベルでカスタマイズするオプションもあります. この章では <strong>knitr</strong> で使用できる全てのチャンクオプションとパッケージオプションを解説します. 以下のリスト中で, オプションのデフォルト値になっているものはカッコ内に表記しています.</p>
 <div id="chunk-options" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> チャンクオプション一覧</h2>
 <p>チャンクオプションはチャンクのヘッダに書きます. チャンクヘッダの構文は文書フォーマットがなんであるかに依存します. 例えば <code>.Rnw</code> ファイル (R + LaTeX) であれば, <code>&lt;&lt; &gt;&gt;=</code> という記号の中に書きます. <code>.Rmd</code> ならば, チャンクヘッダは <code>```{r}</code> 内に書きます. 以下の例は主に <code>.Rmd</code> (R Markdown) の場合ですが, ほとんどのチャンクオプションはどのフォーマットでも使用可能です.</p>
@@ -313,7 +313,7 @@ knitr::opts_chunk$set(
 <li>理論上はチャンクラベルもまた引用符で囲む必要がありますが, 利便性のため書かなくとも自動で引用符が追加されます (例: <code>```{r, 2a}```</code> は <code>```{r, label='2a'}```</code> として扱われます).</li>
 <li>R のコードとして有効なものである限り, いくらでも複雑な構文を書くことができます.</li>
 </ul>
-<p>以下では <code>オプション</code>: (<code>デフォルト値</code>; 値の型) という形式で, <strong><code>knitr</code></strong> で使えるチャンクオプションのリストを掲載します.</p>
+<p>以下では <code>オプション</code>: (<code>デフォルト値</code>; 値の型) という形式で, <strong>knitr</strong> で使えるチャンクオプションのリストを掲載します.</p>
 <div id="evaluate" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> コード評価関連</h3>
 <ul>
@@ -326,7 +326,7 @@ knitr::opts_chunk$set(
 <li><strong><code>echo</code></strong>: (<code>TRUE</code>; <code>logical</code> または <code>numeric</code>).: 出力される文書にソースコードを表示するかどうか. 「表示」「隠す」に対応する <code>TRUE</code>/<code>FALSE</code> に加え, どの R の評価式を表示するかを選ぶために <code>numeric</code> のベクトルを使用することもできます. 例: <code>echo=2:3</code> は 2, 3番めの評価式を表示し, <code>echo = -4</code> は4番目だけを非表示にします.</li>
 <li><code>results</code>: (<code>'markup'</code>; <code>character</code>) 実行結果のテキストの部分をどう表示するかを制御します. このオプションは通常のテキスト出力にのみ影響することに注意してください (警告・メッセージ・エラーは適用範囲外です). 取りうる値は次のとおりです.
 <ul>
-<li><code>markup</code>: 出力の文書フォーマットに応じて適切な環境でテキスト出力をマークアップします. 例えば R Markdown ならば <code>"[1] 1 2 3"</code> が <strong><code>knitr</code></strong> によって以下のように加工されます. この場合, <code>results='markup'</code> は囲み (<code>```</code>) 付きのコードブロックとして出力されることを意味します.</li>
+<li><code>markup</code>: 出力の文書フォーマットに応じて適切な環境でテキスト出力をマークアップします. 例えば R Markdown ならば <code>"[1] 1 2 3"</code> が <strong>knitr</strong> によって以下のように加工されます. この場合, <code>results='markup'</code> は囲み (<code>```</code>) 付きのコードブロックとして出力されることを意味します.</li>
 </ul>
 <pre><code>```
 [1] 1 2 3
@@ -338,7 +338,7 @@ knitr::opts_chunk$set(
 </ul></li>
 <li><code>collapse</code>: (<code>FALSE</code>; <code>logical</code>) 可能であれば, ソースと出力をつなげて1つのブロックにするかどうかです (デフォルトではソースと出力はそれぞれ独立したブロックです). このオプションは Markdown 文書でのみ有効です.</li>
 <li><strong><code>warning</code></strong>: (<code>TRUE</code>; <code>logical</code>).: 警告文 (<code>warning()</code> で出力されるテキスト) を保存するかどうかです. <code>FALSE</code> の場合, 全ての警告文は文書に出力されず, 代わりにコンソールに書き出されます. 警告文の一部を選ぶインデックスとして, <code>numeric</code> 型のベクトルを指定することもできます. この場合のインデックスの数値は「何番目の警告文を表示するか」を参照する (例: <code>3</code> はこのチャンクから投げられた3番目の警告文を意味します) ものであって, 「何番目の R コードの警告文の出力を許可するか」ではないことに注意してください.</li>
-<li><strong><code>error</code></strong>: (<code>TRUE</code>; <code>logical</code>).: エラー文 (<code>stop()</code> で出力される文です) を保持するかどうかです. デフォルトの <code>TRUE</code> では, <strong>コード評価はエラーが出ても停止しません!</strong> エラー時点で停止させたい場合はこのオプションを <code>FALSE</code> に指定してください. <strong>R Markdown ではこのデフォルト値は <code>FALSE</code> に変更されていることに注意</strong>してください. チャンクオプションに <code>include=FALSE</code> がある場合, 起こりうるエラーを見落とさないように, <strong><code>knitr</code></strong> はエラー時点で停止するようになります.</li>
+<li><strong><code>error</code></strong>: (<code>TRUE</code>; <code>logical</code>).: エラー文 (<code>stop()</code> で出力される文です) を保持するかどうかです. デフォルトの <code>TRUE</code> では, <strong>コード評価はエラーが出ても停止しません!</strong> エラー時点で停止させたい場合はこのオプションを <code>FALSE</code> に指定してください. <strong>R Markdown ではこのデフォルト値は <code>FALSE</code> に変更されていることに注意</strong>してください. チャンクオプションに <code>include=FALSE</code> がある場合, 起こりうるエラーを見落とさないように, <strong>knitr</strong> はエラー時点で停止するようになります.</li>
 <li><strong><code>message</code></strong>: (<code>TRUE</code>; <code>logical</code>).: <code>message()</code> が出力するメッセージ文を (<code>warning</code> オプションと同様に) 表示するかどうかです.</li>
 <li><strong><code>include</code></strong>: (<code>TRUE</code>; <code>logical</code>).: 出力する文書にチャンクの出力を含めるかどうかです. <code>FALSE</code> ならばなにも書き出されませんが, コードの評価はなされ, チャンク内にプロット命令があるのならグラフのファイルも生成されます. よってこの図をそれ以降で任意に挿入することもできます.</li>
 <li><strong><code>strip.white</code></strong>: (<code>TRUE</code>; <code>logical</code>).: 出力時にソースコードの冒頭と末尾から空白行を除去するかどうかです.</li>
@@ -368,11 +368,11 @@ knitr::opts_chunk$set(
 <li><strong><code>attr.source</code></strong>: (<code>NULL</code>; <code>character</code>).: ソースコードブロックの属性です. <code>attr.output</code> などの <code>attr.*</code> シリーズと同様です.</li>
 <li><code>size</code>: (<code>'normalsize'</code>; <code>character</code>) <code>.Rnw</code> 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは <a href="https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles">overleaf のヘルプページ (英語)</a> を参照してください<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</li>
 <li><strong><code>background</code></strong>: (<code>'#F7F7F7'</code>; <code>character</code>).: <code>.Rnw</code> 使用時のチャンクブロックの背景色です<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</li>
-<li><strong><code>indent</code></strong>: (<code>character</code>).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は <strong><code>knitr</code></strong> が文書を読み込む際に設定されます. 例えば以下のチャンクでは, <code>indent</code> は空白文字2個です<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</li>
+<li><strong><code>indent</code></strong>: (<code>character</code>).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は <strong>knitr</strong> が文書を読み込む際に設定されます. 例えば以下のチャンクでは, <code>indent</code> は空白文字2個です<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="options.html#cb5-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] -1.34871445 -0.64320884 -0.08130768 -0.33508285  1.19974304 -1.40186582
-##  [7]  0.30455011  0.31691535 -0.62414386  0.03551125</code></pre>
+<pre><code>##  [1] -1.05859849  0.11155982  0.47038250  0.32044162  0.04781956 -0.66921245
+##  [7]  0.73489863  0.03657020  0.32724193  1.17580906</code></pre>
 </div>
 <div id="options-cache" class="section level3" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> キャッシュ関連</h3>
@@ -420,7 +420,7 @@ knitr::opts_chunk$set(
 <li><code>animate</code>: チャンクに複数のグラフがある場合, 連結して1つのアニメーションにします.</li>
 <li><code>hide</code>: グラフをファイルに保存しますが, 出力時は隠します.</li>
 </ul></li>
-<li><strong><code>dev</code></strong>: (LaTeX の場合は <code>'pdf'</code><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, HTML/Markdown の場合は <code>'png'</code>; <code>character</code>).: グラフをファイルに保存する際のグラフィックデバイスです. base R および, <strong><code>Cairo</code></strong>, <strong><code>cairoDevice</code></strong>, <strong><code>svglite</code></strong>, <strong><code>ragg</code></strong>, <strong><code>tikzDevice</code></strong> パッケージの提供するデバイスに対応しています. デバイスの例: <code>pdf</code>, <code>png</code>, <code>svg</code>, <code>jpeg</code>, <code>tiff</code>,
+<li><strong><code>dev</code></strong>: (LaTeX の場合は <code>'pdf'</code><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, HTML/Markdown の場合は <code>'png'</code>; <code>character</code>).: グラフをファイルに保存する際のグラフィックデバイスです. base R および, <strong><code>Cairo</code></strong>, <strong><code>cairoDevice</code></strong>, <strong><code>svglite</code></strong>, <strong><code>ragg</code></strong>, <strong>tikzDevice</strong> パッケージの提供するデバイスに対応しています. デバイスの例: <code>pdf</code>, <code>png</code>, <code>svg</code>, <code>jpeg</code>, <code>tiff</code>,
 <code>cairo_pdf</code>, <code>CairoJPEG</code>, <code>CairoPNG</code>, <code>Cairo_pdf</code>, <code>Cairo_png</code>, <code>svglite</code>,
 <code>ragg_png</code>, <code>tikz</code>, など. 有効なデバイスの一覧は <code>names(knitr:::auto_exts)</code> を参照してください. また, <code>function(filename, width, height)</code> という引数を定義した関数名を文字列で与えることでも指定できます. 画像サイズの単位は <strong>常にインチ</strong>です. ビットマップであってもインチで指定したものがピクセルに変換されます.</li>
 </ul>
@@ -436,11 +436,12 @@ knitr::opts_chunk$set(
 と <code>fig.height</code> とは異なります. つまりグラフは文書に表示される際にスケールが調整されます. 出力フォーマットに応じて, これら2つのオプションはそれぞれ特殊な値を取ることができます. 例えば LaTeX ならば <code>.8\\linewidth</code>, <code>3in</code>, <code>8cm</code> などと指定でき, HTML ならば <code>300px</code> と指定できます. <code>.Rnw</code> ならば <code>out.width</code> のデフォルト値は <code>\\maxwidth</code> に変更され, その値は <a href="framed.html#framed">framed のページ</a> で書いたように定義されます. 例えば <code>'40%'</code> のようにパーセンテージで指定もでき, これは LaTeX では <code>0.4\linewidth</code> に置き換えられます.</li>
 <li><strong><code>out.extra</code></strong>: (<code>NULL</code>; <code>character</code>).: 図の表示に関するその他のオプションです. LaTeX で出力する場合は <code>\includegraphics[]</code> に挿入される任意の文字に対応し (例: <code>out.extra = 'angle=90'</code> ならば図の90度回転), HTML なら <code>&lt;img /&gt;</code> に挿入されます (例: <code>out.extra = 'style="border:5px solid orange;"'</code>).</li>
 <li><strong><code>fig.retina</code></strong>: (<code>1</code>; <code>numeric</code>).: このオプションは HTML で出力する際にのみ適用されます. <a href="https://ja.wikipedia.org/wiki/Retina%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4">Retina ディスプレイ</a> に対して画像サイズを調整する比率 (多くの場合は2を指定します) です. チャンクオプションの <code>dpi</code> を <code>dpi * fig.retina</code> で, <code>out.width</code> を <code>fig.width * dpi / fig.retina</code> で計算します. 例えば <code>fig.retina = 2</code> なら, 画像の物理サイズが2倍となり, その表示サイズは半分になります.</li>
-<li><strong><code>resize.width</code></strong>, <strong><code>resize.height</code></strong>: (<code>NULL</code>; <code>character</code>).: LaTeX で出力する際に <code>\resizebox{}{}</code> コマンドで使われます. これら2つのオプションは Tikz グラフィックスをリサイズしたい場合のみ必要になります. それ以外に通常使うことはありません. しかし <strong><code>tikzDevice</code></strong> の開発者によれば, 他の箇所のテキストとの一貫性のため, Tikz グラフィックスはリサイズを想定していません. 値の1つでも <code>NULL</code> ならば, <code>!</code> が使用されます (この意味がわからない方は <strong>graphicx</strong> のドキュメントを読んでください).</li>
+<li><strong><code>resize.width</code></strong>, <strong><code>resize.height</code></strong>: (<code>NULL</code>; <code>character</code>).: LaTeX で出力する際に <code>\resizebox{}{}</code> コマンドで使われます. これら2つのオプションは Tikz グラフィックスをリサイズしたい場合のみ必要になります. それ以外に通常使うことはありません. しかし <strong>tikzDevice</strong> の開発者によれば, 他の箇所のテキストとの一貫性のため, Tikz グラフィックスはリサイズを想定していません. 値の1つでも <code>NULL</code> ならば, <code>!</code> が使用されます (この意味がわからない方は <strong>graphicx</strong> のドキュメントを読んでください).</li>
 <li><strong><code>fig.align</code></strong>: (<code>'default'</code>; <code>character</code>).: 出力時の画像の位置揃え (アラインメント) です. 可能な値は <code>default</code>, <code>left</code>, <code>right</code>, <code>center</code> です. <code>default</code> は位置について特に何も調整しません.</li>
 <li><strong><code>fig.link</code></strong>: (<code>NULL</code>; <code>character</code>) 画像に与えるリンク.</li>
 <li><strong><code>fig.env</code></strong>: (<code>'figure'</code>; <code>character</code>).: 画像に使われる LaTeX 環境. 例えば <code>fig.env = 'marginfigure'</code> ならば <code>\begin{marginfigure}</code> で囲まれます. このオプションの使用は <code>fig.cap</code> が指定されいることが条件です.</li>
 <li><strong><code>fig.cap</code></strong>: (<code>NULL</code>; <code>character</code>).: 図のキャプションです.</li>
+<li><strong><code>fig.alt</code></strong>: (<code>NULL</code>; <code>character</code>) HTML 出力時の図の <code>&lt;img&gt;</code> タグの <code>alt</code> 属性に使う代替テキストです. デフォルトでは, 代替テキストが与えられた場合チャンクオプション <code>fig.cap</code> には代替テキストが使われます.</li>
 <li><strong><code>fig.scap</code></strong>: (<code>NULL</code>; <code>character</code>).: 図の短縮キャプションです. 出力が LaTeX の場合のみ意味をなします. 短縮キャプションは <code>\caption[]</code> コマンドに挿入され, 大抵の場合は PDF 出力時の「図一覧」で表示される見出しとして使われます.</li>
 <li><strong><code>fig.lp</code></strong>: (<code>'fig:'</code>; <code>character</code>).; 図の相互参照に使われるラベル<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>の接頭語で, <code>\label{}</code> コマンドに挿入されます. 実際のラベルはこの接頭語とチャンクラベルを連結して作られます. 例えば図のラベルが <code>```{r, foo-plot}</code> will be ならば, デフォルトでは図のラベルは <code>fig:foo-plot</code> になります.</li>
 <li><strong><code>fig.pos</code></strong>: (<code>''</code>; <code>character</code>).: LaTeX の <code>\begin{figure}[]</code> に使われる, 画像の位置調整オプション<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>を指定します.</li>
@@ -449,10 +450,10 @@ knitr::opts_chunk$set(
 <li><strong><code>fig.sep</code></strong>: (<code>NULL</code>; <code>character</code>).: subfigures どうしの間に挿入されるセパレータを指定する文字ベクトルです. <code>fig.ncol</code> が指定された場合, デフォルトでは <code>fig.sep</code> に N 個ごとに <code>\newline</code> が挿入されます (<code>N</code> は列の数です). 例えば <code>fig.ncol = 2</code> ならばデフォルトは <code>fig.sep = c('', '', '\\newline', '', '', '\\newline', '', ...)</code> となります.</li>
 <li><strong><code>fig.process</code></strong>: (<code>NULL</code>; <code>function</code>).: 画像ファイルに対する後処理の関数です. 関数は画像のファイルパスを引数として, 挿入したい新しい画像のファイルを返すものであるべきです. 関数に <code>options</code> 引数がある場合, この引数にチャンクオプションのリストが与えられます.</li>
 <li><strong><code>fig.showtext</code></strong>: (<code>NULL</code>; <code>logical</code>).: <code>TRUE</code> ならばグラフの描画前に <code>showtext::showtext_begin()</code> が呼ばれます. 詳細は <a href="http://cran.rstudio.com/package=showtext"><strong><code>showtext</code></strong></a> パッケージのドキュメントを参照してください<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>.</li>
-<li><strong><code>external</code></strong>: (<code>TRUE</code>; <code>logical</code>).: tikz グラフィックの処理 (PDF 生成時のコンパイル前の処理) を外部化するかどうかです. <strong><code>tikzDevice</code></strong> パッケージの <code>tikz()</code> デバイスを使う場合 (つまり <code>dev='tikz'</code> を指定したとき) のみ使用され, コンパイル時間を短縮することが可能です.</li>
-<li><strong><code>sanitize</code></strong>: (<code>FALSE</code>; <code>character</code>). tikz グラフィックでサニタイズ (ここでは, LaTeXで特殊な意味を持つ文字のエスケープ処理) するかどうかです. 詳細は <strong><code>tikzDevice</code></strong> パッケージのドキュメントを参照してください.</li>
+<li><strong><code>external</code></strong>: (<code>TRUE</code>; <code>logical</code>).: tikz グラフィックの処理 (PDF 生成時のコンパイル前の処理) を外部化するかどうかです. <strong>tikzDevice</strong> パッケージの <code>tikz()</code> デバイスを使う場合 (つまり <code>dev='tikz'</code> を指定したとき) のみ使用され, コンパイル時間を短縮することが可能です.</li>
+<li><strong><code>sanitize</code></strong>: (<code>FALSE</code>; <code>character</code>). tikz グラフィックでサニタイズ (ここでは, LaTeXで特殊な意味を持つ文字のエスケープ処理) するかどうかです. 詳細は <strong>tikzDevice</strong> パッケージのドキュメントを参照してください.</li>
 </ul>
-<p>さらにこの他に, ユーザーが使用することを想定していない隠しオプションが2つあります. <code>fig.cur</code> (複数の図表がある場合の, 現在の図番号/インデックス) と <code>fig.num</code> (チャンク内の図の合計数) です. これら2つのオプションは <strong><code>knitr</code></strong> が複数の図そしてアニメーションを処理するためにあります. 場合によっては手動で保存した画像ファイルを使ってアニメーションを書き出す場合などに役に立つかもしれません (使用例として <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-graphics.pdf">graphics manual</a> を参照してください).</p>
+<p>さらにこの他に, ユーザーが使用することを想定していない隠しオプションが2つあります. <code>fig.cur</code> (複数の図表がある場合の, 現在の図番号/インデックス) と <code>fig.num</code> (チャンク内の図の合計数) です. これら2つのオプションは <strong>knitr</strong> が複数の図そしてアニメーションを処理するためにあります. 場合によっては手動で保存した画像ファイルを使ってアニメーションを書き出す場合などに役に立つかもしれません (使用例として <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-graphics.pdf">graphics manual</a> を参照してください).</p>
 </div>
 <div id="animation" class="section level3" number="1.1.6">
 <h3><span class="header-section-number">1.1.6</span> アニメーション関連</h3>
@@ -519,13 +520,14 @@ knitr::opts_chunk$set(
 <p>別の方法として, R の基本関数である <code>options()</code> を使ってパッケージオプションを設定する場合は <code>?knitr::opts_knit</code> を参照してください.</p>
 <p>可能なオプションは次のとおりです.</p>
 <ul>
-<li><strong><code>aliases</code></strong>: (<code>NULL</code>; <code>character</code>).: チャンクオプションのエイリアスを指定する名前付きベクトルです. 例えば <code>c(h = 'fig.height', w = 'fig.width')</code> は <strong><code>knitr</code></strong> に <code>h</code> は <code>fig.height</code> <code>w</code> は <code>fig.width</code> と同じ意味だと認識させます. このオプションは名前の長いチャンクオプションのタイピング労力を削減できます.</li>
+<li><strong><code>aliases</code></strong>: (<code>NULL</code>; <code>character</code>).: チャンクオプションのエイリアスを指定する名前付きベクトルです. 例えば <code>c(h = 'fig.height', w = 'fig.width')</code> は <strong>knitr</strong> に <code>h</code> は <code>fig.height</code> <code>w</code> は <code>fig.width</code> と同じ意味だと認識させます. このオプションは名前の長いチャンクオプションのタイピング労力を削減できます.</li>
 <li><strong><code>base.dir</code></strong>: (<code>NULL</code>; <code>character</code>).: グラフを生成する際のディレクトリの絶対パスです.</li>
 <li><strong><code>base.url</code></strong>: (<code>NULL</code>; <code>character</code>).: HTML ページに掲載する画像のベースURLです.</li>
 <li><strong><code>concordance</code></strong>: (<code>FALSE</code>; <code>logical</code>).: この機能は RStudio によって実装されている機能で, <code>.Rnw</code> でのみ有効です. 入力ファイルの行番号に対応した行番号を出力ファイルに書き出すかどうかを指定します. これにより, 出力から入力の誘導が可能になり, 特に LaTeX のエラー発生時に役に立ちます.</li>
-<li><strong><code>eval.after</code></strong>: (<code>'fig.cap'</code>; <code>character</code>).: オプション名の文字ベクトルを指定します. このオプションはチャンクが評価された<strong>後で</strong>評価され, 他のオプションはチャンクが評価される前に評価されます. 例えば <code>eval.after = 'fig.cap'</code> が指定されているときに <code>fig.cap = paste('p-value is', t.test(x)$p.value)</code> とすると, チャンクの評価後の <code>x</code> の値が使用されます.</li>
-<li><strong><code>global.par</code></strong>: (<code>FALSE</code>; <code>logical</code>).: <code>TRUE</code> にすると, それ以前のコードチャンクでの <code>par()</code> での設定が引き継がれます (もちろん, この設定は R グラフィックスのみで有効です). デフォルトでは <strong><code>knitr</code></strong> はグラフの記録のために新規のグラフィックデバイスを開き, コードの評価後に閉じるため, <code>par()</code> による設定はその都度破棄されます.</li>
+<li><strong><code>eval.after</code></strong>: (<code>c('fig.cap', 'fig.alt';</code>character<code>).: オプション名の文字ベクトルを指定します. このオプションはチャンクが評価された**後で**評価され, 他の全てのオプションはチャンクが評価される前に評価されます. 例えば</code>eval.after = ‘fig.cap’<code>が指定されているときに</code>fig.cap = paste(‘p-value is’, t.test(x)$p.value)<code>とすると,</code>eval.after<code>にはチャンクの評価後の</code>x` の値が使用されます.</li>
+<li><strong><code>global.par</code></strong>: (<code>FALSE</code>; <code>logical</code>).: <code>TRUE</code> にすると, それ以前のコードチャンクでの <code>par()</code> での設定が引き継がれます (もちろん, この設定は R グラフィックスのみで有効です). デフォルトでは <strong>knitr</strong> はグラフの記録のために新規のグラフィックデバイスを開き, コードの評価後に閉じるため, <code>par()</code> による設定はその都度破棄されます.</li>
 <li><strong><code>header</code></strong>: (<code>NULL</code>; <code>character</code>).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば <code>\documentclass{article}</code> の直後, HTML ならば <code>&lt;head&gt;</code> タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は <code>knitr::knit_patterns$get('document.begin')</code> で知ることができます. このオプションは <code>.Rnw</code> と <code>.Rhtml</code> 限定の機能です<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>.</li>
+<li><code>label.prefix</code>: (<code>c(table = 'tab:')</code>; character) ラベルの接頭語を指定します. 現時点では <code>kable::kable()</code> によって生成される表のラベルに対する接頭語のみサポートしています.</li>
 <li><strong><code>latex.options.color</code></strong>, <strong><code>latex.options.graphicx</code></strong>: (<code>NULL</code>).: それぞれ LaTeX パッケージの <strong>color</strong> と <strong>graphicx</strong> に対するオプションを指定します. これらのオプションは <code>.Rnw</code> 限定の機能です<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.</li>
 <li><strong><code>out.format</code></strong>: (<code>NULL</code>; <code>character</code>).: 可能な値は <code>latex</code>, <code>sweave</code>,
 <code>html</code>, <code>markdown</code>, <code>jekyll</code> です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば <code>?knitr::render_latex</code> を参考にしてください. このオプションは <code>knitr::knit()</code> が実行される<strong>前に</strong>設定する必要があります (文書内で設定しても機能しません).</li>
@@ -553,7 +555,7 @@ show_toc: true
 <li id="fn2"><p>訳注: R Markdown ではさらに, YAML フロントマターで適用するハイライトのテーマ名を指定できます<a href="options.html#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>訳注: <code>\normalsize</code>, <code>\Large</code>, <code>\LARGE</code> など LaTeX で指定できるフォントサイズを表すマクロのことを指しています<a href="options.html#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p>訳注: R Markdown では背景色は CSS や <code>class.output</code> などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください<a href="options.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>訳注: R Markdown の場合は <strong><code>knitr</code></strong> 以外の中間処理があるため, 必ずしもこのルールを守りません<a href="options.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>訳注: R Markdown の場合は <strong>knitr</strong> 以外の中間処理があるため, 必ずしもこのルールを守りません<a href="options.html#fnref5" class="footnote-back">↩︎</a></p></li>
 <li id="fn6"><p>訳注: <code>pdf</code> は日本語表示に向いていないため, <code>cairo_pdf</code> などを利用することをおすすめします<a href="options.html#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p>訳注: チャンクラベルと混同しないでください<a href="options.html#fnref7" class="footnote-back">↩︎</a></p></li>
 <li id="fn8"><p>訳注: LaTeX では通常は図の位置は調整されますが, <code>fig.pos='H'</code> ならばその位置で固定されます<a href="options.html#fnref8" class="footnote-back">↩︎</a></p></li>

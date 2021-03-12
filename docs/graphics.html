@@ -33,7 +33,7 @@
   
 <link rel="prev" href="reference.html"/>
 <link rel="next" href="manual.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -277,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="graphics" class="section level1 unnumbered">
 <h1>グラフィックス</h1>
-<p><strong><code>knitr</code></strong> におけるグラフィックスの力について</p>
+<p><strong>knitr</strong> におけるグラフィックスの力について</p>
 <p>オリジナルの記事: <a href="https://yihui.org/knitr/demos/graphics" class="uri">https://yihui.org/knitr/demos/graphics</a></p>
 <p>オリジナルの更新日: 2011/12/9</p>
 <hr />
@@ -287,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="グラフィックスマニュアル" class="section level2 unnumbered">
 <h2>グラフィックスマニュアル</h2>
-<p>グラフィックスマニュアルでは <strong><code>knitr</code></strong> のグラフィックスに彩りを加えるものを紹介します.</p>
+<p>グラフィックスマニュアルでは <strong>knitr</strong> のグラフィックスに彩りを加えるものを紹介します.</p>
 <ul>
 <li>グラフィックスマニュアルのソースと出力は以下です
 <ul>
@@ -302,7 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="figure" style="text-align: center"><span id="fig:demo-graphics-tikz"></span>
 <img src="https://db.yihui.org/imgur/HCkka.png" alt="knitr 上の tikz グラフィックス"  />
 <p class="caption">
-図 4.7: <strong><code>knitr</code></strong> 上の tikz グラフィックス
+図 4.7: <strong>knitr</strong> 上の tikz グラフィックス
 </p>
 </div>
 
@@ -312,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 図 4.8: (ref:demo-graphics-ggplot2
 </p>
 </div>
-<p><a href="http://code.google.com/p/tufte-latex/"><code>tufte-handout</code></a> クラスの作者に感謝します. 上記の例はこれを利用しています. そして <strong><code>tikzDevice</code></strong> パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).</p>
+<p><a href="http://code.google.com/p/tufte-latex/"><code>tufte-handout</code></a> クラスの作者に感謝します. 上記の例はこれを利用しています. そして <strong>tikzDevice</strong> パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).</p>
 </div>
 <div id="カスタムグラフィックデバイスについての補足" class="section level2 unnumbered">
 <h2>カスタムグラフィックデバイスについての補足</h2>
@@ -320,7 +320,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="graphics.html#cb41-1"></a>my_pdf <span class="ot">=</span> <span class="cf">function</span>(file, width, height) {</span>
 <span id="cb41-2"><a href="graphics.html#cb41-2"></a>  <span class="fu">pdf</span>(file, <span class="at">width =</span> width, <span class="at">height =</span> height, <span class="at">pointsize =</span> <span class="dv">10</span>)</span>
 <span id="cb41-3"><a href="graphics.html#cb41-3"></a>}</span></code></pre></div>
-<p>これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. <strong><code>knitr</code></strong> はグラフファイルに対して適切なファイル拡張子を推測できないため, <code>fig.ext</code> オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.</p>
+<p>これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. <strong>knitr</strong> はグラフファイルに対して適切なファイル拡張子を推測できないため, <code>fig.ext</code> オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="graphics.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;my_pdf&#39;, fig.ext=&#39;pdf&#39;}</span></span>
 <span id="cb42-2"><a href="graphics.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
 <span id="cb42-3"><a href="graphics.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
@@ -359,7 +359,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="装飾フォント" class="section level2 unnumbered">
 <h2>装飾フォント</h2>
-<p><code>pdf()</code> のドキュメントによれば, <code>useDingbats</code> 引数は小さな円を含む PDF のファイルサイズを減らしてくれる可能性があります. RStudio 上で <strong><code>knitr</code></strong> を使っている場合, このオプションはデフォルトで無効になっています. 巨大な散布図を含む場合, ソース文書に <code>pdf.options(useDingbats = TRUE)</code> と書くことで有効になるでしょう. 詳細な議論は issue <a href="https://github.com/yihui/knitr/issues/311">#311</a> を参照してください.</p>
+<p><code>pdf()</code> のドキュメントによれば, <code>useDingbats</code> 引数は小さな円を含む PDF のファイルサイズを減らしてくれる可能性があります. RStudio 上で <strong>knitr</strong> を使っている場合, このオプションはデフォルトで無効になっています. 巨大な散布図を含む場合, ソース文書に <code>pdf.options(useDingbats = TRUE)</code> と書くことで有効になるでしょう. 詳細な議論は issue <a href="https://github.com/yihui/knitr/issues/311">#311</a> を参照してください.</p>
 </div>
 <div id="アニメーション" class="section level2 unnumbered">
 <h2>アニメーション</h2>

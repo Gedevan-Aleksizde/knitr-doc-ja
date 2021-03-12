@@ -33,7 +33,7 @@
   
 <link rel="prev" href="options.html"/>
 <link rel="next" href="examples.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルのページ: <a href="https://yihui.org/knitr/hooks/" class="uri">https://yihui.org/knitr/hooks/</a></p>
 <p>オリジナルの更新日: 2017-02-03</p>
 <hr />
-<p><strong><code>knitr</code></strong> の <code>knit_hooks</code> オブジェクトはフック (hook) を設定するのに使います. 基本的な使用法は <code>knit_hooks$set(param = FUN)</code> です (詳細は <a href="objects.html#objects">A</a> 章『オブジェクト』参照)で, ここでの <code>param</code> はチャンクオプション名, <code>FUN</code> は関数です. フックには2種類あります. チャンクに対するフックと出力に対するフックです. フック関数はどのように設計するかによって異なる形式をとるでしょう.</p>
+<p><strong>knitr</strong> の <code>knit_hooks</code> オブジェクトはフック (hook) を設定するのに使います. 基本的な使用法は <code>knit_hooks$set(param = FUN)</code> です (詳細は <a href="objects.html#objects">A</a> 章『オブジェクト』参照)で, ここでの <code>param</code> はチャンクオプション名, <code>FUN</code> は関数です. フックには2種類あります. チャンクに対するフックと出力に対するフックです. フック関数はどのように設計するかによって異なる形式をとるでしょう.</p>
 <div id="チャンクフック" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> チャンクフック</h2>
 <p>チャンクフックは対応するチャンクオプションの値が <code>NULL</code> ではないとき コードチャンクの前後に実行されます (つまりオプションになんらかの値を設定している限り, 実行されるということです). この関数は以下のように 3 つの引数が定義されるべきです.</p>
@@ -292,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-5"><a href="hooks.html#cb11-5"></a>    <span class="do">## チャンク実行後の処理</span></span>
 <span id="cb11-6"><a href="hooks.html#cb11-6"></a>  }</span>
 <span id="cb11-7"><a href="hooks.html#cb11-7"></a>}</span></code></pre></div>
-<p><strong><code>knitr</code></strong> が文書を処理する時, 各チャンクの直前に <code>foo_hook(before = TRUE)</code> が (チャンクがキャッシュされていたり評価しないように設定されていない限り) 呼び出され, チャンク直後に <code>foo_hook(before = FALSE)</code> が呼び出されます. <code>options</code> 引数は現在のチャンクに設定された<strong>オプション</strong> (<a href="options.html#options">1</a> 章) です (例えば <code>options$label</code> は現在のチャンクのラベルです). <code>envir</code> にはコードチャンクが評価させる環境を指定します. 後の2つの引数はチャンクフックのオプション引数です. 例えば, 次のように <code>small_mar</code> オプションにフックを設定します. (訳注: マージン調整だけでは違いがわかりづらい, というか R Markdown はデフォルトでマージン調整するので背景色も変更して違いをわかりやすくしました)</p>
+<p><strong>knitr</strong> が文書を処理する時, 各チャンクの直前に <code>foo_hook(before = TRUE)</code> が (チャンクがキャッシュされていたり評価しないように設定されていない限り) 呼び出され, チャンク直後に <code>foo_hook(before = FALSE)</code> が呼び出されます. <code>options</code> 引数は現在のチャンクに設定された<strong>オプション</strong> (<a href="options.html#options">1</a> 章) です (例えば <code>options$label</code> は現在のチャンクのラベルです). <code>envir</code> にはコードチャンクが評価させる環境を指定します. 後の2つの引数はチャンクフックのオプション引数です. 例えば, 次のように <code>small_mar</code> オプションにフックを設定します. (訳注: マージン調整だけでは違いがわかりづらい, というか R Markdown はデフォルトでマージン調整するので背景色も変更して違いをわかりやすくしました)</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="hooks.html#cb12-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">small_mar =</span> <span class="cf">function</span>(before, options, envir) {</span>
 <span id="cb12-2"><a href="hooks.html#cb12-2"></a>  <span class="cf">if</span> (before) {</span>
 <span id="cb12-3"><a href="hooks.html#cb12-3"></a>    <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>))  <span class="co"># 上と右側のマージンを小さく設定</span></span>
@@ -305,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 hist(rnorm(100), main = &#39;&#39;)
 ```</code></pre>
 <p><img src="knitr_files/figure-html/myplot-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><strong><code>knitr</code></strong> のフックは出力にテキストを挿入することにも使えます. そのため, このタイプのフック関数は文字列を返す必要があります. この機能はフックの能力を大いに広げます. <strong><code>rgl</code></strong> パッケージを例に取りましょう. <strong>rgl</strong> によって生成された 3D グラフを Markdown または HTML 文書に挿入したい時, このタイプのフック関数を考える事になるでしょう (この例よりも洗練された <code>hook_rgl()</code> 関数が <strong><code>rgl</code></strong> パッケージにあるので参照してください).</p>
+<p><strong>knitr</strong> のフックは出力にテキストを挿入することにも使えます. そのため, このタイプのフック関数は文字列を返す必要があります. この機能はフックの能力を大いに広げます. <strong><code>rgl</code></strong> パッケージを例に取りましょう. <strong>rgl</strong> によって生成された 3D グラフを Markdown または HTML 文書に挿入したい時, このタイプのフック関数を考える事になるでしょう (この例よりも洗練された <code>hook_rgl()</code> 関数が <strong><code>rgl</code></strong> パッケージにあるので参照してください).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="hooks.html#cb14-1"></a>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">rgl =</span> <span class="cf">function</span>(before, options, envir) {</span>
 <span id="cb14-2"><a href="hooks.html#cb14-2"></a>  <span class="cf">if</span> (<span class="sc">!</span>before) {</span>
 <span id="cb14-3"><a href="hooks.html#cb14-3"></a>    <span class="do">## チャンクコードが評価された後の処理</span></span>

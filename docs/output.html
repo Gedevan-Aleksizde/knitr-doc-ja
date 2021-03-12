@@ -33,7 +33,7 @@
   
 <link rel="prev" href="listings.html"/>
 <link rel="next" href="reference.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルのページ:</p>
 <p>オリジナルの更新日: 2012-01-25</p>
 <hr />
-<p><a href="https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf">main manual</a> の導入の通り, <strong><code>knitr</code></strong> は R コードチャンクの評価のために <strong><code>evaluate</code></strong> パッケージを使用し, その出力は6種類あります. <strong>ソースコード</strong>, <strong>通常テキスト出力</strong>, <strong>メッセージ文</strong>, <strong>警告文</strong>, <strong>エラー文</strong>, そして<strong>グラフ</strong>です. 以降ではこれらをうまく制御する方法を要約します.</p>
+<p><a href="https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf">main manual</a> の導入の通り, <strong>knitr</strong> は R コードチャンクの評価のために <strong><code>evaluate</code></strong> パッケージを使用し, その出力は6種類あります. <strong>ソースコード</strong>, <strong>通常テキスト出力</strong>, <strong>メッセージ文</strong>, <strong>警告文</strong>, <strong>エラー文</strong>, そして<strong>グラフ</strong>です. 以降ではこれらをうまく制御する方法を要約します.</p>
 <ol style="list-style-type: decimal">
 <li><strong>ソースコード</strong>: チャンクオプション <code>echo</code> を使います, 例: <code>echo=FALSE</code> は R コードを隠します</li>
 <li><strong>通常テキスト出力</strong>: <code>results</code> オプションを使います (<code>markup</code> はテキストをマークアップし, <code>asis</code> はテキストをそのまま出力し, <code>hide</code> は結果を隠します)</li>
@@ -291,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>グラフ</strong>: <code>fig.keep</code> オプションを使います. (<code>none</code> は全てのグラフを破棄し, <code>all</code> は全ての低水準プロットに分けて保存し, <code>high</code> は高水準作図として保存します)</li>
 </ol>
 <p>これらのオプションは互いに独立しており, 他のタイプの出力への影響を気にすることなく自由に切り替えることができます.</p>
-<p><strong><code>knitr</code></strong> の全ての<a href="$options">オプション</a>は R の評価式から値を取ることができます. これは main manual で条件評価 (conditional evaluation) の機能として紹介したものです. 端的に言うなら <code>eval=dothis</code> は実際の値 <code>value</code> はグローバル環境の <code>dothis</code> とい変数から取られた値になるということです. この変数を操作することで, 1つ1つのチャンクの評価をオン・オフ切り替えることができます.</p>
+<p><strong>knitr</strong> の全ての<a href="$options">オプション</a>は R の評価式から値を取ることができます. これは main manual で条件評価 (conditional evaluation) の機能として紹介したものです. 端的に言うなら <code>eval=dothis</code> は実際の値 <code>value</code> はグローバル環境の <code>dothis</code> とい変数から取られた値になるということです. この変数を操作することで, 1つ1つのチャンクの評価をオン・オフ切り替えることができます.</p>
 <div id="echo-オプションの発展的な使い方" class="section level2 unnumbered">
 <h2><code>echo</code> オプションの発展的な使い方</h2>
 <p>チャンクオプション <code>echo</code> は <code>TRUE/FALSE</code> だけでなく, 数値のベクトルを取ることで出力文を選択することができます. このベクトルのインデックスはコードチャンクを完全な R 評価式単位でインデックスします. たとえば <code>echo=1</code> は出力内の最初のソースコード出力のみを含めることを意味します. 以下はこの例の完全版です.</p>
@@ -316,7 +316,7 @@ plot(mtcars[, 4:5])
 </div>
 <div id="インライン出力" class="section level2 unnumbered">
 <h2>インライン出力</h2>
-<p>チャンクの出力とは別の出力タイプがあります. インライン R コードの出力です (例: <code>\Sexpr{t.test(x)$p.value}</code>). 数値の出力は特別な扱われ方をします. 非常に大きいか小さい数値は指数表記で書き出されます. 指数表記になるしきい値は R オプションの <code>scipen</code> (詳細は <code>?options</code> を参照してください) によります. 基本的に <span class="math inline">\(10^4\)</span> より大きいか, <span class="math inline">\(10^{-4}\)</span> より小さい場合に指数表記になります (負の数でも絶対値が同様に評価されます). 出力フォーマット (LaTeX とか HTML とか) に応じて, <strong><code>knitr</code></strong> は <code>$3.14 \times 10^5$</code> や <code>3.14 &amp;times; 10&lt;sup&gt;5&lt;/sup&gt;</code> というように適切なコードで出力します.</p>
+<p>チャンクの出力とは別の出力タイプがあります. インライン R コードの出力です (例: <code>\Sexpr{t.test(x)$p.value}</code>). 数値の出力は特別な扱われ方をします. 非常に大きいか小さい数値は指数表記で書き出されます. 指数表記になるしきい値は R オプションの <code>scipen</code> (詳細は <code>?options</code> を参照してください) によります. 基本的に <span class="math inline">\(10^4\)</span> より大きいか, <span class="math inline">\(10^{-4}\)</span> より小さい場合に指数表記になります (負の数でも絶対値が同様に評価されます). 出力フォーマット (LaTeX とか HTML とか) に応じて, <strong>knitr</strong> は <code>$3.14 \times 10^5$</code> や <code>3.14 &amp;times; 10&lt;sup&gt;5&lt;/sup&gt;</code> というように適切なコードで出力します.</p>
 <p>もう1つの R オプション <code>digits</code> は, どの桁で丸めるべきかを制御します. デフォルトの <code>options(scipen = 0, digits = 4)</code> が気に入らないならば, こんなふうに最初のチャンクで変更できます.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="output.html#cb33-1"></a><span class="do">## 10^5 以上ならば指数表記され, 2 桁で丸める</span></span>
 <span id="cb33-2"><a href="output.html#cb33-2"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">1</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
@@ -334,11 +334,11 @@ plot(mtcars[, 4:5])
 </div>
 <div id="long-lines-of-text-output" class="section level2 unnumbered">
 <h2>Long lines of text output</h2>
-<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong><code>knitr</code></strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>.</p>
+<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong>knitr</strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>.</p>
 </div>
 <div id="メッセージに1コメントを" class="section level2 unnumbered">
 <h2>1メッセージに1コメントを</h2>
-<p>R でメッセージ文を書き出すのに <code>cat()</code> を使うのが好きな人がたくさんいますが, これは大変よくない使い方です. このような形にメッセージ文は非表示にするのが大変だからです. 本当に <strong>メッセージ</strong> を提示したい場合は, <code>message()</code> 関数を使うべきです. 正規のメッセージは <code>suppressMessages()</code> で表示を抑制したり, <strong><code>knitr</code></strong> で補足したりすることができ便利です. パッケージ開発者の中にはこの問題に注意を払ってない人がいます. そのようなパッケージを読み込んだりパッケージの関数を使ったりすると, 表示を抑制できない偽物のメッセージ文を見かけます. パッケージのスタートアップメッセージはじっさい必要ですが, それは <code>packageStartupMessage()</code> で表示すべきです. <strong><code>knitr</code></strong> の <code>message=FALSE</code> でメッセージを消せないなら, それはパッケージ開発者に変更を要求するときです.</p>
+<p>R でメッセージ文を書き出すのに <code>cat()</code> を使うのが好きな人がたくさんいますが, これは大変よくない使い方です. このような形にメッセージ文は非表示にするのが大変だからです. 本当に <strong>メッセージ</strong> を提示したい場合は, <code>message()</code> 関数を使うべきです. 正規のメッセージは <code>suppressMessages()</code> で表示を抑制したり, <strong>knitr</strong> で補足したりすることができ便利です. パッケージ開発者の中にはこの問題に注意を払ってない人がいます. そのようなパッケージを読み込んだりパッケージの関数を使ったりすると, 表示を抑制できない偽物のメッセージ文を見かけます. パッケージのスタートアップメッセージはじっさい必要ですが, それは <code>packageStartupMessage()</code> で表示すべきです. <strong>knitr</strong> の <code>message=FALSE</code> でメッセージを消せないなら, それはパッケージ開発者に変更を要求するときです.</p>
 <p>同様に, 警告を発したいならまさに <code>warning()</code> を使うべきです.</p>
 <p>というわけで, あなたの <code>cat</code> の振る舞いに気をつけてください!</p>
 </div>

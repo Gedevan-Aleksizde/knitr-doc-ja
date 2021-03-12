@@ -1,6 +1,5 @@
 ---
 title: "**knitr**: Rによる美麗で柔軟そして高速な動的レポート生成"
-date: "ver. 1.2 (`r format(Sys.time(), '%Y/%m/%d %H:%M:%S %Z')`, 本家最終更新時刻: `r format(as.POSIXct(system('git log -1 --pretty=format:%ci ../yihui', intern = T)), '%Y/%m/%d %H:%M:%S %Z')`)"
 author:
   - "著者: Xie, Yihui (谢益辉)"
   - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
@@ -18,7 +17,15 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 
 ```{r index-setup, include=F}
 require(knitr)
+updated_time <- format(Sys.time(), '%Y/%m/%d %H:%M:%S %Z')
+original_time <- format(as.POSIXct(system('git log -1 --pretty=format:%ci ../yihui', intern = T)), '%Y/%m/%d %H:%M:%S %Z')
+original_hash <- read.csv(text = system("git ls-tree master ../yihui/", intern = T), header = F, sep = "")[, 3]
 ```
+<!-- inline で書くと見づらいのでここに移動 -->
+
+---
+date: "ver. 1.2 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/`r original_hash`))"
+---
 
 ```{block2, type="rmdimportant"}
 本稿は [CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)ライセンス](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています. Yihui 氏によるオリジナルは https://yihui.org/knitr/ で読むことができます.

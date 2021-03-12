@@ -33,7 +33,7 @@
   
 <link rel="prev" href="objects.html"/>
 
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルのページ: <a href="https://yihui.org/knitr/patterns/" class="uri">https://yihui.org/knitr/patterns/</a></p>
 <p>オリジナルの更新日: 2017-02-03</p>
 <hr />
-<p><a href="objects.html#objects">オブジェクト</a> の <code>knit_patterns</code> は <strong><code>knitr</code></strong> のパターンを管理します. たとえば現在の正規表現パターンのリストを取得するには <code>knit_patterns$get()</code> が使えます. パターンリストには以下のコンポネントが含まれています.</p>
+<p><a href="objects.html#objects">オブジェクト</a> の <code>knit_patterns</code> は <strong>knitr</strong> のパターンを管理します. たとえば現在の正規表現パターンのリストを取得するには <code>knit_patterns$get()</code> が使えます. パターンリストには以下のコンポネントが含まれています.</p>
 <ul>
 <li><strong><code>chunk.begin</code></strong>: コードチャンクの開始時点のパターンです. チャンクオプションを取りだすための, <code>()</code> で定義されたグループが含まれていなければなりません.</li>
 <li><strong><code>chunk.end</code></strong>: チャンクの終了時点のパターンです (文芸的プログラミングにおける本来の意味とは異なります. 本来は通常のテキストの開始時点を意味していました. 詳細は <a href="options.html#options">1</a> 章の <code>filter.chunk.end</code> オプションを参照してください).</li>
@@ -292,13 +292,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><code>document.begin</code></strong>: 文書の本文開始点を見つけるためのパターンです (たとえば LaTeX プリアンブルを取りだすのに使うとして, tikz のグラフィックスを外部化したり, シンタックスハイライトのためにコードを挿入したりすることができます)</li>
 </ul>
 <p>パターンが <code>NULL</code> である場合, 何もマッチしません.</p>
-<p>Sweave のように, <strong><code>knitr</code></strong> には2種類の R コードがあります. パラグラフのようなまとまりである「コードチャンクと」, 地の文の中にあって実行される「インライン R コード」です. 文書内のチャンクのオプションは <code>label, opt1=TRUE, opt2=FALSE, opt3='character.string'</code> という形式になります (オプションは <code>,</code> と <code>=</code> で繋げられ, ラベルのみが <code>label</code> が暗黙に <code>value</code> とみなされるため, ラベルのみが <code>value</code> を必要としません).</p>
+<p>Sweave のように, <strong>knitr</strong> には2種類の R コードがあります. パラグラフのようなまとまりである「コードチャンクと」, 地の文の中にあって実行される「インライン R コード」です. 文書内のチャンクのオプションは <code>label, opt1=TRUE, opt2=FALSE, opt3='character.string'</code> という形式になります (オプションは <code>,</code> と <code>=</code> で繋げられ, ラベルのみが <code>label</code> が暗黙に <code>value</code> とみなされるため, ラベルのみが <code>value</code> を必要としません).</p>
 <div id="ビルトインパターン" class="section level2" number="6.1">
 <h2><span class="header-section-number">B.1</span> ビルトインパターン</h2>
-<p><strong><code>knitr</code></strong> には <code>all_patterns</code> を保存するいくつかのビルトインパターンがあります.</p>
+<p><strong>knitr</strong> には <code>all_patterns</code> を保存するいくつかのビルトインパターンがあります.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="patterns.html#cb54-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb54-2"><a href="patterns.html#cb54-2"></a><span class="fu">str</span>(all_patterns)</span></code></pre></div>
-<p><strong><code>Knitr</code></strong> は最初に適切なパターンのセットを決定するために入力文書の中身を探索します. もしこの自動検出が失敗したら, 入力文書のファイル拡張子名から判定し, <strong><code>knitr</code></strong> は自動で上記のリストから適切な形式を選び出します. たとえば入力ファイルが <code>file.Rnw</code> ならは <code>all_patterns$rnw</code> を, <code>file.html</code> ならば <code>all_patterns$html</code> を, というふうに使用します.</p>
+<p><strong><code>Knitr</code></strong> は最初に適切なパターンのセットを決定するために入力文書の中身を探索します. もしこの自動検出が失敗したら, 入力文書のファイル拡張子名から判定し, <strong>knitr</strong> は自動で上記のリストから適切な形式を選び出します. たとえば入力ファイルが <code>file.Rnw</code> ならは <code>all_patterns$rnw</code> を, <code>file.html</code> ならば <code>all_patterns$html</code> を, というふうに使用します.</p>
 <p><code>pat_rnw()</code>, <code>pat_html()</code>, <code>pat_md()</code>, <code>pat_tex()</code>, <code>pat_brew()</code> という一連の便利な関数はビルトインパターンを設定するために使われます.</p>
 
 </div>

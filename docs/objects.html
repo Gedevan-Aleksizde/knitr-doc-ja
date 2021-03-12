@@ -33,7 +33,7 @@
   
 <link rel="prev" href="showcase.html"/>
 <link rel="next" href="patterns.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -281,23 +281,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルのページ: <a href="https://yihui.org/knitr/objects/" class="uri">https://yihui.org/knitr/objects/</a></p>
 <p>オリジナルの更新日: 2017-02-03</p>
 <hr />
-<p><strong><code>knitr</code></strong> パッケージはオプションと設定を制御する特別なオブジェクト (以下では <code>obj</code> と表記) を使用します. このオブジェクトは次のようなメソッドを持ちます.</p>
+<p><strong>knitr</strong> パッケージはオプションと設定を制御する特別なオブジェクト (以下では <code>obj</code> と表記) を使用します. このオブジェクトは次のようなメソッドを持ちます.</p>
 <ul>
 <li><strong><code>obj$get(name)</code></strong>: <code>name</code> という名前のオプションを返します. または, <code>name</code> が2以上の長さの名前つきベクトルである場合はリストを返します. そして <code>name</code> が与えられなかった場合は全てのオプションのリストを返します</li>
 <li><strong><code>obj$set(...)</code></strong>: オプションを永続的に変更します. 引数 <code>...</code> には <code>tag = value</code> の形式, または <code>list(opt1 = value1, opt2 = value2)</code> のようなオプションのリストとして与えられます</li>
 <li><strong><code>obj$merge(values)</code></strong>: 新しいオプションリストを現在のリストに一時的にマージして, そのリストを返します (もとのリストは変更されません)</li>
 <li><strong><code>obj$restore()</code></strong>: オブジェクトを元に戻します</li>
 </ul>
-<p><strong><code>knitr</code></strong> のこれらのオブジェクトはユーザーから見ることができます.</p>
+<p><strong>knitr</strong> のこれらのオブジェクトはユーザーから見ることができます.</p>
 <ul>
 <li><strong><code>opts_chunk</code></strong>, <strong><code>opts_current</code></strong>: <a href="options.html#chunk-options">チャンクオプション</a>を管理します</li>
-<li><strong><code>opts_knit</code></strong>: <strong><code>knitr</code></strong> <a href="options.html#package-options">パッケージ全体のオプション</a>を管理します</li>
+<li><strong><code>opts_knit</code></strong>: <strong>knitr</strong> <a href="options.html#package-options">パッケージ全体のオプション</a>を管理します</li>
 <li><strong><code>knit_hooks</code></strong>: <a href="hooks.html#hooks">フック関数</a>を管理します</li>
 <li><strong><a href="patterns.html#patterns"><code>knit_patterns</code></a></strong>: 入力ドキュメントから R コードを取りだすための正規表現を管理します</li>
 <li><strong><code>knit_engines</code></strong>: R 以外の他の言語の処理に対する関数を管理します</li>
 </ul>
 <p><code>knit_patterns</code> 以外の他の全てのオブジェクトはデフォルトの初期値が設定されており, <code>knit_paterns</code> は特に指定がない場合は入力ファイルのタイプに基づいて自動的に決定されます. <code>knit_hooks</code> オブジェクトは1番よく使うことになるでしょう. そして残りの3つは直接使用する機会は少ないと思います. たとえば <code>opts_chunk</code> はたいていはコマンドラインで直接実行するよりも入力ファイル内で設定します.</p>
-<p>各チャンクが依存している <strong><code>knitr</code></strong> の設定は, そのチャンクが実行されるまえに設定<strong>されなければなりません</strong>. スクリプトの一番最初の, 他のどのチャンクよりも先に実行される位置に「<code>knit</code>
+<p>各チャンクが依存している <strong>knitr</strong> の設定は, そのチャンクが実行されるまえに設定<strong>されなければなりません</strong>. スクリプトの一番最初の, 他のどのチャンクよりも先に実行される位置に「<code>knit</code>
 の設定用チャンク」を書き, その中で <code>cache = FALSE</code>, <code>include = FALSE</code> オプションを設定することをおすすめします. 設定用チャンクには, このチャンク自身の実行時に有効化される設定を想定する命令文は含めては<strong>いけません</strong><a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>. 設定用チャンクはこのようになるでしょう<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="objects.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=</span></span>
 <span id="cb53-2"><a href="objects.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="at">library(knitr)</span></span>

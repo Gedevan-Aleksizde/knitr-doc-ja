@@ -33,7 +33,7 @@
   
 <link rel="prev" href="editors.html"/>
 <link rel="next" href="listings.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -277,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="framed" class="section level1 unnumbered">
 <h1><code>framed</code> パッケージ</h1>
-<p><strong><code>knitr</code></strong> における LaTeX のデフォルトスタイル</p>
+<p><strong>knitr</strong> における LaTeX のデフォルトスタイル</p>
 <p>オリジナルのページ: <a href="https://yihui.org/knitr/demo/framed/" class="uri">https://yihui.org/knitr/demo/framed/</a></p>
 <p>オリジナルの更新日: 2012/2/29</p>
 <hr />
@@ -285,11 +285,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdtip">
 このページは <code>knitr</code> 単体の場合を解説しています. R Markdown の場合, <code>framed</code> が関わるのは基本的にコードチャンクの表示スタイルのみです.
 </div>
-<p>デフォルトでは <strong><code>knitr</code></strong> はタイプセットに <a href="http://www.ctan.org/pkg/framed">framed</a> という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.</p>
+<p>デフォルトでは <strong>knitr</strong> はタイプセットに <a href="http://www.ctan.org/pkg/framed">framed</a> という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.</p>
 <p><a href="FAQs.html#FAQs">よくある質問</a>で挙げたように, 影付きボックスからはみ出ることがあるかもしれません. その際は <code>options('width')</code> でより小さい値を設定してください.</p>
 <div id="要素の概要" class="section level2 unnumbered">
 <h2>要素の概要</h2>
-<p>テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は <code>kframe</code> 環境で問題が合った旨を警告します. <code>kframe</code> は <strong><code>knitr</code></strong> チャンク出力を包むために使用します. 既知の問題では, issue <a href="https://github.com/yihui/knitr/issues/154">#154</a> で PNG を使った場合があります. 確実にページ余白を超えないようにするため, <strong><code>knitr</code></strong> は以下のコマンドを LaTeX プリアンブルで使用します.</p>
+<p>テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は <code>kframe</code> 環境で問題が合った旨を警告します. <code>kframe</code> は <strong>knitr</strong> チャンク出力を包むために使用します. 既知の問題では, issue <a href="https://github.com/yihui/knitr/issues/154">#154</a> で PNG を使った場合があります. 確実にページ余白を超えないようにするため, <strong>knitr</strong> は以下のコマンドを LaTeX プリアンブルで使用します.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb28-1"><a href="framed.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% maxwidth is the original width if it&#39;s less than linewidth</span></span>
 <span id="cb28-2"><a href="framed.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">%% otherwise use linewidth (to make sure the graphics do not exceed the margin)</span></span>
 <span id="cb28-3"><a href="framed.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatletter</span></span>

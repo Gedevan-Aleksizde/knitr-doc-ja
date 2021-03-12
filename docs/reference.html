@@ -33,7 +33,7 @@
   
 <link rel="prev" href="output.html"/>
 <link rel="next" href="graphics.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>knitr</code>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</a>
           </h1>
         </div>
 
@@ -293,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;&lt;chunk2&gt;&gt;=
 &lt;&lt;chunk1&gt;&gt;
 @</code></pre>
-<p><code>chunk2</code> では <code>chunk1</code> のコードが挿入されます. この機能は <strong><code>knitr</code></strong> でも有効ですが <strong><code>knitr</code></strong> はさらに任意の (制限なし) 階層での再帰的なチャンク参照をサポートしています (Sweave は1段階までしかサポートしていませんでした). つまりあるチャンクはさらに別のチャンクを参照しているチャンクを参照できるということです.</p>
+<p><code>chunk2</code> では <code>chunk1</code> のコードが挿入されます. この機能は <strong>knitr</strong> でも有効ですが <strong>knitr</strong> はさらに任意の (制限なし) 階層での再帰的なチャンク参照をサポートしています (Sweave は1段階までしかサポートしていませんでした). つまりあるチャンクはさらに別のチャンクを参照しているチャンクを参照できるということです.</p>
 <p>この <code>&lt;&lt;chunk-label&gt;&gt;</code> 構文と同様のものは markdown の構文でも機能します. それ以前の, 他のチャンクを含んでいる, 名前を付けた markdown チャンクを再利用することができます. あなたの使っている R Markdown エディタが「予期しないトークンです」と構文に警告していたとしてもです.</p>
 <p><strong>訳注</strong>: R Markdown でもチャンク中に <code>&lt;&lt;</code>, <code>&gt;&gt;</code> で囲んでラベルを書くことでチャンク参照ができます.</p>
 <p><strong>knitr</strong> でチャンクを再利用するアプローチは他にもあります.</p>
@@ -310,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 &lt;&lt;chunk1, echo=FALSE, results=&#39;markup&#39;&gt;&gt;=
 @</code></pre>
-<p>2番目のチャンクは空なので, <strong><code>knitr</code></strong> は同じ名前を持ち, 空でないチャンクを探し, そのチャンクのコードを使用します. ポイントは他のチャンクを使用するためにはチャンクの中身を空にしておくことです. 問題は, この2つのチャンクの MD5 ハッシュ値が異なるため, 両方のキャッシュを残すことができないというものです. <strong><code>knitr</code></strong> はラベル1つにつき1まとまりのキャッシュしか取ることができません.</p>
+<p>2番目のチャンクは空なので, <strong>knitr</strong> は同じ名前を持ち, 空でないチャンクを探し, そのチャンクのコードを使用します. ポイントは他のチャンクを使用するためにはチャンクの中身を空にしておくことです. 問題は, この2つのチャンクの MD5 ハッシュ値が異なるため, 両方のキャッシュを残すことができないというものです. <strong>knitr</strong> はラベル1つにつき1まとまりのキャッシュしか取ることができません.</p>
 </div>
 <div id="チャンクオプション-ref.label" class="section level2 unnumbered">
 <h2>チャンクオプション <code>ref.label</code></h2>
