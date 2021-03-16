@@ -110,7 +110,8 @@ knitr::opts_chunk$set(
 -   **`background`**: (`'#F7F7F7'`; `character`).:  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
 -   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **knitr** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です^[訳注: R Markdown の場合は **knitr** 以外の中間処理があるため, 必ずしもこのルールを守りません].
   
-```{r indent-example}
+```{r indent-example, echo=2}
+set.seed(42)
 rnorm(10)
 ```
 
