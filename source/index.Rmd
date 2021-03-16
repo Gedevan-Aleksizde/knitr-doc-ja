@@ -18,13 +18,12 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 ```{r index-setup, include=F}
 require(knitr)
 updated_time <- format(Sys.time(), '%Y/%m/%d %H:%M:%S %Z')
-original_time <- format(as.POSIXct(system('git log -1 --pretty=format:%ci ../yihui', intern = T)), '%Y/%m/%d %H:%M:%S %Z')
-original_hash <- read.csv(text = system("git ls-tree master ../yihui/", intern = T), header = F, sep = "")[, 3]
+original_time <- format(as.POSIXct(system('cd ../yihui && git log -1 --pretty=format:%ci content/knitr', intern = T)), '%Y/%m/%d %H:%M:%S %Z')
 ```
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.2 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/`r original_hash`))"
+date: "ver. 1.2 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/content/knitr))"
 ---
 
 ```{block2, type="rmdimportant"}
