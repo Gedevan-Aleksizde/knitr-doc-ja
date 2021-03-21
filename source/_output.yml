@@ -13,3 +13,5 @@ rmdja::gitbook_ja:
       twitter: yes
       facebook: no
       all: ['facebook', 'linkedin', 'instapaper', 'weibo', 'vk']
+rmdja::pdf_book_ja:
+  keep_tex: true

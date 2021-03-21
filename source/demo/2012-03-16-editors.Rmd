@@ -26,7 +26,7 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 `User --> User Commands --> Edit User Commands` から, Rnw 文書を処理するためのカスタムコマンドを定義できます.
 
 ```{r demo-def-user-command-texmaker, echo=F, fig.cap="Texmaker でユーザーコマンドを定義する"}
-knitr::include_graphics("https://db.yihui.org/imgur/ddIBH.png")
+include_graphics_url("https://db.yihui.org/imgur/ddIBH.png")
 ```
 
 Rの実行ファイルパスが `PATH` 環境変数にない場合, 上記のコマンドに `Rscript.exe` のフルパスを書く必要があります. こんなかんじに:
@@ -38,7 +38,7 @@ Rの実行ファイルパスが `PATH` 環境変数にない場合, 上記のコ
 `Rscript.exe` の場所さえ知っていれば, R を開いて `R.home('bin')` を実行すれば見つけられます. そうすればどんな Rnw 文書ファイルに対しても, この  `knitr` コマンドでコンパイルすることができます.
 
 ```{r demo-compile-texmaker, echo=F, fig.cap="Texmaker で knitr コマンドでコンパイルする"}
-knitr::include_graphics("https://db.yihui.org/imgur/xKoeT.png")
+include_graphics_url("https://db.yihui.org/imgur/xKoeT.png")
 ```
 
 文書をコンパイルするには左向きの矢印をクリックし, PDF を表示するのに右矢印をクリックします. もちろん上記の設定は Windows のものですが, 他のシステムでも同じ要領です. `Rscript.exe` を `Rscript` に置き換えてください (実際は Windows 環境でも `Rscript` が使えます).
@@ -48,7 +48,7 @@ knitr::include_graphics("https://db.yihui.org/imgur/xKoeT.png")
 一例として, 基本的には Texmaker と同様に設定することができます (Henrik Nyhus と [Paul J. Hurtado](https://twitter.com/MathBioPaul/status/691446297304272897) に感謝)
 
 ```{r demo-editor-texstudio, echo=F, fig.cap="TeXStudio での knitr"}
-knitr::include_graphics("https://db.yihui.org/imgur/VFcvTUB.png")
+include_graphics_url("https://db.yihui.org/imgur/VFcvTUB.png")
 ```
 
 上級者向けオプション (左下) を解放すれば, 下部に `Commands ($PATH)` が現れるでしょう. ここに `R` フォルダのパスを入力できます (例: 引用符なしで `C:\Program Files\R\R-3.3.2\bin\x64`). それからユーザーコマンド (そして他のコマンドからも呼び出せる) に `Rscript.exe -e "knitr::knit2pdf('%.Rnw')"` とするだけです.
@@ -126,7 +126,7 @@ latexmk -pdf "${1%.*}"
 (ref:demo-editors-texworks) TeXworks で **knitr** を使う
 
 ```{r demo-editors-texworks, echo=F, fig.cap="(ref:demo-editors-texworks)"}
-knitr::include_graphics("https://db.yihui.org/imgur/d6tE6.png")
+include_graphics_url("https://db.yihui.org/imgur/d6tE6.png")
 ```
 
 ## Kile {-}

@@ -35,13 +35,13 @@ slug: graphics
 (ref:demo-graphics-tikz) **knitr** 上の tikz グラフィックス
 
 ```{r demo-graphics-tikz, echo=F, fig.cap="(ref:demo-graphics-tikz)"}
-knitr::include_graphics("https://db.yihui.org/imgur/HCkka.png")
+include_graphics_url("https://db.yihui.org/imgur/HCkka.png")
 ```
 
 (ref:demo-graphics-ggplot2) **knitr** 上の **`ggplot2`**
 
 ```{r demo-graphics-ggplot2, echo=F, fig.cap="(ref:demo-graphics-ggplot2"}
-knitr::include_graphics("https://db.yihui.org/imgur/BTEiu.png")
+include_graphics_url("https://db.yihui.org/imgur/BTEiu.png")
 ```
 
  [`tufte-handout`](http://code.google.com/p/tufte-latex/) クラスの作者に感謝します. 上記の例はこれを利用しています. そして **tikzDevice**  パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).

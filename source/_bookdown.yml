@@ -22,6 +22,7 @@ rmd_files:
     - '33-patterns.Rmd'
 history: https://github.com/Gedevan-Aleksizde/knitr-doc-ja/commits/master/source/%s
 edit: https://github.com/Gedevan-Aleksizde/knitr-doc-ja/edit/master/source/%s
+download: ["pdf"]
 language:                 
   label:
     fig: '図 '
