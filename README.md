@@ -25,7 +25,7 @@ documentation by Yihui is [here](https://yihui.org/knitr/).
 
 -   “[R Markdown
     Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)”
-    ([日本語版](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/))
+    ([日本語版『R Markdown クックブック』](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/))
 -   “[R Markdown: The Definitive
     Guide](https://bookdown.org/yihui/rmarkdown/)”
     ([近日翻訳予定](https://github.com/Gedevan-Aleksizde/rmarkdown-book))
