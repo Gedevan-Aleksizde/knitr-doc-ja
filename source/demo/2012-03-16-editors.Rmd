@@ -15,9 +15,9 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 
 ----
 
-```{block2 demo-editor-translator, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
-```
+:::
 
 私は以前 [Lyx]($lyx) (未翻訳), [RStudio]($RStudio) (未翻訳) [Emacs Org-mode]($org) (未翻訳), [Ecripse]($ecripse) (未翻訳) について書きました. その他にも, [Texmaker](http://www.xm1math.net/texmaker/) や Windt といったエディタで **knitr** を使うことができます. ポイントは R を呼び出して **knitr** パッケージを読み込み, それから `knit()`または `knit2pdf()` を呼び出すことです.
 

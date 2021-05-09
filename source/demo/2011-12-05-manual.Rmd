@@ -13,9 +13,9 @@ slug: manual
 
 オリジナルの更新日: 2011/12/5
 
-```{block, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 訳注: このページは **knitr** ドキュメントのトップページではありません.
-```
+:::
 
 パッケージのマニュアルそれ自体は **knitr** のほとんどの機能の良い使用例となりえます. このマニュアルは LyX で書かれ (([knitr-manual.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.lyx))), Rnw ソース ([knitr-manual.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.Rnw)) にエクスポートして PDFファイル [knitr-manual.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) を生成できます.
 

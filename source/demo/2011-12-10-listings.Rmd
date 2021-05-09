@@ -15,9 +15,9 @@ slug: listings
 
 ----
 
-```{block2, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
-```
+:::
 
 **knitr** では, LaTeX の `listings` パッケージで結果を装飾するためにの出力[フック](#hooks)を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.
 
