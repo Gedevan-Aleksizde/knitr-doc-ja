@@ -7,7 +7,7 @@
 ]{bxjsreport}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex,ifthen}
+\usepackage{ifxetex,ifluatex,ifpdf,ifthen}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
@@ -47,10 +47,12 @@
 
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
+\ifpdf
+  \IfFileExists{microtype.sty}{% use microtype if available
+    \usepackage[]{microtype}
+    \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+  }{}
+\fi
 \makeatletter
 \@ifundefined{KOMAClassName}{% if non-KOMA class
   \IfFileExists{parskip.sty}{%
@@ -116,7 +118,7 @@
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 % for compatible with kableExtra package functions.
 \usepackage{longtable,booktabs,dcolumn}
-%\usepackage{longtable,booktabs,dcolumn,array,multirow,wrapfig,float,colortbl,pdflscape,tabu,threeparttablethreeparttablex,makecell}
+%\usepackage{longtable,booktabs,dcolumn,array,multirow,wrapfig,float,colortbl,pdflscape,tabu,threeparttable,threeparttablex,makecell}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -143,37 +145,25 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 
-% for soft wrapping in code block
-\usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere}
-\usepackage[style=jauthoryear,natbib=true]{biblatex}
 
-
-\title{\textbf{knitr}: Rによる美麗で柔軟そして高速な動的レポート生成}
-\author{著者: Xie, Yihui (谢益辉) \and 翻訳者: Katagiri,
-Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identified}}}
-\date{ver. 1.3 (2021/03/21 19:34:35 JST, 本家最終更新時刻:
-\href{https://github.com/rbind/yihui/tree/master/content/knitr}{2021/03/01
-16:46:02 JST})}
-\usepackage{bxtexlogo}
-\colorlet{shadecolor}{gray!20}
-
-\usepackage{fmtcount}
-\ifdefined\theFancyVerbLine\renewcommand{\theFancyVerbLine}{\small \padzeroes[2]{\decimal{FancyVerbLine}}}\fi % adjust row number position
-\IfFileExists{bxcoloremoji.sty}{\usepackage{bxcoloremoji}}{}
-
-
-
-%\renewcommand{\prepartname}{第}
-%\renewcommand{\postpartname}{部}
-
-
-% redefine quote format as modern
+% compatible mukti-columns macro
+% by "R Markdown Cookbook" Sec. 5.8
+\newenvironment{cols}[1][]{}{}
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
 \makeatletter
-\@ifpackageloaded{framed}{}{\usepackage{framed}}
-\definecolor{quotebarcolor}{rgb}{0.2,0.2,0.2}
-\renewenvironment{quote}{\def\FrameCommand{{\color{quotebarcolor}{\vrule width 3pt}}\hspace{10pt}}\MakeFramed{\advance\hsize-\width\FrameRestore}}{\endMakeFramed}
+\def\ignorespacesandallpars{%
+\@ifnextchar\par
+{\expandafter\ignorespacesandallpars\@gobble}%
+{}%
+}
 \makeatother
+%-------
+
 
 % ---- XeLaTeX 専用のあれ ----
 \ifxetex
@@ -190,7 +180,7 @@ Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identifi
   }%
 \fi
 
-% --- 特殊ブロックをLaTeXで表現するためのマクロ ---
+% ---- custom blocks ----
 \makeatletter
 \newenvironment{kframe}{%
 \medskip{}
@@ -216,37 +206,63 @@ Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identifi
 }{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
 \makeatother
 
-\newenvironment{rmdblock}[1]
-  {
-  \begin{itemize}
-  \renewcommand{\labelitemi}{
-    \raisebox{-.7\height}[0pt][0pt]{
-      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{_latex/_img/#1}}
-    }
-  }
+
+% --- custom blocks ---
+
+% ---- redefine quote format as modern
+\setlength{\fboxsep}{.8em}
+\usepackage{framed}
+\definecolor{quotebarcolor}{rgb}{0.2,0.2,0.2}
+\renewenvironment{quote}{\def\FrameCommand{{\color{quotebarcolor}{\vrule width 3pt}}\hspace{10pt}}\MakeFramed{\advance\hsize-\width\FrameRestore}}{\endMakeFramed}
+% ----
+% ---- tcolobox settings by the Cookbook Sec.9.6.2
+\usepackage{tcolorbox}
+% \newenvironment{blackbox}{\definecolor{shadecolor}{rgb}{0, 0, 0}\color{white}\begin{shaded}}{\end{shaded}}
+% \newtcolorbox{blackbox}{colback=black,colframe=orange,coltext=white,boxsep=5pt,arc=4pt}
+\newtcolorbox{greyblock}{colback=gray!20,colframe=orange,coltext=black,boxsep=5pt,arc=4pt}
+\newenvironment{infobox}[1]{\begin{itemize}\renewcommand{\labelitemi}{\raisebox{-.7\height}[0pt][0pt]{%
+  {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{_latex/_img/#1}}}}
   \setlength{\fboxsep}{1em}
-  \begin{kframe}
+  \begin{greyblock}
   \item
-  }
-  {
-  \end{kframe}
-  \end{itemize}
-  }
-\newenvironment{rmdnote}
-  {\begin{rmdblock}{note}}
-  {\end{rmdblock}}
-\newenvironment{rmdcaution}
-  {\begin{rmdblock}{caution}}
-  {\end{rmdblock}}
-\newenvironment{rmdimportant}
-  {\begin{rmdblock}{important}}
-  {\end{rmdblock}}
-\newenvironment{rmdtip}
-  {\begin{rmdblock}{tip}}
-  {\end{rmdblock}}
-\newenvironment{rmdwarning}
-  {\begin{rmdblock}{warning}}
-  {\end{rmdblock}}
+  }{\end{greyblock}\end{itemize}
+}
+% ----
+
+% for block/block2 engine
+\newenvironment{memo}{\begin{infobox}{memo}}{\end{infobox}}
+\newenvironment{caution}{\begin{infobox}{caution}}{\end{infobox}}
+\newenvironment{important}{\begin{infobox}{important}}{\end{infobox}}
+\newenvironment{tip}{\begin{infobox}{tip}}{\end{infobox}}
+\newenvironment{warning}{\begin{infobox}{warning}}{\end{infobox}}
+% ---- custom block over ----
+
+% --- for soft wrapping in code block
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere}
+% ----
+
+% ---- user-defined preamble here ----
+% ---- user-defined preamble over ----
+
+\usepackage[style=jauthoryear,natbib=true]{biblatex}
+
+
+\title{\textbf{knitr}: Rによる美麗で柔軟そして高速な動的レポート生成}
+\author{著者: Xie, Yihui (谢益辉) \and 翻訳者: Katagiri,
+Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identified}}}
+\date{ver. 1.4 (2021/05/10 02:15:04 JST, 本家最終更新時刻:
+\href{https://github.com/rbind/yihui/tree/master/content/knitr}{2021/03/01
+16:46:02 JST})}
+\usepackage{bxtexlogo}
+\colorlet{shadecolor}{gray!20}
+
+\usepackage{fmtcount}
+\ifdefined\theFancyVerbLine\renewcommand{\theFancyVerbLine}{\small \padzeroes[2]{\decimal{FancyVerbLine}}}\fi % adjust row number position
+\IfFileExists{bxcoloremoji.sty}{\usepackage{bxcoloremoji}}{}
+
+
+
 
 \begin{document}
 \maketitle
@@ -260,7 +276,7 @@ Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identifi
 \chapter*{knitr}\label{knitr}}
 \addcontentsline{toc}{chapter}{knitr}
 
-\begin{rmdimportant}
+\begin{infobox}{important}
 本稿は
 \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja}{CC
 BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0
@@ -271,11 +287,13 @@ This is an unofficial Japanese translation of Yihui's \textbf{knitr}
 documentation, which is licensed under
 \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{CC BY-NC-SA
 4.0}. The original documentation by Yihui is
-\href{https://yihui.org/knitr/}{here}. \end{rmdimportant}
+\href{https://yihui.org/knitr/}{here}.
+
+\end{infobox}
 
 \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja}{\includegraphics{7051e470f21a5ffaacd91435e622cbb2e1382765.png}}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 \textbf{訳注}: Yihui
 氏のサイトの一連のドキュメントはかなり以前から氏のブログ投稿として断続的に更新されてきたものを編纂しているため,
 内容の重複した記述がいくつかありますし, RStudio および R Markdown
@@ -291,7 +309,9 @@ Sweave はあまり使いません). そのため,
 に関する日本語の情報流通を鑑みるに,
 非常に有用なドキュメントであると翻訳者は確信しています.
 それぞれのトピックがどの環境を想定したものなのか,
-よく確認してご覧ください. \end{rmdtip}
+よく確認してご覧ください.
+
+\end{infobox}
 
 \hypertarget{ux6982ux8981}{%
 \section*{概要}\label{ux6982ux8981}}
@@ -537,13 +557,14 @@ FOAS はフリーウェア, オープンアクセス,
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 このドキュメントでは \textbf{knitr} 全般の機能を紹介しており,
 \texttt{Rnw} や \texttt{Rhtml} の仕様についても言及しています. R
 Markdown でも \textbf{knitr} の機能は使われますが, R Markdown
 独自の中間処理によって,
 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.
-\end{rmdtip}
+
+\end{infobox}
 
 \textbf{knitr} パッケージはソースコード, テキスト, グラフ,
 チャンクで使用するプログラミング言語といった,
@@ -1563,6 +1584,11 @@ manual} を参照してください).
   限定の機能です\footnote{訳注: R Markdown ではこの機能もやはり YAML
     フロントマターが担当しています}.
 \item
+  \textbf{\texttt{latex.tilde}} (\texttt{NULL}): .Rnw
+  文書のハイライト出力部でのチルダを表す LaTeX コマンドです (使用例は
+  issue \href{https://github.com/yihui/knitr/issues/1992}{\#1992}
+  を見てください).
+\item
   \textbf{\texttt{out.format}}: (\texttt{NULL}; \texttt{character}).:
   可能な値は \texttt{latex}, \texttt{sweave}, \texttt{html},
   \texttt{markdown}, \texttt{jekyll} です.
@@ -1813,14 +1839,30 @@ Markdown Cookbook}} を参考にしてください.
 デフォルトではチャンクフックは空ですが,
 出力フックはデフォルト設定があり, 以下のようにしてリセットできます.
 
-\textbf{訳注}: \textbf{R Markdown の場合,
-フォーマット関数の処理内容によっては予期せぬ結果になることがあります}.
-
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{knitr}\SpecialCharTok{::}\NormalTok{knit\_hooks}\SpecialCharTok{$}\FunctionTok{restore}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{infobox}{caution}
+
+\begin{center}
+\textbf{訳注}
+
+\end{center}
+
+R Markdown の場合,
+基本的な出力フォーマットにもデフォルトでフックが定義されており,
+処理内容によっては予期せぬ結果になることがあるため, 単純な上書きや
+\texttt{\$restore()} は意図しない動作につながることがあります. 詳細は
+``R Markdown Cookboox''
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html}{Ch.
+12}\footnote{翻訳版:
+  \url{https://gedevan-aleksizde.github.io/rmarkdown-cookbook/output-hooks.html}}
+を確認ください.
+
+\end{infobox}
 
 本パッケージは出力を異なる部品にわけてそれぞれにデフォルトのフックを設定し,
 さらに LaTeX, HTML, Jekyll
@@ -2023,7 +2065,7 @@ Markdown の構文に従って書き出されます.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-1-1} \end{center}
 
 訳注: \texttt{knit\_hooks} 同様に, \texttt{opts\_hooks} にも
 \texttt{restore()} メソッドが用意されています.
@@ -2039,12 +2081,13 @@ Markdown の構文に従って書き出されます.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdnote}
+\begin{infobox}{memo}
 \textbf{訳注}: 現在は knitr の主な利用場面は R Markdown
 との併用だと思うので, それらと関係の薄いページは翻訳していません. また,
 編集上の問題から,
 ここで挙げられているページのうち翻訳済みのものは全てナビゲーションバーの「用例」パートでもリンクされています.
-\end{rmdnote}
+
+\end{infobox}
 
 Github の \href{https://github.com/yihui/knitr-examples}{knitr-examples}
 はより豊富なコレクションになっています.
@@ -2406,10 +2449,11 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 \textbf{訳注}: このページは R Markdown ではなく, Rnw を想定した説明です.
 R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
-\end{rmdtip}
+
+\end{infobox}
 
 私は以前 \href{$lyx}{Lyx} (未翻訳), \href{$RStudio}{RStudio} (未翻訳)
 \href{$org}{Emacs Org-mode} (未翻訳), \href{$ecripse}{Ecripse} (未翻訳)
@@ -2440,7 +2484,7 @@ Rの実行ファイルパスが \texttt{PATH} 環境変数にない場合, 上�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\StringTok{"C:/Program Files/R/R{-}2.14.2/bin/Rscript.exe"} \ExtensionTok{{-}e} \StringTok{"knitr::knit2pdf(\textquotesingle{}\%.Rnw\textquotesingle{})"}
+\StringTok{"C:/Program Files/R/R{-}2.14.2/bin/Rscript.exe"} \AttributeTok{{-}e} \StringTok{"knitr::knit2pdf(\textquotesingle{}\%.Rnw\textquotesingle{})"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2596,7 +2640,7 @@ ESS で \textbf{knitr}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{Rscript}\NormalTok{ {-}e }\StringTok{"library(knitr); knit(\textquotesingle{}}\VariableTok{$GEDIT\_CURRENT\_DOCUMENT\_NAME}\StringTok{\textquotesingle{})"}
+\ExtensionTok{Rscript} \AttributeTok{{-}e} \StringTok{"library(knitr); knit(\textquotesingle{}}\VariableTok{$GEDIT\_CURRENT\_DOCUMENT\_NAME}\StringTok{\textquotesingle{})"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2640,8 +2684,8 @@ Applescript for TextMate 2 で使用するアプローチとして
 \begin{Highlighting}[]
 \CommentTok{\#!/bin/bash}
 \BuiltInTok{export} \VariableTok{PATH=$PATH}\NormalTok{:/usr/texbin:/usr/local/bin}
-\ExtensionTok{Rscript}\NormalTok{ {-}e }\StringTok{"library(knitr); knit(\textquotesingle{}}\VariableTok{$1}\StringTok{\textquotesingle{})"}
-\ExtensionTok{latexmk}\NormalTok{ {-}pdf }\StringTok{"}\VariableTok{$\{1\%}\NormalTok{.*}\VariableTok{\}}\StringTok{"}
+\ExtensionTok{Rscript} \AttributeTok{{-}e} \StringTok{"library(knitr); knit(\textquotesingle{}}\VariableTok{$1}\StringTok{\textquotesingle{})"}
+\ExtensionTok{latexmk} \AttributeTok{{-}pdf} \StringTok{"}\VariableTok{$\{1}\OperatorTok{\%}\NormalTok{.}\PreprocessorTok{*}\VariableTok{\}}\StringTok{"}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2720,11 +2764,12 @@ Tinn-R は \textbf{knitr} v2.3.7.3 以降からサポートを開始しました
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 このページは \texttt{knitr} 単体の場合を解説しています. R Markdown
 の場合, \texttt{framed}
 が関わるのは基本的にコードチャンクの表示スタイルのみです.
-\end{rmdtip}
+
+\end{infobox}
 
 デフォルトでは \textbf{knitr} はタイプセットに
 \href{http://www.ctan.org/pkg/framed}{framed} という LaTeX
@@ -2820,9 +2865,11 @@ issue \href{https://github.com/yihui/knitr/issues/222}{\#222}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 このページは主に R Markdown ではなく Rnw
-を想定していることに注意してください. \end{rmdtip}
+を想定していることに注意してください.
+
+\end{infobox}
 
 \textbf{knitr} では, LaTeX の \texttt{listings}
 パッケージで結果を装飾するためにの出力\protect\hyperlink{hooks}{フック}を簡単に定義することができます.
@@ -3153,9 +3200,11 @@ R でメッセージ文を書き出すのに \texttt{cat()}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 \textbf{訳注}: このページは全編を通して Sweave の構文で書かれていますが,
-R Markdown のチャンクでも同様のことが可能です. \end{rmdtip}
+R Markdown のチャンクでも同様のことが可能です.
+
+\end{infobox}
 
 Sweave には
 \texttt{\textless{}\textless{}chunk-label\textgreater{}\textgreater{}}
@@ -3262,9 +3311,11 @@ Sweave には
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 このページは主に R Markdown ではなく Rnw
-を想定していることに注意してください. \end{rmdtip}
+を想定していることに注意してください.
+
+\end{infobox}
 
 \hypertarget{ux30b0ux30e9ux30d5ux30a3ux30c3ux30afux30b9ux30deux30cbux30e5ux30a2ux30eb}{%
 \section*{グラフィックスマニュアル}\label{ux30b0ux30e9ux30d5ux30a3ux30c3ux30afux30b9ux30deux30cbux30e5ux30a2ux30eb}}
@@ -3498,7 +3549,7 @@ Windows ユーザーは FFmpeg
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\ExtensionTok{brew}\NormalTok{ install ffmpeg {-}{-}with{-}libvpx}
+\ExtensionTok{brew}\NormalTok{ install ffmpeg }\AttributeTok{{-}{-}with{-}libvpx}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3512,10 +3563,11 @@ Windows ユーザーは FFmpeg
 
 オリジナルの更新日: 2011/12/5
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 訳注: このページは \textbf{knitr}
 ドキュメントのトップページではありません.
-\end{rmdtip}
+
+\end{infobox}
 
 パッケージのマニュアルそれ自体は \textbf{knitr}
 のほとんどの機能の良い使用例となりえます. このマニュアルは LyX で書かれ
@@ -3811,17 +3863,21 @@ RNG の関係する再現可能性を保証するために, \texttt{.Random.seed
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{rmdtip}
+\begin{infobox}{tip}
 訳注: 更新日時からも分かるように, このリストは古く,
 また膨大であるため個別の翻訳はいたしません. R に限らず,
 活発に利用されているオープンソースソフトウェアは頻繁に更新されるため,
 非公式の解説はしばしば out-of-date になりうる,
-ということに注意してください. \end{rmdtip}
+ということに注意してください.
 
-\begin{rmdnote}
+\end{infobox}
+
+\begin{infobox}{memo}
 以下のリンク集は外部サイトによる \texttt{knitr} の使用事例集です
 (もしリンクしてほしくない, あるいはしてほしいということであれば私
-(Yihui) に気軽に連絡してください) \end{rmdnote}
+(Yihui) に気軽に連絡してください)
+
+\end{infobox}
 
 \hypertarget{ux30a6ux30a8ux30d6ux30b5ux30a4ux30c8}{%
 \section*{ウエブサイト}\label{ux30a6ux30a8ux30d6ux30b5ux30a4ux30c8}}

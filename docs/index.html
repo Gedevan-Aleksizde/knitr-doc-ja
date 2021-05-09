@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="header.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
@@ -279,21 +283,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</h1>
 <p class="author"><em>著者: Xie, Yihui (谢益辉)</em></p>
 <p class="author"><em>翻訳者: Katagiri, Satoshi<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>ver. 1.3 (2021/03/21 19:34:31 JST, 本家最終更新時刻: <a href="https://github.com/rbind/yihui/tree/master/content/knitr">2021/03/01 16:46:02 JST</a>)</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>ver. 1.4 (2021/05/10 02:15:01 JST, 本家最終更新時刻: <a href="https://github.com/rbind/yihui/tree/master/content/knitr">2021/03/01 16:46:02 JST</a>)</em></p>
 </div>
 <div id="knitr" class="section level1 unnumbered">
 <h1>knitr</h1>
 <!-- inline で書くと見づらいのでここに移動 -->
-
-<div class="rmdimportant">
+<div class="infobox important">
 <p>本稿は <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)ライセンス</a> で提供されています. Yihui 氏によるオリジナルは <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a> で読むことができます.</p>
-This is an unofficial Japanese translation of Yihui’s <strong>knitr</strong> documentation, which is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The original documentation by Yihui is <a href="https://yihui.org/knitr/">here</a>.
+<p>This is an unofficial Japanese translation of Yihui’s <strong>knitr</strong> documentation, which is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The original documentation by Yihui is <a href="https://yihui.org/knitr/">here</a>.</p>
 </div>
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></p>
-
-<div class="rmdtip">
+<div class="infobox tip">
 <p><strong>訳注</strong>: Yihui 氏のサイトの一連のドキュメントはかなり以前から氏のブログ投稿として断続的に更新されてきたものを編纂しているため, 内容の重複した記述がいくつかありますし, RStudio および R Markdown が普及している現在では, やや out-of-date な記述も見られます (現在では Sweave はあまり使いません). そのため, <strong>サイドバーの目次から辿れるページ, およびそれらでリンクされているページ以外は重要度が低いと見なし, 翻訳していません</strong>. 同様の理由から「用例」も一部を除き翻訳していません (<strong>共同翻訳者は常に歓迎します</strong>: <a href="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" class="uri">https://github.com/Gedevan-Aleksizde/knitr-doc-ja</a>).</p>
-しかしながら翻訳時の <strong>knitr</strong> および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.
+<p>しかしながら翻訳時の <strong>knitr</strong> および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.</p>
 </div>
 <div id="概要" class="section level2 unnumbered">
 <h2>概要</h2>
@@ -398,6 +400,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 オプション | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 オプション | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="header.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
@@ -281,9 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルのページ: <a href="https://yihui.org/knitr/options/" class="uri">https://yihui.org/knitr/options/</a></p>
 <p>オリジナルの更新日: 2020-06-30</p>
 <hr />
-
-<div class="rmdtip">
-このドキュメントでは <strong>knitr</strong> 全般の機能を紹介しており, <code>Rnw</code> や <code>Rhtml</code> の仕様についても言及しています. R Markdown でも <strong>knitr</strong> の機能は使われますが, R Markdown 独自の中間処理によって, 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.
+<div class="infobox tip">
+<p>このドキュメントでは <strong>knitr</strong> 全般の機能を紹介しており, <code>Rnw</code> や <code>Rhtml</code> の仕様についても言及しています. R Markdown でも <strong>knitr</strong> の機能は使われますが, R Markdown 独自の中間処理によって, 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.</p>
 </div>
 <p><strong>knitr</strong> パッケージはソースコード, テキスト, グラフ, チャンクで使用するプログラミング言語といった, コードチャンクのコンポネントのほとんど全部をカスタマイズするための多くのオプションを提供します. <code>knit</code> 処理のカスタマイズをパッケージレベルでカスタマイズするオプションもあります. この章では <strong>knitr</strong> で使用できる全てのチャンクオプションとパッケージオプションを解説します. 以下のリスト中で, オプションのデフォルト値になっているものはカッコ内に表記しています.</p>
 <div id="chunk-options" class="section level2" number="1.1">
@@ -529,6 +532,7 @@ knitr::opts_chunk$set(
 <li><strong><code>header</code></strong>: (<code>NULL</code>; <code>character</code>).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば <code>\documentclass{article}</code> の直後, HTML ならば <code>&lt;head&gt;</code> タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は <code>knitr::knit_patterns$get('document.begin')</code> で知ることができます. このオプションは <code>.Rnw</code> と <code>.Rhtml</code> 限定の機能です<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>.</li>
 <li><code>label.prefix</code>: (<code>c(table = 'tab:')</code>; character) ラベルの接頭語を指定します. 現時点では <code>kable::kable()</code> によって生成される表のラベルに対する接頭語のみサポートしています.</li>
 <li><strong><code>latex.options.color</code></strong>, <strong><code>latex.options.graphicx</code></strong>: (<code>NULL</code>).: それぞれ LaTeX パッケージの <strong>color</strong> と <strong>graphicx</strong> に対するオプションを指定します. これらのオプションは <code>.Rnw</code> 限定の機能です<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.</li>
+<li><strong><code>latex.tilde</code></strong> (<code>NULL</code>): .Rnw 文書のハイライト出力部でのチルダを表す LaTeX コマンドです (使用例は issue <a href="https://github.com/yihui/knitr/issues/1992">#1992</a> を見てください).</li>
 <li><strong><code>out.format</code></strong>: (<code>NULL</code>; <code>character</code>).: 可能な値は <code>latex</code>, <code>sweave</code>,
 <code>html</code>, <code>markdown</code>, <code>jekyll</code> です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば <code>?knitr::render_latex</code> を参考にしてください. このオプションは <code>knitr::knit()</code> が実行される<strong>前に</strong>設定する必要があります (文書内で設定しても機能しません).</li>
 <li><strong><code>progress</code></strong>: (<code>TRUE</code>; <code>logical</code>).: <code>knitr::knit()</code> の実行中にプログレスバーを表示するかどうかを指定します.</li>
@@ -595,6 +599,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {

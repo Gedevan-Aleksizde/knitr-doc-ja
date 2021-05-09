@@ -19,22 +19,22 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.3 (2021/03/21 19:34:35 JST, 本家最終更新時刻: [2021/03/01 16:46:02 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.4 (2021/05/10 02:15:04 JST, 本家最終更新時刻: [2021/03/01 16:46:02 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
-\BeginKnitrBlock{rmdimportant}
+:::{.infobox .important data-latex="{important}"}
 本稿は [CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)ライセンス](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています. Yihui 氏によるオリジナルは https://yihui.org/knitr/ で読むことができます.
 
 This is an unofficial Japanese translation of Yihui's **knitr** documentation, which is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).  The original documentation by Yihui is [here](https://yihui.org/knitr/).
-\EndKnitrBlock{rmdimportant}
+:::
 
 [![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja)
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: Yihui 氏のサイトの一連のドキュメントはかなり以前から氏のブログ投稿として断続的に更新されてきたものを編纂しているため, 内容の重複した記述がいくつかありますし, RStudio および R Markdown が普及している現在では, やや out-of-date な記述も見られます (現在では Sweave はあまり使いません). そのため, **サイドバーの目次から辿れるページ, およびそれらでリンクされているページ以外は重要度が低いと見なし, 翻訳していません**. 同様の理由から「用例」も一部を除き翻訳していません (**共同翻訳者は常に歓迎します**: https://github.com/Gedevan-Aleksizde/knitr-doc-ja).
 
 しかしながら翻訳時の **knitr** および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.
-\EndKnitrBlock{rmdtip}
+:::
 
 ## 概要 {-}
 
@@ -110,9 +110,9 @@ show_toc: true
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このドキュメントでは **knitr** 全般の機能を紹介しており, `Rnw` や `Rhtml` の仕様についても言及しています. R Markdown でも **knitr** の機能は使われますが, R Markdown 独自の中間処理によって, 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.
-\EndKnitrBlock{rmdtip}
+:::
 
 **knitr** パッケージはソースコード, テキスト, グラフ, チャンクで使用するプログラミング言語といった, コードチャンクのコンポネントのほとんど全部をカスタマイズするための多くのオプションを提供します. `knit` 処理のカスタマイズをパッケージレベルでカスタマイズするオプションもあります. この章では **knitr** で使用できる全てのチャンクオプションとパッケージオプションを解説します. 以下のリスト中で, オプションのデフォルト値になっているものはカッコ内に表記しています.
 
@@ -366,6 +366,7 @@ knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
 - **`header`**: (`NULL`; `character`).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば `\documentclass{article}` の直後, HTML ならば `<head>` タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は `knitr::knit_patterns$get('document.begin')` で知ることができます. このオプションは `.Rnw` と `.Rhtml` 限定の機能です^[訳注: R Markdown ではヘッダの設定は YAML フロントマターで行います].
 -   `label.prefix`: (`c(table = 'tab:')`; character) ラベルの接頭語を指定します. 現時点では `kable::kable()` によって生成される表のラベルに対する接頭語のみサポートしています.
 -  **`latex.options.color`**, **`latex.options.graphicx`**: (`NULL`).: それぞれ LaTeX パッケージの  **color** と **graphicx** に対するオプションを指定します. これらのオプションは `.Rnw` 限定の機能です^[訳注: R Markdown ではこの機能もやはり YAML フロントマターが担当しています].
+- **`latex.tilde`** (`NULL`): .Rnw 文書のハイライト出力部でのチルダを表す LaTeX コマンドです (使用例は issue [#1992](https://github.com/yihui/knitr/issues/1992) を見てください).
 -   **`out.format`**: (`NULL`; `character`).: 可能な値は `latex`, `sweave`,
     `html`, `markdown`, `jekyll` です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば `?knitr::render_latex` を参考にしてください. このオプションは `knitr::knit()` が実行される**前に**設定する必要があります (文書内で設定しても機能しません).
 -   **`progress`**: (`TRUE`; `logical`).: `knitr::knit()` の実行中にプログレスバーを表示するかどうかを指定します.
@@ -521,12 +522,18 @@ knitr::knit_hooks$set(error = function(x, options) {
 
 デフォルトではチャンクフックは空ですが, 出力フックはデフォルト設定があり, 以下のようにしてリセットできます.
 
-**訳注**: **R Markdown の場合, フォーマット関数の処理内容によっては予期せぬ結果になることがあります**.
-
 
 ```{.r .numberLines .lineAnchors}
 knitr::knit_hooks$restore()
 ```
+
+::::::{.infobox .caution data-latex="{caution}"}
+
+:::{.center data-latex=""}
+**訳注**
+:::
+R Markdown の場合, 基本的な出力フォーマットにもデフォルトでフックが定義されており, 処理内容によっては予期せぬ結果になることがあるため, 単純な上書きや `$restore()` は意図しない動作につながることがあります. 詳細は "R Markdown Cookboox" [Ch. 12](https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html)^[翻訳版: https://gedevan-aleksizde.github.io/rmarkdown-cookbook/output-hooks.html] を確認ください.
+::::::
 
 本パッケージは出力を異なる部品にわけてそれぞれにデフォルトのフックを設定し, さらに LaTeX, HTML, Jekyll といった異なる出力フォーマットごとに用意しています. `render_*()` という一連の関数群は, 例えば `render_latex()`, `redner_html()`, など出力フォーマットごとにそれぞれ異なる, 組み込みの出力フックを提供するためにあります. 出力フックはドキュメント内で設定すべきですが, `knitr::knit()` が文書を処理する前にフックを設定したなら `render_*()`, たとえば `render_markdown()`, `render_html()` を最初に呼び出さなければなりません. `hooks_markdown()` などの `hooks_*()` 関数で, 設定を変えることなくこれらの出力フックにアクセスすることができます.
 
@@ -592,7 +599,7 @@ plot(1:10)
 ````
 
 
-\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-1-1} \end{center}
 
 訳注: `knit_hooks` 同様に, `opts_hooks` にも `restore()` メソッドが用意されています.
 
@@ -618,9 +625,9 @@ list_pages: true
 
 ----
 
-\BeginKnitrBlock{rmdnote}
+:::{.infobox .memo data-latex="{memo}"}
 **訳注**: 現在は knitr の主な利用場面は R Markdown との併用だと思うので, それらと関係の薄いページは翻訳していません. また, 編集上の問題から, ここで挙げられているページのうち翻訳済みのものは全てナビゲーションバーの「用例」パートでもリンクされています.
-\EndKnitrBlock{rmdnote}
+:::
 
 Github の [knitr-examples](https://github.com/yihui/knitr-examples) はより豊富なコレクションになっています. このページはむしろドキュメント用途として作られています. 他のユーザーによる [**knitr**のショーケース](#showcase) を見ることもできます.
 
@@ -751,9 +758,9 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
-\EndKnitrBlock{rmdtip}
+:::
 
 私は以前 [Lyx]($lyx) (未翻訳), [RStudio]($RStudio) (未翻訳) [Emacs Org-mode]($org) (未翻訳), [Ecripse]($ecripse) (未翻訳) について書きました. その他にも, [Texmaker](http://www.xm1math.net/texmaker/) や Windt といったエディタで **knitr** を使うことができます. ポイントは R を呼び出して **knitr** パッケージを読み込み, それから `knit()`または `knit2pdf()` を呼び出すことです.
 
@@ -924,9 +931,9 @@ slug: framed
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このページは `knitr` 単体の場合を解説しています. R Markdown の場合, `framed` が関わるのは基本的にコードチャンクの表示スタイルのみです.
-\EndKnitrBlock{rmdtip}
+:::
 
 デフォルトでは **knitr** はタイプセットに [framed](http://www.ctan.org/pkg/framed) という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.
 
@@ -989,9 +996,9 @@ slug: listings
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
-\EndKnitrBlock{rmdtip}
+:::
 
 **knitr** では, LaTeX の `listings` パッケージで結果を装飾するためにの出力[フック](#hooks)を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.
 
@@ -1194,9 +1201,9 @@ slug: reference
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: このページは全編を通して Sweave の構文で書かれていますが, R Markdown のチャンクでも同様のことが可能です.
-\EndKnitrBlock{rmdtip}
+:::
 
 Sweave には `<<chunk-label>>` (`<<>>=` と違い `=` がない点に注意) という構文でチャンクを再利用するためにチャンクを参照する機能があります. たとえば
 
@@ -1272,9 +1279,9 @@ slug: graphics
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
-\EndKnitrBlock{rmdtip}
+:::
 
 ## グラフィックスマニュアル {-}
 
@@ -1423,10 +1430,9 @@ slug: manual
 
 オリジナルの更新日: 2011/12/5
 
-\begin{rmdtip}
-訳注: このページは \textbf{knitr}
-ドキュメントのトップページではありません.
-\end{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
+訳注: このページは **knitr** ドキュメントのトップページではありません.
+:::
 
 パッケージのマニュアルそれ自体は **knitr** のほとんどの機能の良い使用例となりえます. このマニュアルは LyX で書かれ (([knitr-manual.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.lyx))), Rnw ソース ([knitr-manual.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.Rnw)) にエクスポートして PDFファイル [knitr-manual.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) を生成できます.
 
@@ -1560,13 +1566,13 @@ slug: showcase
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 訳注: 更新日時からも分かるように, このリストは古く, また膨大であるため個別の翻訳はいたしません. R に限らず, 活発に利用されているオープンソースソフトウェアは頻繁に更新されるため, 非公式の解説はしばしば out-of-date になりうる, ということに注意してください.
-\EndKnitrBlock{rmdtip}
+:::
 
-\BeginKnitrBlock{rmdnote}
+:::{.infobox .memo data-latex="{memo}"}
 以下のリンク集は外部サイトによる `knitr` の使用事例集です (もしリンクしてほしくない, あるいはしてほしいということであれば私 (Yihui) に気軽に連絡してください)
-\EndKnitrBlock{rmdnote}
+:::
 
 ## ウエブサイト {-}
 

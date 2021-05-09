@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="header.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
@@ -281,9 +285,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルの記事: <a href="https://yihui.org/knitr/demos/graphics" class="uri">https://yihui.org/knitr/demos/graphics</a></p>
 <p>オリジナルの更新日: 2011/12/9</p>
 <hr />
-
-<div class="rmdtip">
-このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
+<div class="infobox tip">
+<p>このページは主に R Markdown ではなく Rnw を想定していることに注意してください.</p>
 </div>
 <div id="グラフィックスマニュアル" class="section level2 unnumbered">
 <h2>グラフィックスマニュアル</h2>
@@ -316,7 +319,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="カスタムグラフィックデバイスについての補足" class="section level2 unnumbered">
 <h2>カスタムグラフィックデバイスについての補足</h2>
-<p><a href="options.html#options">チャンクオプション</a> の <code>dev</code> は3つの引数をとる R 関数として定義されたカスタムグラフィックデバイスに対応します. これは <code>pointsize</code> 10 を使用した PDF デバイスの例です<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>.</p>
+<p><a href="options.html#options">チャンクオプション</a> の <code>dev</code> は3つの引数をとる R 関数として定義されたカスタムグラフィックデバイスに対応します. これは <code>pointsize</code> 10 を使用した PDF デバイスの例です<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="graphics.html#cb41-1"></a>my_pdf <span class="ot">=</span> <span class="cf">function</span>(file, width, height) {</span>
 <span id="cb41-2"><a href="graphics.html#cb41-2"></a>  <span class="fu">pdf</span>(file, <span class="at">width =</span> width, <span class="at">height =</span> height, <span class="at">pointsize =</span> <span class="dv">10</span>)</span>
 <span id="cb41-3"><a href="graphics.html#cb41-3"></a>}</span></code></pre></div>
@@ -351,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="graphics.html#cb46-1"></a><span class="do">## 例: pdf.options(encoding = &#39;CP1250&#39;)</span></span></code></pre></div>
 <p>このような警告メッセージを目にした場合, エンコーディングの設定が必要かもしれません.</p>
 <pre><code>Warning: conversion failure on &#39;&lt;var&gt;&#39; in &#39;mbcsToSbcs&#39;: dot substituted for &lt;var&gt;`.</code></pre>
-<p>別の手段として, <code>pdf</code> の代わりに <code>cairo_pdf</code> を使うというものがあります. (issue <a href="https://github.com/yihui/knitr/issues/436">#436</a> を参照してください)<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a><a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>:</p>
+<p>別の手段として, <code>pdf</code> の代わりに <code>cairo_pdf</code> を使うというものがあります. (issue <a href="https://github.com/yihui/knitr/issues/436">#436</a> を参照してください)<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a><a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="graphics.html#cb48-1"></a><span class="fu">options</span>(<span class="at">device =</span> <span class="cf">function</span>(file, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>, ...) {</span>
 <span id="cb48-2"><a href="graphics.html#cb48-2"></a>  <span class="fu">cairo_pdf</span>(<span class="fu">tempfile</span>(), <span class="at">width =</span> width, <span class="at">height =</span> height, ...)</span>
 <span id="cb48-3"><a href="graphics.html#cb48-3"></a>})</span></code></pre></div>
@@ -364,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="アニメーション" class="section level2 unnumbered">
 <h2>アニメーション</h2>
 <p>チャンクオプション <code>fig.show='animate'</code> が設定されコードチャンクで複数のグラフが生成されている場合, 全てのグラフが統合されアニメーションになります. LaTeX の出力では, LaTeX パッケージの <strong>animate</strong> が使われ, HTML/Markdown の出力に対しては, デフォルトでは <a href="http://ffmpeg.org">FFmpeg</a> が使われ <a href="http://www.webmproject.org">WebM</a> 動画が作られます. FFmpeg をインストールする際に <strong>libvpx</strong> のサポートを有効にする必要があることに注意してください. Linux および Windows ユーザーは FFmpeg ウェブサイトのダウンロードリンクを確認してください (バイナリ版では <strong>libvpx</strong> は有効になっています). OSX ユーザーは, <a href="http://brew.sh">Homebrew</a> 経由で FFmpeg をインストールできます.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash numberLines lineAnchors"><code class="sourceCode bash"><span id="cb49-1"><a href="graphics.html#cb49-1"></a><span class="ex">brew</span> install ffmpeg --with-libvpx</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash numberLines lineAnchors"><code class="sourceCode bash"><span id="cb49-1"><a href="graphics.html#cb49-1"></a><span class="ex">brew</span> install ffmpeg <span class="at">--with-libvpx</span></span></code></pre></div>
 
 <!---
 title: Manual
@@ -376,10 +379,10 @@ slug: manual
 </div>
 <div class="footnotes">
 <hr />
-<ol start="25">
-<li id="fn25"><p>訳注: R Markdown の場合, 日本語表示は後述するように <code>cairo_pdf</code> のほうが簡単です.<a href="graphics.html#fnref25" class="footnote-back">↩︎</a></p></li>
-<li id="fn26"><p>訳注: 投稿したい論文雑誌などから特別な要件がない限り, 現在は <code>cairo_pdf</code> のほうが簡単だと思います.<a href="graphics.html#fnref26" class="footnote-back">↩︎</a></p></li>
-<li id="fn27"><p>訳注: R Markdown であれば, <code>dev = 'cairo_pdf'</code> で十分です.<a href="graphics.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<ol start="26">
+<li id="fn26"><p>訳注: R Markdown の場合, 日本語表示は後述するように <code>cairo_pdf</code> のほうが簡単です.<a href="graphics.html#fnref26" class="footnote-back">↩︎</a></p></li>
+<li id="fn27"><p>訳注: 投稿したい論文雑誌などから特別な要件がない限り, 現在は <code>cairo_pdf</code> のほうが簡単だと思います.<a href="graphics.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<li id="fn28"><p>訳注: R Markdown であれば, <code>dev = 'cairo_pdf'</code> で十分です.<a href="graphics.html#fnref28" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -411,6 +414,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {

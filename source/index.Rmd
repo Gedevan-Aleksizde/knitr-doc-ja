@@ -44,7 +44,7 @@ original_time <- format(as.POSIXct(system('cd ../yihui && git log -1 --pretty=fo
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.3 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.4 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
 :::{.infobox .important data-latex="{important}"}

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -51,12 +51,15 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="header.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
@@ -326,7 +330,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb51-2"><a href="cache.html#cb51-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
 <span id="cb51-3"><a href="cache.html#cb51-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(R.version, <span class="fu">sessionInfo</span>(), </span>
 <span id="cb51-4"><a href="cache.html#cb51-4"></a>  <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y-%m&quot;</span>)))</span></code></pre></div>
-<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>.</p>
+<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>.</p>
 <p>注: キャッシュ条件にさらにオブジェクトを導入する際に, <code>cache.extra</code> 以外の任意のオプション名を使用することができます. たとえば <code>cache.validation</code> も呼び出せます. 全てのチャンクオプションはキャッシュの確認時に考慮されるためです.</p>
 </div>
 <div id="キャッシュディレクトリを入力ファイル名と連動させる" class="section level2 unnumbered">
@@ -358,8 +362,8 @@ slug: showcase
 </div>
 <div class="footnotes">
 <hr />
-<ol start="28">
-<li id="fn28"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<ol start="29">
+<li id="fn29"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref29" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -391,6 +395,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {
