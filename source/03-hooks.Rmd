@@ -139,13 +139,12 @@ knitr::knit_hooks$set(error = function(x, options) {
 knitr::knit_hooks$restore()
 ```
 
-::::::{.infobox .caution data-latex="{caution}"}
+:::{.infobox .caution data-latex="{caution}"}
 
-:::{.center data-latex=""}
 **訳注**
-:::
+
 R Markdown の場合, 基本的な出力フォーマットにもデフォルトでフックが定義されており, 処理内容によっては予期せぬ結果になることがあるため, 単純な上書きや `$restore()` は意図しない動作につながることがあります. 詳細は "R Markdown Cookboox" [Ch. 12](https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html)^[翻訳版: https://gedevan-aleksizde.github.io/rmarkdown-cookbook/output-hooks.html] を確認ください.
-::::::
+:::
 
 本パッケージは出力を異なる部品にわけてそれぞれにデフォルトのフックを設定し, さらに LaTeX, HTML, Jekyll といった異なる出力フォーマットごとに用意しています. `render_*()` という一連の関数群は, 例えば `render_latex()`, `redner_html()`, など出力フォーマットごとにそれぞれ異なる, 組み込みの出力フックを提供するためにあります. 出力フックはドキュメント内で設定すべきですが, `knitr::knit()` が文書を処理する前にフックを設定したなら `render_*()`, たとえば `render_markdown()`, `render_html()` を最初に呼び出さなければなりません. `hooks_markdown()` などの `hooks_*()` 関数で, 設定を変えることなくこれらの出力フックにアクセスすることができます.
 

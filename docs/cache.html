@@ -153,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -322,15 +321,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="キャッシュにはまだ何かありますか" class="section level2 unnumbered">
 <h2>キャッシュにはまだ何かありますか?</h2>
 <p>以上のオブジェクトがキャッシュに影響するのはいかにも納得できることですが, 再現可能性のある研究ではキャッシュは他の変更によって無効化されるという点でよりいっそう厳格になることがあります. 典型例の1つはソフトウェアのバージョンです. 2つのバージョンが異なるRに, 異なる結果を出させるのは不可能ではありません. この場合, 我々はこう設定するかもしれません.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb50-1"><a href="cache.html#cb50-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version.string)</span>
-<span id="cb50-2"><a href="cache.html#cb50-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version)  <span class="co"># あるいはプラットフォームの違いも考慮する</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="cache.html#cb53-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version.string)</span>
+<span id="cb53-2"><a href="cache.html#cb53-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version)  <span class="co"># あるいはプラットフォームの違いも考慮する</span></span></code></pre></div>
 <p>これによって, キャッシュされた結果は特定のバージョンの R でのみ適用されます. R をアップグレードし文書を再コンパイルしたとき, 全ての結果は再計算されます.</p>
 <p>同様に, キャッシュが特定の環境でのみ保存されるように, このオプションに他の変数も設定したいかもしれません. これは野心的な例です.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="cache.html#cb51-1"></a><span class="do">## キャッシュは特定の R のバージョンとセッションでのみ有効</span></span>
-<span id="cb51-2"><a href="cache.html#cb51-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
-<span id="cb51-3"><a href="cache.html#cb51-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(R.version, <span class="fu">sessionInfo</span>(), </span>
-<span id="cb51-4"><a href="cache.html#cb51-4"></a>  <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y-%m&quot;</span>)))</span></code></pre></div>
-<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="cache.html#cb54-1"></a><span class="do">## キャッシュは特定の R のバージョンとセッションでのみ有効</span></span>
+<span id="cb54-2"><a href="cache.html#cb54-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
+<span id="cb54-3"><a href="cache.html#cb54-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(R.version, <span class="fu">sessionInfo</span>(), </span>
+<span id="cb54-4"><a href="cache.html#cb54-4"></a>  <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y-%m&quot;</span>)))</span></code></pre></div>
+<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>.</p>
 <p>注: キャッシュ条件にさらにオブジェクトを導入する際に, <code>cache.extra</code> 以外の任意のオプション名を使用することができます. たとえば <code>cache.validation</code> も呼び出せます. 全てのチャンクオプションはキャッシュの確認時に考慮されるためです.</p>
 </div>
 <div id="キャッシュディレクトリを入力ファイル名と連動させる" class="section level2 unnumbered">
@@ -349,7 +348,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>乱数生成器 (RNG) の再現可能性</h2>
 <p>乱数生成器 (RNG) が関係するチャンクの再現性を維持するため, <strong>knitr</strong> は <code>.Random.seed</code> をキャッシュし, 各チャンクの評価直前に復元します. しかし1つ問題があります. チャンク A, B がキャッシュされていたとします. この時A, B の間に新たにチャンク C を挿入したとします (3つのチャンクは全て内部で RNG を使用しています). RNG が変更されたため B が更新されるはずですが, <code>.Random.seed</code> は副次作用であるため, これに反して実際には B は更新されません. はっきり言うと, B の再現性は偽りのものとなります.</p>
 <p>RNG の関係する再現可能性を保証するために, <code>.Random.seed</code> とキャッシュを関連付ける必要があります. これが変更される度にキャッシュも更新されなければなりません. これは <code>cache.extra</code> オプションで <strong>評価されない</strong> R 評価式を参照することで簡単にできます. たとえば以下のように.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="cache.html#cb52-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="cache.html#cb55-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
 <p><code>?rand_seed</code> を確認してください (これは評価されない R 評価式です). この場合は各チャンクは最初に <code>.Random.seed</code> が最後の実行から変更されたかどうかを確認します. <code>.Random.seed</code> が異なるならキャッシュは再構成されます.</p>
 
 <!---
@@ -362,8 +361,8 @@ slug: showcase
 </div>
 <div class="footnotes">
 <hr />
-<ol start="29">
-<li id="fn29"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<ol start="31">
+<li id="fn31"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref31" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

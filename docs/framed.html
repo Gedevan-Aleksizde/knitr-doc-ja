@@ -153,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -293,23 +292,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="要素の概要" class="section level2 unnumbered">
 <h2>要素の概要</h2>
 <p>テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は <code>kframe</code> 環境で問題が合った旨を警告します. <code>kframe</code> は <strong>knitr</strong> チャンク出力を包むために使用します. 既知の問題では, issue <a href="https://github.com/yihui/knitr/issues/154">#154</a> で PNG を使った場合があります. 確実にページ余白を超えないようにするため, <strong>knitr</strong> は以下のコマンドを LaTeX プリアンブルで使用します.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb28-1"><a href="framed.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% maxwidth is the original width if it&#39;s less than linewidth</span></span>
-<span id="cb28-2"><a href="framed.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">%% otherwise use linewidth (to make sure the graphics do not exceed the margin)</span></span>
-<span id="cb28-3"><a href="framed.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatletter</span></span>
-<span id="cb28-4"><a href="framed.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\def\maxwidth</span>{ <span class="co">%</span></span>
-<span id="cb28-5"><a href="framed.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\ifdim\Gin@nat@width</span>&gt;<span class="fu">\linewidth</span></span>
-<span id="cb28-6"><a href="framed.html#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\linewidth</span></span>
-<span id="cb28-7"><a href="framed.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\else</span></span>
-<span id="cb28-8"><a href="framed.html#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\Gin@nat@width</span></span>
-<span id="cb28-9"><a href="framed.html#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\fi</span></span>
-<span id="cb28-10"><a href="framed.html#cb28-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-11"><a href="framed.html#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatother</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb31-1"><a href="framed.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% maxwidth is the original width if it&#39;s less than linewidth</span></span>
+<span id="cb31-2"><a href="framed.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">%% otherwise use linewidth (to make sure the graphics do not exceed the margin)</span></span>
+<span id="cb31-3"><a href="framed.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatletter</span></span>
+<span id="cb31-4"><a href="framed.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\def\maxwidth</span>{ <span class="co">%</span></span>
+<span id="cb31-5"><a href="framed.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\ifdim\Gin@nat@width</span>&gt;<span class="fu">\linewidth</span></span>
+<span id="cb31-6"><a href="framed.html#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\linewidth</span></span>
+<span id="cb31-7"><a href="framed.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\else</span></span>
+<span id="cb31-8"><a href="framed.html#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\Gin@nat@width</span></span>
+<span id="cb31-9"><a href="framed.html#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\fi</span></span>
+<span id="cb31-10"><a href="framed.html#cb31-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-11"><a href="framed.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatother</span></span></code></pre></div>
 <p>出力が LaTeX の場合, チャンクオプション <code>out.width</code> はデフォルトで <code>'\\maxwidth'</code> 設定されます.</p>
 </div>
 <div id="影付きボックスのパディング" class="section level2 unnumbered">
 <h2>影付きボックスのパディング</h2>
 <p>もしデフォルトのレイアウト (パディングがまったくない)が倹約しすぎると感じた場合, この LaTeX コマンドでパディングを 5mm に設定します.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb29-1"><a href="framed.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength\fboxsep</span>{5mm}</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb32-1"><a href="framed.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength\fboxsep</span>{5mm}</span></code></pre></div>
 <p><strong>framed</strong> パッケージのデフォルトのスタイルが気に入らない場合, <a href="listings.html#listings">listings</a> や自分自身で定義した出力<a href="hooks.html#hooks">フック</a> に切り替えられます.</p>
 </div>
 <div id="framed-と互換性のない環境" class="section level2 unnumbered">

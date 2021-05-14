@@ -31,7 +31,6 @@
 \ifluatex
   \usepackage{luatexja}
   \usepackage[,noto]{luatexja-preset}
-  %\renewcommand{\kanjifamilydefault}{\gtdefault}
 \fi
 
   \IfFileExists{pxrubrica.sty}{\usepackage{pxrubrica}}{}
@@ -251,7 +250,7 @@
 \title{\textbf{knitr}: Rによる美麗で柔軟そして高速な動的レポート生成}
 \author{著者: Xie, Yihui (谢益辉) \and 翻訳者: Katagiri,
 Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identified}}}
-\date{ver. 1.4 (2021/05/10 02:15:04 JST, 本家最終更新時刻:
+\date{ver. 1.4 (2021/05/15 00:08:45 JST, 本家最終更新時刻:
 \href{https://github.com/rbind/yihui/tree/master/content/knitr}{2021/03/01
 16:46:02 JST})}
 \usepackage{bxtexlogo}
@@ -732,6 +731,16 @@ knitr::opts_chunk$set(
   \item
     \texttt{asis}: テキスト出力を「そのまま」書き出します. つまり,
     生の結果テキストをマークアップ一切なしでそのまま文書に書き出します.
+  \end{itemize}
+
+\begin{verbatim}
+```{r, results='asis'}
+cat("I'm raw **Markdown** content.\n")
+```
+\end{verbatim}
+
+  \begin{itemize}
+  \tightlist
   \item
     \textbf{\texttt{hold}}: チャンクと flush
     の全てのテキスト出力をチャンクの末尾に固定します.
@@ -829,7 +838,6 @@ knitr::opts_chunk$set(
 \subsection{コードの装飾関連}\label{code-decoration}}
 
 \begin{itemize}
-\tightlist
 \item
   \texttt{tidy}: (\texttt{FALSE}) R コードを整形するかどうかです.
   他の有効な値は次のとおりです.
@@ -916,24 +924,16 @@ knitr::opts_chunk$set(
   \texttt{indent} は空白文字2個です\footnote{訳注: R Markdown の場合は
     \textbf{knitr} 以外の中間処理があるため,
     必ずしもこのルールを守りません}.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-##  [1]  1.37095845 -0.56469817  0.36312841  0.63286260  0.40426832 -0.10612452
-##  [7]  1.51152200 -0.09465904  2.01842371 -0.06271410
+```{r indent-example, echo=2}
+set.seed(42)
+rnorm(10)
+```
 \end{verbatim}
 
-\hypertarget{options-cache}{%
-\subsection{キャッシュ関連}\label{options-cache}}
-
-\begin{itemize}
-\tightlist
+  \hypertarget{options-cache}{%
+  \subsection{キャッシュ関連}\label{options-cache}}
 \item
   \textbf{\texttt{cache}}: (\texttt{FALSE}; \texttt{logical}).:
   コードチャンクのキャッシュを取るかどうかです.
@@ -1004,18 +1004,22 @@ knitr::opts_chunk$set(
   キャッシュされたチャンク内のオブジェクトは,
   他のキャッシュされたチャンクに依存しているかもしれず,
   他のチャンクの変更に合わせてこのチャンクも更新する必要があるかもしれません.
-\item
-  \texttt{dependson} に \texttt{numeric} ベクトルを与えた場合,
-  それはチャンクラベルのインデックスを意味します. 例えば
-  \texttt{dependson\ =\ 1}
-  ならばこの文書の1番目のチャンクに依存することを意味し,
-  \texttt{dependson\ =\ c(-1,\ -2)} は直前の2つのチャンクを意味します
-  (負のインデックスは現在のチャンクからの相対的な位置を表します).
-\item
-  \texttt{opts\_chunk\$set()}
-  によってグローバルにチャンクオプションを設定した場合,
-  このオプションは機能しません.
-  ローカルなチャンクオプションとして設定しなければなりません.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{dependson} に \texttt{numeric} ベクトルを与えた場合,
+    それはチャンクラベルのインデックスを意味します. 例えば
+    \texttt{dependson\ =\ 1}
+    ならばこの文書の1番目のチャンクに依存することを意味し,
+    \texttt{dependson\ =\ c(-1,\ -2)} は直前の2つのチャンクを意味します
+    (負のインデックスは現在のチャンクからの相対的な位置を表します).
+  \item
+    \texttt{opts\_chunk\$set()}
+    によってグローバルにチャンクオプションを設定した場合,
+    このオプションは機能しません.
+    ローカルなチャンクオプションとして設定しなければなりません.
+  \end{itemize}
 \item
   \textbf{\texttt{autodep}}: (\texttt{FALSE}; \texttt{logical}).:
   グローバル変数を検出することでチャンク間の依存関係を分析するかどうかを指定します
@@ -1073,7 +1077,6 @@ knitr::opts_chunk$set(
     \texttt{fig.keep\ =\ \textquotesingle{}last\textquotesingle{}},
     なら, 最後の10本の垂線を描画したグラフが保存されます.
   \end{itemize}
-\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -1086,9 +1089,6 @@ knitr::opts_chunk$set(
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{itemize}
-\tightlist
 \item
   \textbf{\texttt{fig.show}}:
   (\texttt{\textquotesingle{}asis\textquotesingle{}};
@@ -1416,7 +1416,6 @@ manual} を参照してください).
 \subsection{言語エンジン関連}\label{engine}}
 
 \begin{itemize}
-\tightlist
 \item
   \textbf{\texttt{engine}}:
   (\texttt{\textquotesingle{}R\textquotesingle{}}; \texttt{character}).:
@@ -1439,7 +1438,6 @@ manual} を参照してください).
   これによってエンジンごとにそれぞれパスを指定することができます.
   以下のコードが例です.
   リストの名前はエンジン名と一致する必要があります.
-\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -1449,12 +1447,53 @@ manual} を参照してください).
 \NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+\item
+  \textbf{\texttt{engine.opts}}: (\texttt{NULL}; \texttt{character})
+  言語エンジンに与える追加引数.
+  チャンクの段階ではオプションを文字列またはリストで指定することができます.
+
+\begin{verbatim}
+```{bash, engine.opts='-l'}
+echo $PATH
+```
+\end{verbatim}
+
+\begin{verbatim}
+```{cat, engine.opts = list(file = "my_custom.css")}
+h2 {
+  color: blue;
+}
+```
+\end{verbatim}
+
+  グローバルレベルでは,
+  要素名に言語名を与えた文字列のリストが使用できます.
+  \texttt{engine.path} と同様に, \texttt{knitr::opts\_chunk\$set()}
+  で引数のテンプレートを作ると便利です.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{engine.opts =} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{perl =} \StringTok{"{-}Mstrict {-}Mwarnings"}\NormalTok{,}
+  \AttributeTok{bash =} \StringTok{"{-}o errexit"}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+  各エンジンはそれぞれ自身の \texttt{engine.opts} を持ち,
+  固有のオプションを定義します.
+  言語エンジンのドキュメントを調べるべきでしょう. R Markdown
+  クックブックには
+  \href{https://bookdown.org/yihui/rmarkdown-cookbook/eng-cat.html}{\texttt{cat}}\footnote{翻訳版:
+    \url{https://gedevan-aleksizde.github.io/rmarkdown-cookbook/eng-cat.html}},
+  \href{https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html}{\texttt{sass}/\texttt{scss}}\footnote{翻訳版:
+    \url{https://gedevan-aleksizde.github.io/rmarkdown-cookbook/eng-sass.html}}エンジンの例が掲載されています.
+\end{itemize}
 
 \hypertarget{ux30aaux30d7ux30b7ux30e7ux30f3ux30c6ux30f3ux30d7ux30ecux30fcux30c8ux95a2ux9023}{%
 \subsection{オプションテンプレート関連}\label{ux30aaux30d7ux30b7ux30e7ux30f3ux30c6ux30f3ux30d7ux30ecux30fcux30c8ux95a2ux9023}}
 
 \begin{itemize}
-\tightlist
 \item
   \textbf{\texttt{opts.label}}: (\texttt{NULL}; \texttt{character}).:
   \texttt{knitr::opts\_template} でのオプションのラベルです.
@@ -1462,20 +1501,21 @@ manual} を参照してください).
   で設定できます (\texttt{?knitr::opts\_template} を参照してください).
   このオプションにより,
   頻繁に使うチャンクオプションのタイピング労力を削減できます.
-\end{itemize}
 
-\textbf{訳注}: 例えば次のように, \texttt{echo=F} を設定するテンプレート
-\texttt{noecho} をどこかで作成したとします. すると, 以降のチャンクで
-\texttt{opts.label="noecho"} を設定すると \texttt{opts\_template}
-で設定した \texttt{noecho} のオプションが全て適用されます.
-もちろん複数のオプションをまとめることもできるので,
-定番の設定を使いまわすのが簡単になります.
+  \textbf{訳注}: 例えば次のように, \texttt{echo=F}
+  を設定するテンプレート \texttt{noecho} をどこかで作成したとします.
+  すると, 以降のチャンクで \texttt{opts.label="noecho"} を設定すると
+  \texttt{opts\_template} で設定した \texttt{noecho}
+  のオプションが全て適用されます.
+  もちろん複数のオプションをまとめることもできるので,
+  定番の設定を使いまわすのが簡単になります.
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_template}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{noecho =} \FunctionTok{list}\NormalTok{(}\AttributeTok{echo =}\NormalTok{ F))}
 \end{Highlighting}
 \end{Shaded}
+\end{itemize}
 
 \hypertarget{ux30bdux30fcux30b9ux30b3ux30fcux30c9ux306eux62bdux51faux95a2ux9023}{%
 \subsection{ソースコードの抽出関連}\label{ux30bdux30fcux30b9ux30b3ux30fcux30c9ux306eux62bdux51faux95a2ux9023}}
@@ -1509,11 +1549,11 @@ manual} を参照してください).
 を使用することで変更できます. \textbf{\texttt{knitr::opts\_chunk}
 と混同しないでください}. 使用例は以下のとおりです.
 
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_knit}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{progress =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{verbose =} \ConstantTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+```{.r .numberLines .lineAnchors}
+knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
+```
+\end{verbatim}
 
 別の方法として, R の基本関数である \texttt{options()}
 を使ってパッケージオプションを設定する場合は \texttt{?knitr::opts\_knit}
@@ -1846,11 +1886,7 @@ Markdown Cookbook}} を参考にしてください.
 \end{Shaded}
 
 \begin{infobox}{caution}
-
-\begin{center}
 \textbf{訳注}
-
-\end{center}
 
 R Markdown の場合,
 基本的な出力フォーマットにもデフォルトでフックが定義されており,
@@ -2065,7 +2101,7 @@ Markdown の構文に従って書き出されます.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-1-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
 訳注: \texttt{knit\_hooks} 同様に, \texttt{opts\_hooks} にも
 \texttt{restore()} メソッドが用意されています.

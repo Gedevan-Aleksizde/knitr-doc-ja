@@ -153,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -302,13 +301,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><code>knit_patterns</code> 以外の他の全てのオブジェクトはデフォルトの初期値が設定されており, <code>knit_paterns</code> は特に指定がない場合は入力ファイルのタイプに基づいて自動的に決定されます. <code>knit_hooks</code> オブジェクトは1番よく使うことになるでしょう. そして残りの3つは直接使用する機会は少ないと思います. たとえば <code>opts_chunk</code> はたいていはコマンドラインで直接実行するよりも入力ファイル内で設定します.</p>
 <p>各チャンクが依存している <strong>knitr</strong> の設定は, そのチャンクが実行されるまえに設定<strong>されなければなりません</strong>. スクリプトの一番最初の, 他のどのチャンクよりも先に実行される位置に「<code>knit</code>
-の設定用チャンク」を書き, その中で <code>cache = FALSE</code>, <code>include = FALSE</code> オプションを設定することをおすすめします. 設定用チャンクには, このチャンク自身の実行時に有効化される設定を想定する命令文は含めては<strong>いけません</strong><a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>. 設定用チャンクはこのようになるでしょう<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="objects.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=</span></span>
-<span id="cb53-2"><a href="objects.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="at">library(knitr)</span></span>
-<span id="cb53-3"><a href="objects.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="at">opts_knit$set(upload.fun = imgur_upload, self.contained = FALSE,</span></span>
-<span id="cb53-4"><a href="objects.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="at">              root.dir = &#39;~/R/project&#39;)</span></span>
-<span id="cb53-5"><a href="objects.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="at">@</span></span>
-<span id="cb53-6"><a href="objects.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+の設定用チャンク」を書き, その中で <code>cache = FALSE</code>, <code>include = FALSE</code> オプションを設定することをおすすめします. 設定用チャンクには, このチャンク自身の実行時に有効化される設定を想定する命令文は含めては<strong>いけません</strong><a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>. 設定用チャンクはこのようになるでしょう<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="objects.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=</span></span>
+<span id="cb56-2"><a href="objects.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="at">library(knitr)</span></span>
+<span id="cb56-3"><a href="objects.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="at">opts_knit$set(upload.fun = imgur_upload, self.contained = FALSE,</span></span>
+<span id="cb56-4"><a href="objects.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="at">              root.dir = &#39;~/R/project&#39;)</span></span>
+<span id="cb56-5"><a href="objects.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="at">@</span></span>
+<span id="cb56-6"><a href="objects.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>技術的な注意点として, これらのオブジェクトはクロージャに近い性質であることを挙げます. これらは関数によって返される, 関数リストです. 詳細は, エクスポートされてない <code>knitr:::new_defaults</code> 関数を確認してください. チャンクオプションはクロージャによっても管理されています.</p>
 
 <!---
@@ -320,9 +319,9 @@ slug: patterns
 </div>
 <div class="footnotes">
 <hr />
-<ol start="30">
-<li id="fn30"><p>訳注: チャンクオプションの評価はそのチャンクの実行直前になるため, ここでの変更は次のチャンクまで有効にならない, という意味です<a href="objects.html#fnref30" class="footnote-back">↩︎</a></p></li>
-<li id="fn31"><p>訳注: この例は <code>.Rnw</code> のものであり, <code>&lt;&lt; ... &gt;&gt;=</code> というヘッダの記法も<code>.Rnw</code> で使われることに注意してください. R Markdown では <code>{r, ...}</code> を使います (参考: <a href="options.html#chunk-options">1.1</a> 章)<a href="objects.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<ol start="32">
+<li id="fn32"><p>訳注: チャンクオプションの評価はそのチャンクの実行直前になるため, ここでの変更は次のチャンクまで有効にならない, という意味です<a href="objects.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p>訳注: この例は <code>.Rnw</code> のものであり, <code>&lt;&lt; ... &gt;&gt;=</code> というヘッダの記法も<code>.Rnw</code> で使われることに注意してください. R Markdown では <code>{r, ...}</code> を使います (参考: <a href="options.html#chunk-options">1.1</a> 章)<a href="objects.html#fnref33" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
