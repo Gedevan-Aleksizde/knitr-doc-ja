@@ -19,7 +19,7 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.4 (2021/05/15 00:08:45 JST, 本家最終更新時刻: [2021/03/01 16:46:02 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.5 (2021/05/15 00:13:55 JST, 本家最終更新時刻: [2021/03/01 16:46:02 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
 :::{.infobox .important data-latex="{important}"}
