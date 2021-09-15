@@ -2,7 +2,7 @@
 title: "**knitr**: Rによる美麗で柔軟そして高速な動的レポート生成"
 author:
   - "著者: Xie, Yihui (谢益辉)"
-  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
+  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)] (片桐 智志)"
 site: bookdown::bookdown_site
 description : "knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui's knitr documentation"
 documentclass: bxjsreport
@@ -19,7 +19,7 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.5 (2021/05/15 00:13:55 JST, 本家最終更新時刻: [2021/03/01 16:46:02 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.5 (2021/09/15 20:10:23 JST, 本家最終更新時刻: [2021/08/27 14:31:12 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
 :::{.infobox .important data-latex="{important}"}

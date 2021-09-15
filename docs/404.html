@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
+  <title>Page not found | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta property="og:title" content="Page not found | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Gedevan-Aleksizde/knitr-doc-ja" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
+  <meta name="twitter:title" content="Page not found | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   
   <meta name="twitter:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="reference.html"/>
-<link rel="next" href="manual.html"/>
+
+
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -278,119 +278,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="graphics" class="section level1 unnumbered">
-<h1>グラフィックス</h1>
-<p><strong>knitr</strong> におけるグラフィックスの力について</p>
-<p>オリジナルの記事: <a href="https://yihui.org/knitr/demos/graphics" class="uri">https://yihui.org/knitr/demos/graphics</a></p>
-<p>オリジナルの更新日: 2011/12/9</p>
-<hr />
-<div class="infobox tip">
-<p>このページは主に R Markdown ではなく Rnw を想定していることに注意してください.</p>
-</div>
-<div id="グラフィックスマニュアル" class="section level2 unnumbered">
-<h2>グラフィックスマニュアル</h2>
-<p>グラフィックスマニュアルでは <strong>knitr</strong> のグラフィックスに彩りを加えるものを紹介します.</p>
-<ul>
-<li>グラフィックスマニュアルのソースと出力は以下です
-<ul>
-<li>Rnw ソース: <a href="https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.Rnw">knitr-graphics.Rnw</a></li>
-<li>LyX ソース: <a href="https://github.com/yihui/knitr/blob/master/inst/examples/knitr-graphics.lyx">knitr-graphics.lyx</a></li>
-<li>PDF 出力: <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-graphics.pdf">knitr-graphics.pdf</a></li>
-</ul></li>
-</ul>
-<p>刊行にあたって R グラフィックスの改善の余地が大いにあることに気づくかもしれません. R があなたにもたらすものを鵜呑みにしないでください. あなたのグラフを美しくプロフェッショナルにすることを考える時間です.</p>
-<p>マニュアルからいくつかスクリーショットを提示します.</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-graphics-tikz"></span>
-<img src="https://db.yihui.org/imgur/HCkka.png" alt="knitr 上の tikz グラフィックス"  />
-<p class="caption">
-図 4.7: <strong>knitr</strong> 上の tikz グラフィックス
-</p>
-</div>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-graphics-ggplot2"></span>
-<img src="https://db.yihui.org/imgur/BTEiu.png" alt="(ref:demo-graphics-ggplot2"  />
-<p class="caption">
-図 4.8: (ref:demo-graphics-ggplot2
-</p>
-</div>
-<p><a href="http://code.google.com/p/tufte-latex/"><code>tufte-handout</code></a> クラスの作者に感謝します. 上記の例はこれを利用しています. そして <strong>tikzDevice</strong> パッケージは文書クラスと一貫したフォントスタイルのグラフをもたらしてくれます (セリフフォントを使用しています).</p>
-</div>
-<div id="カスタムグラフィックデバイスについての補足" class="section level2 unnumbered">
-<h2>カスタムグラフィックデバイスについての補足</h2>
-<p><a href="options.html#options">チャンクオプション</a> の <code>dev</code> は3つの引数をとる R 関数として定義されたカスタムグラフィックデバイスに対応します. これは <code>pointsize</code> 10 を使用した PDF デバイスの例です<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="graphics.html#cb44-1"></a>my_pdf <span class="ot">=</span> <span class="cf">function</span>(file, width, height) {</span>
-<span id="cb44-2"><a href="graphics.html#cb44-2"></a>  <span class="fu">pdf</span>(file, <span class="at">width =</span> width, <span class="at">height =</span> height, <span class="at">pointsize =</span> <span class="dv">10</span>)</span>
-<span id="cb44-3"><a href="graphics.html#cb44-3"></a>}</span></code></pre></div>
-<p>これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. <strong>knitr</strong> はグラフファイルに対して適切なファイル拡張子を推測できないため, <code>fig.ext</code> オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="graphics.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;my_pdf&#39;, fig.ext=&#39;pdf&#39;}</span></span>
-<span id="cb45-2"><a href="graphics.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
-<span id="cb45-3"><a href="graphics.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
-<p>文書全体でこのデバイスを使用したい場合は, もちろん <code>\SweaveOpts{}</code> を使ってグローバルに設定することもできます.</p>
-</div>
-<div id="デバイスに追加の引数を与える" class="section level2 unnumbered">
-<h2>デバイスに追加の引数を与える</h2>
-<p><code>dev.args</code> オプションを通してグラフィカルデバイスをよく制御できます. <code>pointsize = 10</code> とハードコーディングする代わりに, チャンクに <code>dev.args = list(pointsize = 10)</code> を与えることができます. これが例です.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="graphics.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;pdf&#39;, dev.args=list(pointsize=10)}</span></span>
-<span id="cb46-2"><a href="graphics.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
-<span id="cb46-3"><a href="graphics.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
-<p><code>dev.args</code> はリストなので, デバイスの引数として可能なものを取るべきです. たとえば <code>pdf()</code> には <code>dev.args=list(pointsize=11, family='serif')</code>. <code>dev.args</code> の全ての要素はチャンクのグラフィカすデバイスに与えられます.</p>
-</div>
-<div id="r-グラフィックスにハイパーリンクを付ける" class="section level2 unnumbered">
-<h2>R グラフィックスにハイパーリンクを付ける</h2>
-<p><strong>tikzDevice</strong> パッケージのおかげで, R グラフィックスではほとんどの LaTeX コマンドを使うことができます. ハイパーリンクを付ける例を示します: <a href="https://gist.github.com/1937313">links.Rnw</a> (Jonathan Kennel に感謝).</p>
-<p>特記事項として, あなたは <code>\usepackage{hyperref}</code> を <strong>tikzDevice</strong> パッケージのメトリックのリストに与える必要があります. そうでなければ <code>\hyperlink</code> や <code>\hypertarget</code> コマンドは認識されません.</p>
-</div>
-<div id="マルチバイト文字のエンコーディング" class="section level2 unnumbered">
-<h2>マルチバイト文字のエンコーディング</h2>
-<p>あなたのグラフにマルチバイト文字が含まれている場合, <code>pdf()</code> デバイスの <code>encoding</code> オプションを指定する必要があります. issue <a href="https://github.com/yihui/knitr/issues/172">#172</a> を参照してください. 可能なエンコーディングのリストは以下で確認できます.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="graphics.html#cb47-1"></a><span class="fu">list.files</span>(<span class="fu">system.file</span>(<span class="st">&#39;enc&#39;</span>, <span class="at">package =</span> <span class="st">&#39;grDevices&#39;</span>))</span></code></pre></div>
-<pre><code>##  [1] &quot;AdobeStd.enc&quot;  &quot;AdobeSym.enc&quot;  &quot;CP1250.enc&quot;    &quot;CP1251.enc&quot;   
-##  [5] &quot;CP1253.enc&quot;    &quot;CP1257.enc&quot;    &quot;Cyrillic.enc&quot;  &quot;Greek.enc&quot;    
-##  [9] &quot;ISOLatin1.enc&quot; &quot;ISOLatin2.enc&quot; &quot;ISOLatin7.enc&quot; &quot;ISOLatin9.enc&quot;
-## [13] &quot;KOI8-R.enc&quot;    &quot;KOI8-U.enc&quot;    &quot;MacRoman.enc&quot;  &quot;PDFDoc.enc&quot;   
-## [17] &quot;TeXtext.enc&quot;   &quot;WinAnsi.enc&quot;</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="graphics.html#cb49-1"></a><span class="do">## 例: pdf.options(encoding = &#39;CP1250&#39;)</span></span></code></pre></div>
-<p>このような警告メッセージを目にした場合, エンコーディングの設定が必要かもしれません.</p>
-<pre><code>Warning: conversion failure on &#39;&lt;var&gt;&#39; in &#39;mbcsToSbcs&#39;: dot substituted for &lt;var&gt;`.</code></pre>
-<p>別の手段として, <code>pdf</code> の代わりに <code>cairo_pdf</code> を使うというものがあります. (issue <a href="https://github.com/yihui/knitr/issues/436">#436</a> を参照してください)<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a><a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="graphics.html#cb51-1"></a><span class="fu">options</span>(<span class="at">device =</span> <span class="cf">function</span>(file, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>, ...) {</span>
-<span id="cb51-2"><a href="graphics.html#cb51-2"></a>  <span class="fu">cairo_pdf</span>(<span class="fu">tempfile</span>(), <span class="at">width =</span> width, <span class="at">height =</span> height, ...)</span>
-<span id="cb51-3"><a href="graphics.html#cb51-3"></a>})</span></code></pre></div>
-<p>もし Windows 環境でこれが失敗するのなら, issue <a href="https://github.com/yihui/knitr/issues/527">#527</a> を確認してください.</p>
-</div>
-<div id="装飾フォント" class="section level2 unnumbered">
-<h2>装飾フォント</h2>
-<p><code>pdf()</code> のドキュメントによれば, <code>useDingbats</code> 引数は小さな円を含む PDF のファイルサイズを減らしてくれる可能性があります. RStudio 上で <strong>knitr</strong> を使っている場合, このオプションはデフォルトで無効になっています. 巨大な散布図を含む場合, ソース文書に <code>pdf.options(useDingbats = TRUE)</code> と書くことで有効になるでしょう. 詳細な議論は issue <a href="https://github.com/yihui/knitr/issues/311">#311</a> を参照してください.</p>
-</div>
-<div id="アニメーション" class="section level2 unnumbered">
-<h2>アニメーション</h2>
-<p>チャンクオプション <code>fig.show='animate'</code> が設定されコードチャンクで複数のグラフが生成されている場合, 全てのグラフが統合されアニメーションになります. LaTeX の出力では, LaTeX パッケージの <strong>animate</strong> が使われ, HTML/Markdown の出力に対しては, デフォルトでは <a href="http://ffmpeg.org">FFmpeg</a> が使われ <a href="http://www.webmproject.org">WebM</a> 動画が作られます. FFmpeg をインストールする際に <strong>libvpx</strong> のサポートを有効にする必要があることに注意してください. Linux および Windows ユーザーは FFmpeg ウェブサイトのダウンロードリンクを確認してください (バイナリ版では <strong>libvpx</strong> は有効になっています). OSX ユーザーは, <a href="http://brew.sh">Homebrew</a> 経由で FFmpeg をインストールできます.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource bash numberLines lineAnchors"><code class="sourceCode bash"><span id="cb52-1"><a href="graphics.html#cb52-1"></a><span class="ex">brew</span> install ffmpeg <span class="at">--with-libvpx</span></span></code></pre></div>
-
-<!---
-title: Manual
-subtitle: The package manual
-date: '2011-12-05'
-slug: manual
---->
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="28">
-<li id="fn28"><p>訳注: R Markdown の場合, 日本語表示は後述するように <code>cairo_pdf</code> のほうが簡単です.<a href="graphics.html#fnref28" class="footnote-back">↩︎</a></p></li>
-<li id="fn29"><p>訳注: 投稿したい論文雑誌などから特別な要件がない限り, 現在は <code>cairo_pdf</code> のほうが簡単だと思います.<a href="graphics.html#fnref29" class="footnote-back">↩︎</a></p></li>
-<li id="fn30"><p>訳注: R Markdown であれば, <code>dev = 'cairo_pdf'</code> で十分です.<a href="graphics.html#fnref30" class="footnote-back">↩︎</a></p></li>
-</ol>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="manual.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -421,11 +321,11 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/edit/master/source/demo/2011-12-09-graphics.Rmd",
+"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/edit/master/source/%s",
 "text": "Edit"
 },
 "history": {
-"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/commits/master/source/demo/2011-12-09-graphics.Rmd",
+"link": "https://github.com/Gedevan-Aleksizde/knitr-doc-ja/commits/master/source/%s",
 "text": null
 },
 "view": {

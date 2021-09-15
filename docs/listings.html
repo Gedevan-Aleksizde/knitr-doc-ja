@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Listings | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Listings | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (片桐 智志)" />
 
 
 
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="framed.html"/>
 <link rel="next" href="output.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -121,9 +121,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<link rel="stylesheet" href="header.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="header.css" type="text/css" />
 </head>
 
 <body>
@@ -290,15 +290,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>knitr</strong> では, LaTeX の <code>listings</code> パッケージで結果を装飾するためにの出力<a href="hooks.html#hooks">フック</a>を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="listings.html#cb33-1"></a><span class="do">## a common hook for messages, warnings and errors</span></span>
 <span id="cb33-2"><a href="listings.html#cb33-2"></a>hook_lst_bf <span class="ot">=</span> <span class="cf">function</span>(x, options) {</span>
-<span id="cb33-3"><a href="listings.html#cb33-3"></a>  <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[basicstyle={</span><span class="sc">\\</span><span class="st">bfseries}]</span><span class="sc">\n</span><span class="st">&quot;</span>, x, </span>
-<span id="cb33-4"><a href="listings.html#cb33-4"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{lstlisting}</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb33-3"><a href="listings.html#cb33-3"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[basicstyle={</span><span class="sc">\\</span><span class="st">bfseries}]</span><span class="sc">\n</span><span class="st">&quot;</span>, x, </span>
+<span id="cb33-4"><a href="listings.html#cb33-4"></a>        <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{lstlisting}</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb33-5"><a href="listings.html#cb33-5"></a>}</span>
 <span id="cb33-6"><a href="listings.html#cb33-6"></a>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">source =</span> <span class="cf">function</span>(x, options) {</span>
-<span id="cb33-7"><a href="listings.html#cb33-7"></a>  <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[language=R,numbers=left,stepnumber=2]</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb33-8"><a href="listings.html#cb33-8"></a>    x, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{lstlisting}</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb33-7"><a href="listings.html#cb33-7"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[language=R,numbers=left,stepnumber=2]</span><span class="sc">\n</span><span class="st">&quot;</span>, x, </span>
+<span id="cb33-8"><a href="listings.html#cb33-8"></a>        <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{lstlisting}</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb33-9"><a href="listings.html#cb33-9"></a>}, <span class="at">output =</span> <span class="cf">function</span>(x, options) {</span>
-<span id="cb33-10"><a href="listings.html#cb33-10"></a>  <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[basicstyle={</span><span class="sc">\\</span><span class="st">ttfamily}]</span><span class="sc">\n</span><span class="st">&quot;</span>, x, </span>
-<span id="cb33-11"><a href="listings.html#cb33-11"></a>    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{lstlisting}</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb33-10"><a href="listings.html#cb33-10"></a>    <span class="fu">paste</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{lstlisting}[basicstyle={</span><span class="sc">\\</span><span class="st">ttfamily}]</span><span class="sc">\n</span><span class="st">&quot;</span>, x, </span>
+<span id="cb33-11"><a href="listings.html#cb33-11"></a>        <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{lstlisting}</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb33-12"><a href="listings.html#cb33-12"></a>}, <span class="at">warning =</span> hook_lst_bf, <span class="at">message =</span> hook_lst_bf, <span class="at">error =</span> hook_lst_bf)</span>
 <span id="cb33-13"><a href="listings.html#cb33-13"></a></span>
 <span id="cb33-14"><a href="listings.html#cb33-14"></a><span class="do">## empty highlight header since it is not useful any more</span></span>
@@ -314,7 +314,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>PDFの出力のスクリーショットを1つお見せします:</p>
-<div class="figure" style="text-align: center"><span id="fig:demo-listings-knitr"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-listings-knitr"></span>
 <img src="https://db.yihui.org/imgur/PKupQ.png" alt="knitr での listings の使用"  />
 <p class="caption">
 図 4.5: knitr での listings の使用
@@ -324,7 +324,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="さらなる-listings-オプション." class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> さらなる listings オプション.</h2>
 <p><strong>listings</strong> パッケージには膨大な数の使用可能なオプションがあるので, その全性能を引き出すにはマニュアルを読み込んでください. 以下はエラーメッセージで開業する方法の例を提示しています. この<a href="https://gist.github.com/2209775">Rnw ソース</a>をダウンロードすることができます. ポイントは <code>breaklines=true</code> オプションです.</p>
-<div class="figure" style="text-align: center"><span id="fig:demo-listings-knitr-break-line"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-listings-knitr-break-line"></span>
 <img src="https://db.yihui.org/imgur/3313T.png" alt="listings の出力の改行"  />
 <p class="caption">
 図 4.6: listings の出力の改行
@@ -349,7 +349,6 @@ slug: output
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -389,6 +388,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knitr.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

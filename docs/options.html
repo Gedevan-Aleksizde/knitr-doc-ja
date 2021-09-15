@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 オプション | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 オプション | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (片桐 智志)" />
 
 
 
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="hooks.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -121,9 +121,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<link rel="stylesheet" href="header.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="header.css" type="text/css" />
 </head>
 
 <body>
@@ -410,11 +410,11 @@ rnorm(10)
 <li>数値ベクトルを指定した場合, その値は保存する低水準プロットのインデックスとなります.
 低水準プロットとは <code>lines()</code> や <code>points()</code> などの関数によるグラフ描画のことです. <code>fig.keep</code> についてより理解するには次のようなチャンクを考えてください. 通常はこれで2つのグラフを出力します (<code>fig.keep = 'high'</code> を指定したので). <code>fig.keep = 'none'</code> としたなら, いかなるグラフも保存されません. <code>fig.keep = 'all'</code> ならば, 4 つのグラフとして保存されます. <code>fig.keep = 'first'</code> ならば <code>plot(1)</code> によって作成されたグラフが保存されます. <code>fig.keep = 'last'</code>, なら, 最後の10本の垂線を描画したグラフが保存されます.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="options.html#cb7-1"></a><span class="fu">plot</span>(<span class="dv">1</span>)  <span class="co"># 高水準プロット</span></span>
-<span id="cb7-2"><a href="options.html#cb7-2"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># 低水準の作図</span></span>
-<span id="cb7-3"><a href="options.html#cb7-3"></a><span class="fu">plot</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>))  <span class="co"># 高水準プロット</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="options.html#cb7-1"></a><span class="fu">plot</span>(<span class="dv">1</span>)         <span class="co"># 高水準プロット</span></span>
+<span id="cb7-2"><a href="options.html#cb7-2"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)    <span class="co"># 低水準の作図</span></span>
+<span id="cb7-3"><a href="options.html#cb7-3"></a><span class="fu">plot</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>)) <span class="co"># 高水準プロット</span></span>
 <span id="cb7-4"><a href="options.html#cb7-4"></a><span class="co"># ループ内での複数の低水準作図 (R 評価式としては1つ)</span></span>
-<span id="cb7-5"><a href="options.html#cb7-5"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb7-5"><a href="options.html#cb7-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
 <span id="cb7-6"><a href="options.html#cb7-6"></a>  <span class="fu">abline</span>(<span class="at">v =</span> i, <span class="at">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb7-7"><a href="options.html#cb7-7"></a>}</span></code></pre></div></li>
 <li><strong><code>fig.show</code></strong>: (<code>'asis'</code>; <code>character</code>).: グラフをどのように表示し, 配置するかです. 可能な値は次のとおりです.
@@ -492,8 +492,10 @@ rnorm(10)
 <ul>
 <li><p><strong><code>engine</code></strong>: (<code>'R'</code>; <code>character</code>).: コードチャンクの言語名です. 指定可能な名前は <code>names(knitr::knit_engines$get())</code> で確認できます. 例: <code>python</code>, <code>sql</code>, <code>julia</code>, <code>bash</code>, <code>c</code>, など. <code>knitr::knit_engines</code> で他の言語を使うためのセットアップが可能です.</p></li>
 <li><p><strong><code>engine.path</code></strong>: (<code>NULL</code>; <code>character</code>).: 実行可能なエンジンのパスを指定します. あなたのお使いのシステムの別の実行ファイルを使用するためのオプションです. 例えば <code>python</code> はデフォルトでは <code>/usr/bin/python</code> を参照しますが, 他のバージョンを使うため <code>engine.path = '~/anaconda/bin/python'</code> などと指定することもできます<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>. <code>engine.path</code> もまたパスのリストを与えられます. これによってエンジンごとにそれぞれパスを指定することができます. 以下のコードが例です. リストの名前はエンジン名と一致する必要があります.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="options.html#cb8-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.path =</span> <span class="fu">list</span>(<span class="at">python =</span> <span class="st">&quot;~/anaconda/bin/python&quot;</span>, </span>
-<span id="cb8-2"><a href="options.html#cb8-2"></a>  <span class="at">ruby =</span> <span class="st">&quot;/usr/local/bin/ruby&quot;</span>))</span></code></pre></div></li>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="options.html#cb8-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.path =</span> <span class="fu">list</span>(</span>
+<span id="cb8-2"><a href="options.html#cb8-2"></a>  <span class="at">python =</span> <span class="st">&#39;~/anaconda/bin/python&#39;</span>,</span>
+<span id="cb8-3"><a href="options.html#cb8-3"></a>  <span class="at">ruby =</span> <span class="st">&#39;/usr/local/bin/ruby&#39;</span></span>
+<span id="cb8-4"><a href="options.html#cb8-4"></a>))</span></code></pre></div></li>
 <li><p><strong><code>engine.opts</code></strong>: (<code>NULL</code>; <code>character</code>) 言語エンジンに与える追加引数. チャンクの段階ではオプションを文字列またはリストで指定することができます.</p>
 <pre><code>```{bash, engine.opts=&#39;-l&#39;}
 echo $PATH
@@ -504,8 +506,10 @@ h2 {
 }
 ```</code></pre>
 <p>グローバルレベルでは, 要素名に言語名を与えた文字列のリストが使用できます. <code>engine.path</code> と同様に, <code>knitr::opts_chunk$set()</code> で引数のテンプレートを作ると便利です.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="options.html#cb11-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(<span class="at">perl =</span> <span class="st">&quot;-Mstrict -Mwarnings&quot;</span>, </span>
-<span id="cb11-2"><a href="options.html#cb11-2"></a>  <span class="at">bash =</span> <span class="st">&quot;-o errexit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="options.html#cb11-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(</span>
+<span id="cb11-2"><a href="options.html#cb11-2"></a>  <span class="at">perl =</span> <span class="st">&#39;-Mstrict -Mwarnings&#39;</span>,</span>
+<span id="cb11-3"><a href="options.html#cb11-3"></a>  <span class="at">bash =</span> <span class="st">&#39;-o errexit&#39;</span></span>
+<span id="cb11-4"><a href="options.html#cb11-4"></a>))</span></code></pre></div>
 <p>各エンジンはそれぞれ自身の <code>engine.opts</code> を持ち, 固有のオプションを定義します. 言語エンジンのドキュメントを調べるべきでしょう. R Markdown クックブックには <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-cat.html"><code>cat</code></a><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html"><code>sass</code>/<code>scss</code></a><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>エンジンの例が掲載されています.</p></li>
 </ul>
 </div>
@@ -598,7 +602,6 @@ show_toc: true
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -638,6 +641,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knitr.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

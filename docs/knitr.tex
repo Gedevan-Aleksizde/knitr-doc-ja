@@ -4,7 +4,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
 \documentclass[
-]{bxjsreport}
+  xelatex,ja=standard,jafont=noto]{bxjsreport}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex,ifpdf,ifthen}
@@ -16,16 +16,11 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-  \setmainfont[]{DejaVu Serif}
-  \setsansfont[]{DejaVu Sans}
-  \setmonofont[]{DejaVu Sans Mono}
 \fi
 
 % japanese font setting
 % if the preset is specified
 \ifxetex
-  \usepackage[AutoFallBack=true]{zxjatype}
-  \usepackage[noto,]{zxjafont}
   \usepackage{xeCJKfntef}
 \fi
 \ifluatex
@@ -67,7 +62,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={knitr: Rによる美麗で柔軟そして高速な動的レポート生成},
-  pdfauthor={著者: Xie, Yihui (谢益辉); 翻訳者: Katagiri, Satoshi},
+  pdfauthor={著者: Xie, Yihui (谢益辉); 翻訳者: Katagiri, Satoshi (片桐 智志)},
   colorlinks=true,
   linkcolor=blue,
   filecolor=Maroon,
@@ -241,6 +236,19 @@
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere}
 % ----
 
+% ---- font style-changing macro for convenient ----
+\ifdefined\mcfamily
+  \newcommand{\textserif}[1]{{\rmfamily\mcfamily #1}}
+\else
+  \newcommand{\textserif}[1]{{\rmfamily #1}}
+\fi
+\ifdefined\gtfamily
+  \newcommand{\textsans}[1]{{\sffamily\gtfamily #1}}
+\else
+  \newcommand{\textsans}[1]{{\sffamily #1}}
+\fi
+% ----
+
 % ---- user-defined preamble here ----
 % ---- user-defined preamble over ----
 
@@ -249,10 +257,11 @@
 
 \title{\textbf{knitr}: Rによる美麗で柔軟そして高速な動的レポート生成}
 \author{著者: Xie, Yihui (谢益辉) \and 翻訳者: Katagiri,
-Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identified}}}
-\date{ver. 1.5 (2021/05/15 00:13:55 JST, 本家最終更新時刻:
-\href{https://github.com/rbind/yihui/tree/master/content/knitr}{2021/03/01
-16:46:02 JST})}
+Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identified}}
+(片桐 智志)}
+\date{ver. 1.5 (2021/09/15 20:10:23 JST, 本家最終更新時刻:
+\href{https://github.com/rbind/yihui/tree/master/content/knitr}{2021/08/27
+14:31:12 JST})}
 \usepackage{bxtexlogo}
 \colorlet{shadecolor}{gray!20}
 
@@ -290,7 +299,7 @@ documentation, which is licensed under
 
 \end{infobox}
 
-\href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja}{\includegraphics{7051e470f21a5ffaacd91435e622cbb2e1382765.png}}
+\href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja}{\includegraphics{./7051e470f21a5ffaacd91435e622cbb2e1382765.png}}
 
 \begin{infobox}{tip}
 \textbf{訳注}: Yihui
@@ -2719,7 +2728,7 @@ Applescript for TextMate 2 で使用するアプローチとして
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/bin/bash}
-\BuiltInTok{export} \VariableTok{PATH=$PATH}\NormalTok{:/usr/texbin:/usr/local/bin}
+\BuiltInTok{export} \VariableTok{PATH}\OperatorTok{=}\VariableTok{$PATH}\NormalTok{:/usr/texbin:/usr/local/bin}
 \ExtensionTok{Rscript} \AttributeTok{{-}e} \StringTok{"library(knitr); knit(\textquotesingle{}}\VariableTok{$1}\StringTok{\textquotesingle{})"}
 \ExtensionTok{latexmk} \AttributeTok{{-}pdf} \StringTok{"}\VariableTok{$\{1}\OperatorTok{\%}\NormalTok{.}\PreprocessorTok{*}\VariableTok{\}}\StringTok{"}
 \end{Highlighting}
@@ -2766,12 +2775,12 @@ tirip01 が以下のような方法を指摘しています.
   \texttt{-e\ "knitr::knit2pdf(\textquotesingle{}\%source\textquotesingle{})"}
   とタイプします.
 
-  \includegraphics{d51d8711a1a70fca5eb9b028aaae6a4001fe1cbf.jpg}
+  \includegraphics{./d51d8711a1a70fca5eb9b028aaae6a4001fe1cbf.jpg}
 \item
   \texttt{Advanced} タブへ移動し, Rnw を \texttt{Source\ extension}
   に設定し, pdf を \texttt{Target\ extension} に設定します.
 
-  \includegraphics{6acc74dc3501c89592e8625c153db75c6a811ac0.jpg}
+  \includegraphics{./6acc74dc3501c89592e8625c153db75c6a811ac0.jpg}
 \item
   メニューから \texttt{Compile} を選択します.
 \end{enumerate}
@@ -3137,7 +3146,7 @@ R Markdown での例:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{インラインコードでは「}\InformationTok{\textasciigrave{}\textasciigrave{}\textasciigrave{} \textasciigrave{}r\textquotesingle{}\textquotesingle{} 1+1\textasciigrave{} \textasciigrave{}\textasciigrave{}\textasciigrave{}}\NormalTok{」と表示される}
+\NormalTok{インラインコードでは「\textasciigrave{}\textasciigrave{}}\InformationTok{\textasciigrave{} \textasciigrave{}}\NormalTok{r\textquotesingle{}\textquotesingle{} 1+1\textasciigrave{} \textasciigrave{}\textasciigrave{}\textasciigrave{}」と表示される}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3293,14 +3302,16 @@ Sweave には
 
 1番目のアプローチの例です
 
-\begin{verbatim}
-<<chunk1, echo=TRUE, results='hide'>>=
-1 + 1
-@
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\textless{}\textless{}chunk1, echo=TRUE, results=\textquotesingle{}hide\textquotesingle{}\textgreater{}\textgreater{}=}
+\NormalTok{1 + 1}
+\NormalTok{@}
 
-<<chunk1, echo=FALSE, results='markup'>>=
-@
-\end{verbatim}
+\NormalTok{\textless{}\textless{}chunk1, echo=FALSE, results=\textquotesingle{}markup\textquotesingle{}\textgreater{}\textgreater{}=}
+\NormalTok{@}
+\end{Highlighting}
+\end{Shaded}
 
 2番目のチャンクは空なので, \textbf{knitr} は同じ名前を持ち,
 空でないチャンクを探し, そのチャンクのコードを使用します.
@@ -3316,14 +3327,16 @@ Sweave には
 
 2番目のアプローチの例です.
 
-\begin{verbatim}
-<<chunk1, echo=TRUE, results='hide'>>=
-1 + 1
-@
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\textless{}\textless{}chunk1, echo=TRUE, results=\textquotesingle{}hide\textquotesingle{}\textgreater{}\textgreater{}=}
+\NormalTok{1 + 1}
+\NormalTok{@}
 
-<<chunk2, ref.label='chunk1', echo=FALSE, results='markup'>>=
-@
-\end{verbatim}
+\NormalTok{\textless{}\textless{}chunk2, ref.label=\textquotesingle{}chunk1\textquotesingle{}, echo=FALSE, results=\textquotesingle{}markup\textquotesingle{}\textgreater{}\textgreater{}=}
+\NormalTok{@}
+\end{Highlighting}
+\end{Shaded}
 
 2番目のチャンクはラベルが異なるので,
 キャッシュが取れない問題はなくなりました. 明らかに,
