@@ -33,7 +33,7 @@
   
 <link rel="prev" href="showcase.html"/>
 <link rel="next" href="patterns.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -302,12 +302,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>knit_patterns</code> 以外の他の全てのオブジェクトはデフォルトの初期値が設定されており, <code>knit_paterns</code> は特に指定がない場合は入力ファイルのタイプに基づいて自動的に決定されます. <code>knit_hooks</code> オブジェクトは1番よく使うことになるでしょう. そして残りの3つは直接使用する機会は少ないと思います. たとえば <code>opts_chunk</code> はたいていはコマンドラインで直接実行するよりも入力ファイル内で設定します.</p>
 <p>各チャンクが依存している <strong>knitr</strong> の設定は, そのチャンクが実行されるまえに設定<strong>されなければなりません</strong>. スクリプトの一番最初の, 他のどのチャンクよりも先に実行される位置に「<code>knit</code>
 の設定用チャンク」を書き, その中で <code>cache = FALSE</code>, <code>include = FALSE</code> オプションを設定することをおすすめします. 設定用チャンクには, このチャンク自身の実行時に有効化される設定を想定する命令文は含めては<strong>いけません</strong><a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>. 設定用チャンクはこのようになるでしょう<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="objects.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=</span></span>
-<span id="cb56-2"><a href="objects.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="at">library(knitr)</span></span>
-<span id="cb56-3"><a href="objects.html#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="at">opts_knit$set(upload.fun = imgur_upload, self.contained = FALSE,</span></span>
-<span id="cb56-4"><a href="objects.html#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="at">              root.dir = &#39;~/R/project&#39;)</span></span>
-<span id="cb56-5"><a href="objects.html#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="at">@</span></span>
-<span id="cb56-6"><a href="objects.html#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="objects.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">&lt;&lt;setup, cache=FALSE, include=FALSE&gt;&gt;=</span></span>
+<span id="cb58-2"><a href="objects.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="at">library(knitr)</span></span>
+<span id="cb58-3"><a href="objects.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="at">opts_knit$set(upload.fun = imgur_upload, self.contained = FALSE,</span></span>
+<span id="cb58-4"><a href="objects.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="at">              root.dir = &#39;~/R/project&#39;)</span></span>
+<span id="cb58-5"><a href="objects.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="at">@</span></span>
+<span id="cb58-6"><a href="objects.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>技術的な注意点として, これらのオブジェクトはクロージャに近い性質であることを挙げます. これらは関数によって返される, 関数リストです. 詳細は, エクスポートされてない <code>knitr:::new_defaults</code> 関数を確認してください. チャンクオプションはクロージャによっても管理されています.</p>
 
 <!---

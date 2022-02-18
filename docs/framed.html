@@ -33,7 +33,7 @@
   
 <link rel="prev" href="editors.html"/>
 <link rel="next" href="listings.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -292,23 +292,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="要素の概要" class="section level2 unnumbered">
 <h2>要素の概要</h2>
 <p>テキストのはみ出しはさておき, 図もまた影付きの余白を超えるかもしれません. 図の幅が広すぎる場合, LaTeX は <code>kframe</code> 環境で問題が合った旨を警告します. <code>kframe</code> は <strong>knitr</strong> チャンク出力を包むために使用します. 既知の問題では, issue <a href="https://github.com/yihui/knitr/issues/154">#154</a> で PNG を使った場合があります. 確実にページ余白を超えないようにするため, <strong>knitr</strong> は以下のコマンドを LaTeX プリアンブルで使用します.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb31-1"><a href="framed.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% maxwidth is the original width if it&#39;s less than linewidth</span></span>
-<span id="cb31-2"><a href="framed.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">%% otherwise use linewidth (to make sure the graphics do not exceed the margin)</span></span>
-<span id="cb31-3"><a href="framed.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatletter</span></span>
-<span id="cb31-4"><a href="framed.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\def\maxwidth</span>{ <span class="co">%</span></span>
-<span id="cb31-5"><a href="framed.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\ifdim\Gin@nat@width</span>&gt;<span class="fu">\linewidth</span></span>
-<span id="cb31-6"><a href="framed.html#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\linewidth</span></span>
-<span id="cb31-7"><a href="framed.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\else</span></span>
-<span id="cb31-8"><a href="framed.html#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\Gin@nat@width</span></span>
-<span id="cb31-9"><a href="framed.html#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\fi</span></span>
-<span id="cb31-10"><a href="framed.html#cb31-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-11"><a href="framed.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatother</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb33-1"><a href="framed.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">%% maxwidth is the original width if it&#39;s less than linewidth</span></span>
+<span id="cb33-2"><a href="framed.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">%% otherwise use linewidth (to make sure the graphics do not exceed the margin)</span></span>
+<span id="cb33-3"><a href="framed.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatletter</span></span>
+<span id="cb33-4"><a href="framed.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">\def\maxwidth</span>{ <span class="co">%</span></span>
+<span id="cb33-5"><a href="framed.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\ifdim\Gin@nat@width</span>&gt;<span class="fu">\linewidth</span></span>
+<span id="cb33-6"><a href="framed.html#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\linewidth</span></span>
+<span id="cb33-7"><a href="framed.html#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\else</span></span>
+<span id="cb33-8"><a href="framed.html#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\Gin@nat@width</span></span>
+<span id="cb33-9"><a href="framed.html#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">\fi</span></span>
+<span id="cb33-10"><a href="framed.html#cb33-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-11"><a href="framed.html#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">\makeatother</span></span></code></pre></div>
 <p>出力が LaTeX の場合, チャンクオプション <code>out.width</code> はデフォルトで <code>'\\maxwidth'</code> 設定されます.</p>
 </div>
 <div id="影付きボックスのパディング" class="section level2 unnumbered">
 <h2>影付きボックスのパディング</h2>
 <p>もしデフォルトのレイアウト (パディングがまったくない)が倹約しすぎると感じた場合, この LaTeX コマンドでパディングを 5mm に設定します.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb32-1"><a href="framed.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength\fboxsep</span>{5mm}</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb34-1"><a href="framed.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">\setlength\fboxsep</span>{5mm}</span></code></pre></div>
 <p><strong>framed</strong> パッケージのデフォルトのスタイルが気に入らない場合, <a href="listings.html#listings">listings</a> や自分自身で定義した出力<a href="hooks.html#hooks">フック</a> に切り替えられます.</p>
 </div>
 <div id="framed-と互換性のない環境" class="section level2 unnumbered">

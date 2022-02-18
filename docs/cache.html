@@ -33,7 +33,7 @@
   
 <link rel="prev" href="manual.html"/>
 <link rel="next" href="showcase.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -321,15 +321,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="キャッシュにはまだ何かありますか" class="section level2 unnumbered">
 <h2>キャッシュにはまだ何かありますか?</h2>
 <p>以上のオブジェクトがキャッシュに影響するのはいかにも納得できることですが, 再現可能性のある研究ではキャッシュは他の変更によって無効化されるという点でよりいっそう厳格になることがあります. 典型例の1つはソフトウェアのバージョンです. 2つのバージョンが異なるRに, 異なる結果を出させるのは不可能ではありません. この場合, 我々はこう設定するかもしれません.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="cache.html#cb53-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version.string)</span>
-<span id="cb53-2"><a href="cache.html#cb53-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version) <span class="co"># あるいはプラットフォームの違いも考慮する</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="cache.html#cb55-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version.string)</span>
+<span id="cb55-2"><a href="cache.html#cb55-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version) <span class="co"># あるいはプラットフォームの違いも考慮する</span></span></code></pre></div>
 <p>これによって, キャッシュされた結果は特定のバージョンの R でのみ適用されます. R をアップグレードし文書を再コンパイルしたとき, 全ての結果は再計算されます.</p>
 <p>同様に, キャッシュが特定の環境でのみ保存されるように, このオプションに他の変数も設定したいかもしれません. これは野心的な例です.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="cache.html#cb54-1"></a><span class="do">## キャッシュは特定の R のバージョンとセッションでのみ有効</span></span>
-<span id="cb54-2"><a href="cache.html#cb54-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
-<span id="cb54-3"><a href="cache.html#cb54-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(</span>
-<span id="cb54-4"><a href="cache.html#cb54-4"></a>  R.version, <span class="fu">sessionInfo</span>(), <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&#39;%Y-%m&#39;</span>)</span>
-<span id="cb54-5"><a href="cache.html#cb54-5"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb56-1"><a href="cache.html#cb56-1"></a><span class="do">## キャッシュは特定の R のバージョンとセッションでのみ有効</span></span>
+<span id="cb56-2"><a href="cache.html#cb56-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
+<span id="cb56-3"><a href="cache.html#cb56-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(</span>
+<span id="cb56-4"><a href="cache.html#cb56-4"></a>  R.version, <span class="fu">sessionInfo</span>(), <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&#39;%Y-%m&#39;</span>)</span>
+<span id="cb56-5"><a href="cache.html#cb56-5"></a>))</span></code></pre></div>
 <p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>.</p>
 <p>注: キャッシュ条件にさらにオブジェクトを導入する際に, <code>cache.extra</code> 以外の任意のオプション名を使用することができます. たとえば <code>cache.validation</code> も呼び出せます. 全てのチャンクオプションはキャッシュの確認時に考慮されるためです.</p>
 </div>
@@ -349,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>乱数生成器 (RNG) の再現可能性</h2>
 <p>乱数生成器 (RNG) が関係するチャンクの再現性を維持するため, <strong>knitr</strong> は <code>.Random.seed</code> をキャッシュし, 各チャンクの評価直前に復元します. しかし1つ問題があります. チャンク A, B がキャッシュされていたとします. この時A, B の間に新たにチャンク C を挿入したとします (3つのチャンクは全て内部で RNG を使用しています). RNG が変更されたため B が更新されるはずですが, <code>.Random.seed</code> は副次作用であるため, これに反して実際には B は更新されません. はっきり言うと, B の再現性は偽りのものとなります.</p>
 <p>RNG の関係する再現可能性を保証するために, <code>.Random.seed</code> とキャッシュを関連付ける必要があります. これが変更される度にキャッシュも更新されなければなりません. これは <code>cache.extra</code> オプションで <strong>評価されない</strong> R 評価式を参照することで簡単にできます. たとえば以下のように.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="cache.html#cb55-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="cache.html#cb57-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
 <p><code>?rand_seed</code> を確認してください (これは評価されない R 評価式です). この場合は各チャンクは最初に <code>.Random.seed</code> が最後の実行から変更されたかどうかを確認します. <code>.Random.seed</code> が異なるならキャッシュは再構成されます.</p>
 
 <!---

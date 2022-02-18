@@ -11,6 +11,8 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 github-repo: Gedevan-Aleksizde/knitr-doc-ja
+monofont: Ricty Discord
+jmonofont: Ricty Discord
 ---
 
 # knitr {-}
@@ -19,7 +21,7 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.5 (2021/09/15 20:10:23 JST, 本家最終更新時刻: [2021/08/27 14:31:12 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.6 (2022/02/19 00:40:13 JST, 本家最終更新時刻: [2022/01/25 16:17:20 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
 :::{.infobox .important data-latex="{important}"}
@@ -155,6 +157,29 @@ knitr::opts_chunk$set(
   - 理論上はチャンクラベルもまた引用符で囲む必要がありますが, 利便性のため書かなくとも自動で引用符が追加されます (例: ```` ```{r, 2a}``` ```` は ```` ```{r, label='2a'}``` ```` として扱われます).
   - R のコードとして有効なものである限り, いくらでも複雑な構文を書くことができます.
 
+チャンクオプションの書き方の別の方法として, コードチャンクの本文内に `#| ` の後に書くことができます. 例えば以下のように.
+
+````
+```{r}
+#| my-chunk, echo = FALSE, fig.width = 10,
+#| fig.cap = "This is a long long
+#|   long long caption."
+plot(cars)
+```
+````
+
+チャンクオプションとコードの間を1行開けるかどうかは任意です. この記法はオプションの改行が許容されます. 好きなだけ改行してオプションを書くことができます. 同じオプションが本文とチャンクヘッダ (```` ```{} ```` の内側) の両方で指定された場合, 前者が後者を上書きします. チャンク内では `<タグ>: <値>` のような YAML 式の記法でオプションを書くこともできます. 通常は, 1行毎に1つづつオプションを書かねばなりません. 例えば以下のように.
+
+````
+```{r}
+#| echo: false
+#| fig.width: 10
+```
+````
+
+YAML 記法を選択した場合, 生の R の式ではなく YAML の値として有効なものを書かねばなりません.
+
+
 以下では `オプション`: (`デフォルト値`; 値の型) という形式で, **knitr** で使えるチャンクオプションのリストを掲載します.
 
 ### コード評価関連 {#evaluate}
@@ -207,6 +232,7 @@ knitr::opts_chunk$set(
 -   **`highlight`**: (`TRUE`; `logical`).: ソースコードをシンタックスハイライトするかどうかです^[訳注: R Markdown ではさらに, YAML フロントマターで適用するハイライトのテーマ名を指定できます].
 -   **`class.source`**: (`NULL`; `character`).: 出力された文書のソースコードブロックのクラス名です. 出力ブロックに対して機能する `class.output` をはじめとする `class.*` シリーズと同様です.
 -   **`attr.source`**: (`NULL`; `character`).: ソースコードブロックの属性です. `attr.output` などの `attr.*` シリーズと同様です.
+- -   `lang`: (`NULL`; `character`) コードチャンクの言語名です. デフォルトでは言語名はエンジン名と同じです. 例: `r`. このオプションは主に Markdown ベースの文書出力でシンタックスハイライトするためのものです.
 -   `size`: (`'normalsize'`; `character`) `.Rnw` 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは  [overleaf のヘルプページ (英語)](https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles) を参照してください^[訳注: `\normalsize`, `\Large`, `\LARGE` など LaTeX で指定できるフォントサイズを表すマクロのことを指しています].
 -   **`background`**: (`'#F7F7F7'`; `character`).:  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
 -   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **knitr** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です^[訳注: R Markdown の場合は **knitr** 以外の中間処理があるため, 必ずしもこのルールを守りません].
@@ -222,7 +248,7 @@ knitr::opts_chunk$set(
 -   **`cache`**: (`FALSE`; `logical`).: コードチャンクのキャッシュを取るかどうかです. 初回の実行またはキャッシュが存在しない場合は通常通り実行され, 結果がデータセットが保存され (`.rdb`, `.rdx` ファイルなど), それ以降でコードチャンクが評価されることがあれば, 以前保存されたこれらのファイルからこのチャンクの結果を読み出します. ファイル名がチャンクラベルと R コードの MD5 ハッシュ値で一致する必要があることに注意してください. つまりチャンクになんらかの変更がある度に異なる MD5 ハッシュ値が生成されるため, キャッシュはその度に無効になります. 詳細は [キャッシュの解説](#cache) を参考にしてください.
 -   **`cache.path`**: (`'cache/'`; `character`).: 生成したキャッシュファイルの保存場所を指定します. R Markdown ではデフォルトでは入力ファイルの名前に基づきます. 例えば `INPUT.Rmd` の `FOO` というラベルのチャンクのキャッシュは `INPUT_cache/FOO_*.*` というファイルパスに保存されます.
 -   **`cache.vars`**: (`NULL`; `character`).: キャッシュデータベースに保存される変数名のベクトルを指定します. デフォルトではチャンクで作られた全ての変数が識別され保存されますが, 変数名の自動検出はロバストではないかもしれませんし,  保存したい変数を選別したい場合もあるかもしれないので, 保存したい変数を手動選択することもできます.
--   **`cache.globals`**: (`NULL`; `character`).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に `autodep = TRUE` オプションをより正確に動作させたいときに使います. チャンク `B` で使われているグローバル変数が チャンク `A` のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue [\#1403](https://github.com/yihui/knitr/issues/1403) を参照してください).
+-   **`cache.globals`**: (`NULL`; `character`).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に `autodep = TRUE` オプションをより正確に動作させたいときに使います. チャンク `B` で使われているグローバル変数が チャンク `A` のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue [\#1403](https://github.com/yihui/knitr/issues/1403) を参照してください). さらに, `cache.globals = FALSE` は, 変数がグローバルかローカルかにかかわらず, コードチャンク内のすべての変数を検出することを意味します. 
 -   **`cache.lazy`**: (`TRUE`; logical).: 遅延読み込み `lazyLoad()` を使うか, 直接 `load()` でオブジェクトを読み込むかを指定します. 非常に大きなオブジェクトに対しては, 遅延読み込みは機能しないかもしれません. よってこの場合は `cache.lazy = FALSE` が望ましいかもしれません (issue [\#572](https://github.com/yihui/knitr/issues/572) を参照してください).
 -   **`cache.comments`**: (`NULL`; `logical`).: `FALSE` の場合, R コードチャンク内のコメントを書き換えてもキャッシュが無効になりません.
 -   **`cache.rebuild`**: (`FALSE`; `logical`).: `TRUE` の場合, キャッシュが有効であってもチャンクのコードの再評価を行います. このオプションはキャッシュの無効化の条件を指定したいときに有用です. 例えば `cache.rebuild = !file.exists("some-file")` とすれば `some-file` が存在しないときにチャンクが評価されキャッシュが再構成されます (issue [\#238](https://github.com/yihui/knitr/issues/238) を参照).
@@ -308,6 +334,7 @@ knitr::opts_chunk$set(
 ### コードチャンク関連 {#code-chunk}
 
 - **`code`**: (`NULL`; `character`).: 指定された場合, そのチャンクのコードを上書きします. この機能によって, プログラミング的にコード挿入が可能になります. 例えば `code = readLines('test.R')` とすれば `test.R` の内容を現在のチャンクで実行します.
+`file`: (`NULL`; `character`) これが指定された場合, `code` オプションが, チャンクとして読み込まれた外部ファイルの内容で上書きされます. `file = "test.R"` というチャンクオプションは `code = xfun::read_all("test.R")` を指定しているのと同じことを意味します.
 - **`ref.label`**: (`NULL`; `character`).: 現在のチャンクのコードに引き継ぐ, 別のチャンクのラベルの文字列ベクトルを指定します (動作例は  [チャンク参照](#reference) を確認してください).
 
 ### 子文書関連 {#child-document}
@@ -396,7 +423,7 @@ knitr::opts_chunk$set(
 - **`header`**: (`NULL`; `character`).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば `\documentclass{article}` の直後, HTML ならば `<head>` タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は `knitr::knit_patterns$get('document.begin')` で知ることができます. このオプションは `.Rnw` と `.Rhtml` 限定の機能です^[訳注: R Markdown ではヘッダの設定は YAML フロントマターで行います].
 -   `label.prefix`: (`c(table = 'tab:')`; character) ラベルの接頭語を指定します. 現時点では `kable::kable()` によって生成される表のラベルに対する接頭語のみサポートしています.
 -  **`latex.options.color`**, **`latex.options.graphicx`**: (`NULL`).: それぞれ LaTeX パッケージの  **color** と **graphicx** に対するオプションを指定します. これらのオプションは `.Rnw` 限定の機能です^[訳注: R Markdown ではこの機能もやはり YAML フロントマターが担当しています].
-- **`latex.tilde`** (`NULL`): .Rnw 文書のハイライト出力部でのチルダを表す LaTeX コマンドです (使用例は issue [#1992](https://github.com/yihui/knitr/issues/1992) を見てください).
+- **`latex.tilde`** (`NULL`): .Rnw 文書のシンタックスハイライトされたチャンク出力内でのチルダ文字を表す LaTeX コマンドの文字列です (使用例は issue [#1992](https://github.com/yihui/knitr/issues/1992) を見てください).
 -   **`out.format`**: (`NULL`; `character`).: 可能な値は `latex`, `sweave`,
     `html`, `markdown`, `jekyll` です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば `?knitr::render_latex` を参考にしてください. このオプションは `knitr::knit()` が実行される**前に**設定する必要があります (文書内で設定しても機能しません).
 -   **`progress`**: (`TRUE`; `logical`).: `knitr::knit()` の実行中にプログレスバーを表示するかどうかを指定します.
@@ -1787,7 +1814,7 @@ slug: showcase
 - [Easier literate programming with R](http://aliquote.org/memos/2012/04/02/easier-literate-programming-with-r) by Christophe Lalanne
 - [knitR - eine Alternative zu Sweave?](http://www.blogofolio.de/2012/05/knitr-eine-alternative-zu-sweave/) by Christian B.
 - [Better R support in pygments by monkey patching SLexer](http://blog.felixriedel.com/2012/05/better-r-support-in-pygments-by-monkey-patching-slexer/) by f3lix
-- [被knitr包给震撼到了](http://xccds1977.blogspot.com/2012/05/knitr.html) by [@xccds](https://twitter.com/xccds)
+- [被knitr包给震撼到了](http://xccds1977.blogspot.com/2012/05/knitr.html) by [\@xccds](https://twitter.com/xccds)
 - [Reproducible Research](http://torsneyt.wordpress.com/2012/05/19/reproducible-research/) by Tom Torsney-Weir (on Vim and Marked)
 - [为什么Markdown+R有较大概率成为科技写作主流？](http://www.yangzhiping.com/tech/r-markdown-knitr.html) by 阳志平
 - [Governance Indicators](http://www.russellshepherd.com/d/?q=blog/governance-indicators) by Russell Shepherd

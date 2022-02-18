@@ -33,7 +33,7 @@
   
 <link rel="prev" href="objects.html"/>
 
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -299,8 +299,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ビルトインパターン" class="section level2" number="6.1">
 <h2><span class="header-section-number">B.1</span> ビルトインパターン</h2>
 <p><strong>knitr</strong> には <code>all_patterns</code> を保存するいくつかのビルトインパターンがあります.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="patterns.html#cb57-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb57-2"><a href="patterns.html#cb57-2"></a><span class="fu">str</span>(all_patterns)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb59-1"><a href="patterns.html#cb59-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb59-2"><a href="patterns.html#cb59-2"></a><span class="fu">str</span>(all_patterns)</span></code></pre></div>
 <p><strong><code>Knitr</code></strong> は最初に適切なパターンのセットを決定するために入力文書の中身を探索します. もしこの自動検出が失敗したら, 入力文書のファイル拡張子名から判定し, <strong>knitr</strong> は自動で上記のリストから適切な形式を選び出します. たとえば入力ファイルが <code>file.Rnw</code> ならは <code>all_patterns$rnw</code> を, <code>file.html</code> ならば <code>all_patterns$html</code> を, というふうに使用します.</p>
 <p><code>pat_rnw()</code>, <code>pat_html()</code>, <code>pat_md()</code>, <code>pat_tex()</code>, <code>pat_brew()</code> という一連の便利な関数はビルトインパターンを設定するために使われます.</p>
 

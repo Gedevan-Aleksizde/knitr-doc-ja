@@ -33,7 +33,7 @@
   
 <link rel="prev" href="FAQs.html"/>
 <link rel="next" href="framed.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -298,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <p>Rの実行ファイルパスが <code>PATH</code> 環境変数にない場合, 上記のコマンドに <code>Rscript.exe</code> のフルパスを書く必要があります. こんなかんじに:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="editors.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:/Program Files/R/R-2.14.2/bin/Rscript.exe&quot;</span> <span class="at">-e</span> <span class="st">&quot;knitr::knit2pdf(&#39;%.Rnw&#39;)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="editors.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:/Program Files/R/R-2.14.2/bin/Rscript.exe&quot;</span> <span class="at">-e</span> <span class="st">&quot;knitr::knit2pdf(&#39;%.Rnw&#39;)&quot;</span></span></code></pre></div>
 <p><code>Rscript.exe</code> の場所さえ知っていれば, R を開いて <code>R.home('bin')</code> を実行すれば見つけられます. そうすればどんな Rnw 文書ファイルに対しても, この <code>knitr</code> コマンドでコンパイルすることができます.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-compile-texmaker"></span>
 <img src="https://db.yihui.org/imgur/xKoeT.png" alt="Texmaker で knitr コマンドでコンパイルする"  />
@@ -337,14 +337,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="emacsess" class="section level2 unnumbered">
 <h2>Emacs/ESS</h2>
 <p>12/9 以降, <strong>knitr</strong> は公式に <a href="http://ess.r-project.org">ESS</a> にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="editors.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ess</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="editors.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ess</span></code></pre></div>
 <p>ESS で <strong>knitr</strong> を使う方法に関する<a href="https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075">短い動画</a>があります.</p>
 <p>(歴史的背景に興味がある人向け) <a href="http://sjp.co.nz/posts/emacs-ess-knitr/">Simon Potter</a> と <a href="https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/">lucialam</a> の両氏が Emacs/<strong>knitr</strong> についてブログに書いています.</p>
 </div>
 <div id="gedit" class="section level2 unnumbered">
 <h2>Gedit</h2>
 <p><a href="https://en.wikipedia.org/wiki/Gedit">gedit</a> で外部ツールとして定義することができます. 以下は David Allen による方法です. 感謝.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="editors.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$GEDIT_CURRENT_DOCUMENT_NAME</span><span class="st">&#39;)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="editors.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$GEDIT_CURRENT_DOCUMENT_NAME</span><span class="st">&#39;)&quot;</span></span></code></pre></div>
 </div>
 <div id="sublime" class="section level2 unnumbered">
 <h2>Sublime</h2>
@@ -361,10 +361,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="texshop" class="section level2 unnumbered">
 <h2>TeXShop</h2>
 <p><a href="http://pages.uoregon.edu/koch/texshop/">TeXShop</a> で <strong>knitr</strong> を動作させる設定は簡単です. TeXShop の <code>Engines</code> ディレクトリ (大抵の場合は <code>~/Library/TeXShop/Engines/</code>) の <code>Knitr.engine</code> ファイルに以下を書き込むだけです.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="editors.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb30-2"><a href="editors.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:/usr/texbin:/usr/local/bin</span>
-<span id="cb30-3"><a href="editors.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$1</span><span class="st">&#39;)&quot;</span></span>
-<span id="cb30-4"><a href="editors.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> <span class="at">-pdf</span> <span class="st">&quot;</span><span class="va">${1</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="editors.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb32-2"><a href="editors.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:/usr/texbin:/usr/local/bin</span>
+<span id="cb32-3"><a href="editors.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$1</span><span class="st">&#39;)&quot;</span></span>
+<span id="cb32-4"><a href="editors.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> <span class="at">-pdf</span> <span class="st">&quot;</span><span class="va">${1</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span><span class="st">&quot;</span></span></code></pre></div>
 <p><a href="http://cameron.bracken.bz/sweave-for-texshop">Cameron Bracken</a> と <a href="http://yihui.org/en/2012/06/enjoyable-reproducible-research/#comment-601032753">Fabian Greimel</a> の厚情に感謝.</p>
 </div>
 <div id="texworks" class="section level2 unnumbered">

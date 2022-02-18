@@ -4,7 +4,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
 \documentclass[
-  xelatex,ja=standard,jafont=noto]{bxjsreport}
+  lualatex,ja=standard,jafont=noto-otf]{bxjsreport}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex,ifpdf,ifthen}
@@ -16,6 +16,7 @@
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmonofont[]{Ricty Discord}
 \fi
 
 % japanese font setting
@@ -25,7 +26,7 @@
 \fi
 \ifluatex
   \usepackage{luatexja}
-  \usepackage[,noto]{luatexja-preset}
+  \usepackage[,noto-otf]{luatexja-preset}
 \fi
 
   \IfFileExists{pxrubrica.sty}{\usepackage{pxrubrica}}{}
@@ -259,9 +260,9 @@
 \author{著者: Xie, Yihui (谢益辉) \and 翻訳者: Katagiri,
 Satoshi\footnote{twitter@\href{https://twitter.com/ill_identified}{ill\_identified}}
 (片桐 智志)}
-\date{ver. 1.5 (2021/09/15 20:10:23 JST, 本家最終更新時刻:
-\href{https://github.com/rbind/yihui/tree/master/content/knitr}{2021/08/27
-14:31:12 JST})}
+\date{ver. 1.6 (2022/02/19 00:40:13 JST, 本家最終更新時刻:
+\href{https://github.com/rbind/yihui/tree/master/content/knitr}{2022/01/25
+16:17:20 JST})}
 \usepackage{bxtexlogo}
 \colorlet{shadecolor}{gray!20}
 
@@ -677,6 +678,38 @@ knitr::opts_chunk$set(
   いくらでも複雑な構文を書くことができます.
 \end{itemize}
 
+チャンクオプションの書き方の別の方法として, コードチャンクの本文内に
+\texttt{\#\textbar{}} の後に書くことができます. 例えば以下のように.
+
+\begin{verbatim}
+```{r}
+#| my-chunk, echo = FALSE, fig.width = 10,
+#| fig.cap = "This is a long long
+#|   long long caption."
+plot(cars)
+```
+\end{verbatim}
+
+チャンクオプションとコードの間を1行開けるかどうかは任意です.
+この記法はオプションの改行が許容されます.
+好きなだけ改行してオプションを書くことができます.
+同じオプションが本文とチャンクヘッダ
+(\texttt{\textasciigrave{}\textasciigrave{}\textasciigrave{}\{\}}
+の内側) の両方で指定された場合, 前者が後者を上書きします. チャンク内では
+\texttt{\textless{}タグ\textgreater{}:\ \textless{}値\textgreater{}}
+のような YAML 式の記法でオプションを書くこともできます. 通常は,
+1行毎に1つづつオプションを書かねばなりません. 例えば以下のように.
+
+\begin{verbatim}
+```{r}
+#| echo: false
+#| fig.width: 10
+```
+\end{verbatim}
+
+YAML 記法を選択した場合, 生の R の式ではなく YAML
+の値として有効なものを書かねばなりません.
+
 以下では \texttt{オプション}: (\texttt{デフォルト値}; 値の型)
 という形式で, \textbf{knitr}
 で使えるチャンクオプションのリストを掲載します.
@@ -908,6 +941,16 @@ cat("I'm raw **Markdown** content.\n")
   ソースコードブロックの属性です. \texttt{attr.output} などの
   \texttt{attr.*} シリーズと同様です.
 \item
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{lang}: (\texttt{NULL}; \texttt{character})
+    コードチャンクの言語名です.
+    デフォルトでは言語名はエンジン名と同じです. 例: \texttt{r}.
+    このオプションは主に Markdown
+    ベースの文書出力でシンタックスハイライトするためのものです.
+  \end{itemize}
+\item
   \texttt{size}:
   (\texttt{\textquotesingle{}normalsize\textquotesingle{}};
   \texttt{character}) \texttt{.Rnw}
@@ -982,7 +1025,9 @@ rnorm(10)
   こにオプションを使って手動でグローバル変数の名前を指定してください
   (具体例として issue
   \href{https://github.com/yihui/knitr/issues/1403}{\#1403}
-  を参照してください).
+  を参照してください). さらに, \texttt{cache.globals\ =\ FALSE} は,
+  変数がグローバルかローカルかにかかわらず,
+  コードチャンク内のすべての変数を検出することを意味します.
 \item
   \textbf{\texttt{cache.lazy}}: (\texttt{TRUE}; logical).: 遅延読み込み
   \texttt{lazyLoad()} を使うか, 直接 \texttt{load()}
@@ -1404,6 +1449,12 @@ manual} を参照してください).
   プログラミング的にコード挿入が可能になります. 例えば
   \texttt{code\ =\ readLines(\textquotesingle{}test.R\textquotesingle{})}
   とすれば \texttt{test.R} の内容を現在のチャンクで実行します.
+  \texttt{file}: (\texttt{NULL}; \texttt{character})
+  これが指定された場合, \texttt{code} オプションが,
+  チャンクとして読み込まれた外部ファイルの内容で上書きされます.
+  \texttt{file\ =\ "test.R"} というチャンクオプションは
+  \texttt{code\ =\ xfun::read\_all("test.R")}
+  を指定しているのと同じことを意味します.
 \item
   \textbf{\texttt{ref.label}}: (\texttt{NULL}; \texttt{character}).:
   現在のチャンクのコードに引き継ぐ,
@@ -1634,8 +1685,9 @@ knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
     フロントマターが担当しています}.
 \item
   \textbf{\texttt{latex.tilde}} (\texttt{NULL}): .Rnw
-  文書のハイライト出力部でのチルダを表す LaTeX コマンドです (使用例は
-  issue \href{https://github.com/yihui/knitr/issues/1992}{\#1992}
+  文書のシンタックスハイライトされたチャンク出力内でのチルダ文字を表す
+  LaTeX コマンドの文字列です (使用例は issue
+  \href{https://github.com/yihui/knitr/issues/1992}{\#1992}
   を見てください).
 \item
   \textbf{\texttt{out.format}}: (\texttt{NULL}; \texttt{character}).:
@@ -3302,16 +3354,14 @@ Sweave には
 
 1番目のアプローチの例です
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\textless{}\textless{}chunk1, echo=TRUE, results=\textquotesingle{}hide\textquotesingle{}\textgreater{}\textgreater{}=}
-\NormalTok{1 + 1}
-\NormalTok{@}
+\begin{verbatim}
+<<chunk1, echo=TRUE, results='hide'>>=
+1 + 1
+@
 
-\NormalTok{\textless{}\textless{}chunk1, echo=FALSE, results=\textquotesingle{}markup\textquotesingle{}\textgreater{}\textgreater{}=}
-\NormalTok{@}
-\end{Highlighting}
-\end{Shaded}
+<<chunk1, echo=FALSE, results='markup'>>=
+@
+\end{verbatim}
 
 2番目のチャンクは空なので, \textbf{knitr} は同じ名前を持ち,
 空でないチャンクを探し, そのチャンクのコードを使用します.
@@ -3327,16 +3377,14 @@ Sweave には
 
 2番目のアプローチの例です.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{\textless{}\textless{}chunk1, echo=TRUE, results=\textquotesingle{}hide\textquotesingle{}\textgreater{}\textgreater{}=}
-\NormalTok{1 + 1}
-\NormalTok{@}
+\begin{verbatim}
+<<chunk1, echo=TRUE, results='hide'>>=
+1 + 1
+@
 
-\NormalTok{\textless{}\textless{}chunk2, ref.label=\textquotesingle{}chunk1\textquotesingle{}, echo=FALSE, results=\textquotesingle{}markup\textquotesingle{}\textgreater{}\textgreater{}=}
-\NormalTok{@}
-\end{Highlighting}
-\end{Shaded}
+<<chunk2, ref.label='chunk1', echo=FALSE, results='markup'>>=
+@
+\end{verbatim}
 
 2番目のチャンクはラベルが異なるので,
 キャッシュが取れない問題はなくなりました. 明らかに,
@@ -4532,7 +4580,7 @@ Analysis}} 向けの \textbf{knitr} の講義です.
   R support in pygments by monkey patching SLexer} by f3lix
 \item
   \href{http://xccds1977.blogspot.com/2012/05/knitr.html}{被knitr包给震撼到了}
-  by \autocite{xccds}(\url{https://twitter.com/xccds})
+  by \href{https://twitter.com/xccds}{@xccds}
 \item
   \href{http://torsneyt.wordpress.com/2012/05/19/reproducible-research/}{Reproducible
   Research} by Tom Torsney-Weir (on Vim and Marked)

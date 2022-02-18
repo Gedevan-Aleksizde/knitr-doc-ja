@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="hooks.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -315,6 +315,19 @@ knitr::opts_chunk$set(
 <li>理論上はチャンクラベルもまた引用符で囲む必要がありますが, 利便性のため書かなくとも自動で引用符が追加されます (例: <code>```{r, 2a}```</code> は <code>```{r, label='2a'}```</code> として扱われます).</li>
 <li>R のコードとして有効なものである限り, いくらでも複雑な構文を書くことができます.</li>
 </ul>
+<p>チャンクオプションの書き方の別の方法として, コードチャンクの本文内に <code>#|</code> の後に書くことができます. 例えば以下のように.</p>
+<pre><code>```{r}
+#| my-chunk, echo = FALSE, fig.width = 10,
+#| fig.cap = &quot;This is a long long
+#|   long long caption.&quot;
+plot(cars)
+```</code></pre>
+<p>チャンクオプションとコードの間を1行開けるかどうかは任意です. この記法はオプションの改行が許容されます. 好きなだけ改行してオプションを書くことができます. 同じオプションが本文とチャンクヘッダ (<code>```{}</code> の内側) の両方で指定された場合, 前者が後者を上書きします. チャンク内では <code>&lt;タグ&gt;: &lt;値&gt;</code> のような YAML 式の記法でオプションを書くこともできます. 通常は, 1行毎に1つづつオプションを書かねばなりません. 例えば以下のように.</p>
+<pre><code>```{r}
+#| echo: false
+#| fig.width: 10
+```</code></pre>
+<p>YAML 記法を選択した場合, 生の R の式ではなく YAML の値として有効なものを書かねばなりません.</p>
 <p>以下では <code>オプション</code>: (<code>デフォルト値</code>; 値の型) という形式で, <strong>knitr</strong> で使えるチャンクオプションのリストを掲載します.</p>
 <div id="evaluate" class="section level3" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> コード評価関連</h3>
@@ -373,6 +386,9 @@ cat(&quot;I&#39;m raw **Markdown** content.\n&quot;)
 <li><p><strong><code>highlight</code></strong>: (<code>TRUE</code>; <code>logical</code>).: ソースコードをシンタックスハイライトするかどうかです<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p></li>
 <li><p><strong><code>class.source</code></strong>: (<code>NULL</code>; <code>character</code>).: 出力された文書のソースコードブロックのクラス名です. 出力ブロックに対して機能する <code>class.output</code> をはじめとする <code>class.*</code> シリーズと同様です.</p></li>
 <li><p><strong><code>attr.source</code></strong>: (<code>NULL</code>; <code>character</code>).: ソースコードブロックの属性です. <code>attr.output</code> などの <code>attr.*</code> シリーズと同様です.</p></li>
+<li><ul>
+<li><code>lang</code>: (<code>NULL</code>; <code>character</code>) コードチャンクの言語名です. デフォルトでは言語名はエンジン名と同じです. 例: <code>r</code>. このオプションは主に Markdown ベースの文書出力でシンタックスハイライトするためのものです.</li>
+</ul></li>
 <li><p><code>size</code>: (<code>'normalsize'</code>; <code>character</code>) <code>.Rnw</code> 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは <a href="https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles">overleaf のヘルプページ (英語)</a> を参照してください<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p></li>
 <li><p><strong><code>background</code></strong>: (<code>'#F7F7F7'</code>; <code>character</code>).: <code>.Rnw</code> 使用時のチャンクブロックの背景色です<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p></li>
 <li><p><strong><code>indent</code></strong>: (<code>character</code>).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は <strong>knitr</strong> が文書を読み込む際に設定されます. 例えば以下のチャンクでは, <code>indent</code> は空白文字2個です<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
@@ -384,7 +400,7 @@ rnorm(10)
 <li><p><strong><code>cache</code></strong>: (<code>FALSE</code>; <code>logical</code>).: コードチャンクのキャッシュを取るかどうかです. 初回の実行またはキャッシュが存在しない場合は通常通り実行され, 結果がデータセットが保存され (<code>.rdb</code>, <code>.rdx</code> ファイルなど), それ以降でコードチャンクが評価されることがあれば, 以前保存されたこれらのファイルからこのチャンクの結果を読み出します. ファイル名がチャンクラベルと R コードの MD5 ハッシュ値で一致する必要があることに注意してください. つまりチャンクになんらかの変更がある度に異なる MD5 ハッシュ値が生成されるため, キャッシュはその度に無効になります. 詳細は <a href="cache.html#cache">キャッシュの解説</a> を参考にしてください.</p></li>
 <li><p><strong><code>cache.path</code></strong>: (<code>'cache/'</code>; <code>character</code>).: 生成したキャッシュファイルの保存場所を指定します. R Markdown ではデフォルトでは入力ファイルの名前に基づきます. 例えば <code>INPUT.Rmd</code> の <code>FOO</code> というラベルのチャンクのキャッシュは <code>INPUT_cache/FOO_*.*</code> というファイルパスに保存されます.</p></li>
 <li><p><strong><code>cache.vars</code></strong>: (<code>NULL</code>; <code>character</code>).: キャッシュデータベースに保存される変数名のベクトルを指定します. デフォルトではチャンクで作られた全ての変数が識別され保存されますが, 変数名の自動検出はロバストではないかもしれませんし, 保存したい変数を選別したい場合もあるかもしれないので, 保存したい変数を手動選択することもできます.</p></li>
-<li><p><strong><code>cache.globals</code></strong>: (<code>NULL</code>; <code>character</code>).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に <code>autodep = TRUE</code> オプションをより正確に動作させたいときに使います. チャンク <code>B</code> で使われているグローバル変数が チャンク <code>A</code> のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue <a href="https://github.com/yihui/knitr/issues/1403">#1403</a> を参照してください).</p></li>
+<li><p><strong><code>cache.globals</code></strong>: (<code>NULL</code>; <code>character</code>).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に <code>autodep = TRUE</code> オプションをより正確に動作させたいときに使います. チャンク <code>B</code> で使われているグローバル変数が チャンク <code>A</code> のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue <a href="https://github.com/yihui/knitr/issues/1403">#1403</a> を参照してください). さらに, <code>cache.globals = FALSE</code> は, 変数がグローバルかローカルかにかかわらず, コードチャンク内のすべての変数を検出することを意味します.</p></li>
 <li><p><strong><code>cache.lazy</code></strong>: (<code>TRUE</code>; logical).: 遅延読み込み <code>lazyLoad()</code> を使うか, 直接 <code>load()</code> でオブジェクトを読み込むかを指定します. 非常に大きなオブジェクトに対しては, 遅延読み込みは機能しないかもしれません. よってこの場合は <code>cache.lazy = FALSE</code> が望ましいかもしれません (issue <a href="https://github.com/yihui/knitr/issues/572">#572</a> を参照してください).</p></li>
 <li><p><strong><code>cache.comments</code></strong>: (<code>NULL</code>; <code>logical</code>).: <code>FALSE</code> の場合, R コードチャンク内のコメントを書き換えてもキャッシュが無効になりません.</p></li>
 <li><p><strong><code>cache.rebuild</code></strong>: (<code>FALSE</code>; <code>logical</code>).: <code>TRUE</code> の場合, キャッシュが有効であってもチャンクのコードの再評価を行います. このオプションはキャッシュの無効化の条件を指定したいときに有用です. 例えば <code>cache.rebuild = !file.exists("some-file")</code> とすれば <code>some-file</code> が存在しないときにチャンクが評価されキャッシュが再構成されます (issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> を参照).</p></li>
@@ -410,13 +426,13 @@ rnorm(10)
 <li>数値ベクトルを指定した場合, その値は保存する低水準プロットのインデックスとなります.
 低水準プロットとは <code>lines()</code> や <code>points()</code> などの関数によるグラフ描画のことです. <code>fig.keep</code> についてより理解するには次のようなチャンクを考えてください. 通常はこれで2つのグラフを出力します (<code>fig.keep = 'high'</code> を指定したので). <code>fig.keep = 'none'</code> としたなら, いかなるグラフも保存されません. <code>fig.keep = 'all'</code> ならば, 4 つのグラフとして保存されます. <code>fig.keep = 'first'</code> ならば <code>plot(1)</code> によって作成されたグラフが保存されます. <code>fig.keep = 'last'</code>, なら, 最後の10本の垂線を描画したグラフが保存されます.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="options.html#cb7-1"></a><span class="fu">plot</span>(<span class="dv">1</span>)         <span class="co"># 高水準プロット</span></span>
-<span id="cb7-2"><a href="options.html#cb7-2"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)    <span class="co"># 低水準の作図</span></span>
-<span id="cb7-3"><a href="options.html#cb7-3"></a><span class="fu">plot</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>)) <span class="co"># 高水準プロット</span></span>
-<span id="cb7-4"><a href="options.html#cb7-4"></a><span class="co"># ループ内での複数の低水準作図 (R 評価式としては1つ)</span></span>
-<span id="cb7-5"><a href="options.html#cb7-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb7-6"><a href="options.html#cb7-6"></a>  <span class="fu">abline</span>(<span class="at">v =</span> i, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb7-7"><a href="options.html#cb7-7"></a>}</span></code></pre></div></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="options.html#cb9-1"></a><span class="fu">plot</span>(<span class="dv">1</span>)         <span class="co"># 高水準プロット</span></span>
+<span id="cb9-2"><a href="options.html#cb9-2"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>)    <span class="co"># 低水準の作図</span></span>
+<span id="cb9-3"><a href="options.html#cb9-3"></a><span class="fu">plot</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>)) <span class="co"># 高水準プロット</span></span>
+<span id="cb9-4"><a href="options.html#cb9-4"></a><span class="co"># ループ内での複数の低水準作図 (R 評価式としては1つ)</span></span>
+<span id="cb9-5"><a href="options.html#cb9-5"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb9-6"><a href="options.html#cb9-6"></a>  <span class="fu">abline</span>(<span class="at">v =</span> i, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="options.html#cb9-7"></a>}</span></code></pre></div></li>
 <li><strong><code>fig.show</code></strong>: (<code>'asis'</code>; <code>character</code>).: グラフをどのように表示し, 配置するかです. 可能な値は次のとおりです.
 <ul>
 <li><code>asis</code>: グラフが生成された場所にそのまま出力します (R ターミナルで実行した場合とおなじように).</li>
@@ -477,7 +493,8 @@ rnorm(10)
 <div id="code-chunk" class="section level3" number="1.1.6">
 <h3><span class="header-section-number">1.1.6</span> コードチャンク関連</h3>
 <ul>
-<li><strong><code>code</code></strong>: (<code>NULL</code>; <code>character</code>).: 指定された場合, そのチャンクのコードを上書きします. この機能によって, プログラミング的にコード挿入が可能になります. 例えば <code>code = readLines('test.R')</code> とすれば <code>test.R</code> の内容を現在のチャンクで実行します.</li>
+<li><strong><code>code</code></strong>: (<code>NULL</code>; <code>character</code>).: 指定された場合, そのチャンクのコードを上書きします. この機能によって, プログラミング的にコード挿入が可能になります. 例えば <code>code = readLines('test.R')</code> とすれば <code>test.R</code> の内容を現在のチャンクで実行します.
+<code>file</code>: (<code>NULL</code>; <code>character</code>) これが指定された場合, <code>code</code> オプションが, チャンクとして読み込まれた外部ファイルの内容で上書きされます. <code>file = "test.R"</code> というチャンクオプションは <code>code = xfun::read_all("test.R")</code> を指定しているのと同じことを意味します.</li>
 <li><strong><code>ref.label</code></strong>: (<code>NULL</code>; <code>character</code>).: 現在のチャンクのコードに引き継ぐ, 別のチャンクのラベルの文字列ベクトルを指定します (動作例は <a href="reference.html#reference">チャンク参照</a> を確認してください).</li>
 </ul>
 </div>
@@ -492,10 +509,10 @@ rnorm(10)
 <ul>
 <li><p><strong><code>engine</code></strong>: (<code>'R'</code>; <code>character</code>).: コードチャンクの言語名です. 指定可能な名前は <code>names(knitr::knit_engines$get())</code> で確認できます. 例: <code>python</code>, <code>sql</code>, <code>julia</code>, <code>bash</code>, <code>c</code>, など. <code>knitr::knit_engines</code> で他の言語を使うためのセットアップが可能です.</p></li>
 <li><p><strong><code>engine.path</code></strong>: (<code>NULL</code>; <code>character</code>).: 実行可能なエンジンのパスを指定します. あなたのお使いのシステムの別の実行ファイルを使用するためのオプションです. 例えば <code>python</code> はデフォルトでは <code>/usr/bin/python</code> を参照しますが, 他のバージョンを使うため <code>engine.path = '~/anaconda/bin/python'</code> などと指定することもできます<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>. <code>engine.path</code> もまたパスのリストを与えられます. これによってエンジンごとにそれぞれパスを指定することができます. 以下のコードが例です. リストの名前はエンジン名と一致する必要があります.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="options.html#cb8-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.path =</span> <span class="fu">list</span>(</span>
-<span id="cb8-2"><a href="options.html#cb8-2"></a>  <span class="at">python =</span> <span class="st">&#39;~/anaconda/bin/python&#39;</span>,</span>
-<span id="cb8-3"><a href="options.html#cb8-3"></a>  <span class="at">ruby =</span> <span class="st">&#39;/usr/local/bin/ruby&#39;</span></span>
-<span id="cb8-4"><a href="options.html#cb8-4"></a>))</span></code></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="options.html#cb10-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.path =</span> <span class="fu">list</span>(</span>
+<span id="cb10-2"><a href="options.html#cb10-2"></a>  <span class="at">python =</span> <span class="st">&#39;~/anaconda/bin/python&#39;</span>,</span>
+<span id="cb10-3"><a href="options.html#cb10-3"></a>  <span class="at">ruby =</span> <span class="st">&#39;/usr/local/bin/ruby&#39;</span></span>
+<span id="cb10-4"><a href="options.html#cb10-4"></a>))</span></code></pre></div></li>
 <li><p><strong><code>engine.opts</code></strong>: (<code>NULL</code>; <code>character</code>) 言語エンジンに与える追加引数. チャンクの段階ではオプションを文字列またはリストで指定することができます.</p>
 <pre><code>```{bash, engine.opts=&#39;-l&#39;}
 echo $PATH
@@ -506,10 +523,10 @@ h2 {
 }
 ```</code></pre>
 <p>グローバルレベルでは, 要素名に言語名を与えた文字列のリストが使用できます. <code>engine.path</code> と同様に, <code>knitr::opts_chunk$set()</code> で引数のテンプレートを作ると便利です.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="options.html#cb11-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(</span>
-<span id="cb11-2"><a href="options.html#cb11-2"></a>  <span class="at">perl =</span> <span class="st">&#39;-Mstrict -Mwarnings&#39;</span>,</span>
-<span id="cb11-3"><a href="options.html#cb11-3"></a>  <span class="at">bash =</span> <span class="st">&#39;-o errexit&#39;</span></span>
-<span id="cb11-4"><a href="options.html#cb11-4"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="options.html#cb13-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">engine.opts =</span> <span class="fu">list</span>(</span>
+<span id="cb13-2"><a href="options.html#cb13-2"></a>  <span class="at">perl =</span> <span class="st">&#39;-Mstrict -Mwarnings&#39;</span>,</span>
+<span id="cb13-3"><a href="options.html#cb13-3"></a>  <span class="at">bash =</span> <span class="st">&#39;-o errexit&#39;</span></span>
+<span id="cb13-4"><a href="options.html#cb13-4"></a>))</span></code></pre></div>
 <p>各エンジンはそれぞれ自身の <code>engine.opts</code> を持ち, 固有のオプションを定義します. 言語エンジンのドキュメントを調べるべきでしょう. R Markdown クックブックには <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-cat.html"><code>cat</code></a><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html"><code>sass</code>/<code>scss</code></a><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>エンジンの例が掲載されています.</p></li>
 </ul>
 </div>
@@ -518,7 +535,7 @@ h2 {
 <ul>
 <li><p><strong><code>opts.label</code></strong>: (<code>NULL</code>; <code>character</code>).: <code>knitr::opts_template</code> でのオプションのラベルです. オプションセットのラベルは <code>knitr::opts_template</code> で設定できます (<code>?knitr::opts_template</code> を参照してください). このオプションにより, 頻繁に使うチャンクオプションのタイピング労力を削減できます.</p>
 <p><strong>訳注</strong>: 例えば次のように, <code>echo=F</code> を設定するテンプレート <code>noecho</code> をどこかで作成したとします. すると, 以降のチャンクで <code>opts.label="noecho"</code> を設定すると <code>opts_template</code> で設定した <code>noecho</code> のオプションが全て適用されます. もちろん複数のオプションをまとめることもできるので, 定番の設定を使いまわすのが簡単になります.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="options.html#cb12-1"></a>knitr<span class="sc">::</span>opts_template<span class="sc">$</span><span class="fu">set</span>(<span class="at">noecho =</span> <span class="fu">list</span>(<span class="at">echo =</span> F))</span></code></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="options.html#cb14-1"></a>knitr<span class="sc">::</span>opts_template<span class="sc">$</span><span class="fu">set</span>(<span class="at">noecho =</span> <span class="fu">list</span>(<span class="at">echo =</span> F))</span></code></pre></div></li>
 </ul>
 </div>
 <div id="ソースコードの抽出関連" class="section level3" number="1.1.10">
@@ -552,7 +569,7 @@ knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
 <li><strong><code>header</code></strong>: (<code>NULL</code>; <code>character</code>).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば <code>\documentclass{article}</code> の直後, HTML ならば <code>&lt;head&gt;</code> タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は <code>knitr::knit_patterns$get('document.begin')</code> で知ることができます. このオプションは <code>.Rnw</code> と <code>.Rhtml</code> 限定の機能です<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.</li>
 <li><code>label.prefix</code>: (<code>c(table = 'tab:')</code>; character) ラベルの接頭語を指定します. 現時点では <code>kable::kable()</code> によって生成される表のラベルに対する接頭語のみサポートしています.</li>
 <li><strong><code>latex.options.color</code></strong>, <strong><code>latex.options.graphicx</code></strong>: (<code>NULL</code>).: それぞれ LaTeX パッケージの <strong>color</strong> と <strong>graphicx</strong> に対するオプションを指定します. これらのオプションは <code>.Rnw</code> 限定の機能です<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</li>
-<li><strong><code>latex.tilde</code></strong> (<code>NULL</code>): .Rnw 文書のハイライト出力部でのチルダを表す LaTeX コマンドです (使用例は issue <a href="https://github.com/yihui/knitr/issues/1992">#1992</a> を見てください).</li>
+<li><strong><code>latex.tilde</code></strong> (<code>NULL</code>): .Rnw 文書のシンタックスハイライトされたチャンク出力内でのチルダ文字を表す LaTeX コマンドの文字列です (使用例は issue <a href="https://github.com/yihui/knitr/issues/1992">#1992</a> を見てください).</li>
 <li><strong><code>out.format</code></strong>: (<code>NULL</code>; <code>character</code>).: 可能な値は <code>latex</code>, <code>sweave</code>,
 <code>html</code>, <code>markdown</code>, <code>jekyll</code> です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば <code>?knitr::render_latex</code> を参考にしてください. このオプションは <code>knitr::knit()</code> が実行される<strong>前に</strong>設定する必要があります (文書内で設定しても機能しません).</li>
 <li><strong><code>progress</code></strong>: (<code>TRUE</code>; <code>logical</code>).: <code>knitr::knit()</code> の実行中にプログレスバーを表示するかどうかを指定します.</li>

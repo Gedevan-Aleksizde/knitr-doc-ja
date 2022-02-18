@@ -33,7 +33,7 @@
   
 <link rel="prev" href="listings.html"/>
 <link rel="next" href="reference.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -321,18 +321,18 @@ plot(mtcars[, 4:5])
 <h2>インライン出力</h2>
 <p>チャンクの出力とは別の出力タイプがあります. インライン R コードの出力です (例: <code>\Sexpr{t.test(x)$p.value}</code>). 数値の出力は特別な扱われ方をします. 非常に大きいか小さい数値は指数表記で書き出されます. 指数表記になるしきい値は R オプションの <code>scipen</code> (詳細は <code>?options</code> を参照してください) によります. 基本的に <span class="math inline">\(10^4\)</span> より大きいか, <span class="math inline">\(10^{-4}\)</span> より小さい場合に指数表記になります (負の数でも絶対値が同様に評価されます). 出力フォーマット (LaTeX とか HTML とか) に応じて, <strong>knitr</strong> は <code>$3.14 \times 10^5$</code> や <code>3.14 &amp;times; 10&lt;sup&gt;5&lt;/sup&gt;</code> というように適切なコードで出力します.</p>
 <p>もう1つの R オプション <code>digits</code> は, どの桁で丸めるべきかを制御します. デフォルトの <code>options(scipen = 0, digits = 4)</code> が気に入らないならば, こんなふうに最初のチャンクで変更できます.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="output.html#cb36-1"></a><span class="do">## 10^5 以上ならば指数表記され, 2 桁で丸める</span></span>
-<span id="cb36-2"><a href="output.html#cb36-2"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">1</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="output.html#cb38-1"></a><span class="do">## 10^5 以上ならば指数表記され, 2 桁で丸める</span></span>
+<span id="cb38-2"><a href="output.html#cb38-2"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">1</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>R Markdown での例:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb37-1"><a href="output.html#cb37-1" aria-hidden="true" tabindex="-1"></a>インラインコードでは「``<span class="in">` `</span>r&#39;&#39; 1+1` ```」と表示される</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb39-1"><a href="output.html#cb39-1" aria-hidden="true" tabindex="-1"></a>インラインコードでは「``<span class="in">` `</span>r&#39;&#39; 1+1` ```」と表示される</span></code></pre></div>
 <p>インラインコードでは「2」と表示される</p>
 <p>上記の例では他の地の文とともに <code>2</code> と表示されます.</p>
 <p>Rnw の例 (LaTeX):</p>
 <pre><code>Inline code looks like this \Sexpr{1+1}</code></pre>
 <p>R HTML の例:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb39-1"><a href="output.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline 1+1 --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb41-1"><a href="output.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline 1+1 --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p>R HTML 文書では, デフォルトでは結果の文字列は <code>&lt;code&gt;&lt;/code&gt;</code> で囲まれます. 出力から <code>&lt;code&gt;&lt;/code&gt;</code> タグをなくしたいなら, R コードを <code>I()</code> で囲むだけです. 例:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb40-1"><a href="output.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline I(1+1) --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb42-1"><a href="output.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline I(1+1) --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p>さらに別の用例を<a href="http://stackoverflow.com/q/14124022/559676">スタックオーバーフローの投稿</a>で見ることができます.</p>
 </div>
 <div id="long-lines-of-text-output" class="section level2 unnumbered">
