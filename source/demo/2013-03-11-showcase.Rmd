@@ -207,7 +207,7 @@ slug: showcase
 - [Easier literate programming with R](http://aliquote.org/memos/2012/04/02/easier-literate-programming-with-r) by Christophe Lalanne
 - [knitR - eine Alternative zu Sweave?](http://www.blogofolio.de/2012/05/knitr-eine-alternative-zu-sweave/) by Christian B.
 - [Better R support in pygments by monkey patching SLexer](http://blog.felixriedel.com/2012/05/better-r-support-in-pygments-by-monkey-patching-slexer/) by f3lix
-- [被knitr包给震撼到了](http://xccds1977.blogspot.com/2012/05/knitr.html) by [@xccds](https://twitter.com/xccds)
+- [被knitr包给震撼到了](http://xccds1977.blogspot.com/2012/05/knitr.html) by [\@xccds](https://twitter.com/xccds)
 - [Reproducible Research](http://torsneyt.wordpress.com/2012/05/19/reproducible-research/) by Tom Torsney-Weir (on Vim and Marked)
 - [为什么Markdown+R有较大概率成为科技写作主流？](http://www.yangzhiping.com/tech/r-markdown-knitr.html) by 阳志平
 - [Governance Indicators](http://www.russellshepherd.com/d/?q=blog/governance-indicators) by Russell Shepherd
