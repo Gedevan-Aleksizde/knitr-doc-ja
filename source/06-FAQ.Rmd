@@ -11,17 +11,17 @@ date: '2017-02-17'
 
 -----
 
-この FAQ は [issues](https://github.com/yihui/knitr/issues) や私 (Yihui) のブログやEメールに届いた質問などを蓄積したものです. 個人的な考えとして, 私は FAQ という概念の大ファンでもありませんし, FAQ はときとしてほとんどバグのようなものであると思っています. ソフトウェアパッケージの作者は, ユーザーがそんな質問を頻繁にする理由を考えるべきです (ユーザーが全員愚かであるから, という考えには賛成できません). 少なくとも私は, 128件もの質問を1つ1つ読み返すほど忍耐強くありませんし, これを読んでいるあなたにも同様のことをさせるつもりはありません.
+この FAQ は [issues](https://github.com/yihui/knitr/issues) や私 (Yihui) のブログやEメールに届いた質問などを蓄積したものです. 個人的な考えとして, 私は FAQ という概念の大ファンでもありませんし, FAQ とはほとんどバグのような存在であると思っているため, このページのリストはなるべく少なくしたいです.
 
 1. 「**knitr**が動かないんだけど...」
-    - まず最初に, あなたの R パッケージ (`update.packages()` を使います) とたぶん R 本体も (ところで, 現在のあなたの[Rのバージョン](https://cran.rstudio.com)は何ですか?) 更新してください. それから動くかどうかを確認してください. もしそれでも動かなかったら,「必要最低限の再現例 (minimal reprex)」のファイルと `library(knitr); sessionInfo()` の実行結果を [issue](https://github.com/yihui/knitr/issues) に投稿してください.
+    - まず最初に, あなたの R パッケージ (`update.packages()` を使います) とたぶん R 本体も (ところで, 現在のあなたの[Rのバージョン](https://cran.rstudio.com)は何ですか?) 更新してください. それから動くかどうかを確認してください. もしそれでも動かなかったら,「必要最低限の再現例 (minimal reprex)」のファイルと `xfun::session_info('knitr')` の実行結果を [issue](https://github.com/yihui/knitr/issues) に投稿してください.
 1. 「パッケージのサイトの説明が役に立たないときはどこで質問するのがいいですか?」
     - 何を質問したいかにもよりますが, 以下のような選択肢があります^[訳注: 英語が苦手な場合は, [Stack Oveflow 日本語版](https://ja.stackoverflow.com/), または [R-wakalang](https://r-wakalang.slack.com/messages/general/) などのコミュニティがあります] (特に最初の2つは私もよく巡回しています).
         - (推奨) **[Stack Overflow](http://stackoverflow.com/questions/tagged/knitr)**: 一般的な質問 (より専門的で早い回答がつきます). `r` と `knitr` タグを忘れずにつけてください. 
         - **[Github issues](https://github.com/yihui/knitr/issues)**: バグ報告と機能追加の要望のみにしてください.
         - **[knitr mailing list](https://groups.google.com/group/knitr)** または **[R-help](http://www.r-project.org/mail.html)** のメーリングリスト: 一般的な質問とその回答が, 一般公開されるEメールによってやりとりされます.
         - **私の個人的なEメール**: 本当にプライベートな問題でない限り[非推奨](https://yihui.org/en/2017/08/so-gh-email/)です^[訳注: リンク先の投稿を要約すると, Yihui氏個人で次から次へと来る質問をさばくのは限界があるし, オープンコミュニティは多くの回答者がいて既出の質問に対する答えも共有でき効率的だ, ということです].
-        - **Twitter** ([\@xieyihui](http://twitter.com/xieyihui)): 本当に簡単な問題だと確信があるなら.
+        - **Twitter** ([\@xieyihui](https://twitter.com/xieyihui)): 本当に簡単な問題だと確信があるなら.
 1. 「**knitr** のソースドキュメントを書くのに最適のエディタソフトは何ですか?」
     - 初心者にとってはたぶん [RStudio](https://www.rstudio.com) が良いです. **knitr** は [LyX](/knitr/demo/lyx/),  [Emacs/ESS](http://ess.r-project.org/), WinEdt, Tinn-R and や[その他多くのエディタ](#editors)でサポートされています.
 1. 「`>` とか `+` とかのプロンプト記号はどこへいったんですか? 出力にこれがないと落ち着きません」
@@ -31,8 +31,15 @@ date: '2017-02-17'
 1. 「出力された灰色の背景色ボックスが狭すぎます.」
     - それはボックスが狭すぎるからではありません. ボックス幅は現在行の幅が適用されます. つまりあなたの出力のほうが広すぎるのです. ページのマージンを超えるような出力を避けるため, もっと小さな `width` オプションを設定してください (例: `options(width = 60)`, 詳細は[example 038](https://github.com/yihui/knitr-examples/blob/master/038-output-width.Rnw) を参照してください.)
 1. 「コードチャンクにリテラルや生のコードを書く方法は? たとえばパースせずにコードチャンクを書きたいです. チュートリアルに便利だと思います.」
-    - チャンクヘッダを破壊する必要があります. たとえば ```` ```{r}`r''` ``` ```` のように, チャンクヘッダの前後に空の文字列を加えます(issues [#443](https://github.com/yihui/knitr/issues/443)). あるいはチャンクヘッダに[ゼロ幅スペース](https://ja.wikipedia.org/w/index.php?title=%E3%82%BC%E3%83%AD%E5%B9%85%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9&oldid=78849992)を追加します. 詳細は [example 065](https://github.com/yihui/knitr-examples) を見てください.
-    - インラインの R コードでは `knitr::inline_expr()`  を使うことになるでしょう (**knitr** ver. 1.8 以降で使用できます). R Markdown で書いている場合は, あるトリックを使えます. `` `r `` **直後に**改行を入れ (実際にやるときは直後にスペースを入れないでください), 二重のバッククオート (バックティック) のペアでインラインの評価式全体を囲みます. 例えば以下のようになります. この挙動の説明に興味があるなら [このページ](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) を見てください (訳注: 未翻訳).
+    - コードチャンクで `verbatim` エンジンを使えば可能です. これがその例です.
+    `````
+    ````{verbatim}
+    ```{r, eval=TRUE}
+    1 + 1
+    ```
+    ````
+    `````
+    - インラインの R コードでは `knitr::inline_expr()`  を使うことになるでしょう (**knitr** ver. 1.8 以降で使用できます). R Markdown を使っているなら, あるトリックが可能です. `` `r `` の**直後に, スペースなどを挟まずすぐ**改行を入れ, 二重のバッククオート (バックティック) のペアでインラインの評価式全体を囲みます. 例えば以下のようになります. この挙動の説明に興味があるなら [このページ](https://yihui.org/en/2017/11/knitr-verbatim-code-chunk/) を見てください (訳注: 未翻訳).
 
 **訳注**: ソースコードでの記述
 ```{r echo=F, comment=NA}

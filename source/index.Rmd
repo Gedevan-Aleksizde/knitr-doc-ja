@@ -117,4 +117,5 @@ Sweave, **`pgfSweave`**, **`cacheSweave`**, **`brew`**, **`decumar`**,
 ## FOAS {-}
 
 <img src="https://db.yihui.org/imgur/XmT6L3F.png" style="float:right;margin-left:1em" width=150 />
+
 **knitr** が [Foundation for Open Access Statistics](http://www.foastat.org/) (FOAS) の協力のもとで開発されたことを誇りに思います. FOAS はフリーウェア, オープンアクセス, 統計学における再現可能な研究を推進するという世界規模の課題を持った非営利の公益法人です.
