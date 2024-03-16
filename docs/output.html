@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="チャンク出力の制御 | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="github-repo" content="Gedevan-Aleksizde/knitr-doc-ja" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="listings.html"/>
 <link rel="next" href="reference.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
@@ -163,6 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
+<li class="chapter" data-level="1.3" data-path="options.html"><a href="options.html#グローバルrオプション"><i class="fa fa-check"></i><b>1.3</b> グローバルRオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hooks.html"><a href="hooks.html"><i class="fa fa-check"></i><b>2</b> フック</a>
 <ul>
@@ -182,9 +186,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>3</b> 使用例</a></li>
 <li class="chapter" data-level="4" data-path="FAQs.html"><a href="FAQs.html"><i class="fa fa-check"></i><b>4</b> よくある質問 (FAQ)</a></li>
 <li class="part"><span><b>I 用例</b></span></li>
-<li><a href="editors.html#editors"><code>knitr</code> のエディタ</a>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i><code>knitr</code> のエディタ</a>
 <ul>
-<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i>Texmaker</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texmaker"><i class="fa fa-check"></i>Texmaker</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texstudio"><i class="fa fa-check"></i>TeXStudio</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#winedt"><i class="fa fa-check"></i>WinEdt</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#emacsess"><i class="fa fa-check"></i>Emacs/ESS</a></li>
@@ -197,19 +201,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#kile"><i class="fa fa-check"></i>Kile</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#tinn-r"><i class="fa fa-check"></i>Tinn-R</a></li>
 </ul></li>
-<li><a href="framed.html#framed"><code>framed</code> パッケージ</a>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i><code>framed</code> パッケージ</a>
 <ul>
-<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i>要素の概要</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#要素の概要"><i class="fa fa-check"></i>要素の概要</a></li>
 <li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#影付きボックスのパディング"><i class="fa fa-check"></i>影付きボックスのパディング</a></li>
-<li><a href="framed.html#framed-と互換性のない環境"><strong>framed</strong> と互換性のない環境</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#framed-と互換性のない環境"><i class="fa fa-check"></i><strong>framed</strong> と互換性のない環境</a></li>
 </ul></li>
-<li><a href="listings.html#listings"><code>Listings</code></a>
+<li class="chapter" data-level="" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><code>Listings</code></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
+<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html#さらなる-listings-オプション."><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i>チャンク出力の制御</a>
 <ul>
-<li><a href="output.html#echo-オプションの発展的な使い方"><code>echo</code> オプションの発展的な使い方</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#echo-オプションの発展的な使い方"><i class="fa fa-check"></i><code>echo</code> オプションの発展的な使い方</a></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html#インライン出力"><i class="fa fa-check"></i>インライン出力</a></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html#long-lines-of-text-output"><i class="fa fa-check"></i>Long lines of text output</a></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html#メッセージに1コメントを"><i class="fa fa-check"></i>1メッセージに1コメントを</a></li>
@@ -218,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>チャンク参照/マクロ</a>
 <ul>
 <li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#同じラベルを使用する"><i class="fa fa-check"></i>同じラベルを使用する</a></li>
-<li><a href="reference.html#チャンクオプション-ref.label">チャンクオプション <code>ref.label</code></a></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#チャンクオプション-ref.label"><i class="fa fa-check"></i>チャンクオプション <code>ref.label</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i>グラフィックス</a>
 <ul>
@@ -240,11 +244,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#より細かいキャッシュのとり方"><i class="fa fa-check"></i>より細かいキャッシュのとり方</a></li>
 <li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#乱数生成器-rng-の再現可能性"><i class="fa fa-check"></i>乱数生成器 (RNG) の再現可能性</a></li>
 </ul></li>
-<li><a href="showcase.html#showcase"><code>knitr</code> のショーケース</a>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i><code>knitr</code> のショーケース</a>
 <ul>
-<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i>ウエブサイト</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ウエブサイト"><i class="fa fa-check"></i>ウエブサイト</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書評"><i class="fa fa-check"></i>書評</a></li>
-<li><a href="showcase.html#knitr-によるソリューション"><code>knitr</code> によるソリューション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#knitr-によるソリューション"><i class="fa fa-check"></i><code>knitr</code> によるソリューション</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#r-パッケージ"><i class="fa fa-check"></i>R パッケージ</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#教材"><i class="fa fa-check"></i>教材</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ワークショッププレゼンテーション"><i class="fa fa-check"></i>ワークショップ・プレゼンテーション</a></li>
@@ -278,8 +282,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="output" class="section level1 unnumbered">
-<h1>チャンク出力の制御</h1>
+<div id="output" class="section level1 unnumbered hasAnchor">
+<h1>チャンク出力の制御<a href="output.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>チャンクの6種類の出力とインライン出力を操作する</p>
 <p>オリジナルのページ:</p>
 <p>オリジナルの更新日: 2012-01-25</p>
@@ -295,8 +299,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>これらのオプションは互いに独立しており, 他のタイプの出力への影響を気にすることなく自由に切り替えることができます.</p>
 <p><strong>knitr</strong> の全ての<a href="$options">オプション</a>は R の評価式から値を取ることができます. これは main manual で条件評価 (conditional evaluation) の機能として紹介したものです. 端的に言うなら <code>eval=dothis</code> は実際の値 <code>value</code> はグローバル環境の <code>dothis</code> とい変数から取られた値になるということです. この変数を操作することで, 1つ1つのチャンクの評価をオン・オフ切り替えることができます.</p>
-<div id="echo-オプションの発展的な使い方" class="section level2 unnumbered">
-<h2><code>echo</code> オプションの発展的な使い方</h2>
+<div id="echo-オプションの発展的な使い方" class="section level2 unnumbered hasAnchor">
+<h2><code>echo</code> オプションの発展的な使い方<a href="output.html#echo-オプションの発展的な使い方" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>チャンクオプション <code>echo</code> は <code>TRUE/FALSE</code> だけでなく, 数値のベクトルを取ることで出力文を選択することができます. このベクトルのインデックスはコードチャンクを完全な R 評価式単位でインデックスします. たとえば <code>echo=1</code> は出力内の最初のソースコード出力のみを含めることを意味します. 以下はこの例の完全版です.</p>
 <pre><code>&lt;&lt;hide-par, echo=3:4&gt;&gt;=
 ## 表示させたくない「醜い」コード
@@ -317,36 +321,36 @@ par(mar = c(4, 4, 1, 0.5)) # reset margins
 plot(mtcars[, 4:5])
 @</code></pre>
 </div>
-<div id="インライン出力" class="section level2 unnumbered">
-<h2>インライン出力</h2>
+<div id="インライン出力" class="section level2 unnumbered hasAnchor">
+<h2>インライン出力<a href="output.html#インライン出力" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>チャンクの出力とは別の出力タイプがあります. インライン R コードの出力です (例: <code>\Sexpr{t.test(x)$p.value}</code>). 数値の出力は特別な扱われ方をします. 非常に大きいか小さい数値は指数表記で書き出されます. 指数表記になるしきい値は R オプションの <code>scipen</code> (詳細は <code>?options</code> を参照してください) によります. 基本的に <span class="math inline">\(10^4\)</span> より大きいか, <span class="math inline">\(10^{-4}\)</span> より小さい場合に指数表記になります (負の数でも絶対値が同様に評価されます). 出力フォーマット (LaTeX とか HTML とか) に応じて, <strong>knitr</strong> は <code>$3.14 \times 10^5$</code> や <code>3.14 &amp;times; 10&lt;sup&gt;5&lt;/sup&gt;</code> というように適切なコードで出力します.</p>
 <p>もう1つの R オプション <code>digits</code> は, どの桁で丸めるべきかを制御します. デフォルトの <code>options(scipen = 0, digits = 4)</code> が気に入らないならば, こんなふうに最初のチャンクで変更できます.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="output.html#cb38-1"></a><span class="do">## 10^5 以上ならば指数表記され, 2 桁で丸める</span></span>
-<span id="cb38-2"><a href="output.html#cb38-2"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">1</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="output.html#cb40-1"></a><span class="do">## 10^5 以上ならば指数表記され, 2 桁で丸める</span></span>
+<span id="cb40-2"><a href="output.html#cb40-2"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">1</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>R Markdown での例:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb39-1"><a href="output.html#cb39-1" aria-hidden="true" tabindex="-1"></a>インラインコードでは「``<span class="in">` `</span>r&#39;&#39; 1+1` ```」と表示される</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb41-1"><a href="output.html#cb41-1" tabindex="-1"></a>インラインコードでは「``<span class="in">` `</span>r&#39;&#39; 1+1` ```」と表示される</span></code></pre></div>
 <p>インラインコードでは「2」と表示される</p>
 <p>上記の例では他の地の文とともに <code>2</code> と表示されます.</p>
 <p>Rnw の例 (LaTeX):</p>
 <pre><code>Inline code looks like this \Sexpr{1+1}</code></pre>
 <p>R HTML の例:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb41-1"><a href="output.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline 1+1 --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb43-1"><a href="output.html#cb43-1" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline 1+1 --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p>R HTML 文書では, デフォルトでは結果の文字列は <code>&lt;code&gt;&lt;/code&gt;</code> で囲まれます. 出力から <code>&lt;code&gt;&lt;/code&gt;</code> タグをなくしたいなら, R コードを <code>I()</code> で囲むだけです. 例:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb42-1"><a href="output.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline I(1+1) --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb44-1"><a href="output.html#cb44-1" tabindex="-1"></a><span class="kw">&lt;p&gt;</span>Inline code looks like this <span class="co">&lt;!--rinline I(1+1) --&gt;</span><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p>さらに別の用例を<a href="http://stackoverflow.com/q/14124022/559676">スタックオーバーフローの投稿</a>で見ることができます.</p>
 </div>
-<div id="long-lines-of-text-output" class="section level2 unnumbered">
-<h2>Long lines of text output</h2>
-<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong>knitr</strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>.</p>
+<div id="long-lines-of-text-output" class="section level2 unnumbered hasAnchor">
+<h2>Long lines of text output<a href="output.html#long-lines-of-text-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>通常, R はテキスト出力時に <code>width</code> オプション (<code>options(width = ??)</code> で設定されたもの) を尊重します. たとえば <code>rnorm(100)</code> として見てください. <code>width</code> のデフォルト値は <code>75</code> に設定されていますが, あなたが LaTeX を使っているならこれより小さい値を望むかもしれません. いくつかのケースでは, 小さな値を設定していたとしても実際の出力の幅が広すぎることがあるかもしれません. それは大抵の場合, R がこのオプションを尊重してないためです. 私はこの問題にあまりできることはありませんが, <strong>knitr</strong> 側でハックする方法がいくつかあります. その例の1つは issue <a href="https://github.com/yihui/knitr/issues/421">#421</a> で見られます<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>.</p>
 </div>
-<div id="メッセージに1コメントを" class="section level2 unnumbered">
-<h2>1メッセージに1コメントを</h2>
+<div id="メッセージに1コメントを" class="section level2 unnumbered hasAnchor">
+<h2>1メッセージに1コメントを<a href="output.html#メッセージに1コメントを" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R でメッセージ文を書き出すのに <code>cat()</code> を使うのが好きな人がたくさんいますが, これは大変よくない使い方です. このような形にメッセージ文は非表示にするのが大変だからです. 本当に <strong>メッセージ</strong> を提示したい場合は, <code>message()</code> 関数を使うべきです. 正規のメッセージは <code>suppressMessages()</code> で表示を抑制したり, <strong>knitr</strong> で補足したりすることができ便利です. パッケージ開発者の中にはこの問題に注意を払ってない人がいます. そのようなパッケージを読み込んだりパッケージの関数を使ったりすると, 表示を抑制できない偽物のメッセージ文を見かけます. パッケージのスタートアップメッセージはじっさい必要ですが, それは <code>packageStartupMessage()</code> で表示すべきです. <strong>knitr</strong> の <code>message=FALSE</code> でメッセージを消せないなら, それはパッケージ開発者に変更を要求するときです.</p>
 <p>同様に, 警告を発したいならまさに <code>warning()</code> を使うべきです.</p>
 <p>というわけで, あなたの <code>cat</code> の振る舞いに気をつけてください!</p>
 </div>
-<div id="その他" class="section level2 unnumbered">
-<h2>その他</h2>
+<div id="その他" class="section level2 unnumbered hasAnchor">
+<h2>その他<a href="output.html#その他" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>チャンクで <code>echo=FALSE, results='hide'</code> を使用した時, 出力に余分な空白行があるかもしれません. 空白行がいらないのなら, issue <a href="https://github.com/yihui/knitr/issues/231">#231</a> で解決できるかもしれません.</p>
 
 <!---
@@ -359,8 +363,8 @@ slug: reference
 </div>
 <div class="footnotes">
 <hr />
-<ol start="27">
-<li id="fn27"><p>訳注: <code>citation()</code> の出力が <code>width</code> に対応していない場合の問題です<a href="output.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<ol start="28">
+<li id="fn28"><p>訳注: <code>citation()</code> の出力が <code>width</code> に対応していない場合の問題です<a href="output.html#fnref28" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -429,7 +433,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

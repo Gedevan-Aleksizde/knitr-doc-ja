@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="キャッシュ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
   <meta name="github-repo" content="Gedevan-Aleksizde/knitr-doc-ja" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="manual.html"/>
 <link rel="next" href="showcase.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
@@ -163,6 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
+<li class="chapter" data-level="1.3" data-path="options.html"><a href="options.html#グローバルrオプション"><i class="fa fa-check"></i><b>1.3</b> グローバルRオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="hooks.html"><a href="hooks.html"><i class="fa fa-check"></i><b>2</b> フック</a>
 <ul>
@@ -182,9 +186,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>3</b> 使用例</a></li>
 <li class="chapter" data-level="4" data-path="FAQs.html"><a href="FAQs.html"><i class="fa fa-check"></i><b>4</b> よくある質問 (FAQ)</a></li>
 <li class="part"><span><b>I 用例</b></span></li>
-<li><a href="editors.html#editors"><code>knitr</code> のエディタ</a>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i><code>knitr</code> のエディタ</a>
 <ul>
-<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html"><i class="fa fa-check"></i>Texmaker</a></li>
+<li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texmaker"><i class="fa fa-check"></i>Texmaker</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#texstudio"><i class="fa fa-check"></i>TeXStudio</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#winedt"><i class="fa fa-check"></i>WinEdt</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#emacsess"><i class="fa fa-check"></i>Emacs/ESS</a></li>
@@ -197,19 +201,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#kile"><i class="fa fa-check"></i>Kile</a></li>
 <li class="chapter" data-level="" data-path="editors.html"><a href="editors.html#tinn-r"><i class="fa fa-check"></i>Tinn-R</a></li>
 </ul></li>
-<li><a href="framed.html#framed"><code>framed</code> パッケージ</a>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i><code>framed</code> パッケージ</a>
 <ul>
-<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html"><i class="fa fa-check"></i>要素の概要</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#要素の概要"><i class="fa fa-check"></i>要素の概要</a></li>
 <li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#影付きボックスのパディング"><i class="fa fa-check"></i>影付きボックスのパディング</a></li>
-<li><a href="framed.html#framed-と互換性のない環境"><strong>framed</strong> と互換性のない環境</a></li>
+<li class="chapter" data-level="" data-path="framed.html"><a href="framed.html#framed-と互換性のない環境"><i class="fa fa-check"></i><strong>framed</strong> と互換性のない環境</a></li>
 </ul></li>
-<li><a href="listings.html#listings"><code>Listings</code></a>
+<li class="chapter" data-level="" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><code>Listings</code></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html"><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
+<li class="chapter" data-level="4.1" data-path="listings.html"><a href="listings.html#さらなる-listings-オプション."><i class="fa fa-check"></i><b>4.1</b> さらなる listings オプション.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i>チャンク出力の制御</a>
 <ul>
-<li><a href="output.html#echo-オプションの発展的な使い方"><code>echo</code> オプションの発展的な使い方</a></li>
+<li class="chapter" data-level="" data-path="output.html"><a href="output.html#echo-オプションの発展的な使い方"><i class="fa fa-check"></i><code>echo</code> オプションの発展的な使い方</a></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html#インライン出力"><i class="fa fa-check"></i>インライン出力</a></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html#long-lines-of-text-output"><i class="fa fa-check"></i>Long lines of text output</a></li>
 <li class="chapter" data-level="" data-path="output.html"><a href="output.html#メッセージに1コメントを"><i class="fa fa-check"></i>1メッセージに1コメントを</a></li>
@@ -218,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i>チャンク参照/マクロ</a>
 <ul>
 <li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#同じラベルを使用する"><i class="fa fa-check"></i>同じラベルを使用する</a></li>
-<li><a href="reference.html#チャンクオプション-ref.label">チャンクオプション <code>ref.label</code></a></li>
+<li class="chapter" data-level="" data-path="reference.html"><a href="reference.html#チャンクオプション-ref.label"><i class="fa fa-check"></i>チャンクオプション <code>ref.label</code></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i>グラフィックス</a>
 <ul>
@@ -240,11 +244,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#より細かいキャッシュのとり方"><i class="fa fa-check"></i>より細かいキャッシュのとり方</a></li>
 <li class="chapter" data-level="" data-path="cache.html"><a href="cache.html#乱数生成器-rng-の再現可能性"><i class="fa fa-check"></i>乱数生成器 (RNG) の再現可能性</a></li>
 </ul></li>
-<li><a href="showcase.html#showcase"><code>knitr</code> のショーケース</a>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i><code>knitr</code> のショーケース</a>
 <ul>
-<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html"><i class="fa fa-check"></i>ウエブサイト</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ウエブサイト"><i class="fa fa-check"></i>ウエブサイト</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#書評"><i class="fa fa-check"></i>書評</a></li>
-<li><a href="showcase.html#knitr-によるソリューション"><code>knitr</code> によるソリューション</a></li>
+<li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#knitr-によるソリューション"><i class="fa fa-check"></i><code>knitr</code> によるソリューション</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#r-パッケージ"><i class="fa fa-check"></i>R パッケージ</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#教材"><i class="fa fa-check"></i>教材</a></li>
 <li class="chapter" data-level="" data-path="showcase.html"><a href="showcase.html#ワークショッププレゼンテーション"><i class="fa fa-check"></i>ワークショップ・プレゼンテーション</a></li>
@@ -278,15 +282,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cache" class="section level1 unnumbered">
-<h1>キャッシュ</h1>
+<div id="cache" class="section level1 unnumbered hasAnchor">
+<h1>キャッシュ<a href="cache.html#cache" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>キャッシュ機能の使用例について</p>
 <p>オリジナルのページ: <a href="https://yihui.org/knitr/demo/cache/" class="uri">https://yihui.org/knitr/demo/cache/</a></p>
 <p>オリジナルの更新日: 2011-12-04</p>
 <hr />
 <p>チャンクオプションの <code>cache=TRUE</code> でキャッシュを有効にでき, <code>cache.path</code> でキャッシュ用ディレクトリを指定できます. <a href="options.html#options">1</a> 章『オプション』を参照してください.</p>
-<div id="キャッシュの例" class="section level2 unnumbered">
-<h2>キャッシュの例</h2>
+<div id="キャッシュの例" class="section level2 unnumbered hasAnchor">
+<h2>キャッシュの例<a href="cache.html#キャッシュの例" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>キャッシュ機能は私の文書の多くで広く使われています. たとえば <strong>knitr</strong> の <a href="manual.html#manual">メインマニュアル</a> や <a href="graphics.html#graphics">グラフィックス</a> です. ここでは, もう少しいくつかの例を挙げます.</p>
 <ul>
 <li>基本的な例
@@ -301,8 +305,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 </div>
-<div id="重要な補足事項" class="section level2 unnumbered">
-<h2>重要な補足事項</h2>
+<div id="重要な補足事項" class="section level2 unnumbered hasAnchor">
+<h2>重要な補足事項<a href="cache.html#重要な補足事項" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>キャッシュがいつ再構成されるかと, キャッシュされないチャンクについてよく理解するため, <a href="https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf">メインマニュアル</a> (英語版 PDF) のキャッシュに関するセクションを, とても注意深く読まなければなりません.</p>
 <p>キャッシュに影響する要素を今一度繰り返します (いかなる変更も古いキャッシュを無効にします):</p>
 <ol style="list-style-type: decimal">
@@ -318,38 +322,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>source()</code> と <code>setGeneric()</code> は, コードがローカル環境で評価された場合でもグローバル環境にオブジェクトを作成するという副次作用を持ちます. <strong>knitr</strong> 0.4 より前ではこれらのグローバルオブジェクトをキャッシュすることはできませんでした (たとえば issue <a href="https://github.com/yihui/knitr/issues/138">#138</a> を見てください). しかし ver. 0.4 以降は <strong>knitr</strong> が <code>globalenv()</code> で作成されたオブジェクトを確認し, 他のオブジェクト同様に保存するようになったため, キャッシュできるようになりました.</p>
 <p>キャッシュされたチャンクで使われるパッケージのリストは保存されますが, パッケージ名をキャッシュする方法としては完璧ではありません. かりにパッケージを読み込み, あとで除外したとしても, <strong>knitr</strong> はそれを知ることはできません (新たに読み込まれたパッケージしか捕捉できません). Issue <a href="https://github.com/yihui/knitr/issues/382">#382</a> で解説されているように, キャッシュディレクトリにある <code>__packages</code> ファイルを手動で編集しなければなりません.</p>
 </div>
-<div id="キャッシュにはまだ何かありますか" class="section level2 unnumbered">
-<h2>キャッシュにはまだ何かありますか?</h2>
+<div id="キャッシュにはまだ何かありますか" class="section level2 unnumbered hasAnchor">
+<h2>キャッシュにはまだ何かありますか?<a href="cache.html#キャッシュにはまだ何かありますか" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>以上のオブジェクトがキャッシュに影響するのはいかにも納得できることですが, 再現可能性のある研究ではキャッシュは他の変更によって無効化されるという点でよりいっそう厳格になることがあります. 典型例の1つはソフトウェアのバージョンです. 2つのバージョンが異なるRに, 異なる結果を出させるのは不可能ではありません. この場合, 我々はこう設定するかもしれません.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="cache.html#cb55-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version.string)</span>
-<span id="cb55-2"><a href="cache.html#cb55-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version) <span class="co"># あるいはプラットフォームの違いも考慮する</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="cache.html#cb57-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version.string)</span>
+<span id="cb57-2"><a href="cache.html#cb57-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> R.version)  <span class="co"># あるいはプラットフォームの違いも考慮する</span></span></code></pre></div>
 <p>これによって, キャッシュされた結果は特定のバージョンの R でのみ適用されます. R をアップグレードし文書を再コンパイルしたとき, 全ての結果は再計算されます.</p>
 <p>同様に, キャッシュが特定の環境でのみ保存されるように, このオプションに他の変数も設定したいかもしれません. これは野心的な例です.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb56-1"><a href="cache.html#cb56-1"></a><span class="do">## キャッシュは特定の R のバージョンとセッションでのみ有効</span></span>
-<span id="cb56-2"><a href="cache.html#cb56-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
-<span id="cb56-3"><a href="cache.html#cb56-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(</span>
-<span id="cb56-4"><a href="cache.html#cb56-4"></a>  R.version, <span class="fu">sessionInfo</span>(), <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&#39;%Y-%m&#39;</span>)</span>
-<span id="cb56-5"><a href="cache.html#cb56-5"></a>))</span></code></pre></div>
-<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb58-1"><a href="cache.html#cb58-1"></a><span class="do">## キャッシュは特定の R のバージョンとセッションでのみ有効</span></span>
+<span id="cb58-2"><a href="cache.html#cb58-2"></a><span class="do">## キャッシュは最大で1ヶ月間保存される (来月は再計算される)</span></span>
+<span id="cb58-3"><a href="cache.html#cb58-3"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> <span class="fu">list</span>(R.version, <span class="fu">sessionInfo</span>(),</span>
+<span id="cb58-4"><a href="cache.html#cb58-4"></a>  <span class="fu">format</span>(<span class="fu">Sys.Date</span>(), <span class="st">&quot;%Y-%m&quot;</span>)))</span></code></pre></div>
+<p>この <code>cache.extra</code> オプションの別の良い使用例が issue <a href="https://github.com/yihui/knitr/issues/238">#238</a> で示されています. この例ではキャッシュはファイルの更新日時と関連付けられています. つまり, データファイルが変更されれば, キャッシュは自動的に再構成されることになります<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>.</p>
 <p>注: キャッシュ条件にさらにオブジェクトを導入する際に, <code>cache.extra</code> 以外の任意のオプション名を使用することができます. たとえば <code>cache.validation</code> も呼び出せます. 全てのチャンクオプションはキャッシュの確認時に考慮されるためです.</p>
 </div>
-<div id="キャッシュディレクトリを入力ファイル名と連動させる" class="section level2 unnumbered">
-<h2>キャッシュディレクトリを入力ファイル名と連動させる</h2>
+<div id="キャッシュディレクトリを入力ファイル名と連動させる" class="section level2 unnumbered hasAnchor">
+<h2>キャッシュディレクトリを入力ファイル名と連動させる<a href="cache.html#キャッシュディレクトリを入力ファイル名と連動させる" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>ときとしてデフォルトとは異なる入力ファイルに対して異なるキャッシュディレクトリを使いたいことがあるかもしれません. 解決策の1つが issue <a href="https://github.com/yihui/knitr/issues/234">#234</a> で提示されています. しかし, 自己完結性を高めるため, この設定はソースドキュメントの内部で行うことを推奨します (<code>opts_chunk$set(cache.path = ...)</code> を使ってください.).</p>
 </div>
-<div id="より細かいキャッシュのとり方" class="section level2 unnumbered">
-<h2>より細かいキャッシュのとり方</h2>
+<div id="より細かいキャッシュのとり方" class="section level2 unnumbered hasAnchor">
+<h2>より細かいキャッシュのとり方<a href="cache.html#より細かいキャッシュのとり方" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>上級者はチャンクオプション <code>cache</code> に対して <code>TRUE</code> か <code>FALSE</code> かだけでなく, 数字で設定するなどしてもっと粒度の細かいキャッシュが欲しいと考えるかもしれません. <code>cache = 0, 1, 2, 3</code> として, <code>0</code> は <code>FALSE</code>, <code>3</code> は <code>TRUE</code> と同じで, <code>cache = 1</code> は計算の結果のみキャッシュから読み込む (<code>evaluate::evaluate()</code> から), よってコードは再評価されませんが, 他の箇所, 出力フックや作成されたグラフの保存といった箇所は評価されます. <code>cache = 2</code> ならば, <code>1</code> とほとんど同じですが, 唯一の違いはグラフファイルがすでに存在する場合, 再保存されない点です. これはグラフが大きい場合, いくらか時間の削減になります. 以前のRセッションで記録されたグラフが別のRセッション, あるいは別のバージョンで安全に再保存されるという保証はないため, <code>cache = 1</code> よりは <code>cache = 2</code> を推奨します.</p>
 <p><code>cache = 1, 2</code> の場合は少数のチャンクオプションだけがキャッシュに影響します. オプション名は <code>knitr:::cache1.opts</code>, <code>knitr:::cache2.opts</code> で確認してください. 基本的に, コード評価に影響しないチャンクオプションが変更されてもキャッシュは無効になりません. たとえば <code>echo</code> を <code>TRUE</code> から <code>FALSE</code> に変えるとか, <code>fig.cap = '新しいキャプション'</code> と設定するなどの変更です. しかし, <code>eval</code> を <code>TRUE</code> から <code>FALSE</code> に変えた場合, あるいは <code>cache.path='foo/'</code> を <code>'bar/'</code> に変えた場合, キャッシュは再構成されます.</p>
 <p>いくつかの例が, <a href="https://github.com/yihui/knitr-examples/">example #101</a> (<a href="https://github.com/yihui/knitr-examples/blob/master/101-cache-levels.md">出力</a>) で見られます.</p>
 <p>この方法では, 計算と文書の出力レンダリングを分離することが可能となり,
 キャッシュを破棄することなく出力を調整するのに役立ちます. issue <a href="https://github.com/yihui/knitr/issues/396">#396</a>, <a href="https://github.com/yihui/knitr/issues/536">#536</a> を確認してください.</p>
 </div>
-<div id="乱数生成器-rng-の再現可能性" class="section level2 unnumbered">
-<h2>乱数生成器 (RNG) の再現可能性</h2>
+<div id="乱数生成器-rng-の再現可能性" class="section level2 unnumbered hasAnchor">
+<h2>乱数生成器 (RNG) の再現可能性<a href="cache.html#乱数生成器-rng-の再現可能性" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>乱数生成器 (RNG) が関係するチャンクの再現性を維持するため, <strong>knitr</strong> は <code>.Random.seed</code> をキャッシュし, 各チャンクの評価直前に復元します. しかし1つ問題があります. チャンク A, B がキャッシュされていたとします. この時A, B の間に新たにチャンク C を挿入したとします (3つのチャンクは全て内部で RNG を使用しています). RNG が変更されたため B が更新されるはずですが, <code>.Random.seed</code> は副次作用であるため, これに反して実際には B は更新されません. はっきり言うと, B の再現性は偽りのものとなります.</p>
 <p>RNG の関係する再現可能性を保証するために, <code>.Random.seed</code> とキャッシュを関連付ける必要があります. これが変更される度にキャッシュも更新されなければなりません. これは <code>cache.extra</code> オプションで <strong>評価されない</strong> R 評価式を参照することで簡単にできます. たとえば以下のように.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="cache.html#cb57-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb59-1"><a href="cache.html#cb59-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache.extra =</span> rand_seed)</span></code></pre></div>
 <p><code>?rand_seed</code> を確認してください (これは評価されない R 評価式です). この場合は各チャンクは最初に <code>.Random.seed</code> が最後の実行から変更されたかどうかを確認します. <code>.Random.seed</code> が異なるならキャッシュは再構成されます.</p>
 
 <!---
@@ -362,8 +365,8 @@ slug: showcase
 </div>
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref31" class="footnote-back">↩︎</a></p></li>
+<ol start="32">
+<li id="fn32"><p>訳注: ファイルの更新日時を取得するには base R の <code>file.mtime</code> 関数が便利とのことです<a href="cache.html#fnref32" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -432,7 +435,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
