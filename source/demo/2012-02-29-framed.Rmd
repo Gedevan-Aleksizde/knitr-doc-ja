@@ -15,9 +15,9 @@ slug: framed
 
 ----
 
-```{block2, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 このページは `knitr` 単体の場合を解説しています. R Markdown の場合, `framed` が関わるのは基本的にコードチャンクの表示スタイルのみです.
-```
+:::
 
 デフォルトでは **knitr** はタイプセットに [framed](http://www.ctan.org/pkg/framed) という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.
 

@@ -15,9 +15,9 @@ slug: graphics
 
 ----
 
-```{block2, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
-```
+:::
 
 ## グラフィックスマニュアル {-}
 

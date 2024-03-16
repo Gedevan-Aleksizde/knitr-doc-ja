@@ -15,9 +15,9 @@ slug: reference
 
 ----
 
-```{block2, demo-reference-translateor, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: このページは全編を通して Sweave の構文で書かれていますが, R Markdown のチャンクでも同様のことが可能です.
-```
+:::
 
 Sweave には `<<chunk-label>>` (`<<>>=` と違い `=` がない点に注意) という構文でチャンクを再利用するためにチャンクを参照する機能があります. たとえば
 

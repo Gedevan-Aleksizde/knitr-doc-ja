@@ -16,9 +16,9 @@ list_pages: true
 
 ----
 
-```{block2, type="rmdnote"}
+:::{.infobox .memo data-latex="{memo}"}
 **訳注**: 現在は knitr の主な利用場面は R Markdown との併用だと思うので, それらと関係の薄いページは翻訳していません. また, 編集上の問題から, ここで挙げられているページのうち翻訳済みのものは全てナビゲーションバーの「用例」パートでもリンクされています.
-```
+:::
 
 Github の [knitr-examples](https://github.com/yihui/knitr-examples) はより豊富なコレクションになっています. このページはむしろドキュメント用途として作られています. 他のユーザーによる [**knitr**のショーケース](#showcase) を見ることもできます.
 

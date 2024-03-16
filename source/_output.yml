@@ -14,4 +14,7 @@ rmdja::gitbook_ja:
       facebook: no
       all: ['facebook', 'linkedin', 'instapaper', 'weibo', 'vk']
 rmdja::pdf_book_ja:
-  keep_tex: true
+  latex_engine: lualatex
+  keep_tex: yes
+  block_style: tcolorbox
+  extract_media: yes

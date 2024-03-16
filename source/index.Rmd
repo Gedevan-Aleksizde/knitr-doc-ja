@@ -2,7 +2,7 @@
 title: "**knitr**: Rによる美麗で柔軟そして高速な動的レポート生成"
 author:
   - "著者: Xie, Yihui (谢益辉)"
-  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
+  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)] (片桐 智志)"
 site: bookdown::bookdown_site
 description : "knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui's knitr documentation"
 documentclass: bxjsreport
@@ -11,6 +11,8 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 github-repo: Gedevan-Aleksizde/knitr-doc-ja
+monofont: Ricty Discord
+jmonofont: Ricty Discord
 ---
 
 # knitr {-}
@@ -44,24 +46,24 @@ original_time <- format(as.POSIXct(system('cd ../yihui && git log -1 --pretty=fo
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.3 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.6 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
-```{block2, type="rmdimportant"}
+:::{.infobox .important data-latex="{important}"}
 本稿は [CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)ライセンス](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています. Yihui 氏によるオリジナルは https://yihui.org/knitr/ で読むことができます.
 
 This is an unofficial Japanese translation of Yihui's **knitr** documentation, which is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).  The original documentation by Yihui is [here](https://yihui.org/knitr/).
-```
+:::
 
 ```{r cc-logo, results="asis", echo=F}
 rmdja::get_CC("inherit", F, "normal", language = "ja")
 ```
 
-```{block2, type="rmdtip"}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: Yihui 氏のサイトの一連のドキュメントはかなり以前から氏のブログ投稿として断続的に更新されてきたものを編纂しているため, 内容の重複した記述がいくつかありますし, RStudio および R Markdown が普及している現在では, やや out-of-date な記述も見られます (現在では Sweave はあまり使いません). そのため, **サイドバーの目次から辿れるページ, およびそれらでリンクされているページ以外は重要度が低いと見なし, 翻訳していません**. 同様の理由から「用例」も一部を除き翻訳していません (**共同翻訳者は常に歓迎します**: https://github.com/Gedevan-Aleksizde/knitr-doc-ja).
 
 しかしながら翻訳時の **knitr** および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.
-```
+:::
 
 ## 概要 {-}
 

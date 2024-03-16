@@ -2,7 +2,7 @@
 title: "**knitr**: Rによる美麗で柔軟そして高速な動的レポート生成"
 author:
   - "著者: Xie, Yihui (谢益辉)"
-  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)]"
+  - "翻訳者: Katagiri, Satoshi^[twitter@[ill_identified](https://twitter.com/ill_identified)] (片桐 智志)"
 site: bookdown::bookdown_site
 description : "knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui's knitr documentation"
 documentclass: bxjsreport
@@ -11,6 +11,8 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 github-repo: Gedevan-Aleksizde/knitr-doc-ja
+monofont: Ricty Discord
+jmonofont: Ricty Discord
 ---
 
 # knitr {-}
@@ -19,22 +21,22 @@ github-repo: Gedevan-Aleksizde/knitr-doc-ja
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.3 (2021/03/21 19:34:35 JST, 本家最終更新時刻: [2021/03/01 16:46:02 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.6 (2022/02/19 00:40:13 JST, 本家最終更新時刻: [2022/01/25 16:17:20 JST](https://github.com/rbind/yihui/tree/master/content/knitr))"
 ---
 
-\BeginKnitrBlock{rmdimportant}
+:::{.infobox .important data-latex="{important}"}
 本稿は [CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)ライセンス](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) で提供されています. Yihui 氏によるオリジナルは https://yihui.org/knitr/ で読むことができます.
 
 This is an unofficial Japanese translation of Yihui's **knitr** documentation, which is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).  The original documentation by Yihui is [here](https://yihui.org/knitr/).
-\EndKnitrBlock{rmdimportant}
+:::
 
 [![](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja)
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: Yihui 氏のサイトの一連のドキュメントはかなり以前から氏のブログ投稿として断続的に更新されてきたものを編纂しているため, 内容の重複した記述がいくつかありますし, RStudio および R Markdown が普及している現在では, やや out-of-date な記述も見られます (現在では Sweave はあまり使いません). そのため, **サイドバーの目次から辿れるページ, およびそれらでリンクされているページ以外は重要度が低いと見なし, 翻訳していません**. 同様の理由から「用例」も一部を除き翻訳していません (**共同翻訳者は常に歓迎します**: https://github.com/Gedevan-Aleksizde/knitr-doc-ja).
 
 しかしながら翻訳時の **knitr** および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.
-\EndKnitrBlock{rmdtip}
+:::
 
 ## 概要 {-}
 
@@ -110,9 +112,9 @@ show_toc: true
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このドキュメントでは **knitr** 全般の機能を紹介しており, `Rnw` や `Rhtml` の仕様についても言及しています. R Markdown でも **knitr** の機能は使われますが, R Markdown 独自の中間処理によって, 最終的な出力がここで説明されているものと異なる可能性がある点に注意してお読みください.
-\EndKnitrBlock{rmdtip}
+:::
 
 **knitr** パッケージはソースコード, テキスト, グラフ, チャンクで使用するプログラミング言語といった, コードチャンクのコンポネントのほとんど全部をカスタマイズするための多くのオプションを提供します. `knit` 処理のカスタマイズをパッケージレベルでカスタマイズするオプションもあります. この章では **knitr** で使用できる全てのチャンクオプションとパッケージオプションを解説します. 以下のリスト中で, オプションのデフォルト値になっているものはカッコ内に表記しています.
 
@@ -155,6 +157,29 @@ knitr::opts_chunk$set(
   - 理論上はチャンクラベルもまた引用符で囲む必要がありますが, 利便性のため書かなくとも自動で引用符が追加されます (例: ```` ```{r, 2a}``` ```` は ```` ```{r, label='2a'}``` ```` として扱われます).
   - R のコードとして有効なものである限り, いくらでも複雑な構文を書くことができます.
 
+チャンクオプションの書き方の別の方法として, コードチャンクの本文内に `#| ` の後に書くことができます. 例えば以下のように.
+
+````
+```{r}
+#| my-chunk, echo = FALSE, fig.width = 10,
+#| fig.cap = "This is a long long
+#|   long long caption."
+plot(cars)
+```
+````
+
+チャンクオプションとコードの間を1行開けるかどうかは任意です. この記法はオプションの改行が許容されます. 好きなだけ改行してオプションを書くことができます. 同じオプションが本文とチャンクヘッダ (```` ```{} ```` の内側) の両方で指定された場合, 前者が後者を上書きします. チャンク内では `<タグ>: <値>` のような YAML 式の記法でオプションを書くこともできます. 通常は, 1行毎に1つづつオプションを書かねばなりません. 例えば以下のように.
+
+````
+```{r}
+#| echo: false
+#| fig.width: 10
+```
+````
+
+YAML 記法を選択した場合, 生の R の式ではなく YAML の値として有効なものを書かねばなりません.
+
+
 以下では `オプション`: (`デフォルト値`; 値の型) という形式で, **knitr** で使えるチャンクオプションのリストを掲載します.
 
 ### コード評価関連 {#evaluate}
@@ -165,15 +190,22 @@ knitr::opts_chunk$set(
 
 -   **`echo`**: (`TRUE`; `logical` または `numeric`).: 出力される文書にソースコードを表示するかどうか. 「表示」「隠す」に対応する `TRUE`/`FALSE` に加え, どの R の評価式を表示するかを選ぶために `numeric` のベクトルを使用することもできます. 例: `echo=2:3` は 2, 3番めの評価式を表示し,  `echo = -4` は4番目だけを非表示にします.
 - `results`: (`'markup'`; `character`) 実行結果のテキストの部分をどう表示するかを制御します. このオプションは通常のテキスト出力にのみ影響することに注意してください (警告・メッセージ・エラーは適用範囲外です). 取りうる値は次のとおりです.
-  - `markup`: 出力の文書フォーマットに応じて適切な環境でテキスト出力をマークアップします. 例えば R Markdown ならば `"[1] 1 2 3"` が **knitr** によって以下のように加工されます. この場合, `results='markup'` は囲み (```` ``` ````) 付きのコードブロックとして出力されることを意味します.
-  ````
-  ```
-  [1] 1 2 3
-  ```
-  ````
-  - `asis`: テキスト出力を「そのまま」書き出します. つまり, 生の結果テキストをマークアップ一切なしでそのまま文書に書き出します.
-  - **`hold`**: チャンクと flush の全てのテキスト出力をチャンクの末尾に固定します.
-  - **`hide`** (または `FALSE`): テキスト出力を表示しません.
+    - `markup`: 出力の文書フォーマットに応じて適切な環境でテキスト出力をマークアップします. 例えば R Markdown ならば `"[1] 1 2 3"` が **knitr** によって以下のように加工されます. この場合, `results='markup'` は囲み (```` ``` ````) 付きのコードブロックとして出力されることを意味します.
+    
+    ````
+    ```
+    [1] 1 2 3
+    ```
+    ````
+    - `asis`: テキスト出力を「そのまま」書き出します. つまり, 生の結果テキストをマークアップ一切なしでそのまま文書に書き出します.
+    
+    ````
+    ```{r, results='asis'}
+    cat("I'm raw **Markdown** content.\n")
+    ```
+    ````
+    - **`hold`**: チャンクと flush の全てのテキスト出力をチャンクの末尾に固定します.
+    - **`hide`** (または `FALSE`): テキスト出力を表示しません.
 -   `collapse`: (`FALSE`; `logical`) 可能であれば, ソースと出力をつなげて1つのブロックにするかどうかです (デフォルトではソースと出力はそれぞれ独立したブロックです). このオプションは Markdown 文書でのみ有効です.
 -   **`warning`**: (`TRUE`; `logical`).: 警告文 (`warning()` で出力されるテキスト) を保存するかどうかです. `FALSE` の場合, 全ての警告文は文書に出力されず, 代わりにコンソールに書き出されます. 警告文の一部を選ぶインデックスとして, `numeric` 型のベクトルを指定することもできます. この場合のインデックスの数値は「何番目の警告文を表示するか」を参照する (例: `3` はこのチャンクから投げられた3番目の警告文を意味します) ものであって, 「何番目の R コードの警告文の出力を許可するか」ではないことに注意してください.
 -   **`error`**: (`TRUE`; `logical`).: エラー文 (`stop()` で出力される文です) を保持するかどうかです. デフォルトの `TRUE` では, **コード評価はエラーが出ても停止しません!** エラー時点で停止させたい場合はこのオプションを `FALSE` に指定してください. **R Markdown ではこのデフォルト値は `FALSE` に変更されていることに注意**してください. チャンクオプションに `include=FALSE` がある場合, 起こりうるエラーを見落とさないように,  **knitr** はエラー時点で停止するようになります.
@@ -190,42 +222,39 @@ knitr::opts_chunk$set(
 ### コードの装飾関連 {#code-decoration}
 
 - `tidy`: (`FALSE`) R コードを整形するかどうかです. 他の有効な値は次のとおりです.
-  - `TRUE` (`tidy = 'formatR'` と等価です): 整形のために `formatR::tidy_source()` を呼び出します.
-  - `'styler'`: コード整形のために `styler::style_text()` を呼び出します.
-  - 整形されたコードを返す, `function(code, ...) {}` という形式の任意の関数.
-  - 整形が失敗した場合, 元の R コードは変更されません (警告は表示されます).
+    - `TRUE` (`tidy = 'formatR'` と等価です): 整形のために `formatR::tidy_source()` を呼び出します.
+    - `'styler'`: コード整形のために `styler::style_text()` を呼び出します.
+    - 整形されたコードを返す, `function(code, ...) {}` という形式の任意の関数.
+    - 整形が失敗した場合, 元の R コードは変更されません (警告は表示されます).
 - `tidy.opts`: (`NULL`; `list`) `tidy` オプションで指定した関数へのオプション引数のリストです. 例えば `tidy.opts = list(blank = FALSE, width.cutoff = 60)` は `tidy = 'formatR'` に対して空白行を削除し各行が60文字におさまるように改行しようとします.
 - `prompt`: (`FALSE`; `logical`) R コードにプロンプト記号 (`>` など) を付けるかどうかです.  `?base::options` ヘルプページの `prompt` と `continue` を参照してください. プロンプト記号の追加は, 読者がコードをコピーするのを難しくさせるため, `prompt=FALSE` のほうが良い選択であることに留意してください. エンジンが `R` 以外の場合, このオプションはうまく機能しないことがあります (issue [\#1274](https://github.com/yihui/knitr/issues/1274)).
 -   **`comment`**: (`'##'`; `character`).: テキスト出力の各行の先頭文字です. デフォルトでは, コメントアウトできるよう `##` となっているので, 読者は文書から任意の範囲をそのままコピーしても出力部分は無視されるのでそのまま実行することができます. `comment = ''` を指定することで, デフォルトの `##` は除去されます.
 -   **`highlight`**: (`TRUE`; `logical`).: ソースコードをシンタックスハイライトするかどうかです^[訳注: R Markdown ではさらに, YAML フロントマターで適用するハイライトのテーマ名を指定できます].
 -   **`class.source`**: (`NULL`; `character`).: 出力された文書のソースコードブロックのクラス名です. 出力ブロックに対して機能する `class.output` をはじめとする `class.*` シリーズと同様です.
 -   **`attr.source`**: (`NULL`; `character`).: ソースコードブロックの属性です. `attr.output` などの `attr.*` シリーズと同様です.
+- -   `lang`: (`NULL`; `character`) コードチャンクの言語名です. デフォルトでは言語名はエンジン名と同じです. 例: `r`. このオプションは主に Markdown ベースの文書出力でシンタックスハイライトするためのものです.
 -   `size`: (`'normalsize'`; `character`) `.Rnw` 使用時のチャンクサイズのフォントサイズです. 指定可能なサイズは  [overleaf のヘルプページ (英語)](https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles) を参照してください^[訳注: `\normalsize`, `\Large`, `\LARGE` など LaTeX で指定できるフォントサイズを表すマクロのことを指しています].
 -   **`background`**: (`'#F7F7F7'`; `character`).:  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
 -   **`indent`**: (`character`).: チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **knitr** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です^[訳注: R Markdown の場合は **knitr** 以外の中間処理があるため, 必ずしもこのルールを守りません].
-  
-
-```{.r .numberLines .lineAnchors}
-rnorm(10)
-```
-
-```
-##  [1]  1.37095845 -0.56469817  0.36312841  0.63286260  0.40426832 -0.10612452
-##  [7]  1.51152200 -0.09465904  2.01842371 -0.06271410
-```
-
+    
+    ````
+    ```{r indent-example, echo=2}
+    set.seed(42)
+    rnorm(10)
+    ```
+    ````
 ### キャッシュ関連 {#options-cache}
 
 -   **`cache`**: (`FALSE`; `logical`).: コードチャンクのキャッシュを取るかどうかです. 初回の実行またはキャッシュが存在しない場合は通常通り実行され, 結果がデータセットが保存され (`.rdb`, `.rdx` ファイルなど), それ以降でコードチャンクが評価されることがあれば, 以前保存されたこれらのファイルからこのチャンクの結果を読み出します. ファイル名がチャンクラベルと R コードの MD5 ハッシュ値で一致する必要があることに注意してください. つまりチャンクになんらかの変更がある度に異なる MD5 ハッシュ値が生成されるため, キャッシュはその度に無効になります. 詳細は [キャッシュの解説](#cache) を参考にしてください.
 -   **`cache.path`**: (`'cache/'`; `character`).: 生成したキャッシュファイルの保存場所を指定します. R Markdown ではデフォルトでは入力ファイルの名前に基づきます. 例えば `INPUT.Rmd` の `FOO` というラベルのチャンクのキャッシュは `INPUT_cache/FOO_*.*` というファイルパスに保存されます.
 -   **`cache.vars`**: (`NULL`; `character`).: キャッシュデータベースに保存される変数名のベクトルを指定します. デフォルトではチャンクで作られた全ての変数が識別され保存されますが, 変数名の自動検出はロバストではないかもしれませんし,  保存したい変数を選別したい場合もあるかもしれないので, 保存したい変数を手動選択することもできます.
--   **`cache.globals`**: (`NULL`; `character`).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に `autodep = TRUE` オプションをより正確に動作させたいときに使います. チャンク `B` で使われているグローバル変数が チャンク `A` のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue [\#1403](https://github.com/yihui/knitr/issues/1403) を参照してください).
+-   **`cache.globals`**: (`NULL`; `character`).: このチャンクで作成されない変数の名前のベクトルを指定します. このオプションは主に `autodep = TRUE` オプションをより正確に動作させたいときに使います. チャンク `B` で使われているグローバル変数が チャンク `A` のローカル変数として使われているときなど. グローバル変数の自動検出に失敗した際に使う場合, こにオプションを使って手動でグローバル変数の名前を指定してください (具体例として issue [\#1403](https://github.com/yihui/knitr/issues/1403) を参照してください). さらに, `cache.globals = FALSE` は, 変数がグローバルかローカルかにかかわらず, コードチャンク内のすべての変数を検出することを意味します. 
 -   **`cache.lazy`**: (`TRUE`; logical).: 遅延読み込み `lazyLoad()` を使うか, 直接 `load()` でオブジェクトを読み込むかを指定します. 非常に大きなオブジェクトに対しては, 遅延読み込みは機能しないかもしれません. よってこの場合は `cache.lazy = FALSE` が望ましいかもしれません (issue [\#572](https://github.com/yihui/knitr/issues/572) を参照してください).
 -   **`cache.comments`**: (`NULL`; `logical`).: `FALSE` の場合, R コードチャンク内のコメントを書き換えてもキャッシュが無効になりません.
 -   **`cache.rebuild`**: (`FALSE`; `logical`).: `TRUE` の場合, キャッシュが有効であってもチャンクのコードの再評価を行います. このオプションはキャッシュの無効化の条件を指定したいときに有用です. 例えば `cache.rebuild = !file.exists("some-file")` とすれば `some-file` が存在しないときにチャンクが評価されキャッシュが再構成されます (issue [\#238](https://github.com/yihui/knitr/issues/238) を参照).
 -   **`dependson`**: (`NULL`; `character` または `numeric`).: このチャンクが依存しているチャンクのラベル名を文字ベクトルで指定します. このオプションはキャッシュされたチャンクでのみ適用されます. キャッシュされたチャンク内のオブジェクトは, 他のキャッシュされたチャンクに依存しているかもしれず, 他のチャンクの変更に合わせてこのチャンクも更新する必要があるかもしれません.
-  - `dependson` に `numeric` ベクトルを与えた場合, それはチャンクラベルのインデックスを意味します. 例えば `dependson = 1` ならばこの文書の1番目のチャンクに依存することを意味し, `dependson = c(-1, -2)` は直前の2つのチャンクを意味します (負のインデックスは現在のチャンクからの相対的な位置を表します).
-  - `opts_chunk$set()` によってグローバルにチャンクオプションを設定した場合, このオプションは機能しません. ローカルなチャンクオプションとして設定しなければなりません.
+    - `dependson` に `numeric` ベクトルを与えた場合, それはチャンクラベルのインデックスを意味します. 例えば `dependson = 1` ならばこの文書の1番目のチャンクに依存することを意味し, `dependson = c(-1, -2)` は直前の2つのチャンクを意味します (負のインデックスは現在のチャンクからの相対的な位置を表します).
+    - `opts_chunk$set()` によってグローバルにチャンクオプションを設定した場合, このオプションは機能しません. ローカルなチャンクオプションとして設定しなければなりません.
 -   **`autodep`**: (`FALSE`; `logical`).: グローバル変数を検出することでチャンク間の依存関係を分析するかどうかを指定します (あまり信頼できません). よって, `dependson` を明示的に指定する必要はありません.
 
 ### グラフ関連 {#plots}
@@ -240,16 +269,16 @@ rnorm(10)
     -   数値ベクトルを指定した場合, その値は保存する低水準プロットのインデックスとなります.
     低水準プロットとは `lines()` や `points()` などの関数によるグラフ描画のことです. `fig.keep` についてより理解するには次のようなチャンクを考えてください. 通常はこれで2つのグラフを出力します (`fig.keep = 'high'` を指定したので).  `fig.keep = 'none'` としたなら, いかなるグラフも保存されません. `fig.keep = 'all'` ならば, 4 つのグラフとして保存されます. `fig.keep = 'first'` ならば `plot(1)` によって作成されたグラフが保存されます. `fig.keep = 'last'`, なら, 最後の10本の垂線を描画したグラフが保存されます.
 
-
-```{.r .numberLines .lineAnchors}
-plot(1) # 高水準プロット
-abline(0, 1) # 低水準の作図
-plot(rnorm(10)) # 高水準プロット
-# ループ内での複数の低水準作図 (R 評価式としては1つ)
-for (i in 1:10) {
-  abline(v = i, lty = 2)
-}
-```
+    
+    ```{.r .numberLines .lineAnchors}
+    plot(1) # 高水準プロット
+    abline(0, 1) # 低水準の作図
+    plot(rnorm(10)) # 高水準プロット
+    # ループ内での複数の低水準作図 (R 評価式としては1つ)
+    for (i in 1:10) {
+      abline(v = i, lty = 2)
+    }
+    ```
 
 -   **`fig.show`**: (`'asis'`; `character`).: グラフをどのように表示し, 配置するかです. 可能な値は次のとおりです.
     -   `asis`: グラフが生成された場所にそのまま出力します (R ターミナルで実行した場合とおなじように).
@@ -295,8 +324,8 @@ for (i in 1:10) {
 
 - **`interval`**: (`1`; `numeric`).: アニメーションの1フレームごとの時間 (単位は秒) です.
 - **`animation.hook`**: (`knitr::hook_ffmpeg_html`; `function` または `character`). HTML 出力時のアニメーション作成用のフック関数を指定します. デフォルトでは FFmpeg を使って WebM 動画ファイルに変換します.
-  - 別のフック関数として [**gifski**](https://cran.r-project.org/package=gifski) パッケージの `knitr::hook_gifski` 関数はGIFアニメーションを作ることができます.
-  - このオプションは `'ffmpeg'` や `'gifski'` といった文字列を指定することもできます. これらは対応するフック関数の省略形です. 例: `animation.hook = 'gifski'` は `animation.hook = knitr::hook_gifski` を意味します.
+    - 別のフック関数として [**gifski**](https://cran.r-project.org/package=gifski) パッケージの `knitr::hook_gifski` 関数はGIFアニメーションを作ることができます.
+    - このオプションは `'ffmpeg'` や `'gifski'` といった文字列を指定することもできます. これらは対応するフック関数の省略形です. 例: `animation.hook = 'gifski'` は `animation.hook = knitr::hook_gifski` を意味します.
 - **`aniopts`**: (`'controls,loop'`; `character`).: アニメーションに対する追加のオプションです. 詳細は LaTeX の [**animate**
         パッケージのドキュメント](http://ctan.org/pkg/animate)を参照してください.
 - **`ffmpeg.bitrate`**: (`1M`; `character`).: WebM 動画の質を制御するための FFmpeg の引数 `-b:v` に対応する値を指定できます.
@@ -305,6 +334,7 @@ for (i in 1:10) {
 ### コードチャンク関連 {#code-chunk}
 
 - **`code`**: (`NULL`; `character`).: 指定された場合, そのチャンクのコードを上書きします. この機能によって, プログラミング的にコード挿入が可能になります. 例えば `code = readLines('test.R')` とすれば `test.R` の内容を現在のチャンクで実行します.
+`file`: (`NULL`; `character`) これが指定された場合, `code` オプションが, チャンクとして読み込まれた外部ファイルの内容で上書きされます. `file = "test.R"` というチャンクオプションは `code = xfun::read_all("test.R")` を指定しているのと同じことを意味します.
 - **`ref.label`**: (`NULL`; `character`).: 現在のチャンクのコードに引き継ぐ, 別のチャンクのラベルの文字列ベクトルを指定します (動作例は  [チャンク参照](#reference) を確認してください).
 
 ### 子文書関連 {#child-document}
@@ -316,25 +346,52 @@ for (i in 1:10) {
 - **`engine`**: (`'R'`; `character`).: コードチャンクの言語名です. 指定可能な名前は `names(knitr::knit_engines$get())` で確認できます. 例: `python`, `sql`, `julia`, `bash`, `c`, など. `knitr::knit_engines` で他の言語を使うためのセットアップが可能です.
 - **`engine.path`**: (`NULL`; `character`).: 実行可能なエンジンのパスを指定します. あなたのお使いのシステムの別の実行ファイルを使用するためのオプションです. 例えば `python` はデフォルトでは `/usr/bin/python` を参照しますが, 他のバージョンを使うため `engine.path = '~/anaconda/bin/python'` などと指定することもできます^[訳注: R Markdown の場合, Python のバージョンは `reticulate` パッケージでも制御できます. むしろそちらをつかったほうが便利だと思われます.]. `engine.path` もまたパスのリストを与えられます. これによってエンジンごとにそれぞれパスを指定することができます. 以下のコードが例です. リストの名前はエンジン名と一致する必要があります.
 
+    
+    ```{.r .numberLines .lineAnchors}
+    knitr::opts_chunk$set(engine.path = list(
+      python = "~/anaconda/bin/python",
+      ruby = "/usr/local/bin/ruby"
+    ))
+    ```
 
-```{.r .numberLines .lineAnchors}
-knitr::opts_chunk$set(engine.path = list(
-  python = "~/anaconda/bin/python",
-  ruby = "/usr/local/bin/ruby"
-))
-```
-
+- **`engine.opts`**: (`NULL`; `character`) 言語エンジンに与える追加引数. チャンクの段階ではオプションを文字列またはリストで指定することができます.
+    
+    ````
+    ```{bash, engine.opts='-l'}
+    echo $PATH
+    ```
+    ````
+    
+    ````
+    ```{cat, engine.opts = list(file = "my_custom.css")}
+    h2 {
+      color: blue;
+    }
+    ```
+    ````
+    
+    グローバルレベルでは, 要素名に言語名を与えた文字列のリストが使用できます. `engine.path` と同様に, `knitr::opts_chunk$set()` で引数のテンプレートを作ると便利です.
+    
+    
+    ```{.r .numberLines .lineAnchors}
+    knitr::opts_chunk$set(engine.opts = list(
+      perl = "-Mstrict -Mwarnings",
+      bash = "-o errexit"
+    ))
+    ```
+    
+    各エンジンはそれぞれ自身の `engine.opts` を持ち, 固有のオプションを定義します. 言語エンジンのドキュメントを調べるべきでしょう. R Markdown クックブックには [`cat`](https://bookdown.org/yihui/rmarkdown-cookbook/eng-cat.html)^[翻訳版: https://gedevan-aleksizde.github.io/rmarkdown-cookbook/eng-cat.html], [`sass`/`scss`](https://bookdown.org/yihui/rmarkdown-cookbook/eng-sass.html)^[翻訳版: https://gedevan-aleksizde.github.io/rmarkdown-cookbook/eng-sass.html]エンジンの例が掲載されています.
 
 ### オプションテンプレート関連
 
 -   **`opts.label`**: (`NULL`; `character`).: `knitr::opts_template` でのオプションのラベルです. オプションセットのラベルは `knitr::opts_template` で設定できます (`?knitr::opts_template` を参照してください). このオプションにより, 頻繁に使うチャンクオプションのタイピング労力を削減できます. 
 
-**訳注**: 例えば次のように, `echo=F` を設定するテンプレート `noecho` をどこかで作成したとします. すると, 以降のチャンクで `opts.label="noecho"` を設定すると `opts_template` で設定した `noecho` のオプションが全て適用されます. もちろん複数のオプションをまとめることもできるので, 定番の設定を使いまわすのが簡単になります.
-
-
-```{.r .numberLines .lineAnchors}
-knitr::opts_template$set(noecho = list(echo = F))
-```
+    **訳注**: 例えば次のように, `echo=F` を設定するテンプレート `noecho` をどこかで作成したとします. すると, 以降のチャンクで `opts.label="noecho"` を設定すると `opts_template` で設定した `noecho` のオプションが全て適用されます. もちろん複数のオプションをまとめることもできるので, 定番の設定を使いまわすのが簡単になります.
+    
+    
+    ```{.r .numberLines .lineAnchors}
+    knitr::opts_template$set(noecho = list(echo = F))
+    ```
 
 ### ソースコードの抽出関連
 
@@ -348,10 +405,10 @@ knitr::opts_template$set(noecho = list(echo = F))
 
 パッケージオプションは [`knitr::opts_knit`](#objects) を使用することで変更できます. **`knitr::opts_chunk` と混同しないでください**. 使用例は以下のとおりです.
 
-
-```{.r .numberLines .lineAnchors}
-knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
-```
+    
+    ```{.r .numberLines .lineAnchors}
+    knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
+    ```
 
 別の方法として, R の基本関数である `options()` を使ってパッケージオプションを設定する場合は `?knitr::opts_knit` を参照してください.
 
@@ -366,6 +423,7 @@ knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
 - **`header`**: (`NULL`; `character`).: 文書の開始前に挿入するテキストを指定します. (例えば, LaTeX ならば `\documentclass{article}` の直後, HTML ならば `<head>` タグの直後). このオプションは LaTeX プリアンブルや HTML ヘッダでコマンドやスタイルの定義をするのに有用です. ドキュメントの開始地点は `knitr::knit_patterns$get('document.begin')` で知ることができます. このオプションは `.Rnw` と `.Rhtml` 限定の機能です^[訳注: R Markdown ではヘッダの設定は YAML フロントマターで行います].
 -   `label.prefix`: (`c(table = 'tab:')`; character) ラベルの接頭語を指定します. 現時点では `kable::kable()` によって生成される表のラベルに対する接頭語のみサポートしています.
 -  **`latex.options.color`**, **`latex.options.graphicx`**: (`NULL`).: それぞれ LaTeX パッケージの  **color** と **graphicx** に対するオプションを指定します. これらのオプションは `.Rnw` 限定の機能です^[訳注: R Markdown ではこの機能もやはり YAML フロントマターが担当しています].
+- **`latex.tilde`** (`NULL`): .Rnw 文書のシンタックスハイライトされたチャンク出力内でのチルダ文字を表す LaTeX コマンドの文字列です (使用例は issue [#1992](https://github.com/yihui/knitr/issues/1992) を見てください).
 -   **`out.format`**: (`NULL`; `character`).: 可能な値は `latex`, `sweave`,
     `html`, `markdown`, `jekyll` です. このオプションは入力ファイル名に応じて自動で決定され, 自動設定されるフック関数に影響します. 例えば `?knitr::render_latex` を参考にしてください. このオプションは `knitr::knit()` が実行される**前に**設定する必要があります (文書内で設定しても機能しません).
 -   **`progress`**: (`TRUE`; `logical`).: `knitr::knit()` の実行中にプログレスバーを表示するかどうかを指定します.
@@ -521,12 +579,17 @@ knitr::knit_hooks$set(error = function(x, options) {
 
 デフォルトではチャンクフックは空ですが, 出力フックはデフォルト設定があり, 以下のようにしてリセットできます.
 
-**訳注**: **R Markdown の場合, フォーマット関数の処理内容によっては予期せぬ結果になることがあります**.
-
 
 ```{.r .numberLines .lineAnchors}
 knitr::knit_hooks$restore()
 ```
+
+:::{.infobox .caution data-latex="{caution}"}
+
+**訳注**
+
+R Markdown の場合, 基本的な出力フォーマットにもデフォルトでフックが定義されており, 処理内容によっては予期せぬ結果になることがあるため, 単純な上書きや `$restore()` は意図しない動作につながることがあります. 詳細は "R Markdown Cookboox" [Ch. 12](https://bookdown.org/yihui/rmarkdown-cookbook/output-hooks.html)^[翻訳版: https://gedevan-aleksizde.github.io/rmarkdown-cookbook/output-hooks.html] を確認ください.
+:::
 
 本パッケージは出力を異なる部品にわけてそれぞれにデフォルトのフックを設定し, さらに LaTeX, HTML, Jekyll といった異なる出力フォーマットごとに用意しています. `render_*()` という一連の関数群は, 例えば `render_latex()`, `redner_html()`, など出力フォーマットごとにそれぞれ異なる, 組み込みの出力フックを提供するためにあります. 出力フックはドキュメント内で設定すべきですが, `knitr::knit()` が文書を処理する前にフックを設定したなら `render_*()`, たとえば `render_markdown()`, `render_html()` を最初に呼び出さなければなりません. `hooks_markdown()` などの `hooks_*()` 関数で, 設定を変えることなくこれらの出力フックにアクセスすることができます.
 
@@ -592,7 +655,7 @@ plot(1:10)
 ````
 
 
-\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{knitr_files/figure-latex/unnamed-chunk-2-1} \end{center}
 
 訳注: `knit_hooks` 同様に, `opts_hooks` にも `restore()` メソッドが用意されています.
 
@@ -618,9 +681,9 @@ list_pages: true
 
 ----
 
-\BeginKnitrBlock{rmdnote}
+:::{.infobox .memo data-latex="{memo}"}
 **訳注**: 現在は knitr の主な利用場面は R Markdown との併用だと思うので, それらと関係の薄いページは翻訳していません. また, 編集上の問題から, ここで挙げられているページのうち翻訳済みのものは全てナビゲーションバーの「用例」パートでもリンクされています.
-\EndKnitrBlock{rmdnote}
+:::
 
 Github の [knitr-examples](https://github.com/yihui/knitr-examples) はより豊富なコレクションになっています. このページはむしろドキュメント用途として作られています. 他のユーザーによる [**knitr**のショーケース](#showcase) を見ることもできます.
 
@@ -751,9 +814,9 @@ Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
-\EndKnitrBlock{rmdtip}
+:::
 
 私は以前 [Lyx]($lyx) (未翻訳), [RStudio]($RStudio) (未翻訳) [Emacs Org-mode]($org) (未翻訳), [Ecripse]($ecripse) (未翻訳) について書きました. その他にも, [Texmaker](http://www.xm1math.net/texmaker/) や Windt といったエディタで **knitr** を使うことができます. ポイントは R を呼び出して **knitr** パッケージを読み込み, それから `knit()`または `knit2pdf()` を呼び出すことです.
 
@@ -924,9 +987,9 @@ slug: framed
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このページは `knitr` 単体の場合を解説しています. R Markdown の場合, `framed` が関わるのは基本的にコードチャンクの表示スタイルのみです.
-\EndKnitrBlock{rmdtip}
+:::
 
 デフォルトでは **knitr** はタイプセットに [framed](http://www.ctan.org/pkg/framed) という LaTeX パッケージを使用しています. 代表的な特徴として, 薄灰色の影がつけられます. このページではいくつかのトリックと既知の問題を紹介します.
 
@@ -989,9 +1052,9 @@ slug: listings
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
-\EndKnitrBlock{rmdtip}
+:::
 
 **knitr** では, LaTeX の `listings` パッケージで結果を装飾するためにの出力[フック](#hooks)を簡単に定義することができます. 以下のようなスニペットを使うことになるでしょう.
 
@@ -1194,9 +1257,9 @@ slug: reference
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 **訳注**: このページは全編を通して Sweave の構文で書かれていますが, R Markdown のチャンクでも同様のことが可能です.
-\EndKnitrBlock{rmdtip}
+:::
 
 Sweave には `<<chunk-label>>` (`<<>>=` と違い `=` がない点に注意) という構文でチャンクを再利用するためにチャンクを参照する機能があります. たとえば
 
@@ -1272,9 +1335,9 @@ slug: graphics
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
-\EndKnitrBlock{rmdtip}
+:::
 
 ## グラフィックスマニュアル {-}
 
@@ -1423,10 +1486,9 @@ slug: manual
 
 オリジナルの更新日: 2011/12/5
 
-\begin{rmdtip}
-訳注: このページは \textbf{knitr}
-ドキュメントのトップページではありません.
-\end{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
+訳注: このページは **knitr** ドキュメントのトップページではありません.
+:::
 
 パッケージのマニュアルそれ自体は **knitr** のほとんどの機能の良い使用例となりえます. このマニュアルは LyX で書かれ (([knitr-manual.lyx](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.lyx))), Rnw ソース ([knitr-manual.Rnw](https://github.com/yihui/knitr/blob/master/inst/examples/knitr-manual.Rnw)) にエクスポートして PDFファイル [knitr-manual.pdf](https://github.com/yihui/knitr/releases/download/doc/knitr-manual.pdf) を生成できます.
 
@@ -1560,13 +1622,13 @@ slug: showcase
 
 ----
 
-\BeginKnitrBlock{rmdtip}
+:::{.infobox .tip data-latex="{tip}"}
 訳注: 更新日時からも分かるように, このリストは古く, また膨大であるため個別の翻訳はいたしません. R に限らず, 活発に利用されているオープンソースソフトウェアは頻繁に更新されるため, 非公式の解説はしばしば out-of-date になりうる, ということに注意してください.
-\EndKnitrBlock{rmdtip}
+:::
 
-\BeginKnitrBlock{rmdnote}
+:::{.infobox .memo data-latex="{memo}"}
 以下のリンク集は外部サイトによる `knitr` の使用事例集です (もしリンクしてほしくない, あるいはしてほしいということであれば私 (Yihui) に気軽に連絡してください)
-\EndKnitrBlock{rmdnote}
+:::
 
 ## ウエブサイト {-}
 
@@ -1752,7 +1814,7 @@ slug: showcase
 - [Easier literate programming with R](http://aliquote.org/memos/2012/04/02/easier-literate-programming-with-r) by Christophe Lalanne
 - [knitR - eine Alternative zu Sweave?](http://www.blogofolio.de/2012/05/knitr-eine-alternative-zu-sweave/) by Christian B.
 - [Better R support in pygments by monkey patching SLexer](http://blog.felixriedel.com/2012/05/better-r-support-in-pygments-by-monkey-patching-slexer/) by f3lix
-- [被knitr包给震撼到了](http://xccds1977.blogspot.com/2012/05/knitr.html) by [@xccds](https://twitter.com/xccds)
+- [被knitr包给震撼到了](http://xccds1977.blogspot.com/2012/05/knitr.html) by [\@xccds](https://twitter.com/xccds)
 - [Reproducible Research](http://torsneyt.wordpress.com/2012/05/19/reproducible-research/) by Tom Torsney-Weir (on Vim and Marked)
 - [为什么Markdown+R有较大概率成为科技写作主流？](http://www.yangzhiping.com/tech/r-markdown-knitr.html) by 阳志平
 - [Governance Indicators](http://www.russellshepherd.com/d/?q=blog/governance-indicators) by Russell Shepherd

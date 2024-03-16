@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (片桐 智志)" />
 
 
 
@@ -33,8 +33,9 @@
   
 
 <link rel="next" href="options.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,13 +51,15 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -117,9 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="header.css" type="text/css" />
+
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="header.css" type="text/css" />
 </head>
 
 <body>
@@ -149,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -278,22 +281,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title"><strong>knitr</strong>: Rによる美麗で柔軟そして高速な動的レポート生成</h1>
 <p class="author"><em>著者: Xie, Yihui (谢益辉)</em></p>
-<p class="author"><em>翻訳者: Katagiri, Satoshi<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>ver. 1.3 (2021/03/21 19:34:31 JST, 本家最終更新時刻: <a href="https://github.com/rbind/yihui/tree/master/content/knitr">2021/03/01 16:46:02 JST</a>)</em></p>
+<p class="author"><em>翻訳者: Katagiri, Satoshi<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> (片桐 智志)</em></p>
+<p class="date"><em>ver. 1.6 (2022/02/19 00:40:11 JST, 本家最終更新時刻: <a href="https://github.com/rbind/yihui/tree/master/content/knitr">2022/01/25 16:17:20 JST</a>)</em></p>
 </div>
 <div id="knitr" class="section level1 unnumbered">
 <h1>knitr</h1>
 <!-- inline で書くと見づらいのでここに移動 -->
-
-<div class="rmdimportant">
+<div class="infobox important">
 <p>本稿は <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">CC BY-NC-SA 4.0 (クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際)ライセンス</a> で提供されています. Yihui 氏によるオリジナルは <a href="https://yihui.org/knitr/" class="uri">https://yihui.org/knitr/</a> で読むことができます.</p>
-This is an unofficial Japanese translation of Yihui’s <strong>knitr</strong> documentation, which is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The original documentation by Yihui is <a href="https://yihui.org/knitr/">here</a>.
+<p>This is an unofficial Japanese translation of Yihui’s <strong>knitr</strong> documentation, which is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The original documentation by Yihui is <a href="https://yihui.org/knitr/">here</a>.</p>
 </div>
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a></p>
-
-<div class="rmdtip">
+<div class="infobox tip">
 <p><strong>訳注</strong>: Yihui 氏のサイトの一連のドキュメントはかなり以前から氏のブログ投稿として断続的に更新されてきたものを編纂しているため, 内容の重複した記述がいくつかありますし, RStudio および R Markdown が普及している現在では, やや out-of-date な記述も見られます (現在では Sweave はあまり使いません). そのため, <strong>サイドバーの目次から辿れるページ, およびそれらでリンクされているページ以外は重要度が低いと見なし, 翻訳していません</strong>. 同様の理由から「用例」も一部を除き翻訳していません (<strong>共同翻訳者は常に歓迎します</strong>: <a href="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" class="uri">https://github.com/Gedevan-Aleksizde/knitr-doc-ja</a>).</p>
-しかしながら翻訳時の <strong>knitr</strong> および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.
+<p>しかしながら翻訳時の <strong>knitr</strong> および R Markdown に関する日本語の情報流通を鑑みるに, 非常に有用なドキュメントであると翻訳者は確信しています. それぞれのトピックがどの環境を想定したものなのか, よく確認してご覧ください.</p>
 </div>
 <div id="概要" class="section level2 unnumbered">
 <h2>概要</h2>
@@ -379,7 +380,6 @@ show_toc: true
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -398,6 +398,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {
@@ -418,6 +419,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knitr.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

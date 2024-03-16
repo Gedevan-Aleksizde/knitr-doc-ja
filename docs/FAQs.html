@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 よくある質問 (FAQ) | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 よくある質問 (FAQ) | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (片桐 智志)" />
 
 
 
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="examples.html"/>
 <link rel="next" href="editors.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,13 +51,15 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -117,9 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="header.css" type="text/css" />
+
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="header.css" type="text/css" />
 </head>
 
 <body>
@@ -149,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -288,12 +291,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>「パッケージのサイトの説明が役に立たないときはどこで質問するのがいいですか?」
 <ul>
-<li>何を質問したいかにもよりますが, 以下のような選択肢があります<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> (特に最初の2つは私もよく巡回しています).
+<li>何を質問したいかにもよりますが, 以下のような選択肢があります<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> (特に最初の2つは私もよく巡回しています).
 <ul>
 <li>(推奨) <strong><a href="http://stackoverflow.com/questions/tagged/knitr">Stack Overflow</a></strong>: 一般的な質問 (より専門的で早い回答がつきます). <code>r</code> と <code>knitr</code> タグを忘れずにつけてください.</li>
 <li><strong><a href="https://github.com/yihui/knitr/issues">Github issues</a></strong>: バグ報告と機能追加の要望のみにしてください.</li>
 <li><strong><a href="https://groups.google.com/group/knitr">knitr mailing list</a></strong> または <strong><a href="http://www.r-project.org/mail.html">R-help</a></strong> のメーリングリスト: 一般的な質問とその回答が, 一般公開されるEメールによってやりとりされます.</li>
-<li><strong>私の個人的なEメール</strong>: 本当にプライベートな問題でない限り<a href="https://yihui.org/en/2017/08/so-gh-email/">非推奨</a>です<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</li>
+<li><strong>私の個人的なEメール</strong>: 本当にプライベートな問題でない限り<a href="https://yihui.org/en/2017/08/so-gh-email/">非推奨</a>です<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>.</li>
 <li><strong>Twitter</strong> (<a href="http://twitter.com/xieyihui">@xieyihui</a>): 本当に簡単な問題だと確信があるなら.</li>
 </ul></li>
 </ul></li>
@@ -303,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>「<code>&gt;</code> とか <code>+</code> とかのプロンプト記号はどこへいったんですか? 出力にこれがないと落ち着きません」
 <ul>
-<li><a href="https://yihui.org/en/2013/01/code-pollution-with-command-prompts/">私はこれらが意味をなさないと考えている</a>ので, デフォルトではこれらは除去されています. R の本に <code>&gt;</code> や <code>+</code> を載せるのを嫌う理由はこのようなものです: 本に書かれた R コードを読む際に, <strong>こいつらは私の精神をめちゃくちゃにひねりちぎろうとし, 私の両眼に流血を欲してきます</strong>. マジで <code>1 + 1</code> ではなく <code>&gt; 1+1</code> という表記を読むのがお好みな奇特な方は, <a href="options.html#options">チャンクオプション</a> の章にあるように <code>prompt</code> オプションで設定できます<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</li>
+<li><a href="https://yihui.org/en/2013/01/code-pollution-with-command-prompts/">私はこれらが意味をなさないと考えている</a>ので, デフォルトではこれらは除去されています. R の本に <code>&gt;</code> や <code>+</code> を載せるのを嫌う理由はこのようなものです: 本に書かれた R コードを読む際に, <strong>こいつらは私の精神をめちゃくちゃにひねりちぎろうとし, 私の両眼に流血を欲してきます</strong>. マジで <code>1 + 1</code> ではなく <code>&gt; 1+1</code> という表記を読むのがお好みな奇特な方は, <a href="options.html#options">チャンクオプション</a> の章にあるように <code>prompt</code> オプションで設定できます<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>.</li>
 </ul></li>
 <li>「ワーキングディレクトリとはなんですか? コードチャンク内でワーキングディレクトリを変更できますか?」
 <ul>
@@ -343,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>「このドキュメントの修正や小さな変更を投稿するにはどうすればいいですか?」
 <ul>
 <li>R パッケージを修正したい場合は <a href="https://github.com/yihui/knitr">リポジトリ</a> へ移動し, ツールバー右上の Edit ボタンを押します. それから必要な修正をします. 投稿の概要を書いて, <strong>Propose file change</strong> をクリックして, プルリクエストを投稿してください.</li>
-<li>このウエブサイト (<a href="https://yihui.org/knitr" class="uri">https://yihui.org/knitr</a>) 上の修正や変更提案は, ページ左側の <code>Edit this page</code> を押して, あとは Github の手順に従ってください<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>.</li>
+<li>このウエブサイト (<a href="https://yihui.org/knitr" class="uri">https://yihui.org/knitr</a>) 上の修正や変更提案は, ページ左側の <code>Edit this page</code> を押して, あとは Github の手順に従ってください<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a>.</li>
 </ul></li>
 </ol>
 
@@ -360,11 +363,11 @@ slug: editors
 </div>
 <div class="footnotes">
 <hr />
-<ol start="20">
-<li id="fn20"><p>訳注: 英語が苦手な場合は, <a href="https://ja.stackoverflow.com/">Stack Oveflow 日本語版</a>, または <a href="https://r-wakalang.slack.com/messages/general/">R-wakalang</a> などのコミュニティがあります<a href="FAQs.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>訳注: リンク先の投稿を要約すると, Yihui氏個人で次から次へと来る質問をさばくのは限界があるし, オープンコミュニティは多くの回答者がいて既出の質問に対する答えも共有でき効率的だ, ということです<a href="FAQs.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>訳注: Yihui 氏がこれを嫌う理由はここでも簡潔に書かれています. R Markdown においては, それ以外の方法でもコードの装飾をカスタマイズできます. たとえばこの翻訳版でなされているようにコピーボタンや行番号をつけたりできます.<a href="FAQs.html#fnref22" class="footnote-back">↩︎</a></p></li>
-<li id="fn23"><p>訳注: 原典ではなくこの翻訳版に対する修正提案は <a href="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" class="uri">https://github.com/Gedevan-Aleksizde/knitr-doc-ja</a> で受け付けています<a href="FAQs.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="23">
+<li id="fn23"><p>訳注: 英語が苦手な場合は, <a href="https://ja.stackoverflow.com/">Stack Oveflow 日本語版</a>, または <a href="https://r-wakalang.slack.com/messages/general/">R-wakalang</a> などのコミュニティがあります<a href="FAQs.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<li id="fn24"><p>訳注: リンク先の投稿を要約すると, Yihui氏個人で次から次へと来る質問をさばくのは限界があるし, オープンコミュニティは多くの回答者がいて既出の質問に対する答えも共有でき効率的だ, ということです<a href="FAQs.html#fnref24" class="footnote-back">↩︎</a></p></li>
+<li id="fn25"><p>訳注: Yihui 氏がこれを嫌う理由はここでも簡潔に書かれています. R Markdown においては, それ以外の方法でもコードの装飾をカスタマイズできます. たとえばこの翻訳版でなされているようにコピーボタンや行番号をつけたりできます.<a href="FAQs.html#fnref25" class="footnote-back">↩︎</a></p></li>
+<li id="fn26"><p>訳注: 原典ではなくこの翻訳版に対する修正提案は <a href="https://github.com/Gedevan-Aleksizde/knitr-doc-ja" class="uri">https://github.com/Gedevan-Aleksizde/knitr-doc-ja</a> で受け付けています<a href="FAQs.html#fnref26" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -377,7 +380,6 @@ slug: editors
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -396,6 +398,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {
@@ -416,6 +419,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knitr.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

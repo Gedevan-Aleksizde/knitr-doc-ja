@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>knitr のエディタ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="knitr のエディタ | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (片桐 智志)" />
 
 
 
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="FAQs.html"/>
 <link rel="next" href="framed.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,13 +51,15 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -117,9 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="header.css" type="text/css" />
+
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="header.css" type="text/css" />
 </head>
 
 <body>
@@ -149,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -281,24 +284,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルの記事: <a href="https://yihui.org/knitr/demo/editors/" class="uri">https://yihui.org/knitr/demo/editors/</a></p>
 <p>オリジナルの更新日: 2012-03-16</p>
 <hr />
-
-<div class="rmdtip">
-<strong>訳注</strong>: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.
+<div class="infobox tip">
+<p><strong>訳注</strong>: このページは R Markdown ではなく, Rnw を想定した説明です. R Markdown は基本的に RStudio での編集が最も使いやすいと思われます.</p>
 </div>
 <p>私は以前 <a href="$lyx">Lyx</a> (未翻訳), <a href="$RStudio">RStudio</a> (未翻訳) <a href="$org">Emacs Org-mode</a> (未翻訳), <a href="$ecripse">Ecripse</a> (未翻訳) について書きました. その他にも, <a href="http://www.xm1math.net/texmaker/">Texmaker</a> や Windt といったエディタで <strong>knitr</strong> を使うことができます. ポイントは R を呼び出して <strong>knitr</strong> パッケージを読み込み, それから <code>knit()</code>または <code>knit2pdf()</code> を呼び出すことです.</p>
 <div id="texmaker" class="section level2 unnumbered">
 <h2>Texmaker</h2>
 <p><code>User --&gt; User Commands --&gt; Edit User Commands</code> から, Rnw 文書を処理するためのカスタムコマンドを定義できます.</p>
-<div class="figure" style="text-align: center"><span id="fig:demo-def-user-command-texmaker"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-def-user-command-texmaker"></span>
 <img src="https://db.yihui.org/imgur/ddIBH.png" alt="Texmaker でユーザーコマンドを定義する"  />
 <p class="caption">
 図 4.1: Texmaker でユーザーコマンドを定義する
 </p>
 </div>
 <p>Rの実行ファイルパスが <code>PATH</code> 環境変数にない場合, 上記のコマンドに <code>Rscript.exe</code> のフルパスを書く必要があります. こんなかんじに:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="editors.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:/Program Files/R/R-2.14.2/bin/Rscript.exe&quot;</span> <span class="ex">-e</span> <span class="st">&quot;knitr::knit2pdf(&#39;%.Rnw&#39;)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="editors.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:/Program Files/R/R-2.14.2/bin/Rscript.exe&quot;</span> <span class="at">-e</span> <span class="st">&quot;knitr::knit2pdf(&#39;%.Rnw&#39;)&quot;</span></span></code></pre></div>
 <p><code>Rscript.exe</code> の場所さえ知っていれば, R を開いて <code>R.home('bin')</code> を実行すれば見つけられます. そうすればどんな Rnw 文書ファイルに対しても, この <code>knitr</code> コマンドでコンパイルすることができます.</p>
-<div class="figure" style="text-align: center"><span id="fig:demo-compile-texmaker"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-compile-texmaker"></span>
 <img src="https://db.yihui.org/imgur/xKoeT.png" alt="Texmaker で knitr コマンドでコンパイルする"  />
 <p class="caption">
 図 4.2: Texmaker で knitr コマンドでコンパイルする
@@ -309,7 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="texstudio" class="section level2 unnumbered">
 <h2>TeXStudio</h2>
 <p>一例として, 基本的には Texmaker と同様に設定することができます (Henrik Nyhus と <a href="https://twitter.com/MathBioPaul/status/691446297304272897">Paul J. Hurtado</a> に感謝)</p>
-<div class="figure" style="text-align: center"><span id="fig:demo-editor-texstudio"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-editor-texstudio"></span>
 <img src="https://db.yihui.org/imgur/VFcvTUB.png" alt="TeXStudio での knitr"  />
 <p class="caption">
 図 4.3: TeXStudio での knitr
@@ -335,14 +337,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="emacsess" class="section level2 unnumbered">
 <h2>Emacs/ESS</h2>
 <p>12/9 以降, <strong>knitr</strong> は公式に <a href="http://ess.r-project.org">ESS</a> にサポートされています. Debian/Ubuntu をお使いの場合, 以下のようにしてインストールできます.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="editors.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ess</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="editors.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install ess</span></code></pre></div>
 <p>ESS で <strong>knitr</strong> を使う方法に関する<a href="https://web.archive.org/web/20161225094148im_/http://cdn.screenr.com/video/d43075">短い動画</a>があります.</p>
 <p>(歴史的背景に興味がある人向け) <a href="http://sjp.co.nz/posts/emacs-ess-knitr/">Simon Potter</a> と <a href="https://constantmindmapping.wordpress.com/2012/06/12/knitr-and-emacs/">lucialam</a> の両氏が Emacs/<strong>knitr</strong> についてブログに書いています.</p>
 </div>
 <div id="gedit" class="section level2 unnumbered">
 <h2>Gedit</h2>
 <p><a href="https://en.wikipedia.org/wiki/Gedit">gedit</a> で外部ツールとして定義することができます. 以下は David Allen による方法です. 感謝.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="editors.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> -e <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$GEDIT_CURRENT_DOCUMENT_NAME</span><span class="st">&#39;)&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="editors.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$GEDIT_CURRENT_DOCUMENT_NAME</span><span class="st">&#39;)&quot;</span></span></code></pre></div>
 </div>
 <div id="sublime" class="section level2 unnumbered">
 <h2>Sublime</h2>
@@ -359,17 +361,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="texshop" class="section level2 unnumbered">
 <h2>TeXShop</h2>
 <p><a href="http://pages.uoregon.edu/koch/texshop/">TeXShop</a> で <strong>knitr</strong> を動作させる設定は簡単です. TeXShop の <code>Engines</code> ディレクトリ (大抵の場合は <code>~/Library/TeXShop/Engines/</code>) の <code>Knitr.engine</code> ファイルに以下を書き込むだけです.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="editors.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb27-2"><a href="editors.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH=$PATH</span>:/usr/texbin:/usr/local/bin</span>
-<span id="cb27-3"><a href="editors.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> -e <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$1</span><span class="st">&#39;)&quot;</span></span>
-<span id="cb27-4"><a href="editors.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> -pdf <span class="st">&quot;</span><span class="va">${1%</span>.*<span class="va">}</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="editors.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb32-2"><a href="editors.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:/usr/texbin:/usr/local/bin</span>
+<span id="cb32-3"><a href="editors.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">&quot;library(knitr); knit(&#39;</span><span class="va">$1</span><span class="st">&#39;)&quot;</span></span>
+<span id="cb32-4"><a href="editors.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> <span class="at">-pdf</span> <span class="st">&quot;</span><span class="va">${1</span><span class="op">%</span>.<span class="pp">*</span><span class="va">}</span><span class="st">&quot;</span></span></code></pre></div>
 <p><a href="http://cameron.bracken.bz/sweave-for-texshop">Cameron Bracken</a> と <a href="http://yihui.org/en/2012/06/enjoyable-reproducible-research/#comment-601032753">Fabian Greimel</a> の厚情に感謝.</p>
 </div>
 <div id="texworks" class="section level2 unnumbered">
 <h2>TeXworks</h2>
 <p>追加ツールの設定に関して TeXworks も Texmaker と似ています. 以下は Ubuntu でのスクリーショットです. StackExchange 回答してくれた <a href="http://tex.stackexchange.com/a/85165/9128">Speravir</a> に感謝. (Windows/Mac OS も <code>Rscript</code> が <code>PATH</code> にある限り同様にできるはずです).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:demo-editors-texworks"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-editors-texworks"></span>
 <img src="https://db.yihui.org/imgur/d6tE6.png" alt="TeXworks で knitr を使う"  />
 <p class="caption">
 図 4.4: TeXworks で <strong>knitr</strong> を使う
@@ -410,7 +412,6 @@ slug: framed
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -429,6 +430,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {
@@ -449,6 +451,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knitr.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }

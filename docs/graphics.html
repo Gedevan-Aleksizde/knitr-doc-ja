@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成</title>
   <meta name="description" content="knitr ドキュメントの非公式日本語訳 Unofficial Japanese translation of Yihui’s knitr documentation" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="グラフィックス | knitr: Rによる美麗で柔軟そして高速な動的レポート生成" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
   
 
 <meta name="author" content="著者: Xie, Yihui (谢益辉)" />
-<meta name="author" content="翻訳者: Katagiri, Satoshi" />
+<meta name="author" content="翻訳者: Katagiri, Satoshi (片桐 智志)" />
 
 
 
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="reference.html"/>
 <link rel="next" href="manual.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,13 +51,15 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -117,9 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="header.css" type="text/css" />
+
 <link rel="stylesheet" href="knitr_files/styles/css/style.css" type="text/css" />
 <link rel="stylesheet" href="knitr_files/styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="header.css" type="text/css" />
 </head>
 
 <body>
@@ -149,15 +153,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1.1" data-path="options.html"><a href="options.html#evaluate"><i class="fa fa-check"></i><b>1.1.1</b> コード評価関連</a></li>
 <li class="chapter" data-level="1.1.2" data-path="options.html"><a href="options.html#text-output"><i class="fa fa-check"></i><b>1.1.2</b> テキストの出力関連</a></li>
 <li class="chapter" data-level="1.1.3" data-path="options.html"><a href="options.html#code-decoration"><i class="fa fa-check"></i><b>1.1.3</b> コードの装飾関連</a></li>
-<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#options-cache"><i class="fa fa-check"></i><b>1.1.4</b> キャッシュ関連</a></li>
-<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.5</b> グラフ関連</a></li>
-<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.6</b> アニメーション関連</a></li>
-<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.7</b> コードチャンク関連</a></li>
-<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.8</b> 子文書関連</a></li>
-<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.9</b> 言語エンジン関連</a></li>
-<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.10</b> オプションテンプレート関連</a></li>
-<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.11</b> ソースコードの抽出関連</a></li>
-<li class="chapter" data-level="1.1.12" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.12</b> その他のチャンクオプション</a></li>
+<li class="chapter" data-level="1.1.4" data-path="options.html"><a href="options.html#plots"><i class="fa fa-check"></i><b>1.1.4</b> グラフ関連</a></li>
+<li class="chapter" data-level="1.1.5" data-path="options.html"><a href="options.html#animation"><i class="fa fa-check"></i><b>1.1.5</b> アニメーション関連</a></li>
+<li class="chapter" data-level="1.1.6" data-path="options.html"><a href="options.html#code-chunk"><i class="fa fa-check"></i><b>1.1.6</b> コードチャンク関連</a></li>
+<li class="chapter" data-level="1.1.7" data-path="options.html"><a href="options.html#child-document"><i class="fa fa-check"></i><b>1.1.7</b> 子文書関連</a></li>
+<li class="chapter" data-level="1.1.8" data-path="options.html"><a href="options.html#engine"><i class="fa fa-check"></i><b>1.1.8</b> 言語エンジン関連</a></li>
+<li class="chapter" data-level="1.1.9" data-path="options.html"><a href="options.html#オプションテンプレート関連"><i class="fa fa-check"></i><b>1.1.9</b> オプションテンプレート関連</a></li>
+<li class="chapter" data-level="1.1.10" data-path="options.html"><a href="options.html#ソースコードの抽出関連"><i class="fa fa-check"></i><b>1.1.10</b> ソースコードの抽出関連</a></li>
+<li class="chapter" data-level="1.1.11" data-path="options.html"><a href="options.html#その他のチャンクオプション"><i class="fa fa-check"></i><b>1.1.11</b> その他のチャンクオプション</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="options.html"><a href="options.html#package-options"><i class="fa fa-check"></i><b>1.2</b> パッケージオプション一覧</a></li>
 </ul></li>
@@ -281,9 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>オリジナルの記事: <a href="https://yihui.org/knitr/demos/graphics" class="uri">https://yihui.org/knitr/demos/graphics</a></p>
 <p>オリジナルの更新日: 2011/12/9</p>
 <hr />
-
-<div class="rmdtip">
-このページは主に R Markdown ではなく Rnw を想定していることに注意してください.
+<div class="infobox tip">
+<p>このページは主に R Markdown ではなく Rnw を想定していることに注意してください.</p>
 </div>
 <div id="グラフィックスマニュアル" class="section level2 unnumbered">
 <h2>グラフィックスマニュアル</h2>
@@ -299,14 +301,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>刊行にあたって R グラフィックスの改善の余地が大いにあることに気づくかもしれません. R があなたにもたらすものを鵜呑みにしないでください. あなたのグラフを美しくプロフェッショナルにすることを考える時間です.</p>
 <p>マニュアルからいくつかスクリーショットを提示します.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:demo-graphics-tikz"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-graphics-tikz"></span>
 <img src="https://db.yihui.org/imgur/HCkka.png" alt="knitr 上の tikz グラフィックス"  />
 <p class="caption">
 図 4.7: <strong>knitr</strong> 上の tikz グラフィックス
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:demo-graphics-ggplot2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:demo-graphics-ggplot2"></span>
 <img src="https://db.yihui.org/imgur/BTEiu.png" alt="(ref:demo-graphics-ggplot2"  />
 <p class="caption">
 図 4.8: (ref:demo-graphics-ggplot2
@@ -316,22 +318,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="カスタムグラフィックデバイスについての補足" class="section level2 unnumbered">
 <h2>カスタムグラフィックデバイスについての補足</h2>
-<p><a href="options.html#options">チャンクオプション</a> の <code>dev</code> は3つの引数をとる R 関数として定義されたカスタムグラフィックデバイスに対応します. これは <code>pointsize</code> 10 を使用した PDF デバイスの例です<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="graphics.html#cb41-1"></a>my_pdf <span class="ot">=</span> <span class="cf">function</span>(file, width, height) {</span>
-<span id="cb41-2"><a href="graphics.html#cb41-2"></a>  <span class="fu">pdf</span>(file, <span class="at">width =</span> width, <span class="at">height =</span> height, <span class="at">pointsize =</span> <span class="dv">10</span>)</span>
-<span id="cb41-3"><a href="graphics.html#cb41-3"></a>}</span></code></pre></div>
+<p><a href="options.html#options">チャンクオプション</a> の <code>dev</code> は3つの引数をとる R 関数として定義されたカスタムグラフィックデバイスに対応します. これは <code>pointsize</code> 10 を使用した PDF デバイスの例です<a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="graphics.html#cb46-1"></a>my_pdf <span class="ot">=</span> <span class="cf">function</span>(file, width, height) {</span>
+<span id="cb46-2"><a href="graphics.html#cb46-2"></a>  <span class="fu">pdf</span>(file, <span class="at">width =</span> width, <span class="at">height =</span> height, <span class="at">pointsize =</span> <span class="dv">10</span>)</span>
+<span id="cb46-3"><a href="graphics.html#cb46-3"></a>}</span></code></pre></div>
 <p>これでチャンクオプションでこのデバイスを使えるようになりますが, 1つ重要なことを覚えておいてください. <strong>knitr</strong> はグラフファイルに対して適切なファイル拡張子を推測できないため, <code>fig.ext</code> オプションも同時に指定する必要があります. 最終的に, このカスタムデバイスはこのように使われます.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="graphics.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;my_pdf&#39;, fig.ext=&#39;pdf&#39;}</span></span>
-<span id="cb42-2"><a href="graphics.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
-<span id="cb42-3"><a href="graphics.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="graphics.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;my_pdf&#39;, fig.ext=&#39;pdf&#39;}</span></span>
+<span id="cb47-2"><a href="graphics.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
+<span id="cb47-3"><a href="graphics.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>文書全体でこのデバイスを使用したい場合は, もちろん <code>\SweaveOpts{}</code> を使ってグローバルに設定することもできます.</p>
 </div>
 <div id="デバイスに追加の引数を与える" class="section level2 unnumbered">
 <h2>デバイスに追加の引数を与える</h2>
 <p><code>dev.args</code> オプションを通してグラフィカルデバイスをよく制御できます. <code>pointsize = 10</code> とハードコーディングする代わりに, チャンクに <code>dev.args = list(pointsize = 10)</code> を与えることができます. これが例です.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="graphics.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;pdf&#39;, dev.args=list(pointsize=10)}</span></span>
-<span id="cb43-2"><a href="graphics.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
-<span id="cb43-3"><a href="graphics.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="graphics.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r dev=&#39;pdf&#39;, dev.args=list(pointsize=10)}</span></span>
+<span id="cb48-2"><a href="graphics.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="at">plot(rnorm(100))</span></span>
+<span id="cb48-3"><a href="graphics.html#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p><code>dev.args</code> はリストなので, デバイスの引数として可能なものを取るべきです. たとえば <code>pdf()</code> には <code>dev.args=list(pointsize=11, family='serif')</code>. <code>dev.args</code> の全ての要素はチャンクのグラフィカすデバイスに与えられます.</p>
 </div>
 <div id="r-グラフィックスにハイパーリンクを付ける" class="section level2 unnumbered">
@@ -342,19 +344,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="マルチバイト文字のエンコーディング" class="section level2 unnumbered">
 <h2>マルチバイト文字のエンコーディング</h2>
 <p>あなたのグラフにマルチバイト文字が含まれている場合, <code>pdf()</code> デバイスの <code>encoding</code> オプションを指定する必要があります. issue <a href="https://github.com/yihui/knitr/issues/172">#172</a> を参照してください. 可能なエンコーディングのリストは以下で確認できます.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="graphics.html#cb44-1"></a><span class="fu">list.files</span>(<span class="fu">system.file</span>(<span class="st">&quot;enc&quot;</span>, <span class="at">package =</span> <span class="st">&quot;grDevices&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="graphics.html#cb49-1"></a><span class="fu">list.files</span>(<span class="fu">system.file</span>(<span class="st">&#39;enc&#39;</span>, <span class="at">package =</span> <span class="st">&#39;grDevices&#39;</span>))</span></code></pre></div>
 <pre><code>##  [1] &quot;AdobeStd.enc&quot;  &quot;AdobeSym.enc&quot;  &quot;CP1250.enc&quot;    &quot;CP1251.enc&quot;   
 ##  [5] &quot;CP1253.enc&quot;    &quot;CP1257.enc&quot;    &quot;Cyrillic.enc&quot;  &quot;Greek.enc&quot;    
 ##  [9] &quot;ISOLatin1.enc&quot; &quot;ISOLatin2.enc&quot; &quot;ISOLatin7.enc&quot; &quot;ISOLatin9.enc&quot;
 ## [13] &quot;KOI8-R.enc&quot;    &quot;KOI8-U.enc&quot;    &quot;MacRoman.enc&quot;  &quot;PDFDoc.enc&quot;   
 ## [17] &quot;TeXtext.enc&quot;   &quot;WinAnsi.enc&quot;</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="graphics.html#cb46-1"></a><span class="do">## 例: pdf.options(encoding = &#39;CP1250&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="graphics.html#cb51-1"></a><span class="do">## 例: pdf.options(encoding = &#39;CP1250&#39;)</span></span></code></pre></div>
 <p>このような警告メッセージを目にした場合, エンコーディングの設定が必要かもしれません.</p>
 <pre><code>Warning: conversion failure on &#39;&lt;var&gt;&#39; in &#39;mbcsToSbcs&#39;: dot substituted for &lt;var&gt;`.</code></pre>
-<p>別の手段として, <code>pdf</code> の代わりに <code>cairo_pdf</code> を使うというものがあります. (issue <a href="https://github.com/yihui/knitr/issues/436">#436</a> を参照してください)<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a><a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a>:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="graphics.html#cb48-1"></a><span class="fu">options</span>(<span class="at">device =</span> <span class="cf">function</span>(file, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>, ...) {</span>
-<span id="cb48-2"><a href="graphics.html#cb48-2"></a>  <span class="fu">cairo_pdf</span>(<span class="fu">tempfile</span>(), <span class="at">width =</span> width, <span class="at">height =</span> height, ...)</span>
-<span id="cb48-3"><a href="graphics.html#cb48-3"></a>})</span></code></pre></div>
+<p>別の手段として, <code>pdf</code> の代わりに <code>cairo_pdf</code> を使うというものがあります. (issue <a href="https://github.com/yihui/knitr/issues/436">#436</a> を参照してください)<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a><a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="graphics.html#cb53-1"></a><span class="fu">options</span>(<span class="at">device =</span> <span class="cf">function</span>(file, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>, ...) {</span>
+<span id="cb53-2"><a href="graphics.html#cb53-2"></a>  <span class="fu">cairo_pdf</span>(<span class="fu">tempfile</span>(), <span class="at">width =</span> width, <span class="at">height =</span> height, ...)</span>
+<span id="cb53-3"><a href="graphics.html#cb53-3"></a>})</span></code></pre></div>
 <p>もし Windows 環境でこれが失敗するのなら, issue <a href="https://github.com/yihui/knitr/issues/527">#527</a> を確認してください.</p>
 </div>
 <div id="装飾フォント" class="section level2 unnumbered">
@@ -364,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="アニメーション" class="section level2 unnumbered">
 <h2>アニメーション</h2>
 <p>チャンクオプション <code>fig.show='animate'</code> が設定されコードチャンクで複数のグラフが生成されている場合, 全てのグラフが統合されアニメーションになります. LaTeX の出力では, LaTeX パッケージの <strong>animate</strong> が使われ, HTML/Markdown の出力に対しては, デフォルトでは <a href="http://ffmpeg.org">FFmpeg</a> が使われ <a href="http://www.webmproject.org">WebM</a> 動画が作られます. FFmpeg をインストールする際に <strong>libvpx</strong> のサポートを有効にする必要があることに注意してください. Linux および Windows ユーザーは FFmpeg ウェブサイトのダウンロードリンクを確認してください (バイナリ版では <strong>libvpx</strong> は有効になっています). OSX ユーザーは, <a href="http://brew.sh">Homebrew</a> 経由で FFmpeg をインストールできます.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource bash numberLines lineAnchors"><code class="sourceCode bash"><span id="cb49-1"><a href="graphics.html#cb49-1"></a><span class="ex">brew</span> install ffmpeg --with-libvpx</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource bash numberLines lineAnchors"><code class="sourceCode bash"><span id="cb54-1"><a href="graphics.html#cb54-1"></a><span class="ex">brew</span> install ffmpeg <span class="at">--with-libvpx</span></span></code></pre></div>
 
 <!---
 title: Manual
@@ -376,10 +378,10 @@ slug: manual
 </div>
 <div class="footnotes">
 <hr />
-<ol start="25">
-<li id="fn25"><p>訳注: R Markdown の場合, 日本語表示は後述するように <code>cairo_pdf</code> のほうが簡単です.<a href="graphics.html#fnref25" class="footnote-back">↩︎</a></p></li>
-<li id="fn26"><p>訳注: 投稿したい論文雑誌などから特別な要件がない限り, 現在は <code>cairo_pdf</code> のほうが簡単だと思います.<a href="graphics.html#fnref26" class="footnote-back">↩︎</a></p></li>
-<li id="fn27"><p>訳注: R Markdown であれば, <code>dev = 'cairo_pdf'</code> で十分です.<a href="graphics.html#fnref27" class="footnote-back">↩︎</a></p></li>
+<ol start="28">
+<li id="fn28"><p>訳注: R Markdown の場合, 日本語表示は後述するように <code>cairo_pdf</code> のほうが簡単です.<a href="graphics.html#fnref28" class="footnote-back">↩︎</a></p></li>
+<li id="fn29"><p>訳注: 投稿したい論文雑誌などから特別な要件がない限り, 現在は <code>cairo_pdf</code> のほうが簡単だと思います.<a href="graphics.html#fnref29" class="footnote-back">↩︎</a></p></li>
+<li id="fn30"><p>訳注: R Markdown であれば, <code>dev = 'cairo_pdf'</code> で十分です.<a href="graphics.html#fnref30" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -392,7 +394,6 @@ slug: manual
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -411,6 +412,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "linkedin", "instapaper", "weibo", "vk"]
 },
 "fontsettings": {
@@ -431,6 +433,10 @@ gitbook.start({
 "text": null
 },
 "download": ["knitr.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
