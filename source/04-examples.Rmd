@@ -6,7 +6,7 @@ layout: example
 list_pages: true
 --->
 
-# 使用例 {#examples}
+# 使用例 {#examples-list}
 
 ソースと出力のデモ
 
@@ -44,10 +44,10 @@ make_item_text <- function(x){
     
   } else {
     tmp <- readLines(file.path("demo", x))[2:10]
-    title <- sub("^#\\s*(.+)\\s(.*)", "\\1", grep("^#\\s", tmp, value = T)[1])
-    ref <- sub("^#\\s*(.+)\\s\\{-(.*)\\}", "\\2", grep("^#\\s", tmp, value = T)[1])
-    tmp[(grep("^#\\s", tmp) + 1):length(tmp)]
-    subtitle <- grep("^$", tmp[(grep("^#\\s", tmp) + 1):length(tmp)], value = T, invert = T)[1]
+    title <- sub("^##\\s*(.+)\\s(.*)", "\\1", grep("^#\\s", tmp, value = T)[1])
+    ref <- sub("^##\\s*(.+)\\s\\{-(.*)\\}", "\\2", grep("^#\\s", tmp, value = T)[1])
+    tmp[(grep("^##\\s", tmp) + 1):length(tmp)]
+    subtitle <- grep("^$", tmp[(grep("^##\\s", tmp) + 1):length(tmp)], value = T, invert = T)[1]
     topic <- paste(header$date,
                    paste0("[", title, ' - ', subtitle, "](", ref, ")")
                    )

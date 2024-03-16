@@ -5,7 +5,7 @@ date: '2013-03-11'
 slug: showcase
 --->
 
-# `knitr` のショーケース {-#showcase}
+## `knitr` のショーケース {-#showcase}
 
 ユーザーたちによる使用例
 

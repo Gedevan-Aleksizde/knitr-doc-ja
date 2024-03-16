@@ -28,14 +28,14 @@ show_toc: true
 
 チャンクオプションは以下のように `タグ名=値` という形式で書きます.
 
-````
+````{verbatim}
 ```{r, my-chunk, echo=FALSE, fig.height=4, dev='jpeg'}`r ''`
 ```
 ````
 
 **チャンクラベル**は特殊なチャンクオプションです (例: 先ほどの例の `my-chunk` がそれにあたります). これは唯一のタグが不要なチャンクオプションです (つまり, 値のみ書くことになります). もし `タグ名=値` の形式で書きたいのならば, チャンクオプション名の `label` を明示的に使うこともできます.
 
-````
+````{verbatim}
 ```{r label="my-chunk"}`r ''`
 ```
 ````
@@ -44,7 +44,7 @@ show_toc: true
 
 文書全体のチャンクオプションのデフォルト値を変更するために `knitr::opts_chunk$set()` を使うことができます. 例えば以下のようなチャンクを文書の冒頭に書きます.
 
-````
+````{verbatim}
 ```{r, setup, include=FALSE}`r ''`
 knitr::opts_chunk$set(
   comment = '', fig.width = 6, fig.height = 6
@@ -64,7 +64,7 @@ knitr::opts_chunk$set(
 
 コードチャンクの本文に `#|` の後に続けてチャンクオプションを書くという, 代替的な構文も使用できます.
 
-````
+````{verbatim}
 ```{r}`r ''`
 #| my-chunk, echo = FALSE, fig.width = 10,
 #| fig.cap = "This is a long long
@@ -75,7 +75,7 @@ plot(cars)
 
 この構文では, チャンクオプションはチャンク本文の冒頭で, 連続した行で書く必要があります. つまり, 全てのオプションは, 行頭の特殊なコメント記号 `#|` から書き始める必要があります. チャンクオプションとコードの間を1行開けるかどうかは任意です. この記法はオプションの改行が許容されます. 好きなだけ改行してオプションを書くことができます. 同じオプションが本文とチャンクヘッダ (```` ```{} ```` の内側) の両方で指定された場合, 前者が後者を上書きします. あるいは, チャンク内では `<タグ>: <値>` のような YAML 式の記法でオプションを書くこともできます. 通常は, この記法では1行に1つづつオプションを書かねばなりません. 以下がその例です.
 
-````
+````{verbatim}
 ```{r}`r ''`
 #| echo: false
 #| fig.width: 10
@@ -146,7 +146,7 @@ YAML 記法を選択した場合, 生の R の式ではなく YAML の値とし�
 -   **`background`** (`'#F7F7F7'`; `character`):  `.Rnw` 使用時のチャンクブロックの背景色です^[訳注: R Markdown では背景色は CSS や `class.output` などで設定する必要があります. 詳細は R Markdown Cookbook などを参照してください].
 -   **`indent`** (`character`): チャンクの出力で各行に追加する文字です. 典型的には空白と同義です. このオプションは読み込み専用を想定しており, 値は **knitr** が文書を読み込む際に設定されます. 例えば以下のチャンクでは, `indent` は空白文字2個です^[訳注: R Markdown の場合は **knitr** 以外の中間処理があるため, 必ずしもこのルールを守りません].
     
-    ````
+    ````{verbatim}
     ```{r indent-example, echo=2}`r ''`
     set.seed(42)
     rnorm(10)
@@ -264,13 +264,13 @@ YAML 記法を選択した場合, 生の R の式ではなく YAML の値とし�
 
 - **`engine.opts`** (`NULL`; `character`): 言語エンジンに与える追加引数です. チャンクの段階ではオプションを文字列またはリストで指定することができます.
     
-    ````
+    ````{verbatim}
     ```{bash, engine.opts='-l'}`r ''`
     echo $PATH
     ```
     ````
     
-    ````
+    ````{verbatim}
     ```{cat, engine.opts = list(file = "my_custom.css")}`r ''`
     h2 {
       color: blue;
@@ -310,9 +310,9 @@ YAML 記法を選択した場合, 生の R の式ではなく YAML の値とし�
 
 パッケージオプションは [`knitr::opts_knit`](#objects) を使用することで変更できます. **`knitr::opts_chunk` と混同しないでください**. 使用例は以下のとおりです.
 
-    ```{r opts-knit-example, eval=F}
-    knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
-    ```
+```{r opts-knit-example, eval=F}
+knitr::opts_knit$set(progress = TRUE, verbose = TRUE)
+```
 
 別の方法として, R の基本関数である `options()` を使ってパッケージオプションを設定する場合は `?knitr::opts_knit` を参照してください.
 
@@ -373,7 +373,7 @@ YAML 記法を選択した場合, 生の R の式ではなく YAML の値とし�
 
     そして以下は, Windowsのプログレスバーを使用する例です. つまり, Windowsでのみ動作します.
 
-    ``` r
+    ```{r, eval=F}
     function(total, labels) {
       pb = winProgressBar("Knitting...", max = total)
       list(

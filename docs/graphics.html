@@ -349,8 +349,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>マルチバイト文字のエンコーディング<a href="graphics.html#マルチバイト文字のエンコーディング" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>あなたのグラフにマルチバイト文字が含まれている場合, <code>pdf()</code> デバイスの <code>encoding</code> オプションを指定する必要があります. issue <a href="https://github.com/yihui/knitr/issues/172">#172</a> を参照してください. 可能なエンコーディングのリストは以下で確認できます.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="graphics.html#cb51-1"></a><span class="fu">list.files</span>(<span class="fu">system.file</span>(<span class="st">&quot;enc&quot;</span>, <span class="at">package =</span> <span class="st">&quot;grDevices&quot;</span>))</span></code></pre></div>
-<pre><code>##  [1] &quot;AdobeStd.enc&quot;  &quot;AdobeSym.enc&quot;  &quot;CP1250.enc&quot;    &quot;CP1251.enc&quot;    &quot;CP1253.enc&quot;    &quot;CP1257.enc&quot;    &quot;Cyrillic.enc&quot;  &quot;Greek.enc&quot;     &quot;ISOLatin1.enc&quot;
-## [10] &quot;ISOLatin2.enc&quot; &quot;ISOLatin7.enc&quot; &quot;ISOLatin9.enc&quot; &quot;KOI8-R.enc&quot;    &quot;KOI8-U.enc&quot;    &quot;MacRoman.enc&quot;  &quot;PDFDoc.enc&quot;    &quot;TeXtext.enc&quot;   &quot;WinAnsi.enc&quot;</code></pre>
+<pre><code>##  [1] &quot;AdobeStd.enc&quot;  &quot;AdobeSym.enc&quot;  &quot;CP1250.enc&quot;    &quot;CP1251.enc&quot;   
+##  [5] &quot;CP1253.enc&quot;    &quot;CP1257.enc&quot;    &quot;Cyrillic.enc&quot;  &quot;Greek.enc&quot;    
+##  [9] &quot;ISOLatin1.enc&quot; &quot;ISOLatin2.enc&quot; &quot;ISOLatin7.enc&quot; &quot;ISOLatin9.enc&quot;
+## [13] &quot;KOI8-R.enc&quot;    &quot;KOI8-U.enc&quot;    &quot;MacRoman.enc&quot;  &quot;PDFDoc.enc&quot;   
+## [17] &quot;TeXtext.enc&quot;   &quot;WinAnsi.enc&quot;</code></pre>
 <div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="graphics.html#cb53-1"></a><span class="do">## 例: pdf.options(encoding = &#39;CP1250&#39;)</span></span></code></pre></div>
 <p>このような警告メッセージを目にした場合, エンコーディングの設定が必要かもしれません.</p>
 <pre><code>Warning: conversion failure on &#39;&lt;var&gt;&#39; in &#39;mbcsToSbcs&#39;: dot substituted for &lt;var&gt;`.</code></pre>

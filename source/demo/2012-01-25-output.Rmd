@@ -5,7 +5,7 @@ date: '2012-01-25'
 slug: output
 --->
 
-# チャンク出力の制御 {-#output}
+## チャンク出力の制御 {-#output}
 
 チャンクの6種類の出力とインライン出力を操作する
 
@@ -32,7 +32,7 @@ slug: output
 
 チャンクオプション `echo` は `TRUE/FALSE` だけでなく, 数値のベクトルを取ることで出力文を選択することができます. このベクトルのインデックスはコードチャンクを完全な R 評価式単位でインデックスします. たとえば `echo=1` は出力内の最初のソースコード出力のみを含めることを意味します. 以下はこの例の完全版です.
 
-```
+```{verbatim}
 <<hide-par, echo=3:4>>=
 ## 表示させたくない「醜い」コード
 par(mar = c(4, 4, 0.1, 0.1), cex.lab = 0.95, cex.axis = 0.9,
@@ -46,7 +46,7 @@ plot(mtcars[, 4:5])
 
 ソースコードを部分部分に分けて選択すると, 読み手は混乱するかもしれません. (相対的に) 完全な部分集合を選ぶために, ほとんどの場合は `a:b` または `-(a:b)` を使うべきでしょう. しかし, 誰もあなたに禁じることはできません.
 
-``` 
+```{verbatim}
 % 3, 5 番めの評価式を選択
 <<hide-par, echo=c(3, 5)>>=
 ## 表示させたくない「醜い」コード
@@ -81,19 +81,19 @@ R Markdown での例:
 
 Rnw の例 (LaTeX):
 
-```
+```{verbatim}
 Inline code looks like this \Sexpr{1+1}
 ```
 
 R HTML の例:
 
-```html 
+```html
 <p>Inline code looks like this <!--rinline 1+1 --></p>
 ```
 
 R HTML 文書では, デフォルトでは結果の文字列は `<code></code>` で囲まれます. 出力から `<code></code>` タグをなくしたいなら, R コードを `I()` で囲むだけです. 例:
 
-```html 
+```html
 <p>Inline code looks like this <!--rinline I(1+1) --></p>
 ```
 

@@ -1,9 +1,45 @@
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Osaka', 'Meiryo', 'Noto Sans CJK', Arial, Helvetica, 'DejaVu Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP&display=swap');
+
+body {
+  font-family: 'Noto Serif CJK JP', 'Yu Mincho', 'Hiragino MinchoProN', 'Noto Serif JP', seif;
 }
 
-code.sourceCode, .sourceCode.r {
-  font-family: 'Ricty Discord', Ricty, Inconsolata, 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace ;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Sans CJK JP', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Osaka', 'Meiryo', 'Noto Sans CJK', Arial, Helvetica, 'DejaVu Sans', "Noto Sans JP", sans-serif;
+  font-weight: bold;
+}
+
+.weight100   {
+    font-weight:100
+    }
+ 
+.weight300   {
+    font-weight:300
+    }
+ 
+.weight400   {
+    font-weight:400
+    }
+ 
+.weight500   {
+    font-weight:500
+    }
+ 
+.weight600   {
+    font-weight:600
+    }
+ 
+.weight700   {
+    font-weight:700
+    }
+ 
+.weight900   {
+    font-weight:900
+    }
+
+code {
+  font-family: Ricty, 'Ricty Discord', Inconsolata, 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace ;
 }
 
 .subtitle {

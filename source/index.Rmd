@@ -11,8 +11,8 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 github-repo: Gedevan-Aleksizde/knitr-doc-ja
-monofont: Ricty Discord
-jmonofont: Ricty Discord
+monofont: Ricty
+jmonofont: Ricty
 ---
 
 # knitr {-}
@@ -46,7 +46,7 @@ original_time <- format(as.POSIXct(system('cd ../yihui && git log -1 --pretty=fo
 <!-- inline で書くと見づらいのでここに移動 -->
 
 ---
-date: "ver. 1.6 (`r updated_time`, 本家最終更新時刻: [`r original_time`](https://github.com/rbind/yihui/tree/master/content/knitr))"
+date: "ver. 1.7 (`r updated_time` に更新されました. 本家の [`r original_time`](https://github.com/rbind/yihui/tree/master/content/knitr) の版に対応しています)"
 ---
 
 :::{.infobox .important data-latex="{important}"}

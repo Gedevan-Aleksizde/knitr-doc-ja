@@ -5,7 +5,7 @@ date: '2011-12-09'
 slug: graphics
 --->
 
-# グラフィックス {-#graphics}
+## グラフィックス {-#graphics}
 
 **knitr** におけるグラフィックスの力について
 

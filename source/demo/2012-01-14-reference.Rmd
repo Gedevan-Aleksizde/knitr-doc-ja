@@ -5,7 +5,7 @@ date: '2012-01-14'
 slug: reference
 --->
 
-# チャンク参照/マクロ {-#reference}
+## チャンク参照/マクロ {-#reference}
 
 チャンクの再利用方法
 

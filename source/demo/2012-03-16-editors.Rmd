@@ -5,7 +5,7 @@ date: '2012-03-16'
 slug: editors
 --->
 
-# `knitr` のエディタ {-#editors}
+## `knitr` のエディタ {-#editors}
 
 Emacs, TeX Maker, TeXShop, WinEdt, そして TextMate などについて
 

@@ -5,7 +5,7 @@ date: '2012-02-29'
 slug: framed
 --->
 
-# `framed` パッケージ {-#framed}
+## `framed` パッケージ {-#framed}
 
 **knitr** における LaTeX のデフォルトスタイル
 

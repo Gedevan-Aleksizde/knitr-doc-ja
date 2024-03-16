@@ -38,8 +38,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight:900
     }
 
-code.sourceCode, .sourceCode.r {
-  font-family: 'Ricty Discord', Ricty, Inconsolata, 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace ;
+code {
+  font-family: Ricty, 'Ricty Discord', Inconsolata, 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace ;
 }
 
 .subtitle {
