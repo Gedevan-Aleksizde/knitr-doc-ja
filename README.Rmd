@@ -18,3 +18,24 @@ This is an unofficial Japanese translation of Yihui's **knitr** documentation, w
 * "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" ([近日翻訳予定](https://github.com/Gedevan-Aleksizde/rmarkdown-cookbook))
 * "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)" ([近日翻訳予定](https://github.com/Gedevan-Aleksizde/rmarkdown-book))
 * "[bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)" ([近日翻訳予定](https://github.com/Gedevan-Aleksizde/bookdown))
+
+
+<details>
+<summary>運用手順</summary>
+
+# 環境
+
+再現性のため renv を使っている. `rmdja@development` を使っているので再現性は厳密ではない.
+
+# 更新手順
+
+もっとかんたんな方法はないか?
+
+1. `cd yihui & git pull` で submodule を更新する
+2. 更新差分を `https://github.com/yihui/yihui.org/compare/${lastcommit}..master` とかで見る.
+    * TODO: どこで lastcommit を取得する?
+3. 差分を見て変更された箇所に対応する
+4. `bookdown::render_book(input = "source/", c("rmdja::gitbook_ja", "rmdja::pdf_book_ja"))` でビルドする.
+    * 元のリポジトリはYihui氏のブログをビルドするためのものだが, ブログの全訳は作っていないので本体のワークフローを真似する必要はない.
+
+</details>
